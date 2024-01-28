@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:conx/root_and_unver_page/unversal_pages/detail_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
@@ -74,7 +76,7 @@ class _SearchAllState extends State<SearchAll> {
                 return GestureDetector(
                   onTap: () {
                     // Handle item tap
-                    print('Item tapped: ${items[index]}');
+                   Navigator.push(context,CupertinoPageRoute(builder: (context) => DetailPage(),));
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -87,7 +89,6 @@ class _SearchAllState extends State<SearchAll> {
                           width: 120,
                           height: 180,
                           imageUrl: imageUrls[index < 5 ? index : index % 5],
-
                         alignment: Alignment.topCenter,
                         progressIndicatorBuilder: (context, url, downloadProgress) =>
                         // CircularProgressIndicator(value: downloadProgress.progress),
@@ -117,7 +118,7 @@ class _SearchAllState extends State<SearchAll> {
 
                           /// Optional, the stroke backgroundColor
                         ),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        errorWidget: (context, url, error) => const Icon(Icons.error),
                       ),
                     ),
                   ),

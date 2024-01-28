@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:conx/pages/unversal_pages/choose_plan.dart';
+import 'package:conx/root_and_unver_page/unversal_pages/choose_plan.dart';
 import 'package:conx/widgets/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

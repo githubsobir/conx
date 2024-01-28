@@ -50,5 +50,16 @@
       <string>sms</string>
       <string>tel</string>
     </array>
+    <key>CFBundleLocalizations</key>
+    <array>
+    	<string>en</string>
+    	<string>kz</string>
+    	<string>ru</string>
+    	<string>tj</string>
+    	<string>tr</string>
+    	<string>uz</string>
+    </array>
+      <key>com.apple.security.files.user-selected.read-only</key>
+      <true/>
 </dict>
 </plist>

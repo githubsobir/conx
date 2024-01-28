@@ -1,10 +1,11 @@
 import 'dart:io';
 import 'package:connection_notifier/connection_notifier.dart';
-import 'package:conx/root_page/root_page.dart';
+import 'package:conx/firts_part/login_reg/enter_page/lang_model/choose_lang.dart';
+import 'package:conx/firts_part/user_fill/user_fill.dart';
+import 'package:conx/scefics/customer/add_photo.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 
@@ -25,7 +26,6 @@ Future initialization(BuildContext? context) async {
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  // await FaceCamera.initialize();
   await ConnectionNotifierTools.initialize();
   await EasyLocalization.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
@@ -40,7 +40,7 @@ void main() async{
       EasyLocalization(
         supportedLocales: const [
           Locale('en', 'EN'),
-          Locale('qq', 'QQ'),
+          Locale('kz', 'KZ'),
           Locale('ru', 'RU'),
           Locale('tj', 'TJ'),
           Locale('tr', 'TR'),
@@ -60,9 +60,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        debugShowCheckedModeBanner: false,
-      home:  RootPage(),
+    return MaterialApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      debugShowCheckedModeBanner: false,
+      home:  AddPhotoCustomer(),
     );
   }
 }

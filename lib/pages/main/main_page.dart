@@ -6,7 +6,6 @@ import 'package:conx/pages/main/header_main.dart';
 import 'package:conx/widgets/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

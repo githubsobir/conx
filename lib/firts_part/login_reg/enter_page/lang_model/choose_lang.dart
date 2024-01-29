@@ -13,7 +13,7 @@ class ChooseLang extends StatefulWidget {
 }
 
 class _ChooseLangState extends State<ChooseLang> {
-  int indexActive = 0;
+  String indexValForRadio = "";
   int lastActive = 0;
 
   @override
@@ -42,38 +42,51 @@ class _ChooseLangState extends State<ChooseLang> {
               const SizedBox(height: 30),
               Expanded(
                 child: ListView.builder(
-                  itemCount: listLanguage.length,
-                  itemBuilder: (context, index) => Card(
-                    margin: const EdgeInsets.all(6),
-                    child: CheckboxListTile(
-                      value: listLanguage[index].boolLang,
-                      onChanged: (val) {
-                        context.setLocale(Locale(listLanguage[index].langId1,
-                            listLanguage[index].langId2));
-                        indexActive = index;
-                        listLanguage[index].boolLang = true;
-                        listLanguage[lastActive].boolLang = false;
-                        lastActive = index;
-                        setState(() {});
-                      },
-                      checkboxShape: const CircleBorder(
-                          side: BorderSide(color: AppColors.colorBackground)),
-                      secondary: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: Image.asset(
-                          listLanguage[index].imageAssetLink,
-                          height: 35,
-                          width: 35,
-                          fit: BoxFit.cover,
-                          alignment: Alignment.topRight,
-                        ),
-                      ),
-                      activeColor: AppColors.colorBackground,
-                      title: Text(listLanguage[index].langName,
-                          style: const TextStyle(fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                ),
+                    itemCount: listLanguage.length,
+                    itemBuilder: (context, index) => Card(
+                          child: ListTile(
+                            leading: ClipRRect(
+                              borderRadius: BorderRadius.circular(100),
+                              child: Image.asset(
+                                listLanguage[index].imageAssetLink,
+                                height: 35,
+                                width: 35,
+                                fit: BoxFit.cover,
+                                alignment: Alignment.topRight,
+                              ),
+                            ),
+                            title: Text(listLanguage[index].langName,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold)),
+                            trailing: GestureDetector(
+                              child: Radio(
+                                  value: indexValForRadio,
+                                  autofocus: false,
+                                  groupValue: listLanguage[index].langName,
+                                  activeColor: AppColors.colorBackground,
+                                  onChanged: (val) {
+                                    context.setLocale(Locale(
+                                        listLanguage[index].langId1,
+                                        listLanguage[index].langId2));
+                                    indexValForRadio = listLanguage[index].langName;
+                                    listLanguage[index].boolLang = true;
+                                    listLanguage[lastActive].boolLang = false;
+                                    lastActive = index;
+                                    setState(() {});
+                                  }),
+                            ),
+                            onTap: () {
+                              context.setLocale(Locale(
+                                  listLanguage[index].langId1,
+                                  listLanguage[index].langId2));
+                              indexValForRadio = listLanguage[index].langName;
+                              listLanguage[index].boolLang = true;
+                              listLanguage[lastActive].boolLang = false;
+                              lastActive = index;
+                              setState(() {});
+                            },
+                          ),
+                        )),
               ),
               MaterialButton(
                 onPressed: () {
@@ -109,7 +122,7 @@ class _ChooseLangState extends State<ChooseLang> {
         note: "note"),
     ModelLanguage(
         id: 2,
-        langName: "Qozoq tili",
+        langName: "Kazak dili",
         langId1: "kz",
         langId2: "KZ",
         imageAssetLink: "assets/images/kz.png",
@@ -117,7 +130,7 @@ class _ChooseLangState extends State<ChooseLang> {
         note: "note"),
     ModelLanguage(
         id: 3,
-        langName: "Turk tili",
+        langName: "Türk Dili",
         langId1: "tr",
         langId2: "TR",
         imageAssetLink: "assets/images/tr.png",
@@ -125,7 +138,7 @@ class _ChooseLangState extends State<ChooseLang> {
         note: "note"),
     ModelLanguage(
         id: 4,
-        langName: "Tojik tili",
+        langName: "Забони точикй",
         langId1: "tj",
         langId2: "TJ",
         imageAssetLink: "assets/images/tj.png",
@@ -133,7 +146,7 @@ class _ChooseLangState extends State<ChooseLang> {
         note: "note"),
     ModelLanguage(
         id: 5,
-        langName: "Rus tili",
+        langName: "Русский язык",
         langId1: "ru",
         langId2: "RU",
         imageAssetLink: "assets/images/rus.png",
@@ -141,7 +154,7 @@ class _ChooseLangState extends State<ChooseLang> {
         note: "note"),
     ModelLanguage(
         id: 6,
-        langName: "Ingiliz tili",
+        langName: "English language",
         langId1: "en",
         langId2: "EN",
         imageAssetLink: "assets/images/uk.png",

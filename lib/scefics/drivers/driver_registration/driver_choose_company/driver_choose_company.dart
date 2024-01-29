@@ -1,3 +1,5 @@
+import 'package:conx/scefics/drivers/choose_rate/choose_rate.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DriverChooseCompany extends StatefulWidget {
@@ -47,7 +49,7 @@ class _DriverChooseCompanyState extends State<DriverChooseCompany> {
                 itemBuilder: (context, index) =>
                     index == 0?Card(
                       color: Colors.grey.shade200,
-                        child:ListTile(
+                        child:const ListTile(
 
                           title: Text("Не указать"),
                           trailing: Icon(Icons.arrow_forward_ios),
@@ -56,6 +58,9 @@ class _DriverChooseCompanyState extends State<DriverChooseCompany> {
                     Card(
                         color: Colors.grey.shade100,
                   child:ListTile(
+                    onTap: (){
+                        Navigator.push(context, CupertinoPageRoute(builder: (context) => ChooseRate(),));
+                    },
                     leading: Icon(Icons.account_box),
                     title: Text("Efficient logistics solutions"),
                     subtitle: Text("Logistics service in Tashkent"),

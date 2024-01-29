@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:connection_notifier/connection_notifier.dart';
+import 'package:conx/firts_part/login_reg/enter_page/lang_model/choose_lang.dart';
+import 'package:conx/pages/main/main_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:conx/scefics/customer/add_photo.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -29,7 +31,7 @@ void main() async{
   await EasyLocalization.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
   await Hive.initFlutter();
-  await Hive.openBox("online");
+  await Hive.openBox("sanx");
   await initialization(null);
 
   SystemChrome.setPreferredOrientations([
@@ -47,24 +49,27 @@ void main() async{
         ],
         path: 'assets/lang',
         fallbackLocale: const Locale('uz', 'UZ'),
-        child: const ProviderScope(child: MyApp()),
+        child:  ProviderScope(child: MyApp()),
       ),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   MyApp({super.key});
+   var box = Hive.box("sanx");
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       debugShowCheckedModeBanner: false,
-      home:  AddPhotoCustomer(),
+      home:
+      box.get("langChoosen").toString() != "1"?
+      ChooseLang():MainPage(),
     );
   }
 }

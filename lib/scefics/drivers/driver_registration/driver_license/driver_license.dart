@@ -1,4 +1,6 @@
+import 'package:conx/scefics/drivers/driver_registration/driver_license/photo_driver_license.dart';
 import 'package:conx/widgets/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DriverLicense extends StatefulWidget {
@@ -70,7 +72,7 @@ class _DriverLicenseState extends State<DriverLicense> {
               MaterialButton(
                 onPressed: ()  {
 
-
+Navigator.push(context, CupertinoPageRoute(builder: (context) => PhotoDiverLicense(),));
                 },
                 height: 55,
                 minWidth: double.infinity,

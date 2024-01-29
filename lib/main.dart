@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:connection_notifier/connection_notifier.dart';
-import 'package:conx/firts_part/login_reg/enter_page/lang_model/choose_lang.dart';
-import 'package:conx/firts_part/user_fill/user_fill.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:conx/scefics/customer/add_photo.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +47,7 @@ void main() async{
         ],
         path: 'assets/lang',
         fallbackLocale: const Locale('uz', 'UZ'),
-        child: const MyApp(),
+        child: const ProviderScope(child: MyApp()),
       ),
     ),
   );

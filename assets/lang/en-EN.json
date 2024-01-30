@@ -1,4 +1,14 @@
 {
   "chooseLang": "Choose language",
-  "chooseRoll": "O'z rolingizni tanlang en"
+  "chooseRoll": "Choose your role",
+  "confirmation": "Confirmation",
+  "continue": "Continue",
+  "skip": "Skip",
+  "driver": "Driver",
+  "driverText": "If you have a cargo truck, you can use this mobile app to select the cargo that is suitable for you.",
+  "shipper": "The shipper",
+  "shipperText": "With this application, you will be able to find the right truck for your cargo.",
+  "logistics": "Logistics company",
+  "logisticsText": "With this mobile application, you can keep a profile of your logistics company and earn a good income by taking a lot of orders."
+
 }

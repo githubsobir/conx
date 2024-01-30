@@ -41,9 +41,9 @@ void main() async{
       EasyLocalization(
         supportedLocales: const [
           Locale('en', 'EN'),
-          Locale('kz', 'KZ'),
+          Locale('kk', 'KK'),
           Locale('ru', 'RU'),
-          Locale('tj', 'TJ'),
+          Locale('ta', 'TA'),
           Locale('tr', 'TR'),
           Locale('uz', 'UZ'),
         ],

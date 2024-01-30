@@ -1,6 +1,7 @@
 import 'package:conx/firts_part/login_reg/enter_page/lang_model/model_lang.dart';
 import 'package:conx/firts_part/login_reg/enter_page/user_category/user_category.dart';
 import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,27 +14,36 @@ class ChooseLang extends StatefulWidget {
 }
 
 class _ChooseLangState extends State<ChooseLang> {
-  String indexValForRadio = "";
+  String indexValForRadio = "O'zbek tili";
   int lastActive = 0;
+var box = HiveBoxes();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(
+              right: 20,
+            ),
+            child: Image.asset(
+              "assets/images/star.png",
+              fit: BoxFit.cover,
+              height: 40,
+            ),
+          ),
+        ],
+        elevation: 0,
+      ),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
-          margin: const EdgeInsets.all(30),
+          margin: const EdgeInsets.all(25),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 80,
-                child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                  Icon(
-                    Icons.star_purple500,
-                    size: 40,
-                  )
-                ]),
-              ),
               Text(
                 "chooseLang".tr(),
                 style:
@@ -44,6 +54,8 @@ class _ChooseLangState extends State<ChooseLang> {
                 child: ListView.builder(
                     itemCount: listLanguage.length,
                     itemBuilder: (context, index) => Card(
+                          color: const Color.fromRGBO(241, 242, 240, 1),
+                          shadowColor: Colors.blue,
                           child: ListTile(
                             leading: ClipRRect(
                               borderRadius: BorderRadius.circular(100),
@@ -60,7 +72,7 @@ class _ChooseLangState extends State<ChooseLang> {
                                     fontWeight: FontWeight.bold)),
                             trailing: GestureDetector(
                               child: Radio(
-                                  value: indexValForRadio,
+                                  value: box.langFulName,
                                   autofocus: false,
                                   groupValue: listLanguage[index].langName,
                                   activeColor: AppColors.colorBackground,
@@ -68,14 +80,19 @@ class _ChooseLangState extends State<ChooseLang> {
                                     context.setLocale(Locale(
                                         listLanguage[index].langId1,
                                         listLanguage[index].langId2));
-                                    indexValForRadio = listLanguage[index].langName;
+                                    indexValForRadio =
+                                        listLanguage[index].langName;
                                     listLanguage[index].boolLang = true;
                                     listLanguage[lastActive].boolLang = false;
                                     lastActive = index;
+                                    box.langUser = "1";
+                                    box.langFulName =  listLanguage[index].langName;
+                                    box.langUserLang = listLanguage[index].langId1;
                                     setState(() {});
                                   }),
                             ),
                             onTap: () {
+
                               context.setLocale(Locale(
                                   listLanguage[index].langId1,
                                   listLanguage[index].langId2));
@@ -83,6 +100,10 @@ class _ChooseLangState extends State<ChooseLang> {
                               listLanguage[index].boolLang = true;
                               listLanguage[lastActive].boolLang = false;
                               lastActive = index;
+                              box.langUser = "1";
+                              box.langFulName =  listLanguage[index].langName;
+                              box.langUserLang = listLanguage[index].langId1;
+
                               setState(() {});
                             },
                           ),
@@ -96,12 +117,17 @@ class _ChooseLangState extends State<ChooseLang> {
                         builder: (context) => UserCategory(),
                       ));
                 },
+                color: AppColors.colorBackground,
                 height: 50,
                 minWidth: double.infinity,
                 shape: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(10),
                     borderSide: const BorderSide(color: Colors.grey)),
-                child: Text("Tasdiqlash"),
+                child: Text(
+                  "continue".tr(),
+                  style: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
               ),
               const SizedBox(height: 40),
             ],
@@ -123,8 +149,8 @@ class _ChooseLangState extends State<ChooseLang> {
     ModelLanguage(
         id: 2,
         langName: "Kazak dili",
-        langId1: "kz",
-        langId2: "KZ",
+        langId1: "kk",
+        langId2: "KK",
         imageAssetLink: "assets/images/kz.png",
         boolLang: false,
         note: "note"),
@@ -139,8 +165,8 @@ class _ChooseLangState extends State<ChooseLang> {
     ModelLanguage(
         id: 4,
         langName: "Забони точикй",
-        langId1: "tj",
-        langId2: "TJ",
+        langId1: "ta",
+        langId2: "TA",
         imageAssetLink: "assets/images/tj.png",
         boolLang: false,
         note: "note"),

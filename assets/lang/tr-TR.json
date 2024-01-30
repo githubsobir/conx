@@ -1,4 +1,13 @@
 {
   "chooseLang": "Dil seçiniz",
-  "chooseRoll": "O'z rolingizni tanlang tr"
+  "chooseRoll": "Rolünüzü seçin",
+  "confirmation": "Onayla",
+  "continue": "Devam etmek",
+  "skip": "Atla",
+  "driver": "Sürücü",
+  "driverText": "Bir kargo aracınız varsa, sizin için kargoyu seçmek için bu mobil uygulamayı kullanabilirsiniz.",
+  "shipper": "Nakliyeci",
+  "shipperText": "Bu uygulama ile yükünüz için giden bir kamyon bulabileceksiniz.",
+  "logistics": "Lojistik şirketi",
+  "logisticsText": "Bu mobil uygulama ile lojistik şirketinizin profilini koruyabilir ve çok sayıda sipariş alarak iyi bir gelir elde edebilirsiniz."
 }

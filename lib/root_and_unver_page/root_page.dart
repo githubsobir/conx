@@ -31,17 +31,17 @@ class _RootPageState extends State<RootPage> {
   dynamic selected;
   var heart = false;
 
-  var box = Hive.box("online");
+  // var box = Hive.box("online");
 
-  Future getFirstAction() async {
-    try {
-      await Future.delayed(Duration.zero);
-      box.delete("updateVersion");
-      box.put("updateVersion", "1005");
-    } catch (e) {
-      throw Exception("Error update");
-    }
-  }
+  // Future getFirstAction() async {
+  //   try {
+  //     await Future.delayed(Duration.zero);
+  //     box.delete("updateVersion");
+  //     box.put("updateVersion", "1005");
+  //   } catch (e) {
+  //     throw Exception("Error update");
+  //   }
+  // }
 
   int currentIndex = 0;
   final List<IconData> icons = [
@@ -80,11 +80,7 @@ class _RootPageState extends State<RootPage> {
         child: Icon(CupertinoIcons.globe,
             color: _bottomNavIndex == 4 ? Colors.white : Colors.grey),
         onPressed: () {
-          if (index >= 1) {
-            box.put("animationWindowValue", 0.6);
-          } else {
-            box.put("animationWindowValue", -0.6);
-          }
+
           _bottomNavIndex = 4;
           setState(() {});
         },
@@ -116,15 +112,15 @@ class _RootPageState extends State<RootPage> {
           log(index.toString());
           if (_bottomNavIndex != 4) {
             if (_bottomNavIndex > index) {
-              box.put("animationWindowValue", 0.7);
+              // box.put("animationWindowValue", 0.7);
             } else {
-              box.put("animationWindowValue", -0.7);
+              // box.put("animationWindowValue", -0.7);
             }
           } else {
             if (index > 1) {
-              box.put("animationWindowValue", 0.7);
+              // box.put("animationWindowValue", 0.7);
             } else {
-              box.put("animationWindowValue", -0.7);
+              // box.put("animationWindowValue", -0.7);
             }
           }
 

@@ -1,5 +1,6 @@
 import 'package:conx/firts_part/login_reg/choose_page/choose_page.dart';
 import 'package:conx/firts_part/login_reg/enter_page/user_category/model_user_category.dart';
+import 'package:conx/root_and_unver_page/root_page.dart';
 import 'package:conx/widgets/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,15 +15,18 @@ class UserCategory extends StatefulWidget {
 
 class _UserCategoryState extends State<UserCategory> {
   int lastIndex = 0;
-
+  String textCheckBoxValue = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+      ),
       backgroundColor: Colors.white,
-
       body: SafeArea(
         child: Container(
-          margin: const EdgeInsets.all(30),
+          margin: const EdgeInsets.only(right: 25, left: 25),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -38,32 +42,67 @@ class _UserCategoryState extends State<UserCategory> {
                   itemBuilder: (context, index) => Card(
                     margin: const EdgeInsets.all(6),
                     color: Colors.white,
-                    child: CheckboxListTile(
-                      value: listModelUserCat[index].boolActive,
-                      hoverColor: Colors.white,
-                      onChanged: (val) {
-                        listModelUserCat[index].boolActive = true;
-                        listModelUserCat[lastIndex].boolActive = false;
-                        lastIndex = index;
-                        setState(() {});
-                      },
-                      checkboxShape: const CircleBorder(),
-                      isThreeLine: true,
-                      secondary: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: Image.asset(
-                          listModelUserCat[index].imageAssetLink,
-                          height: 40,
-                          width: 40,
-                          fit: BoxFit.cover,
-                          alignment: Alignment.topRight,
-                        ),
+                    child: ListTile(
+                      leading: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            listModelUserCat[index].imageAssetLink,
+                            height: 40,
+                            width: 40,
+                            fit: BoxFit.cover,
+                            alignment: Alignment.topRight,
+                          ),
+                        ],
                       ),
-                      activeColor: AppColors.colorBackground,
                       title: Text(listModelUserCat[index].nameCategory,
                           style: const TextStyle(fontWeight: FontWeight.bold)),
                       subtitle: Text(listModelUserCat[index].textCategory),
+                      trailing: GestureDetector(
+                        child: Radio(
+                            value: textCheckBoxValue,
+                            autofocus: false,
+                            groupValue: listModelUserCat[index].nameCategory,
+                            activeColor: AppColors.colorBackground,
+                            onChanged: (val) {
+                              textCheckBoxValue  =listModelUserCat[index].nameCategory;
+                              setState(() {});
+                            }),
+                      ),
+                      onTap: () {
+                        textCheckBoxValue  =listModelUserCat[index].nameCategory;
+                        setState(() {
+
+                        });
+                      },
                     ),
+                    // CheckboxListTile(
+                    //   value: listModelUserCat[index].boolActive,
+                    //   hoverColor: Colors.white,
+                    //   onChanged: (val) {
+                    //     listModelUserCat[index].boolActive = true;
+                    //     listModelUserCat[lastIndex].boolActive = false;
+                    //     lastIndex = index;
+                    //     setState(() {});
+                    //   },
+                    //   checkboxShape: const CircleBorder(),
+                    //   isThreeLine: true,
+                    //   secondary: ClipRRect(
+                    //     borderRadius: BorderRadius.circular(100),
+                    //     child: Image.asset(
+                    //       listModelUserCat[index].imageAssetLink,
+                    //       height: 40,
+                    //       width: 40,
+                    //       fit: BoxFit.cover,
+                    //       alignment: Alignment.topRight,
+                    //     ),
+                    //   ),
+                    //   activeColor: AppColors.colorBackground,
+                    //   title: Text(listModelUserCat[index].nameCategory,
+                    //       style: const TextStyle(fontWeight: FontWeight.bold)),
+                    //   subtitle: Text(listModelUserCat[index].textCategory),
+                    // ),
                   ),
                 ),
               ),
@@ -75,14 +114,32 @@ class _UserCategoryState extends State<UserCategory> {
                         builder: (context) => ChoosePage(),
                       ));
                 },
-                height: 50,
+                height: 55,
                 minWidth: double.infinity,
+                color: AppColors.colorBackground,
                 shape: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(10),
                     borderSide: const BorderSide(color: Colors.grey)),
-                child: const Text("Tasdiqlash"),
+                child:  Text("continue".tr(), style:const TextStyle(color: Colors.white,  fontWeight: FontWeight.bold)),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 10),
+              MaterialButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => RootPage(),
+                      ));
+                },
+                height: 55,
+                minWidth: double.infinity,
+                color: Colors.white,
+                shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide:  const BorderSide(color: Colors.grey,)),
+                child:  Text("skip".tr(), style:const TextStyle(color: AppColors.colorBackground, fontWeight: FontWeight.bold)),
+              ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
@@ -93,25 +150,25 @@ class _UserCategoryState extends State<UserCategory> {
   List<ModelUserCategory> listModelUserCat = [
     ModelUserCategory(
         id: 1,
-        nameCategory: "Водитель",
+        nameCategory: "driver".tr(),
         textCategory:
-            "Если у вас есть грузовой автомобиль, вы можете использовать это мобильное приложение, чтобы выбрать подходящий для вас груз.",
+            "driverText".tr(),
         imageAssetLink: "assets/images/truck.png",
         boolActive: false,
         note: "note"),
     ModelUserCategory(
         id: 1,
-        nameCategory: "Грузоотправитель",
+        nameCategory: "shipper".tr(),
         textCategory:
-            "С помощью этого приложения вы сможете найти подходящий грузовик для вашего груза.",
+            "shipperText".tr(),
         imageAssetLink: "assets/images/box_category.png",
         boolActive: false,
         note: "note"),
     ModelUserCategory(
         id: 1,
-        nameCategory: "Логистическая компания",
+        nameCategory: "logistics".tr(),
         textCategory:
-            "С помощью этого мобильного приложения вы можете вести профиль своей логистической компании и получать хороший доход, принимая множество заказов.",
+            "logisticsText".tr(),
         imageAssetLink: "assets/images/globus.png",
         boolActive: false,
         note: "note")

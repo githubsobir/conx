@@ -1,4 +1,13 @@
 {
   "chooseLang": "Tilni tanlang",
-  "chooseRoll": "O'z rolingizni tanlang"
+  "chooseRoll": "O'z rolingizni tanlang",
+  "confirmation": "Tasdiqlash",
+  "continue": "Davom etish",
+  "skip": "O'tkazib yuborish",
+  "driver": "Haydovchi",
+  "driverText": "Agar sizda yuk mashinasi bo'lsa, siz uchun yukni tanlash uchun ushbu mobil ilovadan foydalanishingiz mumkin.",
+  "shipper": "Yuk jo'natuvchi",
+  "shipperText": "Ushbu ilova yordamida siz yukingiz uchun to'g'ri yuk mashinasini topa olasiz.",
+  "logistics": "Logistika kompaniyasi",
+  "logisticsText": "Ushbu mobil ilova yordamida siz logistika kompaniyangizning profilini saqlashingiz va ko'plab buyurtmalarni qabul qilish orqali yaxshi daromad olishingiz mumkin."
 }

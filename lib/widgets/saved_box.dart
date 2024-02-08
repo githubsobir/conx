@@ -105,4 +105,94 @@ class HiveBoxes {
       return "-1";
     }
   }
+
+  set userPhone(String token) {
+    try {
+      box.delete("userPhone");
+      box.put("userPhone", token);
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  String get userPhone {
+    try {
+      return box.get("userPhone");
+    } catch (e) {
+      log(e.toString());
+      return "-1";
+    }
+  }
+
+  set userName(String name) {
+    try {
+      box.delete("userName");
+      box.put("userName", name);
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  String get userName {
+    try {
+      return box.get("userName");
+    } catch (e) {
+      log(e.toString());
+      return "_";
+    }
+  }
+
+  set userFName(String name) {
+    try {
+      box.delete("userFName");
+      box.put("userFName", name);
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  String get userFName {
+    try {
+      return box.get("userFName");
+    } catch (e) {
+      log(e.toString());
+      return "_";
+    }
+  }
+  set userSName(String name) {
+    try {
+      box.delete("userSName");
+      box.put("userSName", name);
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  String get userSName {
+    try {
+      return box.get("userSName");
+    } catch (e) {
+      log(e.toString());
+      return "_";
+    }
+  }
+
+  set userBirth(String name) {
+    try {
+      box.delete("userBirth");
+      box.put("userBirth", name);
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  String get userBirth {
+    try {
+      return box.get("userBirth");
+    } catch (e) {
+      log(e.toString());
+      return "_";
+    }
+  }
+
 }

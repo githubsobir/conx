@@ -21,8 +21,9 @@ var box = HiveBoxes();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        // backgroundColor: Theme.of(context).colorScheme.primary,
         actions: [
           Padding(
             padding: const EdgeInsets.only(
@@ -37,7 +38,7 @@ var box = HiveBoxes();
         ],
         elevation: 0,
       ),
-      backgroundColor: Colors.white,
+
       body: SafeArea(
         child: Container(
           margin: const EdgeInsets.all(25),

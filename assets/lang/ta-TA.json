@@ -9,5 +9,19 @@
   "shipper": "Интиқолдиҳанда",
   "shipperText": "Бо ин барнома шумо метавонед мошини боркаши воридшавандаро барои боратон пайдо кунед.",
   "logistics": "Ширкати логистикӣ",
-  "logisticsText": "Бо ин барномаи мобилӣ, шумо метавонед профили ширкати логистикии худро нигоҳ доред ва бо қабули фармоишҳои зиед даромади хуб ба даст оред."
+  "logisticsText": "Бо ин барномаи мобилӣ, шумо метавонед профили ширкати логистикии худро нигоҳ доред ва бо қабули фармоишҳои зиед даромади хуб ба даст оред.",
+  "enter": "Муқаддима",
+  "registration": "Бақайдгирӣ",
+  "explore": "Омӯзиши барнома",
+  "exploreText": "Молияи шумо Ҳоло дар як ҷо аст ва ҳамеша таҳти назорати шумост.",
+  "transfer": "Ҷойивазкунӣ",
+  "registrationText": "Лутфан рамзи кишварро тасдиқ кунед ва рақами телефони худро ворид кунед.",
+  "region": "Hudud tanlang",
+  "passCode": "Kodni kiriting",
+  "verificationCode": "{} raqamingizga yuborilgan tasdiqlash kodini kiriting",
+  "sendAgain": "Kodni qayta yuborish",
+  "check": "Tekshirish",
+  "checkInfo": "Ma'lumotlarni tekshiring",
+  "tryAgain": "Qayta urunish",
+  "smsError": "Xato kod kiritildi yana urinib ko'ring"
 }

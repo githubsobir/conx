@@ -1,13 +1,15 @@
 import 'dart:io';
 import 'package:connection_notifier/connection_notifier.dart';
 import 'package:conx/firts_part/login_reg/enter_page/lang_model/choose_lang.dart';
+import 'package:conx/firts_part/user_fill/user_fill.dart';
 import 'package:conx/pages/main/main_page.dart';
+import 'package:conx/theme/theme_app.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:conx/scefics/customer/add_photo.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:riverpod/riverpod.dart';
 
 
 
@@ -55,21 +57,24 @@ void main() async{
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
    MyApp({super.key});
    var box = Hive.box("sanx");
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
 
     return MaterialApp(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       debugShowCheckedModeBanner: false,
+      // darkTheme: darkMode,
+      // theme: ligthMode,
+      //   themeMode:  ref.watch(getTheme) ? ThemeMode.light : ThemeMode.dark,
       home:
       box.get("langChoosen").toString() != "1"?
-      ChooseLang():MainPage(),
+      UserFIO():MainPage(),
     );
   }
 }

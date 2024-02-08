@@ -9,6 +9,19 @@
   "shipper": "The shipper",
   "shipperText": "With this application, you will be able to find the right truck for your cargo.",
   "logistics": "Logistics company",
-  "logisticsText": "With this mobile application, you can keep a profile of your logistics company and earn a good income by taking a lot of orders."
-
+  "logisticsText": "With this mobile application, you can keep a profile of your logistics company and earn a good income by taking a lot of orders.",
+  "enter": "Introduction",
+  "registration":"Registration",
+  "explore": "Explore the app",
+  "exploreText": "Now your finances are in one place and always under your control",
+  "transfer": "Transfer",
+  "registrationText": "Please confirm the country code and enter your phone number.",
+  "region": "Hudud tanlang",
+  "passCode": "Kodni kiriting",
+  "verificationCode": "{} raqamingizga yuborilgan tasdiqlash kodini kiriting",
+  "sendAgain": "Kodni qayta yuborish",
+  "check": "Tekshirish",
+  "checkInfo": "Ma'lumotlarni tekshiring",
+  "tryAgain": "Qayta urunish",
+  "smsError": "Xato kod kiritildi yana urinib ko'ring"
 }

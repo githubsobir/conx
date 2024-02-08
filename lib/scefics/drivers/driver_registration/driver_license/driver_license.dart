@@ -14,6 +14,11 @@ class _DriverLicenseState extends State<DriverLicense> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
       body: SafeArea(
         child: Container(
           margin: EdgeInsets.all(20),
@@ -21,8 +26,7 @@ class _DriverLicenseState extends State<DriverLicense> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
-              Text(
+             const Text(
                 "Водительское удостоверение",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),

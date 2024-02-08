@@ -1,6 +1,7 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:conx/firts_part/login_reg/login/login_page.dart';
-import 'package:conx/firts_part/login_reg/reg/controller_reg.dart';
+import 'package:conx/firts_part/login_reg/login/controller_login.dart';
 import 'package:conx/widgets/app_colors.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -9,14 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Registration extends ConsumerStatefulWidget {
-  const Registration({super.key});
+class LoginPage extends ConsumerStatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  ConsumerState<Registration> createState() => _RegistrationState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegistrationState extends ConsumerState<Registration> {
+class _LoginPageState extends ConsumerState<LoginPage> {
   TextEditingController textEditingController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   var box = HiveBoxes();
@@ -33,8 +34,8 @@ class _RegistrationState extends ConsumerState<Registration> {
   }
 
   Widget bodyBuild() {
-    if (ref.watch(registrationController).boolGetData) {
-      if (ref.watch(registrationController).txtError.length < 4) {
+    if (ref.watch(controllerLogin).boolGetData) {
+      if (ref.watch(controllerLogin).txtError.length < 4) {
         return Container(
           margin: const EdgeInsets.all(20),
           child: Column(
@@ -42,15 +43,15 @@ class _RegistrationState extends ConsumerState<Registration> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "registration".tr(),
+                "login".tr(),
                 style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
               const SizedBox(height: 10),
               Text(
                 "registrationText".tr(),
                 style:
-                    const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+                const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
               ),
               const SizedBox(height: 20),
               Container(
@@ -60,10 +61,10 @@ class _RegistrationState extends ConsumerState<Registration> {
                 child: ListTile(
                   leading: CachedNetworkImage(
                     imageUrl:
-                        "https://ae04.alicdn.com/kf/S38c74f65152c4b5cab5fddf3deda6c4ag.jpg",
+                    "https://ae04.alicdn.com/kf/S38c74f65152c4b5cab5fddf3deda6c4ag.jpg",
                     // ref
-                    //     .watch(registrationController.notifier)
-                    //     .listModelCountry[index]
+                    //     .watch(controllerLogin.notifier)
+                    //     .listModelCountry[]
                     //     .flagImg
                     //     .toString(),
                     height: 36,
@@ -78,12 +79,13 @@ class _RegistrationState extends ConsumerState<Registration> {
                                 Colors.red, BlendMode.colorBurn)),
                       ),
                     ),
-                    placeholder: (context, url) => CircularProgressIndicator(),
+                    placeholder: (context, url) =>
+                        CircularProgressIndicator(),
                     errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
                   title: Text(ref
-                      .watch(registrationController.notifier)
-                      .listModelCountry[ref.watch(selectedIndex)]
+                      .watch(controllerLogin.notifier)
+                      .listModelCountry[ref.watch(selectedIndexLogin)]
                       .name
                       .toString()),
                   trailing: const Icon(Icons.keyboard_arrow_down_outlined),
@@ -95,7 +97,7 @@ class _RegistrationState extends ConsumerState<Registration> {
               Container(
                   height: 100,
                   decoration: const BoxDecoration(
-                      // color: Colors.grey.shade50,
+                    // color: Colors.grey.shade50,
                       border: Border.symmetric(
                           horizontal: BorderSide(color: Colors.white))),
                   child: Column(
@@ -142,7 +144,7 @@ class _RegistrationState extends ConsumerState<Registration> {
                               filled: true,
                               fillColor: Colors.grey.shade50,
                               prefix: Text(
-                                "${ref.watch(registrationController.notifier).listModelCountry[ref.watch(selectedIndex)].code.toString()} | ",
+                                "${ref.watch(controllerLogin.notifier).listModelCountry[ref.watch(selectedIndexLogin)].code.toString()} | ",
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold),
@@ -168,10 +170,12 @@ class _RegistrationState extends ConsumerState<Registration> {
                           duration: const Duration(milliseconds: 2200)),
                     );
                   } else {
-                    box.userPhone = textEditingController.text.toString();
+                    box.userPhone = "+998${textEditingController.text}";
+
+                      log("login bosildi");
                     ref
-                        .read(registrationController.notifier)
-                        .sentForRegistration(context: context);
+                        .read(controllerLogin.notifier)
+                        .sentForLogin(context: context);
                   }
                 },
                 height: 55,
@@ -179,7 +183,7 @@ class _RegistrationState extends ConsumerState<Registration> {
                 color: AppColors.colorBackground,
                 shape: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.grey)),
+                    borderSide: const BorderSide(color: AppColors.colorBackground)),
                 child: Text("continue".tr(),
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.white)),
@@ -188,87 +192,39 @@ class _RegistrationState extends ConsumerState<Registration> {
           ),
         );
       } else {
-        return ref.watch(registrationController).txtError == "400"
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Text(ref.watch(registrationController).txtError,
-                        maxLines: 4, textAlign: TextAlign.center),
-                  ),
-                  const SizedBox(height: 35),
-                  MaterialButton(
-                    onPressed: () {
-                      ref.read(registrationController.notifier).getRegion();
-                    },
-                    height: 55,
-                    color: Colors.blue,
-                    minWidth: 100,
-                    textColor: Colors.white,
-                    shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide:
-                            const BorderSide(color: Colors.transparent)),
-                    child: Text("tryAgain".tr()),
-                  )
-                ],
+        return Container(
+          margin:const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                child: Text(ref.watch(controllerLogin).txtError,
+                    maxLines: 4, textAlign: TextAlign.center),
+              ),
+              const SizedBox(height: 35),
+              MaterialButton(
+                onPressed: () {
+                ref.read(controllerLogin.notifier).setDefault();
+                },
+                height: 55,
+                color: AppColors.colorBackground,
+                minWidth: 100,
+                textColor: Colors.white,
+                shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.transparent)),
+                child: Text("tryAgain".tr()),
               )
-            : Container(
-                margin:const EdgeInsets.all(20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: Text(
-                        "${box.userPhone} raqam oldin ro'yxatdan o'tgan \nlogin orqali kiring",
-                        maxLines: 4,
-                        textAlign: TextAlign.center,
-                        style:const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
-                    ),
-                    const SizedBox(height: 40),
-                    MaterialButton(
-                      onPressed: () {
-                       Navigator.push(context, CupertinoPageRoute(builder: (context) => LoginPage(),));
-                      },
-                      height: 55,
-                      color: AppColors.colorBackground,
-                      minWidth: 100,
-                      textColor: Colors.white,
-                      shape: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              const BorderSide(color: Colors.transparent)),
-                      child: Text("enterWithLogin".tr()),
-                    ),
-                    const SizedBox(height: 20),
-                    MaterialButton(
-                      onPressed: () {
-                        ref.read(registrationController.notifier).setDefault();
-                      },
-                      height: 55,
-                      minWidth: 100,
-                      textColor: Colors.white,
-                      shape: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                              color: AppColors.colorBackground)),
-                      child: Text("reTryNum".tr(),
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.colorBackground)),
-                    )
-                  ],
-                ),
-              );
+            ],
+          ),
+        );
       }
     } else {
       return const Center(child: CupertinoActivityIndicator());
     }
   }
+
 
   getCountryList() {
     showModalBottomSheet(
@@ -289,53 +245,43 @@ class _RegistrationState extends ConsumerState<Registration> {
               ),
               Expanded(
                   child: ListView.builder(
-                itemCount: ref
-                    .watch(registrationController.notifier)
-                    .listModelCountry
-                    .length,
-                itemBuilder: (context, index) => Column(
-                  children: [
-                    const Divider(),
-                    ListTile(
-                      onTap: () {
-                        ref.read(selectedIndex.notifier).state = index;
-                        Navigator.of(context).pop();
-                      },
-                      leading: CachedNetworkImage(
-                        imageUrl:
-                            // "https://ae04.alicdn.com/kf/S38c74f65152c4b5cab5fddf3deda6c4ag.jpg",
-                        ref
-                            .watch(registrationController.notifier)
-                            .listModelCountry[index]
-                            .flagImg
-                            .toString(),
-                        height: 36,
-                        width: 36,
-                        fit: BoxFit.cover,
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                                colorFilter: ColorFilter.mode(
-                                    Colors.red, BlendMode.colorBurn)),
+                    itemCount: ref
+                        .watch(controllerLogin.notifier)
+                        .listModelCountry
+                        .length,
+                    itemBuilder: (context, index) => Column(
+                      children: [
+                        const Divider(),
+                        ListTile(
+                          onTap: () {
+                            ref.read(selectedIndexLogin.notifier).state = index;
+                            Navigator.of(context).pop();
+                          },
+                          leading: CachedNetworkImage(
+                            imageUrl: ref
+                                .watch(controllerLogin.notifier)
+                                .listModelCountry[index]
+                                .flagImg
+                                .toString(),
+                            height: 36,
+                            width: 36,
+                            fit: BoxFit.cover,
+                            errorWidget: (context, url, error) {
+                              return const Icon(Icons.language);
+                            },
                           ),
+                          title: Text(ref
+                              .watch(controllerLogin.notifier)
+                              .listModelCountry[index]
+                              .name
+                              .toString()),
                         ),
-                        placeholder: (context, url) =>
-                            CircularProgressIndicator(),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
-                      title: Text(ref
-                          .watch(registrationController.notifier)
-                          .listModelCountry[index]
-                          .name
-                          .toString()),
+                      ],
                     ),
-                  ],
-                ),
-              ))
+                  ))
             ]),
       ),
     );
   }
+
 }

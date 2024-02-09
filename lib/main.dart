@@ -74,7 +74,7 @@ class MyApp extends ConsumerWidget {
       //   themeMode:  ref.watch(getTheme) ? ThemeMode.light : ThemeMode.dark,
       home:
       box.get("langChoosen").toString() != "1"?
-      UserFIO():MainPage(),
+      ChooseLang():MainPage(),
     );
   }
 }

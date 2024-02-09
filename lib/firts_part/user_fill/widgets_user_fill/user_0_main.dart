@@ -48,7 +48,7 @@ Widget user0Main({required BuildContext context}) {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide:
-                          BorderSide(color: AppColors.colorBackground))),
+                         const BorderSide(color: AppColors.colorBackground))),
             ),
           ),
           const SizedBox(height: 20),

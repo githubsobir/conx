@@ -171,7 +171,7 @@ class _DrawerRegistrationState extends State<DrawerRegistration> {
   List<ModelDriverModel> listDriverModel = [
     ModelDriverModel(name: "Паспорт или ID карта", action: "1", note: ""),
     ModelDriverModel(name: "Водительское удостоверение", action: "2", note: ""),
-    ModelDriverModel(name: "Фотография документа", action: "3", note: ""),
-    ModelDriverModel(name: "Выбирите свою компанию", action: "4", note: ""),
+    ModelDriverModel(name: "Выбирите свою компанию", action: "3", note: ""),
+    ModelDriverModel(name: "Выбирите форму оплату", action: "4", note: ""),
   ];
 }

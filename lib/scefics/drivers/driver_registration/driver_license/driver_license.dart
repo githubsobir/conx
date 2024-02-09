@@ -11,6 +11,9 @@ class DriverLicense extends StatefulWidget {
 }
 
 class _DriverLicenseState extends State<DriverLicense> {
+  TextEditingController textSer = TextEditingController();
+  TextEditingController textNum = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +29,7 @@ class _DriverLicenseState extends State<DriverLicense> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             const Text(
+              const Text(
                 "Водительское удостоверение",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
@@ -36,18 +39,21 @@ class _DriverLicenseState extends State<DriverLicense> {
               SizedBox(
                 height: 60,
                 child: TextFormField(
+                  controller: textSer,
                   decoration: InputDecoration(
                       fillColor: Colors.grey.shade100,
                       filled: true,
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: Colors.grey, width: 1)),
+                          borderSide:
+                              const BorderSide(color: Colors.grey, width: 1)),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: Colors.grey, width: 1)),
-                      border: OutlineInputBorder(
                           borderSide:
-                          const BorderSide(color: Colors.transparent, width: 1),
+                              const BorderSide(color: Colors.grey, width: 1)),
+                      border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Colors.transparent, width: 1),
                           borderRadius: BorderRadius.circular(10))),
                 ),
               ),
@@ -57,26 +63,32 @@ class _DriverLicenseState extends State<DriverLicense> {
               SizedBox(
                 height: 60,
                 child: TextFormField(
+                  controller: textNum,
                   decoration: InputDecoration(
                       fillColor: Colors.grey.shade100,
                       filled: true,
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: Colors.grey, width: 1)),
+                          borderSide:
+                              const BorderSide(color: Colors.grey, width: 1)),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: Colors.grey, width: 1)),
-                      border: OutlineInputBorder(
                           borderSide:
-                          const BorderSide(color: Colors.transparent, width: 1),
+                              const BorderSide(color: Colors.grey, width: 1)),
+                      border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Colors.transparent, width: 1),
                           borderRadius: BorderRadius.circular(10))),
                 ),
               ),
               const SizedBox(height: 40),
               MaterialButton(
-                onPressed: ()  {
-
-Navigator.push(context, CupertinoPageRoute(builder: (context) => PhotoDiverLicense(),));
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => PhotoDiverLicense(),
+                      ));
                 },
                 height: 55,
                 minWidth: double.infinity,

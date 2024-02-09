@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:conx/scefics/drivers/passport/controller_passport.dart';
 import 'package:conx/widgets/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +21,27 @@ class _PhotoPassport3State extends ConsumerState<PhotoPassport3> {
         elevation: 0,
         backgroundColor: Colors.black,
         iconTheme: const IconThemeData(color: Colors.white),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              try {
+                ref.read(controllerPassport).list[2].path.length > 10
+                    ? Navigator.of(context).pop()
+                    : {};
+              } catch (e) {
+                log(e.toString());
+              }
+            },
+            child:const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              ),
+            ),
+          )
+        ],
+
       ),
       body: SafeArea(
         child: Container(
@@ -30,7 +53,7 @@ class _PhotoPassport3State extends ConsumerState<PhotoPassport3> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    ref.read(controllerPassport.notifier).getImageCamera(0);
+                    ref.read(controllerPassport.notifier).getImageCamera(2);
                   },
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.3,
@@ -91,7 +114,9 @@ class _PhotoPassport3State extends ConsumerState<PhotoPassport3> {
                 ),
                 const SizedBox(height: 30),
                 MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ref.read(controllerPassport.notifier).getImageCamera(2);
+                  },
                   height: 55,
                   minWidth: double.infinity,
                   color: AppColors.colorBackground,

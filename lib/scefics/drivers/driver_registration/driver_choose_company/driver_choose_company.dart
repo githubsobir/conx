@@ -16,17 +16,17 @@ class _DriverChooseCompanyState extends State<DriverChooseCompany> {
       appBar: AppBar(),
       body: SafeArea(
         child: Container(
-          margin: EdgeInsets.all(20),
+          margin: const EdgeInsets.all(20),
           child: Column(
             children: [
-              Text(
+             const Text(
                 "Выбирите свою компанию",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
               const SizedBox(height: 20),
               TextFormField(
                 decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search),
+                    prefixIcon:const Icon(Icons.search),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide(color: Colors.transparent),
@@ -49,8 +49,10 @@ class _DriverChooseCompanyState extends State<DriverChooseCompany> {
                 itemBuilder: (context, index) =>
                     index == 0?Card(
                       color: Colors.grey.shade200,
-                        child:const ListTile(
-
+                        child: ListTile(
+                          onTap: (){
+                            Navigator.of(context).pop();
+                          },
                           title: Text("Не указать"),
                           trailing: Icon(Icons.arrow_forward_ios),
                         )

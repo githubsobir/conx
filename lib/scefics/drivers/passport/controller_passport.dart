@@ -73,14 +73,13 @@ class ControllerPassport extends StateNotifier<ModelPassport> {
         boolGetData1: true, list: imageList, message1: "", errorMessage1: "");
   }
 
-
-  Future getPassportData()async{
-    try{
-      Response response = await dio.get("${MainUrl.urlMain}/api/driver/passport/",
+  Future getPassportData() async {
+    try {
+      Response response = await dio.get(
+          "${MainUrl.urlMain}/api/driver/passport/",
           options:
-          Options(headers: {"Authorization": "Bearer ${box.userToken}"})
-      );
-    }catch(e){}
+              Options(headers: {"Authorization": "Bearer ${box.userToken}"}));
+    } catch (e) {}
   }
 
   Future sentServer() async {
@@ -111,5 +110,10 @@ class ControllerPassport extends StateNotifier<ModelPassport> {
     } catch (ee) {
       log(ee.toString());
     }
+  }
+
+  setDeafault() {
+    state = state.copyWith(
+        boolGetData1: true, message1: '', list: [], errorMessage1: "");
   }
 }

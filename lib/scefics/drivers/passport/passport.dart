@@ -17,9 +17,7 @@ class Passport extends ConsumerStatefulWidget {
 }
 
 class _PassportState extends ConsumerState<Passport> {
-  late final PageController controller = PageController(
-
-  );
+  late final PageController controller = PageController();
   TextEditingController txtPassport = TextEditingController();
 
   @override
@@ -36,6 +34,9 @@ class _PassportState extends ConsumerState<Passport> {
                 Expanded(
                   child: MaterialButton(
                     onPressed: () {
+
+                      ref.read(controllerPassport.notifier).setDeafault();
+
                       if (ref.watch(passportWindowID).toString() == "1") {
                         ref.watch(passportWindowID.notifier).state = 0;
                         controller.jumpToPage(1); // for regular jump
@@ -84,7 +85,7 @@ class _PassportState extends ConsumerState<Passport> {
                     height: 50,
                     color: ref.watch(passportWindowID).toString() == "1"
                         ? AppColors.colorBackground
-                      :Colors.grey.shade300,
+                        : Colors.grey.shade300,
                     shape: OutlineInputBorder(
                         borderSide: const BorderSide(color: Colors.transparent),
                         borderRadius: BorderRadius.circular(10)),
@@ -112,7 +113,7 @@ class _PassportState extends ConsumerState<Passport> {
   Widget passport() {
     return Container(
       margin: const EdgeInsets.all(18),
-      height: MediaQuery.of(context).size.width*0.9,
+      height: MediaQuery.of(context).size.width * 0.9,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,7 +160,9 @@ class _PassportState extends ConsumerState<Passport> {
             const Text(
               "Фотография документа",
               style: TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20),
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: 20),
             ),
             const SizedBox(height: 20),
             Row(
@@ -176,12 +179,12 @@ class _PassportState extends ConsumerState<Passport> {
                         ));
                   },
                   child: ref
-                              .watch(controllerPassport.notifier)
-                              .imageList
+                              .watch(controllerPassport)
+                                      .list
                               .isNotEmpty &&
                           ref
-                              .watch(controllerPassport.notifier)
-                              .imageList[0]
+                              .watch(controllerPassport)
+                              .list[0]
                               .path
                               .isNotEmpty
                       ?
@@ -192,8 +195,8 @@ class _PassportState extends ConsumerState<Passport> {
                               width: MediaQuery.of(context).size.width * 0.4,
                               fit: BoxFit.cover,
                               ref
-                                  .watch(controllerPassport.notifier)
-                                  .imageList[0]),
+                                  .watch(controllerPassport)
+                                  .list[0]),
                         )
                       : Container(
                           height: 104,
@@ -203,10 +206,12 @@ class _PassportState extends ConsumerState<Passport> {
                               color: Colors.grey.shade300,
                               borderRadius: BorderRadius.circular(10)),
                           child: ref.watch(controllerPassport).list.isNotEmpty
-                              ? Image.file(ref.watch(controllerPassport).list[0])
+                              ? Image.file(
+                                  ref.watch(controllerPassport).list[0])
                               : const Center(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Icon(Icons.photo_camera_outlined),
@@ -223,11 +228,17 @@ class _PassportState extends ConsumerState<Passport> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => PhotoPassport2(),
-                        ));
+                    ref.watch(controllerPassport).list.isNotEmpty
+                        ? Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => PhotoPassport2(),
+                            ))
+                        : Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => PhotoPassport1(),
+                            ));
                   },
                   child: ref.watch(controllerPassport).list.length > 1
                       ? Image.file(
@@ -266,30 +277,286 @@ class _PassportState extends ConsumerState<Passport> {
               padding: const EdgeInsets.all(15),
               child: GestureDetector(
                 onTap: () {
+
+                  ref.watch(controllerPassport).list.isEmpty
+                      ? Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => PhotoPassport1(),
+                      ))
+                      :  ref.watch(controllerPassport).list.length == 1?
+
                   Navigator.push(
                       context,
                       CupertinoPageRoute(
+                        builder: (context) => PhotoPassport2(),
+                      )) :Navigator.push(
+                      context,
+                      CupertinoPageRoute(
                         builder: (context) => PhotoPassport3(),
-                      ));
+                      )) ;
                 },
-                child:
-                ref.watch(controllerPassport).list.length > 2
+                child: ref.watch(controllerPassport).list.length > 2
+                    ? Image.file(
+                        ref.watch(controllerPassport).list[2],
+                        height: 104,
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        fit: BoxFit.cover,
+                      )
+                    : Container(
+                        height: 104,
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        padding: const EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade300,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: const Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.photo_camera_outlined),
+                              SizedBox(height: 10),
+                              Text(
+                                "Фотография лица на фоне документа",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+              ),
+            ),
+            const SizedBox(height: 40),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                MaterialButton(
+                  onPressed: () {
+                    ref.read(controllerPassport.notifier).sentServer();
+                    log(ref.read(controllerPassport).list.length.toString());
+                  },
+                  height: 55,
+                  minWidth: double.infinity,
+                  color: AppColors.colorBackground,
+                  shape: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: Colors.grey)),
+                  child: const Text("Davom etish 77",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white)),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget idCard() {
+    return Container(
+      margin: const EdgeInsets.all(18),
+      height: MediaQuery.of(context).size.width * 0.9,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Pasport",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+            ),
+            const SizedBox(height: 5),
+            const Text("Введите здесь свои паспортные данные"),
+            const SizedBox(height: 10),
+            const Text("Серия и номер"),
+            const SizedBox(height: 5),
+            Form(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: TextFormField(
+                controller: txtPassport,
+                decoration: InputDecoration(
+                    fillColor: Colors.grey.shade100,
+                    filled: true,
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide:
+                        const BorderSide(color: Colors.grey, width: 1)),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide:
+                        const BorderSide(color: Colors.grey, width: 1)),
+                    border: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: Colors.transparent, width: 1),
+                        borderRadius: BorderRadius.circular(10))),
+                validator: (value) {
+                  if (value.toString().isNotEmpty ||
+                      value.toString().length < 5) {
+                    return "Ma'lumot kiriting";
+                  } else {
+                    return "";
+                  }
+                },
+              ),
+            ),
+            const SizedBox(height: 30),
+            const Text(
+              "Фотография документа",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: 20),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox.shrink(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => PhotoPassport1(),
+                        ));
+                  },
+                  child: ref
+                      .watch(controllerPassport)
+                      .list
+                      .isNotEmpty &&
+                      ref
+                          .watch(controllerPassport)
+                          .list[0]
+                          .path
+                          .isNotEmpty
+                      ?
+                  // Text("")
+                  Card(
+                    child: Image.file(
+                        height: 104,
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        fit: BoxFit.cover,
+                        ref
+                            .watch(controllerPassport)
+                            .list[0]),
+                  )
+                      : Container(
+                    height: 104,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    padding: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: ref.watch(controllerPassport).list.isNotEmpty
+                        ? Image.file(
+                        ref.watch(controllerPassport).list[0])
+                        : const Center(
+                      child: Column(
+                        crossAxisAlignment:
+                        CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.photo_camera_outlined),
+                          SizedBox(height: 10),
+                          Text(
+                            "Лицевая сторона",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    ref.watch(controllerPassport).list.isNotEmpty
+                        ? Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => PhotoPassport2(),
+                        ))
+                        : Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => PhotoPassport1(),
+                        ));
+                  },
+                  child: ref.watch(controllerPassport).list.length > 1
+                      ? Image.file(
+                    ref.watch(controllerPassport).list[1],
+                    height: 104,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    fit: BoxFit.cover,
+                  )
+                      : Container(
+                    height: 104,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    padding: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: const Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.photo_camera_outlined),
+                          SizedBox(height: 10),
+                          Text(
+                            "Обратная сторона",
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox.shrink(),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15),
+              child: GestureDetector(
+                onTap: () {
+
+                  ref.watch(controllerPassport).list.isEmpty
+                      ? Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => PhotoPassport1(),
+                      ))
+                      :  ref.watch(controllerPassport).list.length == 1?
+
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => PhotoPassport2(),
+                      )) :Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => PhotoPassport3(),
+                      )) ;
+                },
+                child: ref.watch(controllerPassport).list.length > 2
                     ? Image.file(
                   ref.watch(controllerPassport).list[2],
                   height: 104,
                   width: MediaQuery.of(context).size.width * 0.4,
                   fit: BoxFit.cover,
-                ):
-                Container(
+                )
+                    : Container(
                   height: 104,
                   width: MediaQuery.of(context).size.width * 0.4,
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                       color: Colors.grey.shade300,
                       borderRadius: BorderRadius.circular(10)),
-                  child:
-
-                  const Center(
+                  child: const Center(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -309,174 +576,26 @@ class _PassportState extends ConsumerState<Passport> {
             ),
             const SizedBox(height: 40),
             Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-            MaterialButton(
-              onPressed: () {
-
-                ref.read(controllerPassport.notifier).sentServer();
-                log(ref.read(controllerPassport).list.length.toString());
-              },
-              height: 55,
-              minWidth: double.infinity,
-              color: AppColors.colorBackground,
-              shape: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.grey)),
-              child: const Text("Davom etish 77",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-            ),
-                          ],
-                        )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget idCard() {
-    return SingleChildScrollView(
-      child: Container(
-        margin: const EdgeInsets.all(18),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "ID karta",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-            ),
-            const SizedBox(height: 5),
-            const Text("Введите здесь свои ID карта данные"),
-            const SizedBox(height: 10),
-            const Text("Серия и номер"),
-            const SizedBox(height: 5),
-            SizedBox(
-              height: 60,
-              child: TextFormField(
-                decoration: InputDecoration(
-                    fillColor: Colors.grey.shade100,
-                    filled: true,
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1)),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1)),
-                    border: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.transparent, width: 1),
-                        borderRadius: BorderRadius.circular(10))),
-              ),
-            ),
-            const SizedBox(height: 30),
-            const Text(
-              "Фотография документа",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                const SizedBox.shrink(),
-                Container(
-                  height: 104,
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  padding: const EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: const Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.photo_camera_outlined),
-                        SizedBox(height: 10),
-                        Text(
-                          "Лицевая сторона",
-                          style: TextStyle(fontWeight: FontWeight.w600),
-                        )
-                      ],
-                    ),
-                  ),
+                MaterialButton(
+                  onPressed: () {
+                    ref.read(controllerPassport.notifier).sentServer();
+                    log(ref.read(controllerPassport).list.length.toString());
+                  },
+                  height: 55,
+                  minWidth: double.infinity,
+                  color: AppColors.colorBackground,
+                  shape: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(color: Colors.grey)),
+                  child: const Text("Davom etish 77",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white)),
                 ),
-                Container(
-                  height: 104,
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  padding: const EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: const Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.photo_camera_outlined),
-                        SizedBox(height: 10),
-                        Text(
-                          "Обратная сторона",
-                          style: TextStyle(fontWeight: FontWeight.w600),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox.shrink(),
               ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15),
-              child: Container(
-                height: 104,
-                width: MediaQuery.of(context).size.width * 0.4,
-                padding: const EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(10)),
-                child: const Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.photo_camera_outlined),
-                      SizedBox(height: 10),
-                      Text(
-                        "Фотография лица на фоне документа",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontWeight: FontWeight.w600),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-            MaterialButton(
-              onPressed: () async {
-
-              },
-              height: 55,
-              minWidth: double.infinity,
-              color: AppColors.colorBackground,
-              shape: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.grey)),
-              child: const Text("Davom etish",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-            ),
-                        ],
-                      )
+            )
           ],
         ),
       ),

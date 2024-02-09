@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:conx/scefics/drivers/passport/controller_passport.dart';
 import 'package:conx/widgets/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,26 @@ class _PhotoPassport1State extends ConsumerState<PhotoPassport1> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.black,
+        actions: [
+          GestureDetector(
+            onTap: () {
+              try {
+                ref.read(controllerPassport).list[0].path.length > 10
+                    ? Navigator.of(context).pop()
+                    : {};
+              } catch (e) {
+                log(e.toString());
+              }
+            },
+            child:const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Icon(
+                Icons.check,
+                color: Colors.white,
+              ),
+            ),
+          )
+        ],
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: SafeArea(
@@ -39,12 +61,8 @@ class _PhotoPassport1State extends ConsumerState<PhotoPassport1> {
                         border: Border.all(
                       color: Colors.white,
                     )),
-                    child: ref
-                        .watch(controllerPassport)
-                        .list.isNotEmpty
-
-                        ? Image.file(
-                        ref.watch(controllerPassport).list[0])
+                    child: ref.watch(controllerPassport).list.isNotEmpty
+                        ? Image.file(ref.watch(controllerPassport).list[0])
                         : const Icon(Icons.image,
                             size: 50, color: Colors.white),
                   ),
@@ -91,7 +109,9 @@ class _PhotoPassport1State extends ConsumerState<PhotoPassport1> {
                 ),
                 const SizedBox(height: 30),
                 MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ref.read(controllerPassport.notifier).getImageCamera(0);
+                  },
                   height: 55,
                   minWidth: double.infinity,
                   color: AppColors.colorBackground,

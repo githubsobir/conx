@@ -1,3 +1,4 @@
+import 'package:conx/scefics/drivers/driver_registration/controller_driver_reg.dart';
 import 'package:conx/scefics/drivers/driver_registration/driver_choose_company/driver_choose_company.dart';
 import 'package:conx/scefics/drivers/driver_registration/driver_license/driver_license.dart';
 import 'package:conx/scefics/drivers/driver_registration/driver_license/photo_driver_license.dart';
@@ -6,15 +7,16 @@ import 'package:conx/scefics/drivers/passport/passport.dart';
 import 'package:conx/widgets/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DrawerRegistration extends StatefulWidget {
+class DrawerRegistration extends ConsumerStatefulWidget {
   const DrawerRegistration({super.key});
 
   @override
-  State<DrawerRegistration> createState() => _DrawerRegistrationState();
+  ConsumerState<DrawerRegistration> createState() => _DrawerRegistrationState();
 }
 
-class _DrawerRegistrationState extends State<DrawerRegistration> {
+class _DrawerRegistrationState extends ConsumerState<DrawerRegistration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,7 +106,19 @@ class _DrawerRegistrationState extends State<DrawerRegistration> {
                               }
                             },
                             title: Text(listDriverModel[index].name),
-                            trailing: const Icon(Icons.arrow_forward_ios),
+                            trailing: SizedBox(
+                                width: 50,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                      ref.watch(controllerDriverReg).list[index] == "1"?
+                                    const Icon(Icons.check_circle_outline, color: AppColors.colorBackground)
+                                    :SizedBox.shrink()
+                                    ,
+                                    const Icon(Icons.arrow_forward_ios),
+                                  ],
+                                )),
                           ),
                         );
                       },

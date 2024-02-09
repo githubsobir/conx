@@ -13,6 +13,65 @@ class DriverLicense extends StatefulWidget {
 class _DriverLicenseState extends State<DriverLicense> {
   TextEditingController textSer = TextEditingController();
   TextEditingController textNum = TextEditingController();
+  late DateTime selectedDate = DateTime.now();
+  bool selected = false;
+
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime picked = await showCupertinoModalPopup(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 230,
+          color: Colors.white,
+
+          child: Column(
+            children: [
+              GestureDetector(
+                onTap: (){
+                  Navigator.of(context).pop();
+                },
+                child: Container(
+                  padding: EdgeInsets.only(right: 20, top: 20),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Icon(Icons.check)
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 180,
+                child: CupertinoDatePicker(
+
+                  initialDateTime: selectedDate,
+
+                  onDateTimeChanged: (DateTime newDate) {
+                    setState(() {
+                      selectedDate = newDate;
+                      selected = true;
+                    });
+                  },
+                  mode: CupertinoDatePickerMode.date,
+                  minimumDate: DateTime(2024),
+                  maximumDate: DateTime(2030),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    if (picked != selectedDate) {
+      setState(() {
+
+        selectedDate = picked;
+      });
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -60,25 +119,20 @@ class _DriverLicenseState extends State<DriverLicense> {
               const SizedBox(height: 20),
               const Text("Дата истечения срока действия"),
               const SizedBox(height: 5),
-              SizedBox(
-                height: 60,
-                child: TextFormField(
-                  controller: textNum,
-                  decoration: InputDecoration(
-                      fillColor: Colors.grey.shade100,
-                      filled: true,
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              const BorderSide(color: Colors.grey, width: 1)),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              const BorderSide(color: Colors.grey, width: 1)),
-                      border: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Colors.transparent, width: 1),
-                          borderRadius: BorderRadius.circular(10))),
+              GestureDetector(
+                onTap: (){_selectDate(context);},
+                child: Container(
+                  height: 60,
+                  width: double.infinity,
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(color: Colors.grey.shade200,
+                  borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Row(
+                    children: [
+                      Text(selected?selectedDate.toString():""),
+                    ],
+                  )
                 ),
               ),
               const SizedBox(height: 40),

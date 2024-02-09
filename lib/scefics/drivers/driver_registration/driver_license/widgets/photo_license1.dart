@@ -18,8 +18,9 @@ class _PhotoLicense1State extends ConsumerState<PhotoLicense1> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.black,
+        // backgroundColor: Colors.black,
         iconTheme: const IconThemeData(color: Colors.white),
+        actions: [Icon(Icons.check, color: Colors.white,)],
       ),
       body: SafeArea(
         child: Container(

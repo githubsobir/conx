@@ -30,6 +30,7 @@ dependencies:
   video_player: ^2.8.2
   dio: ^5.4.0
   timer_count_down: ^2.2.2
+  intl: ^0.18.1
 
 
 

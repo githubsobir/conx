@@ -28,20 +28,30 @@ class ControllerLicense extends StateNotifier<ModelLicense> {
     final imagePicker = ImagePicker();
 
     final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);
-    imageList.add(File(pickedFile!.path));
 
-    if (imageList.isNotEmpty) {
-      for (int i = 0; i < imageList.length;) {
-        if (index == 0) {
-          imageList[index] = File(pickedFile.path);
-        } else if (index == 1) {
-          imageList[index] = File(pickedFile.path);
-        } else if (index == 2) {
-          imageList[index] = File(pickedFile.path);
-        }
-        break;
+    if (index == 0) {
+      if (imageList.isNotEmpty) {
+        imageList[index] = File(pickedFile!.path);
+      } else {
+        imageList.add(File(pickedFile!.path));
       }
     }
+
+    if (index == 1) {
+      if (imageList.length == 2) {
+        imageList[index] = File(pickedFile!.path);
+      } else {
+        imageList.length < 2 ? imageList.add(File(pickedFile!.path)) : {};
+      }
+    }
+    if (index == 2) {
+      if (imageList.length == 3) {
+        imageList[index] = File(pickedFile!.path);
+      } else {
+        imageList.length < 3 ? imageList.add(File(pickedFile!.path)) : {};
+      }
+    }
+
     state = state.copyWith(
         boolGetData1: true, list: imageList, message1: "", errorMessage1: "");
   }
@@ -52,19 +62,30 @@ class ControllerLicense extends StateNotifier<ModelLicense> {
     final imagePicker = ImagePicker();
 
     final pickedFile = await imagePicker.pickImage(source: ImageSource.camera);
-    imageList.add(File(pickedFile!.path));
-    if (imageList.isNotEmpty) {
-      for (int i = 0; i < imageList.length;) {
-        if (index == 0) {
-          imageList[index] = File(pickedFile.path);
-        } else if (index == 1) {
-          imageList[index] = File(pickedFile.path);
-        } else if (index == 2) {
-          imageList[index] = File(pickedFile.path);
-        }
-        break;
+
+    if (index == 0) {
+      if (imageList.isNotEmpty) {
+        imageList[index] = File(pickedFile!.path);
+      } else {
+        imageList.add(File(pickedFile!.path));
       }
     }
+
+    if (index == 1) {
+      if (imageList.length == 2) {
+        imageList[index] = File(pickedFile!.path);
+      } else {
+        imageList.length < 2 ? imageList.add(File(pickedFile!.path)) : {};
+      }
+    }
+    if (index == 2) {
+      if (imageList.length == 3) {
+        imageList[index] = File(pickedFile!.path);
+      } else {
+        imageList.length < 3 ? imageList.add(File(pickedFile!.path)) : {};
+      }
+    }
+
     state = state.copyWith(
         boolGetData1: true, list: imageList, message1: "", errorMessage1: "");
   }
@@ -88,9 +109,8 @@ class ControllerLicense extends StateNotifier<ModelLicense> {
     try {
       FormData formData = FormData.fromMap({
         "license_seria_num": "AA1234567",
-        "license_expiration_date":"2022-12-12",
-        "front_side": await MultipartFile.fromFile(
-            imageList[0].path,
+        "license_expiration_date": "2022-12-12",
+        "front_side": await MultipartFile.fromFile(imageList[0].path,
             filename: "license_expiration_date"),
         "back_side": await MultipartFile.fromFile(imageList[1].path,
             filename: "front_side"),

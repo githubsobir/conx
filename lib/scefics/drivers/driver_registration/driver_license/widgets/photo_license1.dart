@@ -1,5 +1,4 @@
 import 'package:conx/scefics/drivers/driver_registration/driver_license/controller_license.dart';
-
 import 'package:conx/widgets/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,9 +17,19 @@ class _PhotoLicense1State extends ConsumerState<PhotoLicense1> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         elevation: 0,
-        // backgroundColor: Colors.black,
+        backgroundColor: Colors.black,
         iconTheme: const IconThemeData(color: Colors.white),
-        actions: [Icon(Icons.check, color: Colors.white,)],
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: IconButton(
+              icon: const Icon(Icons.check, color: Colors.white),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          )
+        ],
       ),
       body: SafeArea(
         child: Container(
@@ -32,7 +41,9 @@ class _PhotoLicense1State extends ConsumerState<PhotoLicense1> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    ref.read(controllerDriverLicense.notifier).getImageCamera(0);
+                    ref
+                        .read(controllerDriverLicense.notifier)
+                        .getImageCamera(0);
                   },
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.3,
@@ -41,12 +52,8 @@ class _PhotoLicense1State extends ConsumerState<PhotoLicense1> {
                         border: Border.all(
                       color: Colors.white,
                     )),
-                    child: ref
-                        .watch(controllerDriverLicense)
-                        .list.isNotEmpty
-
-                        ? Image.file(
-                        ref.watch(controllerDriverLicense).list[0])
+                    child: ref.watch(controllerDriverLicense).list.isNotEmpty
+                        ? Image.file(ref.watch(controllerDriverLicense).list[0])
                         : const Icon(Icons.image,
                             size: 50, color: Colors.white),
                   ),
@@ -93,14 +100,18 @@ class _PhotoLicense1State extends ConsumerState<PhotoLicense1> {
                 ),
                 const SizedBox(height: 30),
                 MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ref
+                        .read(controllerDriverLicense.notifier)
+                        .getImageCamera(0);
+                  },
                   height: 55,
                   minWidth: double.infinity,
                   color: AppColors.colorBackground,
                   elevation: 10,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
-                  child: Text(
+                  child:const Text(
                     "Сделать фото",
                   ),
                 ),

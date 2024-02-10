@@ -6,15 +6,16 @@ import 'package:conx/pages/main/header_main.dart';
 import 'package:conx/widgets/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MainPage extends StatefulWidget {
+class MainPage extends ConsumerStatefulWidget {
   const MainPage({super.key});
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  ConsumerState<MainPage> createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> with TickerProviderStateMixin{
+class _MainPageState extends ConsumerState<MainPage> with TickerProviderStateMixin{
 
   ScrollController _scrollController = ScrollController();
   late AnimationController _hideFabAnimation;

@@ -16,18 +16,21 @@ class _CargoTransportState extends State<CargoTransport> {
       appBar: AppBar(),
       body: SafeArea(
         child: Container(
-          margin: EdgeInsets.all(20),
+          margin: const EdgeInsets.all(20),
           child: Column(
             children: [
-              Text(
-                "Грузовые транспорты по полной массе",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-              ),
-              const SizedBox(height: 20),
+
               Expanded(
                   child: ListView.builder(
                       itemCount: 10,
-                      itemBuilder: (context, index) => Card(
+                      itemBuilder: (context, index) =>
+                          index == 0?
+                         const Text(
+                            "Грузовые транспорты по полной массе",
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                          )
+                              :
+                          Card(
                           color: Colors.grey.shade100,
                           child: ListTile(
                             onTap: () {

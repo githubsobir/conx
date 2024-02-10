@@ -1,5 +1,5 @@
 import 'package:conx/scefics/drivers/driver_registration/driver_license/controller_license.dart';
-import 'package:conx/scefics/drivers/passport/controller_passport.dart';
+import 'package:conx/scefics/drivers/driver_registration/driver_license/mini_controller.dart';
 import 'package:conx/widgets/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,6 +20,17 @@ class _PhotoLicense3State extends ConsumerState<PhotoLicense3> {
         elevation: 0,
         backgroundColor: Colors.black,
         iconTheme: const IconThemeData(color: Colors.white),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: IconButton(
+              icon: const Icon(Icons.check, color: Colors.white),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          )
+        ],
       ),
       body: SafeArea(
         child: Container(
@@ -31,38 +42,39 @@ class _PhotoLicense3State extends ConsumerState<PhotoLicense3> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    ref.read(controllerDriverLicense.notifier).getImageCamera(0);
+                    ref
+                        .read(controllerDriverLicense.notifier)
+                        .getImageCamera(2);
                   },
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.3,
                     width: MediaQuery.of(context).size.width * 0.9,
                     decoration: BoxDecoration(
                         border: Border.all(
-                          color: Colors.white,
-                        )),
-                    child: ref
-                        .watch(controllerDriverLicense)
-                        .list.isNotEmpty
-
-                        ? Image.file(
-                        ref.watch(controllerDriverLicense).list[0])
+                      color: Colors.white,
+                    )),
+                    child: ref.watch(listControllerLicenseMini(2)) == "1"
+                        ? Image.file(ref.watch(controllerDriverLicense).list[2])
                         : const Icon(Icons.image,
-                        size: 50, color: Colors.white),
+                            size: 50, color: Colors.white),
                   ),
                 ),
                 const SizedBox(height: 40),
-                const Row(
+                 Row(
                   children: [
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Обратная сторона",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.start),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width*0.9,
+                          child: const Text("Фотография лица на фоне документа",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.start),
+                        ),
                         SizedBox(height: 20),
                         Text(
                             "Добейтес совпадения ИД карты с рамкой.\nУбедитес что:",
@@ -92,21 +104,25 @@ class _PhotoLicense3State extends ConsumerState<PhotoLicense3> {
                 ),
                 const SizedBox(height: 30),
                 MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ref
+                        .read(controllerDriverLicense.notifier)
+                        .getImageCamera(2);
+                  },
                   height: 55,
                   minWidth: double.infinity,
                   color: AppColors.colorBackground,
                   elevation: 10,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
-                  child: Text(
+                  child: const Text(
                     "Сделать фото",
                   ),
                 ),
                 const SizedBox(height: 25),
                 MaterialButton(
                   onPressed: () {
-                    ref.read(controllerDriverLicense.notifier).getImage(0);
+                    ref.read(controllerDriverLicense.notifier).getImage(2);
                   },
                   height: 55,
                   minWidth: double.infinity,

@@ -3,7 +3,10 @@ import 'package:connection_notifier/connection_notifier.dart';
 import 'package:conx/firts_part/login_reg/enter_page/lang_model/choose_lang.dart';
 import 'package:conx/firts_part/user_fill/user_fill.dart';
 import 'package:conx/pages/main/main_page.dart';
+import 'package:conx/scefics/drivers/driver_registration/driver_reg.dart';
+import 'package:conx/scefics/drivers/tex_car/tex_car.dart';
 import 'package:conx/theme/theme_app.dart';
+import 'package:conx/widgets/saved_box.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +62,9 @@ void main() async{
 
 class MyApp extends ConsumerWidget {
    MyApp({super.key});
-   var box = Hive.box("sanx");
+
+    var box = HiveBoxes();
+
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -73,8 +78,9 @@ class MyApp extends ConsumerWidget {
       // theme: ligthMode,
       //   themeMode:  ref.watch(getTheme) ? ThemeMode.light : ThemeMode.dark,
       home:
-      box.get("langChoosen").toString() != "1"?
-      ChooseLang():MainPage(),
+      box.userToken.length > 20?
+      // TextCarEnterInfo():ChooseLang(),
+      DrawerRegistration():ChooseLang(),
     );
   }
 }

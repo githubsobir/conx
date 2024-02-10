@@ -3,6 +3,7 @@ import 'package:connection_notifier/connection_notifier.dart';
 import 'package:conx/firts_part/login_reg/enter_page/lang_model/choose_lang.dart';
 import 'package:conx/firts_part/user_fill/user_fill.dart';
 import 'package:conx/pages/main/main_page.dart';
+import 'package:conx/root_and_unver_page/root_page.dart';
 import 'package:conx/scefics/drivers/driver_registration/driver_reg.dart';
 import 'package:conx/scefics/drivers/tex_car/tex_car.dart';
 import 'package:conx/theme/theme_app.dart';
@@ -79,8 +80,8 @@ class MyApp extends ConsumerWidget {
       //   themeMode:  ref.watch(getTheme) ? ThemeMode.light : ThemeMode.dark,
       home:
       box.userToken.length > 20?
-      // TextCarEnterInfo():ChooseLang(),
-      DrawerRegistration():ChooseLang(),
+      RootPage():ChooseLang(),
+      // DrawerRegistration():ChooseLang(),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:conx/scefics/drivers/driver_registration/driver_license/controller_license.dart';
 import 'package:conx/widgets/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -31,7 +32,9 @@ class _PhotoLicense1State extends ConsumerState<PhotoLicense1> {
           )
         ],
       ),
-      body: SafeArea(
+      body:
+      ref.watch(controllerDriverLicense).boolGetData?
+      SafeArea(
         child: Container(
           margin: const EdgeInsets.all(20),
           child: Center(
@@ -52,8 +55,8 @@ class _PhotoLicense1State extends ConsumerState<PhotoLicense1> {
                         border: Border.all(
                       color: Colors.white,
                     )),
-                    child: ref.watch(controllerDriverLicense).list.isNotEmpty
-                        ? Image.file(ref.watch(controllerDriverLicense).list[0])
+                    child:getDataFile() == "1"
+                        ? Image.file(ref.watch(controllerDriverLicense.notifier).file1)
                         : const Icon(Icons.image,
                             size: 50, color: Colors.white),
                   ),
@@ -134,7 +137,14 @@ class _PhotoLicense1State extends ConsumerState<PhotoLicense1> {
             ),
           ),
         ),
-      ),
+      ):Center(child: CupertinoActivityIndicator()),
     );
+  }
+  String getDataFile(){
+    try{
+      return ref.watch(controllerDriverLicense.notifier).file1.path.length >= 10?"1":"0";
+    }catch(e){
+      return "0";
+    }
   }
 }

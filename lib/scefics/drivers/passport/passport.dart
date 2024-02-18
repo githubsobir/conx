@@ -5,6 +5,7 @@ import 'package:conx/scefics/drivers/passport/widgets/photo_passport1.dart';
 import 'package:conx/scefics/drivers/passport/widgets/photo_passport2.dart';
 import 'package:conx/scefics/drivers/passport/widgets/photo_passport3.dart';
 import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,9 +44,9 @@ class _PassportState extends ConsumerState<Passport> {
                         controller
                             .animateToPage(0,
                                 curve: Curves.decelerate,
-                                duration: const Duration(milliseconds: 300))
+                                duration: const Duration(milliseconds: 200))
                             .then((value) => setState(() {
-                                  log(controller.page!.toInt().toString());
+
                                 })); // for animated jump. Requires a curve and a duration
                       }
                     },
@@ -96,14 +97,18 @@ class _PassportState extends ConsumerState<Passport> {
             ),
           ),
           Expanded(
-            child: PageView(
+            child:
+            ref.watch(controllerPassport).boolGetData?
+            PageView(
               controller: controller,
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 passport(),
                 idCard(),
               ],
-            ),
+            )
+            :const Center(child: CupertinoActivityIndicator())
+            ,
           ),
         ],
       ),
@@ -178,36 +183,29 @@ class _PassportState extends ConsumerState<Passport> {
                           builder: (context) => PhotoPassport1(),
                         ));
                   },
-                  child: ref
-                              .watch(controllerPassport)
-                                      .list
-                              .isNotEmpty &&
-                          ref
-                              .watch(controllerPassport)
-                              .list[0]
-                              .path
-                              .isNotEmpty
+                  child: getImage(ref, 0) =="1"
                       ?
-                      // Text("")
                       Card(
                           child: Image.file(
                               height: 104,
                               width: MediaQuery.of(context).size.width * 0.4,
                               fit: BoxFit.cover,
                               ref
-                                  .watch(controllerPassport)
-                                  .list[0]),
+                                  .watch(controllerPassport.notifier).file1
+                                  ),
                         )
                       : Container(
                           height: 104,
                           width: MediaQuery.of(context).size.width * 0.4,
-                          padding: const EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
                               color: Colors.grey.shade300,
                               borderRadius: BorderRadius.circular(10)),
-                          child: ref.watch(controllerPassport).list.isNotEmpty
+                          child: getImage(ref, 0) =="1"
                               ? Image.file(
-                                  ref.watch(controllerPassport).list[0])
+                                  ref.watch(controllerPassport.notifier).file1,
+                          fit: BoxFit.cover,
+                          )
                               : const Center(
                                   child: Column(
                                     crossAxisAlignment:
@@ -228,21 +226,16 @@ class _PassportState extends ConsumerState<Passport> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    ref.watch(controllerPassport).list.isNotEmpty
-                        ? Navigator.push(
+                    Navigator.push(
                             context,
                             CupertinoPageRoute(
                               builder: (context) => PhotoPassport2(),
-                            ))
-                        : Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (context) => PhotoPassport1(),
                             ));
+
                   },
-                  child: ref.watch(controllerPassport).list.length > 1
+                  child: getImage(ref, 1) =="1"
                       ? Image.file(
-                          ref.watch(controllerPassport).list[1],
+                          ref.watch(controllerPassport.notifier).file2,
                           height: 104,
                           width: MediaQuery.of(context).size.width * 0.4,
                           fit: BoxFit.cover,
@@ -278,27 +271,28 @@ class _PassportState extends ConsumerState<Passport> {
               child: GestureDetector(
                 onTap: () {
 
-                  ref.watch(controllerPassport).list.isEmpty
-                      ? Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => PhotoPassport1(),
-                      ))
-                      :  ref.watch(controllerPassport).list.length == 1?
-
-                  Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => PhotoPassport2(),
-                      )) :Navigator.push(
+                  // ref.watch(controllerPassport).list.isEmpty
+                  //     ? Navigator.push(
+                  //     context,
+                  //     CupertinoPageRoute(
+                  //       builder: (context) => PhotoPassport1(),
+                  //     ))
+                  //     :  ref.watch(controllerPassport).list.length == 1?
+                  //
+                  // Navigator.push(
+                  //     context,
+                  //     CupertinoPageRoute(
+                  //       builder: (context) => PhotoPassport2(),
+                  //     )) :
+                      Navigator.push(
                       context,
                       CupertinoPageRoute(
                         builder: (context) => PhotoPassport3(),
                       )) ;
                 },
-                child: ref.watch(controllerPassport).list.length > 2
+                child: getImage(ref, 2) =="1"
                     ? Image.file(
-                        ref.watch(controllerPassport).list[2],
+                        ref.watch(controllerPassport.notifier).file3,
                         height: 104,
                         width: MediaQuery.of(context).size.width * 0.4,
                         fit: BoxFit.cover,
@@ -335,8 +329,13 @@ class _PassportState extends ConsumerState<Passport> {
               children: [
                 MaterialButton(
                   onPressed: () {
-                    ref.read(controllerPassport.notifier).sentServer();
-                    log(ref.read(controllerPassport).list.length.toString());
+
+
+                    txtPassport.text.toString().length > 5 ?
+                    ref.read(controllerPassport.notifier).sentServer(context: context):{
+
+                      MyWidgets.snackBarMyWidgets(context: context, text: "Pasport ma'lumot kiriting")
+                    };
                   },
                   height: 55,
                   minWidth: double.infinity,
@@ -344,7 +343,7 @@ class _PassportState extends ConsumerState<Passport> {
                   shape: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: const BorderSide(color: Colors.grey)),
-                  child: const Text("Davom etish 77",
+                  child: const Text("Davom etish",
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.white)),
                 ),
@@ -424,16 +423,7 @@ class _PassportState extends ConsumerState<Passport> {
                           builder: (context) => PhotoPassport1(),
                         ));
                   },
-                  child: ref
-                      .watch(controllerPassport)
-                      .list
-                      .isNotEmpty &&
-                      ref
-                          .watch(controllerPassport)
-                          .list[0]
-                          .path
-                          .isNotEmpty
-                      ?
+                  child: getImage(ref, 0)=="1"?
                   // Text("")
                   Card(
                     child: Image.file(
@@ -441,8 +431,7 @@ class _PassportState extends ConsumerState<Passport> {
                         width: MediaQuery.of(context).size.width * 0.4,
                         fit: BoxFit.cover,
                         ref
-                            .watch(controllerPassport)
-                            .list[0]),
+                            .watch(controllerPassport.notifier).file1),
                   )
                       : Container(
                     height: 104,
@@ -451,9 +440,9 @@ class _PassportState extends ConsumerState<Passport> {
                     decoration: BoxDecoration(
                         color: Colors.grey.shade300,
                         borderRadius: BorderRadius.circular(10)),
-                    child: ref.watch(controllerPassport).list.isNotEmpty
+                    child: getImage(ref, 0) =="1"
                         ? Image.file(
-                        ref.watch(controllerPassport).list[0])
+                        ref.watch(controllerPassport.notifier).file1)
                         : const Center(
                       child: Column(
                         crossAxisAlignment:
@@ -474,21 +463,16 @@ class _PassportState extends ConsumerState<Passport> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    ref.watch(controllerPassport).list.isNotEmpty
-                        ? Navigator.push(
+                    Navigator.push(
                         context,
                         CupertinoPageRoute(
                           builder: (context) => PhotoPassport2(),
-                        ))
-                        : Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => PhotoPassport1(),
                         ));
+
                   },
-                  child: ref.watch(controllerPassport).list.length > 1
+                  child: getImage(ref, 1) =="1"
                       ? Image.file(
-                    ref.watch(controllerPassport).list[1],
+                    ref.watch(controllerPassport.notifier).file2,
                     height: 104,
                     width: MediaQuery.of(context).size.width * 0.4,
                     fit: BoxFit.cover,
@@ -524,27 +508,15 @@ class _PassportState extends ConsumerState<Passport> {
               child: GestureDetector(
                 onTap: () {
 
-                  ref.watch(controllerPassport).list.isEmpty
-                      ? Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => PhotoPassport1(),
-                      ))
-                      :  ref.watch(controllerPassport).list.length == 1?
-
                   Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => PhotoPassport2(),
-                      )) :Navigator.push(
                       context,
                       CupertinoPageRoute(
                         builder: (context) => PhotoPassport3(),
                       )) ;
                 },
-                child: ref.watch(controllerPassport).list.length > 2
+                child: getImage(ref, 2)  =="1"
                     ? Image.file(
-                  ref.watch(controllerPassport).list[2],
+                  ref.watch(controllerPassport.notifier).file3,
                   height: 104,
                   width: MediaQuery.of(context).size.width * 0.4,
                   fit: BoxFit.cover,
@@ -581,8 +553,11 @@ class _PassportState extends ConsumerState<Passport> {
               children: [
                 MaterialButton(
                   onPressed: () {
-                    ref.read(controllerPassport.notifier).sentServer();
-                    log(ref.read(controllerPassport).list.length.toString());
+                    txtPassport.text.toString().length > 5 ?
+                    ref.read(controllerPassport.notifier).sentServer(context: context):{
+
+                      MyWidgets.snackBarMyWidgets(context: context, text: "Pasport ma'lumot kiriting")
+                    };
                   },
                   height: 55,
                   minWidth: double.infinity,
@@ -590,7 +565,7 @@ class _PassportState extends ConsumerState<Passport> {
                   shape: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: const BorderSide(color: Colors.grey)),
-                  child: const Text("Davom etish 77",
+                  child: const Text("Davom etish",
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.white)),
                 ),
@@ -600,5 +575,19 @@ class _PassportState extends ConsumerState<Passport> {
         ),
       ),
     );
+  }
+}
+
+String getImage(WidgetRef ref,int index){
+  try{
+    if(index == 0){
+      return ref.watch(controllerPassport.notifier).file1.path.length > 12?"1":"0";
+    } else if(index == 1){
+      return ref.watch(controllerPassport.notifier).file2.path.length > 12?"1":"0";
+    } else{
+      return ref.watch(controllerPassport.notifier).file3.path.length > 12?"1":"0";
+    }
+  }catch(e){
+    return "0";
   }
 }

@@ -17,7 +17,7 @@ class _HeaderMainState extends State<HeaderMain> {
       backgroundColor: Colors.white,
 
       body: Container(
-        height: 420,
+        height: 520,
         margin: const EdgeInsets.fromLTRB(25, 10, 25, 10),
         decoration: BoxDecoration(
             color: Colors.grey.shade50,
@@ -90,7 +90,7 @@ class _HeaderMainState extends State<HeaderMain> {
             ),
             const SizedBox(height: 10),
             SizedBox(
-                height: 110,
+                height: 120,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 20,
@@ -127,8 +127,9 @@ class _HeaderMainState extends State<HeaderMain> {
                           ),
                         ),
                       ),
-                      const Padding(
+                      Container(
                         padding: EdgeInsets.fromLTRB(5,0,5,0),
+                        height: 30,
                         child: Text(
                           "companiya\n nomi",
                           maxLines: 2,

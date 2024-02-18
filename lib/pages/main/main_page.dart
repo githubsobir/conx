@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/pages/main/body_main.dart';
 import 'package:conx/pages/main/header_main.dart';
+import 'package:conx/pages/user/users.dart';
 import 'package:conx/widgets/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -83,16 +84,22 @@ class _MainPageState extends ConsumerState<MainPage> with TickerProviderStateMix
           ], shape: BoxShape.circle, color: Colors.grey),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(100),
-            child: CachedNetworkImage(
-              imageUrl:
-              "https://yt3.googleusercontent.com/ytc/AGIKgqPwtgj5FwEJ7cFln7T_qxosKFA-gCZTtaDbRMhCGw=s900-c-k-c0x00ffffff-no-rj",
-              alignment: Alignment.topCenter,
-              width: 50,
-              height: 55,
-              fit: BoxFit.cover,
-              progressIndicatorBuilder: (context, url, downloadProgress) =>
-              const CupertinoActivityIndicator(),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+            child: GestureDetector(
+              onTap: (){
+                Navigator.push(context, CupertinoPageRoute(builder: (context) =>Users(),));
+
+              },
+              child: CachedNetworkImage(
+                imageUrl:
+                "https://yt3.googleusercontent.com/ytc/AGIKgqPwtgj5FwEJ7cFln7T_qxosKFA-gCZTtaDbRMhCGw=s900-c-k-c0x00ffffff-no-rj",
+                alignment: Alignment.topCenter,
+                width: 50,
+                height: 55,
+                fit: BoxFit.cover,
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                const CupertinoActivityIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
             ),
           ),
         ),

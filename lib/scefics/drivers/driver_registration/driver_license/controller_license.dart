@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:conx/scefics/drivers/driver_registration/driver_choose_company/driver_choose_company.dart';
 import 'package:conx/scefics/drivers/driver_registration/driver_license/model/model_license.dart';
 import 'package:conx/widgets/main_url.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -21,6 +23,9 @@ class ControllerLicense extends StateNotifier<ModelLicense> {
   var dio = Dio();
   var box = HiveBoxes();
   List<File> imageList = [];
+ late File file1;
+ late File file2;
+ late File file3;
 
   Future getImage(int index) async {
     state = state.copyWith(
@@ -30,26 +35,14 @@ class ControllerLicense extends StateNotifier<ModelLicense> {
     final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (index == 0) {
-      if (imageList.isNotEmpty) {
-        imageList[index] = File(pickedFile!.path);
-      } else {
-        imageList.add(File(pickedFile!.path));
-      }
+      file1 = File(pickedFile!.path);
     }
 
     if (index == 1) {
-      if (imageList.length == 2) {
-        imageList[index] = File(pickedFile!.path);
-      } else {
-        imageList.length < 2 ? imageList.add(File(pickedFile!.path)) : {};
-      }
+      file2 = File(pickedFile!.path);
     }
     if (index == 2) {
-      if (imageList.length == 3) {
-        imageList[index] = File(pickedFile!.path);
-      } else {
-        imageList.length < 3 ? imageList.add(File(pickedFile!.path)) : {};
-      }
+      file3 = File(pickedFile!.path);
     }
 
     state = state.copyWith(
@@ -58,34 +51,21 @@ class ControllerLicense extends StateNotifier<ModelLicense> {
 
   Future getImageCamera(int index) async {
     state = state.copyWith(
-        boolGetData1: true, list: imageList, message1: "", errorMessage1: "");
+        boolGetData1: false, list: imageList, message1: "", errorMessage1: "");
     final imagePicker = ImagePicker();
 
     final pickedFile = await imagePicker.pickImage(source: ImageSource.camera);
 
     if (index == 0) {
-      if (imageList.isNotEmpty) {
-        imageList[index] = File(pickedFile!.path);
-      } else {
-        imageList.add(File(pickedFile!.path));
-      }
+      file1 = File(pickedFile!.path);
     }
 
     if (index == 1) {
-      if (imageList.length == 2) {
-        imageList[index] = File(pickedFile!.path);
-      } else {
-        imageList.length < 2 ? imageList.add(File(pickedFile!.path)) : {};
-      }
+      file2 = File(pickedFile!.path);
     }
     if (index == 2) {
-      if (imageList.length == 3) {
-        imageList[index] = File(pickedFile!.path);
-      } else {
-        imageList.length < 3 ? imageList.add(File(pickedFile!.path)) : {};
-      }
+      file3 = File(pickedFile!.path);
     }
-
     state = state.copyWith(
         boolGetData1: true, list: imageList, message1: "", errorMessage1: "");
   }
@@ -103,18 +83,18 @@ class ControllerLicense extends StateNotifier<ModelLicense> {
     } catch (ee) {}
   }
 
-  Future setDriverLicense() async {
+  Future setDriverLicense({required BuildContext context}) async {
     log(imageList.length.toString());
 
     try {
       FormData formData = FormData.fromMap({
         "license_seria_num": "AA1234567",
         "license_expiration_date": "2022-12-12",
-        "front_side": await MultipartFile.fromFile(imageList[0].path,
+        "front_side": await MultipartFile.fromFile(file1.path,
             filename: "license_expiration_date"),
-        "back_side": await MultipartFile.fromFile(imageList[1].path,
+        "back_side": await MultipartFile.fromFile(file2.path,
             filename: "front_side"),
-        "face_img": await MultipartFile.fromFile(imageList[2].path,
+        "face_img": await MultipartFile.fromFile(file3.path,
             filename: "face_img"),
       });
       Response response = await dio.post(
@@ -128,6 +108,7 @@ class ControllerLicense extends StateNotifier<ModelLicense> {
     } catch (ee) {
       log(ee.toString());
     }
+    Navigator.push(context, CupertinoPageRoute(builder: (context) => DriverChooseCompany(),));
   }
 
   Future updateDriverLicense() async {
@@ -137,5 +118,14 @@ class ControllerLicense extends StateNotifier<ModelLicense> {
               Options(headers: {"Authorization": "Bearer ${box.userToken}"}));
     } on DioException catch (e) {
     } catch (ee) {}
+  }
+
+  Future setDefault()async{
+
+  try{
+    state = state.copyWith(boolGetData1: false, message1: "", list: [], errorMessage1: "");
+    await Future.delayed(Duration(milliseconds: 600));
+    state = state.copyWith(boolGetData1: true, message1: "", list: [], errorMessage1: "");
+  }catch(e){}
   }
 }

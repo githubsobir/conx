@@ -12,6 +12,9 @@ class ChooseRate extends StatefulWidget {
 }
 
 class _ChooseRateState extends State<ChooseRate> {
+
+  String val1 ="Наличные";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,42 +35,30 @@ class _ChooseRateState extends State<ChooseRate> {
                   height: MediaQuery.of(context).size.height * 0.6,
                   child: ListView.builder(
                     itemCount: listModelChooseRate.length,
-                    itemBuilder: (context, index) => Container(
-                        height: 50,
-                        margin: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            color: listModelChooseRate[index].boolActive
-                                ? AppColors.colorBackground
-                                : Colors.grey.shade200,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(left: 15),
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              child: Text(listModelChooseRate[index].nameRate,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      color:
-                                          listModelChooseRate[index].boolActive
-                                              ? Colors.white
-                                              : Colors.black)),
-                            ),
-                            Checkbox(
-                                splashRadius: 20,
-                                checkColor: Colors.white,
-                                activeColor: AppColors.colorBackground,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  side: const BorderSide(color: Colors.white),
-                                ),
-                                side: const BorderSide(
-                                    color: Colors.black, width: 1),
-                                value: listModelChooseRate[index].boolActive,
-                                onChanged: (val) {})
-                          ],
-                        )),
+                    itemBuilder: (context, index) => Card(
+                      child: ListTile(
+
+                        title: Text(listModelChooseRate[index].nameRate,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold)),
+                        trailing: GestureDetector(
+                          child: Radio(
+                              value: listModelChooseRate[index].nameRate,
+                              autofocus: false,
+                              groupValue: val1,
+                              activeColor: AppColors.colorBackground,
+                              onChanged: (val) {
+                                val1 = listModelChooseRate[index].nameRate;
+                                setState(() {});
+                              }),
+                        ),
+                        onTap: () {
+
+                          val1 = listModelChooseRate[index].nameRate;
+                          setState(() {});
+                        },
+                      ),
+                    ),
                   )),
               Expanded(
                   child: Column(

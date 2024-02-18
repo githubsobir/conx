@@ -2,13 +2,24 @@ import 'package:conx/firts_part/login_reg/sms/widgets_sms/sms_2_try_again.dart';
 import 'package:conx/firts_part/user_fill/controller_user_birth.dart';
 import 'package:conx/scefics/drivers/driver_registration/driver_reg.dart';
 import 'package:conx/widgets/app_colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+late DateTime selectedDate = DateTime.now();
+
+DateTime now = DateTime.now();
+
+bool boolSelected = false;
+
+TextEditingController textEditingController =
+TextEditingController(text: box.userBirth);
+
+
+
 Widget user0BirthDay({required BuildContext context, required WidgetRef ref}) {
-  TextEditingController textEditingController =
-      TextEditingController(text: box.userBirth);
+
   return Container(
     margin: const EdgeInsets.all(20),
     child: Column(
@@ -33,6 +44,21 @@ Widget user0BirthDay({required BuildContext context, required WidgetRef ref}) {
                         const BorderSide(color: AppColors.colorBackground))),
           ),
         ),
+        Container(
+            height: 60,
+            width: double.infinity,
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(10)),
+            child: Row(
+              children: [
+                boolSelected
+                    ? Text(
+                    DateFormat('yyyy-MM-dd').format(selectedDate))
+                    : const SizedBox(),
+              ],
+            )),
         const SizedBox(height: 30),
         MaterialButton(
           onPressed: () {
@@ -78,4 +104,52 @@ Widget user0BirthDay({required BuildContext context, required WidgetRef ref}) {
       ],
     ),
   );
+
+}
+
+Future<void> _selectDate(BuildContext context) async {
+  DateTime picked = await showCupertinoModalPopup(
+    context: context,
+    builder: (BuildContext context) {
+      return Container(
+        height: 230,
+        color: Colors.white,
+        child: Column(
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: Container(
+                padding: const EdgeInsets.only(right: 20, top: 20),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [Icon(Icons.check)],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 180,
+              child: CupertinoDatePicker(
+                initialDateTime: selectedDate,
+                onDateTimeChanged: (DateTime newDate) {
+                    selectedDate = newDate;
+                    boolSelected = true;
+                },
+                mode: CupertinoDatePickerMode.date,
+                minimumDate: DateTime(2024),
+                maximumDate: DateTime(2030),
+              ),
+            ),
+          ],
+        ),
+      );
+    },
+  );
+
+  if (picked != selectedDate) {
+
+      selectedDate = picked;
+  }
 }

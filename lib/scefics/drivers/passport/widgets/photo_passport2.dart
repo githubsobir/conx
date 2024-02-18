@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:conx/scefics/drivers/passport/controller_passport.dart';
 import 'package:conx/widgets/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,8 +26,10 @@ class _PhotoPassport2State extends ConsumerState<PhotoPassport2> {
           GestureDetector(
             onTap: () {
               try {
-                ref.read(controllerPassport).list[1].path.length > 10
-                    ? Navigator.of(context).pop()
+                ref.read(controllerPassport.notifier).file2.path.length > 10
+                    ? {Navigator.of(context).pop(),
+                  ref.read(controllerPassport.notifier).setDeafault()
+                }
                     : {};
               } catch (e) {
                 log(e.toString());
@@ -42,7 +45,10 @@ class _PhotoPassport2State extends ConsumerState<PhotoPassport2> {
           )
         ],
       ),
-      body: SafeArea(
+      body:
+
+      ref.watch(controllerPassport).boolGetData ?
+      SafeArea(
         child: Container(
           margin: const EdgeInsets.all(20),
           child: Center(
@@ -52,7 +58,7 @@ class _PhotoPassport2State extends ConsumerState<PhotoPassport2> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    ref.read(controllerPassport.notifier).getImageCamera(0);
+                    ref.read(controllerPassport.notifier).getImageCamera(1);
                   },
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.3,
@@ -61,8 +67,8 @@ class _PhotoPassport2State extends ConsumerState<PhotoPassport2> {
                         border: Border.all(
                       color: Colors.white,
                     )),
-                    child: ref.watch(controllerPassport).list.length >= 2
-                        ? Image.file(ref.watch(controllerPassport).list[2])
+                    child: getDataFile() =="1"
+                        ? Image.file(ref.watch(controllerPassport.notifier).file2)
                         : const Icon(Icons.image,
                             size: 50, color: Colors.white),
                   ),
@@ -125,7 +131,7 @@ class _PhotoPassport2State extends ConsumerState<PhotoPassport2> {
                 const SizedBox(height: 25),
                 MaterialButton(
                   onPressed: () {
-                    ref.read(controllerPassport.notifier).getImage(0);
+                    ref.read(controllerPassport.notifier).getImage(1);
                   },
                   height: 55,
                   minWidth: double.infinity,
@@ -141,7 +147,16 @@ class _PhotoPassport2State extends ConsumerState<PhotoPassport2> {
             ),
           ),
         ),
-      ),
+      )
+      :const Center(child: CupertinoActivityIndicator())
+      ,
     );
+  }
+  String getDataFile(){
+    try{
+      return ref.watch(controllerPassport.notifier).file2.path.length >= 10?"1":"0";
+    }catch(e){
+      return "0";
+    }
   }
 }

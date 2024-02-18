@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:conx/scefics/drivers/passport/controller_passport.dart';
+import 'package:conx/scefics/drivers/passport/passport.dart';
 import 'package:conx/widgets/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -24,8 +26,10 @@ class _PhotoPassport1State extends ConsumerState<PhotoPassport1> {
           GestureDetector(
             onTap: () {
               try {
-                ref.read(controllerPassport).list[0].path.length > 10
-                    ? Navigator.of(context).pop()
+                ref.read(controllerPassport.notifier).file1.path.length > 10
+                    ? {Navigator.of(context).pop(),
+                ref.read(controllerPassport.notifier).setDeafault()
+                }
                     : {};
               } catch (e) {
                 log(e.toString());
@@ -42,7 +46,9 @@ class _PhotoPassport1State extends ConsumerState<PhotoPassport1> {
         ],
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: SafeArea(
+      body:
+      ref.watch(controllerPassport).boolGetData?
+      SafeArea(
         child: Container(
           margin: const EdgeInsets.all(20),
           child: Center(
@@ -61,8 +67,8 @@ class _PhotoPassport1State extends ConsumerState<PhotoPassport1> {
                         border: Border.all(
                       color: Colors.white,
                     )),
-                    child: ref.watch(controllerPassport).list.isNotEmpty
-                        ? Image.file(ref.watch(controllerPassport).list[0])
+                    child: getImage(ref, 0) == "1"
+                        ? Image.file(ref.watch(controllerPassport.notifier).file1)
                         : const Icon(Icons.image,
                             size: 50, color: Colors.white),
                   ),
@@ -141,7 +147,7 @@ class _PhotoPassport1State extends ConsumerState<PhotoPassport1> {
             ),
           ),
         ),
-      ),
+      ):const Center(child: CupertinoActivityIndicator()),
     );
   }
 }

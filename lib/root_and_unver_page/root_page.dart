@@ -9,7 +9,6 @@ import 'package:conx/pages/search/search_all.dart';
 import 'package:conx/widgets/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({super.key});
@@ -31,17 +30,6 @@ class _RootPageState extends State<RootPage> {
   dynamic selected;
   var heart = false;
 
-  // var box = Hive.box("online");
-
-  // Future getFirstAction() async {
-  //   try {
-  //     await Future.delayed(Duration.zero);
-  //     box.delete("updateVersion");
-  //     box.put("updateVersion", "1005");
-  //   } catch (e) {
-  //     throw Exception("Error update");
-  //   }
-  // }
 
   int currentIndex = 0;
   final List<IconData> icons = [

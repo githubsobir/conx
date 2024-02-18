@@ -45,12 +45,15 @@ var box = HiveBoxes();
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "chooseLang".tr(),
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              SizedBox(
+                height: 50,
+                child: Text(
+                  "chooseLang".tr(),
+                  style:
+                      const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 25),
               Expanded(
                 child: ListView.builder(
                     itemCount: listLanguage.length,
@@ -110,6 +113,7 @@ var box = HiveBoxes();
                           ),
                         )),
               ),
+              const SizedBox(height: 10),
               MaterialButton(
                 onPressed: () {
                   Navigator.push(

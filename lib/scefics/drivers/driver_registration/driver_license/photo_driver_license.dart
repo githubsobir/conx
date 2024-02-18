@@ -20,7 +20,9 @@ class _PhotoDiverLicenseState extends ConsumerState<PhotoDiverLicense> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: SafeArea(
+      body:
+      ref.watch(controllerDriverLicense).boolGetData?
+      SafeArea(
         child: Container(
           margin: const EdgeInsets.all(15),
           child: Column(
@@ -51,9 +53,9 @@ class _PhotoDiverLicenseState extends ConsumerState<PhotoDiverLicense> {
                               builder: (context) => const PhotoLicense1(),
                             ));
                       },
-                      child: ref.watch(listControllerLicenseMini(0)) == "1"
+                      child: getDataFile(0) == "1"
                           ? Image.file(
-                              ref.watch(controllerDriverLicense).list[0],
+                              ref.watch(controllerDriverLicense.notifier).file1,
                               height: 104,
                               width: MediaQuery.of(context).size.width * 0.4,
                               fit: BoxFit.cover,
@@ -84,22 +86,17 @@ class _PhotoDiverLicenseState extends ConsumerState<PhotoDiverLicense> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        ref.watch(listControllerLicense(1)) == "1"
-                            ? Navigator.push(
+                       Navigator.push(
                                 context,
                                 CupertinoPageRoute(
                                   builder: (context) => const PhotoLicense2(),
-                                ))
-                            : Navigator.push(
-                                context,
-                                CupertinoPageRoute(
-                                  builder: (context) => const PhotoLicense1(),
                                 ));
+
                       },
                       child:
-                      ref.watch(listControllerLicenseMini(1)) == "1"
+                      getDataFile(1) == "1"
                           ? Image.file(
-                        ref.watch(controllerDriverLicense).list[1],
+                        ref.watch(controllerDriverLicense.notifier).file2,
                         height: 104,
                         width: MediaQuery.of(context).size.width * 0.4,
                         fit: BoxFit.cover,
@@ -134,22 +131,17 @@ class _PhotoDiverLicenseState extends ConsumerState<PhotoDiverLicense> {
                   padding: const EdgeInsets.all(15),
                   child: GestureDetector(
                     onTap: () {
-                      ref.watch(listControllerLicenseMini(2)) == "1"
-                          ? Navigator.push(
+                      Navigator.push(
                               context,
                               CupertinoPageRoute(
                                 builder: (context) => const PhotoLicense3(),
                               ))
-                          : Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (context) => const PhotoLicense2(),
-                              ));
+                         ;
                     },
                     child:
-                    ref.watch(listControllerLicenseMini(2)) == "1"
+                   getDataFile(2) == "1"
                         ? Image.file(
-                      ref.watch(controllerDriverLicense).list[2],
+                      ref.watch(controllerDriverLicense.notifier).file3,
                       height: 104,
                       width: MediaQuery.of(context).size.width * 0.4,
                       fit: BoxFit.cover,
@@ -189,7 +181,7 @@ class _PhotoDiverLicenseState extends ConsumerState<PhotoDiverLicense> {
                       onPressed: () {
                         ref
                             .read(controllerDriverLicense.notifier)
-                            .setDriverLicense();
+                            .setDriverLicense(context: context);
                       },
                       height: 55,
                       minWidth: double.infinity,
@@ -206,7 +198,23 @@ class _PhotoDiverLicenseState extends ConsumerState<PhotoDiverLicense> {
                 )),
               ]),
         ),
-      ),
+      )
+      :Center(child: CupertinoActivityIndicator()),
     );
+  }
+
+  String getDataFile(int index){
+    try{
+      if(index  == 0){
+        return ref.watch(controllerDriverLicense.notifier).file1.path.length >= 10?"1":"0";
+      }else if(index  == 1){
+        return ref.watch(controllerDriverLicense.notifier).file2.path.length >= 10?"1":"0";
+      }else{
+        return ref.watch(controllerDriverLicense.notifier).file3.path.length >= 10?"1":"0";
+      }
+
+    }catch(e){
+      return "0";
+    }
   }
 }

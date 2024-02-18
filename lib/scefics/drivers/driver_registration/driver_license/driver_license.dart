@@ -138,7 +138,7 @@ class _DriverLicenseState extends State<DriverLicense> {
                   Navigator.of(context).pop();
                 },
                 child: Container(
-                  padding: EdgeInsets.only(right: 20, top: 20),
+                  padding: const EdgeInsets.only(right: 20, top: 20),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.end,

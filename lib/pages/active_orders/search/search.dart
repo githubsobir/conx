@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SearchInMap extends StatefulWidget {
-  const SearchInMap({super.key});
+
+class PlacesApiGoogleMapSearch extends ConsumerStatefulWidget {
+  const PlacesApiGoogleMapSearch({super.key});
 
   @override
-  State<SearchInMap> createState() => _SearchInMapState();
+  ConsumerState<PlacesApiGoogleMapSearch> createState() => _SearchInMapState();
 }
 
-class _SearchInMapState extends State<SearchInMap> {
+class _SearchInMapState extends ConsumerState<PlacesApiGoogleMapSearch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold();

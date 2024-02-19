@@ -332,7 +332,7 @@ class _PassportState extends ConsumerState<Passport> {
 
 
                     txtPassport.text.toString().length > 5 ?
-                    ref.read(controllerPassport.notifier).sentServer(context: context):{
+                    ref.read(controllerPassport.notifier).sentServer(context: context,  serNum:txtPassport.text.toString()):{
 
                       MyWidgets.snackBarMyWidgets(context: context, text: "Pasport ma'lumot kiriting")
                     };
@@ -554,7 +554,7 @@ class _PassportState extends ConsumerState<Passport> {
                 MaterialButton(
                   onPressed: () {
                     txtPassport.text.toString().length > 5 ?
-                    ref.read(controllerPassport.notifier).sentServer(context: context):{
+                    ref.read(controllerPassport.notifier).sentServer(context: context,serNum:txtPassport.text.toString()):{
 
                       MyWidgets.snackBarMyWidgets(context: context, text: "Pasport ma'lumot kiriting")
                     };

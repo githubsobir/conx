@@ -75,7 +75,7 @@ class _UserCategoryState extends State<UserCategory> {
 
                               /// 1 haydovchi
                               /// 2 yuk jo'natuvchi
-                              box.userType = (index+1).toString();
+                              box.userType = index == 0?"Driver":"Client";
                             }),
                       ),
                       onTap: () {

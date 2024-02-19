@@ -1,5 +1,4 @@
 import 'package:conx/firts_part/user_fill/controller_user_birth.dart';
-import 'package:conx/firts_part/user_fill/widget_user_birth/user_0_birth.dart';
 import 'package:conx/firts_part/user_fill/widget_user_birth/user_1_birth_loading.dart';
 import 'package:conx/firts_part/user_fill/widget_user_birth/user_birth_error.dart';
 import 'package:conx/scefics/drivers/driver_registration/driver_reg.dart';
@@ -45,7 +44,6 @@ class _UserBothState extends ConsumerState<UserBoth> {
     }
   }
 
-
   // late DateTime selectedDate = DateTime.now();
 
   DateTime now = DateTime.now();
@@ -53,13 +51,12 @@ class _UserBothState extends ConsumerState<UserBoth> {
   bool boolSelected = false;
   var box = HiveBoxes();
 
-  TextEditingController textEditingController =
-  TextEditingController();
+  TextEditingController textEditingController = TextEditingController();
 
+  late DateTime selectedDate;
 
-
-  Widget user0BirthDay({required BuildContext context, required WidgetRef ref}) {
-
+  Widget user0BirthDay(
+      {required BuildContext context, required WidgetRef ref}) {
     return Container(
       margin: const EdgeInsets.all(20),
       child: Column(
@@ -74,7 +71,7 @@ class _UserBothState extends ConsumerState<UserBoth> {
           const SizedBox(height: 30),
           const Text("Sana", style: TextStyle(fontWeight: FontWeight.bold)),
           GestureDetector(
-            onTap: (){
+            onTap: () {
               _selectDate(context);
             },
             child: Container(
@@ -87,29 +84,26 @@ class _UserBothState extends ConsumerState<UserBoth> {
                 child: Row(
                   children: [
                     boolSelected
-                        ? Text(
-                        DateFormat('yyyy-MM-dd').format(selectedDate))
+                        ? Text(DateFormat('yyyy-MM-dd').format(selectedDate))
                         : const SizedBox(),
                   ],
                 )),
           ),
-
-
           const SizedBox(height: 30),
           MaterialButton(
             onPressed: () {
-              ref
-                  .read(userBirthController.notifier).getUserBirth();
+              ref.read(userBirthController.notifier).getUserBirth();
 
               if (box.userBirth.toString().length > 4) {
-                ref
-                    .read(userBirthController.notifier)
-                    .updateUserBirth(date: textEditingController.text.toString());
+                ref.read(userBirthController.notifier).updateUserBirth(
+                    date: DateFormat('yyyy-MM-dd')
+                        .format(selectedDate)
+                        .toString());
               } else {
-
-                ref
-                    .read(userBirthController.notifier)
-                    .setUserBirth(date: textEditingController.text.toString());
+                ref.read(userBirthController.notifier).setUserBirth(
+                    date: DateFormat('yyyy-MM-dd')
+                        .format(selectedDate)
+                        .toString());
               }
 
               Navigator.push(context,CupertinoPageRoute(builder: (context) => DrawerRegistration(),));
@@ -121,26 +115,25 @@ class _UserBothState extends ConsumerState<UserBoth> {
                 borderRadius: BorderRadius.circular(10),
                 borderSide: const BorderSide(color: Colors.grey)),
             child: const Text("Davom etish",
-                style:
-                TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white)),
           ),
-          Expanded(
+          const Expanded(
               child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Akkauntingiz bormi? Kirish",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-              ))
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "Akkauntingiz bormi? Kirish",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
+          ))
         ],
       ),
     );
-
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -172,9 +165,7 @@ class _UserBothState extends ConsumerState<UserBoth> {
                   onDateTimeChanged: (DateTime newDate) {
                     selectedDate = newDate;
                     boolSelected = true;
-                    setState(() {
-
-                    });
+                    setState(() {});
                   },
                   mode: CupertinoDatePickerMode.date,
                   minimumDate: DateTime(1960),
@@ -188,10 +179,9 @@ class _UserBothState extends ConsumerState<UserBoth> {
     );
 
     if (picked != selectedDate) {
-setState(() {
-  selectedDate = picked;
-});
-
+      setState(() {
+        selectedDate = picked;
+      });
     }
   }
 }

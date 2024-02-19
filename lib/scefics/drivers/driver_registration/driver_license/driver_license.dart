@@ -95,7 +95,10 @@ class _DriverLicenseState extends State<DriverLicense> {
                     Navigator.push(
                         context,
                         CupertinoPageRoute(
-                          builder: (context) =>const PhotoDiverLicense(),
+                          builder: (context) => PhotoDiverLicense(
+                            serNums: textSerNum.text.toString(),
+                            yyyyMMDs1: DateFormat('yyyy-MM-dd').format(selectedDate).toString(),
+                          ),
                         ));
                   }else{
 

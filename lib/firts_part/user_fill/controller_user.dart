@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:conx/firts_part/user_fill/model_user/model_main_user.dart';
 import 'package:conx/firts_part/user_fill/model_user/model_user_fio.dart';
-import 'package:conx/firts_part/user_fill/user_birth.dart';
 import 'package:conx/widgets/main_url.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:dio/dio.dart';
@@ -98,12 +97,14 @@ class UserNotifairProvider extends StateNotifier<ModelUserController> {
       log(jsonEncode(response.data).toString());
       state = state.copyWith(success1: true, message1: "", errorMessage1: "");
     } on DioException catch (e) {
+      log("DioException setName");
       state = state.copyWith(
           success1: true,
           message1: e.response!.statusCode.toString(),
           errorMessage1: e.message.toString());
       log(e.toString());
     } catch (ee) {
+      log("ee setName");
       state = state.copyWith(
           success1: true, message1: "1111", errorMessage1: ee.toString());
       log(ee.toString());

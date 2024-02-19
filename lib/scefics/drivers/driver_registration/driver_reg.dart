@@ -106,7 +106,6 @@ class _DrawerRegistrationState extends ConsumerState<DrawerRegistration> {
                                       ));
                                 case "3":
 
-
                                   Navigator.push(
                                       context,
                                       CupertinoPageRoute(

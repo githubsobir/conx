@@ -7,8 +7,8 @@ import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:masked_text_field/masked_text_field.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -45,13 +45,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               Text(
                 "login".tr(),
                 style:
-                const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
               const SizedBox(height: 10),
               Text(
                 "registrationText".tr(),
                 style:
-                const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+                    const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
               ),
               const SizedBox(height: 20),
               Container(
@@ -61,7 +61,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 child: ListTile(
                   leading: CachedNetworkImage(
                     imageUrl:
-                    "https://ae04.alicdn.com/kf/S38c74f65152c4b5cab5fddf3deda6c4ag.jpg",
+                        "https://ae04.alicdn.com/kf/S38c74f65152c4b5cab5fddf3deda6c4ag.jpg",
                     // ref
                     //     .watch(controllerLogin.notifier)
                     //     .listModelCountry[]
@@ -75,18 +75,18 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         image: DecorationImage(
                             image: imageProvider,
                             fit: BoxFit.cover,
-                            colorFilter: ColorFilter.mode(
+                            colorFilter: const ColorFilter.mode(
                                 Colors.red, BlendMode.colorBurn)),
                       ),
                     ),
                     placeholder: (context, url) =>
-                        CircularProgressIndicator(),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+                        const CircularProgressIndicator(),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                   title: Text(ref
-                      .watch(controllerLogin.notifier)
-                      .listModelCountry[ref.watch(selectedIndexLogin)]
-                      .name
+                      .read(controllerLogin.notifier)
+                      .defaultValCountry
                       .toString()),
                   trailing: const Icon(Icons.keyboard_arrow_down_outlined),
                   onTap: () {
@@ -97,7 +97,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               Container(
                   height: 100,
                   decoration: const BoxDecoration(
-                    // color: Colors.grey.shade50,
+                      // color: Colors.grey.shade50,
                       border: Border.symmetric(
                           horizontal: BorderSide(color: Colors.white))),
                   child: Column(
@@ -108,55 +108,22 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         height: 5,
                       ),
                       Form(
-                        key: _formKey,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        child: TextFormField(
-                          controller: textEditingController,
-                          maxLines: 1,
-                          maxLength: 9,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.allow(
-                                RegExp(r'^\d+(?:\.\d+)?$')),
-                          ],
-                          decoration: InputDecoration(
-                              counter: const SizedBox.shrink(),
-                              border: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent, width: 1),
-                                  borderRadius: BorderRadius.circular(10)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent, width: 1),
-                                  borderRadius: BorderRadius.circular(10)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent, width: 1),
-                                  borderRadius: BorderRadius.circular(10)),
-                              errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent, width: 1),
-                                  borderRadius: BorderRadius.circular(10)),
-                              focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent, width: 1),
-                                  borderRadius: BorderRadius.circular(10)),
-                              filled: true,
-                              fillColor: Colors.grey.shade50,
-                              prefix: Text(
-                                "${ref.watch(controllerLogin.notifier).listModelCountry[ref.watch(selectedIndexLogin)].code.toString()} | ",
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              )),
-                          validator: (value) {
-                            if (value.toString().length <= 8) {
-                              return "Telefon raqamda xato";
-                            } else {
-                              return "";
-                            }
-                          },
-                        ),
+                          key: _formKey,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          child: MaskedTextField(
+                            mask: ref
+                                .watch(controllerLogin.notifier)
+                                .defaultValCountryMask,
+                            maxLength: 17,
+                            keyboardType: TextInputType.number,
+                            inputDecoration: const InputDecoration(
+                              hintText: "Telefon raqam kiriting",
+                            ),
+                            textFieldController: textEditingController,
+                            onChange: (String value) {
+                              ref.read(controllerLogin.notifier).getPhoneCodeByTypeUser(valPhone: value);
+                            },
+                          )
                       ),
                     ],
                   )),
@@ -170,9 +137,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           duration: const Duration(milliseconds: 2200)),
                     );
                   } else {
-                    box.userPhone = "+998${textEditingController.text}";
+                    box.userPhone = textEditingController.text;
 
-                      log("login bosildi");
+                    log("login bosildi");
                     ref
                         .read(controllerLogin.notifier)
                         .sentForLogin(context: context);
@@ -183,7 +150,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 color: AppColors.colorBackground,
                 shape: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: AppColors.colorBackground)),
+                    borderSide:
+                        const BorderSide(color: AppColors.colorBackground)),
                 child: Text("continue".tr(),
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.white)),
@@ -193,7 +161,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         );
       } else {
         return Container(
-          margin:const EdgeInsets.all(20),
+          margin: const EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -205,7 +173,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               const SizedBox(height: 35),
               MaterialButton(
                 onPressed: () {
-                ref.read(controllerLogin.notifier).setDefault();
+                  ref.read(controllerLogin.notifier).setDefault();
                 },
                 height: 55,
                 color: AppColors.colorBackground,
@@ -245,43 +213,53 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               ),
               Expanded(
                   child: ListView.builder(
-                    itemCount: ref
-                        .watch(controllerLogin.notifier)
-                        .listModelCountry
-                        .length,
-                    itemBuilder: (context, index) => Column(
-                      children: [
-                        const Divider(),
-                        ListTile(
-                          onTap: () {
-                            ref.read(selectedIndexLogin.notifier).state = index;
-                            Navigator.of(context).pop();
-                          },
-                          leading: CachedNetworkImage(
-                            imageUrl: ref
-                                .watch(controllerLogin.notifier)
+                itemCount:
+                    ref.watch(controllerLogin.notifier).listModelCountry.length,
+                itemBuilder: (context, index) => Column(
+                  children: [
+                    const Divider(),
+                    ListTile(
+                      onTap: () {
+                        textEditingController.clear();
+                        ref.read(selectedIndexLogin.notifier).state = index;
+                        ref.read(controllerLogin.notifier).defaultValCountry =
+                            ref
+                                .read(controllerLogin.notifier)
                                 .listModelCountry[index]
-                                .flagImg
-                                .toString(),
-                            height: 36,
-                            width: 36,
-                            fit: BoxFit.cover,
-                            errorWidget: (context, url, error) {
-                              return const Icon(Icons.language);
-                            },
-                          ),
-                          title: Text(ref
-                              .watch(controllerLogin.notifier)
-                              .listModelCountry[index]
-                              .name
-                              .toString()),
-                        ),
-                      ],
+                                .name;
+
+                        ref.read(controllerLogin.notifier).defaultValCountryId =
+                            ref
+                                .read(controllerLogin.notifier)
+                                .listModelCountry[index]
+                                .code;
+
+                        Navigator.of(context).pop();
+                      },
+                      leading: CachedNetworkImage(
+                        imageUrl: ref
+                            .watch(controllerLogin.notifier)
+                            .listModelCountry[index]
+                            .flagImg
+                            .toString(),
+                        height: 36,
+                        width: 36,
+                        fit: BoxFit.cover,
+                        errorWidget: (context, url, error) {
+                          return const Icon(Icons.language);
+                        },
+                      ),
+                      title: Text(ref
+                          .watch(controllerLogin.notifier)
+                          .listModelCountry[index]
+                          .name
+                          .toString()),
                     ),
-                  ))
+                  ],
+                ),
+              ))
             ]),
       ),
     );
   }
-
 }

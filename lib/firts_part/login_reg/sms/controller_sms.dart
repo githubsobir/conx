@@ -43,17 +43,18 @@ class SmsControllerClass extends StateNotifier<ModelSmsAction> {
       state = state.copyWith(
           actionCode1: "0", boolGetData1: false, txtError1: "", txtSmsNote: "");
 
-        log(box.userPhone.toString());
+        log(box.userPhone.toString().replaceAll("-", ""));
         log(smsCode.toString());
         log(box.userType.toString());
-
+        log(windowId == "log"? "/api/auth/verify-login/":"/api/auth/verify-register/");
+        String phone = box.userPhone.toString().replaceAll("-","");
       try {
         FormData formData = FormData.fromMap(
-            {"phone": box.userPhone, "code": smsCode, "role": box.userType});
+            {"phone": phone, "code": smsCode, "role": box.userType == "1"?"Driver":"Client"});
 
 
         Response response = await dio.post(
-            "${MainUrl.urlMain}${windowId == "log"?"/api/auth/verify-login/":"/api/verify-register/"}",
+            "${MainUrl.urlMain}${windowId == "log"? "/api/auth/verify-login/":"/api/auth/verify-register/"}",
             data: formData);
         log("sms sent");
         log(jsonEncode(response.data).toString());
@@ -106,7 +107,7 @@ class SmsControllerClass extends StateNotifier<ModelSmsAction> {
     try {
       state = state.copyWith(
           actionCode1: "0", boolGetData1: false, txtError1: "", txtSmsNote: "");
-      FormData formData = FormData.fromMap({"phone": box.userPhone});
+      FormData formData = FormData.fromMap({"phone": box.userPhone.toString().replaceAll("-","")});
       Response response = await dio
           .post("${MainUrl.urlMain}/api/auth/register/", data: formData);
       log(jsonEncode(response.data).toString());
@@ -132,11 +133,13 @@ class SmsControllerClass extends StateNotifier<ModelSmsAction> {
       print(ww.toString());
     }
   }
+
+
   Future reSentForLogin() async {
     try {
       state = state.copyWith(
           actionCode1: "0", boolGetData1: false, txtError1: "", txtSmsNote: "");
-      FormData formData = FormData.fromMap({"phone": box.userPhone});
+      FormData formData = FormData.fromMap({"phone": box.userPhone.toString().replaceAll("-","")});
       Response response =
       await dio.post("${MainUrl.urlMain}/api/auth/login/", data: formData);
       log(jsonEncode(response.data).toString());

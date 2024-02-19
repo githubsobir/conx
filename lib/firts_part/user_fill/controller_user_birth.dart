@@ -32,13 +32,12 @@ class UserBothNotifairProvider extends StateNotifier<ModelUserBirthController> {
       print("getUserBirth");
       print(box.userType.toString());
       state = state.copyWith(success1: false, message1: "", errorMessage1: "");
-
       if (box.userType.toString() == "1") {
         response = await dio.get(
             "${MainUrl.urlMain}/api/driver/date-birth-retrieve-update/",
             options:
                 Options(headers: {"Authorization": "Bearer ${box.userToken}"}));
-        log("123");
+
         log(jsonEncode(response.data).toString());
 
         modelUserBirth = ModelUserBirth.fromJson(response.data);
@@ -49,15 +48,16 @@ class UserBothNotifairProvider extends StateNotifier<ModelUserBirthController> {
                 Options(headers: {"Authorization": "Bearer ${box.userToken}"}));
         modelUserBirth = ModelUserBirth.fromJson(response.data);
       }
-
-
       box.userBirth = modelUserBirth.date.toString();
+      log(modelUserBirth.date.toString());
       state = state.copyWith(success1: true, message1: "", errorMessage1: "");
     } on DioException catch (e) {
+      log("on DioException catch");
       log(e.toString());
       state = state.copyWith(
           success1: true, message1: "", errorMessage1: e.message.toString());
     } catch (ee) {
+      log("ee222");
       log(ee.toString());
       state = state.copyWith(
           success1: true, message1: "", errorMessage1: ee.toString());
@@ -71,19 +71,39 @@ class UserBothNotifairProvider extends StateNotifier<ModelUserBirthController> {
       FormData formData = FormData.fromMap({
         "date": date,
       });
+      log("###");
+      log( box.userBirth.toString());
       state = state.copyWith(success1: false, message1: "", errorMessage1: "");
       if (box.userType == "1") {
+
+
+        box.userBirth.toString().length > 6?
+        response = await dio.patch(
+            "${MainUrl.urlMain}/api/driver/date-birth-retrieve-update/",
+            data: formData,
+            options:
+            Options(headers: {"Authorization": "Bearer ${box.userToken}"}))
+            :
         response = await dio.post(
             "${MainUrl.urlMain}/api/driver/date-birth/",
             data: formData,
             options:
                 Options(headers: {"Authorization": "Bearer ${box.userToken}"}));
       } else {
-        response = await dio.post("${MainUrl.urlMain}/api/client/full-name/",
+        box.userBirth.toString().length > 6?
+        response = await dio.patch("${MainUrl.urlMain}/api/client/date-birth-retrieve-update/",
+            data: formData,
+            options:
+            Options(headers: {"Authorization": "Bearer ${box.userToken}"}))
+            :
+        response = await dio.post("${MainUrl.urlMain}/api/client/date-birth/",
             data: formData,
             options:
                 Options(headers: {"Authorization": "Bearer ${box.userToken}"}));
       }
+
+
+
       ModelUserBirth modelUserFio = ModelUserBirth.fromJson(response.data);
       box.userBirth = modelUserFio.date.toString();
       log(jsonEncode(response.data).toString());
@@ -105,14 +125,16 @@ class UserBothNotifairProvider extends StateNotifier<ModelUserBirthController> {
       {
       required String date}) async {
     late Response response;
-    log("update");
+    log("###99");
+    log( box.userBirth.toString());
+    log(date);
     try {
       FormData formData = FormData.fromMap({
         "date": date
       });
       state = state.copyWith(success1: false, message1: "", errorMessage1: "");
       if (box.userType == "1") {
-        response = await dio.put(
+        response = await dio.patch(
             "${MainUrl.urlMain}/api/driver/date-birth-retrieve-update/",
             data: formData,
             options:

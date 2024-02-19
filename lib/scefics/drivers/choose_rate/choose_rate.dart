@@ -1,19 +1,24 @@
 import 'package:conx/scefics/drivers/cargo_transport/cargo_transport.dart';
-import 'package:conx/scefics/drivers/choose_rate/model_rate.dart';
+import 'package:conx/scefics/drivers/choose_rate/controller_payment.dart';
+import 'package:conx/scefics/drivers/choose_rate/model_payment/model_rate.dart';
 import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/widgets/saved_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ChooseRate extends StatefulWidget {
+class ChooseRate extends ConsumerStatefulWidget {
   const ChooseRate({super.key});
 
   @override
-  State<ChooseRate> createState() => _ChooseRateState();
+  ConsumerState<ChooseRate> createState() => _ChooseRateState();
 }
 
-class _ChooseRateState extends State<ChooseRate> {
+class _ChooseRateState extends ConsumerState<ChooseRate> {
 
   String val1 ="Наличные";
+  int valNum = 0;
+  var box = HiveBoxes();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,7 @@ class _ChooseRateState extends State<ChooseRate> {
       ),
       body: SafeArea(
         child: Container(
-          margin: EdgeInsets.all(20),
+          margin: const EdgeInsets.all(20),
           child: Column(
             children: [
               const Text(
@@ -49,12 +54,16 @@ class _ChooseRateState extends State<ChooseRate> {
                               activeColor: AppColors.colorBackground,
                               onChanged: (val) {
                                 val1 = listModelChooseRate[index].nameRate;
+                                box.payType = listModelChooseRate[index].nameRate;
+                                valNum = index;
                                 setState(() {});
+
                               }),
                         ),
                         onTap: () {
-
+                          valNum = index;
                           val1 = listModelChooseRate[index].nameRate;
+                          box.payType = listModelChooseRate[index].nameRate;
                           setState(() {});
                         },
                       ),
@@ -66,6 +75,11 @@ class _ChooseRateState extends State<ChooseRate> {
                 children: [
                   MaterialButton(
                     onPressed: () {
+
+                      ref.read(controllerPayment.notifier).
+                      setData(
+                        index: valNum
+                      );
                       Navigator.push(
                           context,
                           CupertinoPageRoute(

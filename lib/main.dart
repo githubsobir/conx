@@ -1,7 +1,15 @@
 import 'dart:io';
 
 import 'package:connection_notifier/connection_notifier.dart';
+import 'package:conx/firts_part/login_reg/enter_page/lang_model/choose_lang.dart';
 import 'package:conx/firts_part/login_reg/reg/add_photo/add_photo.dart';
+import 'package:conx/firts_part/login_reg/reg/reg.dart';
+import 'package:conx/pages/main/main_page.dart';
+import 'package:conx/root_and_unver_page/root_page.dart';
+import 'package:conx/scefics/drivers/cargo_transport/car_date/car_date.dart';
+import 'package:conx/scefics/drivers/cargo_transport/car_ton_weight/car_weight_and_volume.dart';
+import 'package:conx/scefics/drivers/driver_registration/driver_license/driver_license.dart';
+import 'package:conx/scefics/drivers/driver_registration/driver_reg.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -68,8 +76,9 @@ class MyApp extends ConsumerWidget {
       // theme: ligthMode,
       //   themeMode:  ref.watch(getTheme) ? ThemeMode.light : ThemeMode.dark,
       home: box.userToken.length > 20
-          ? AddPhotoRegistration()
-          : AddPhotoRegistration(),
+        ?DrawerRegistration()
+        // ? DrawerRegistration()
+          : RootPage(),
       // DrawerRegistration():DrawerRegistration(),
     );
   }

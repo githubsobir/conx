@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:masked_text_field/masked_text_field.dart';
 
 class Registration extends ConsumerStatefulWidget {
   const Registration({super.key});
@@ -74,7 +75,7 @@ class _RegistrationState extends ConsumerState<Registration> {
                         image: DecorationImage(
                             image: imageProvider,
                             fit: BoxFit.cover,
-                            colorFilter: ColorFilter.mode(
+                            colorFilter: const ColorFilter.mode(
                                 Colors.red, BlendMode.colorBurn)),
                       ),
                     ),
@@ -83,8 +84,7 @@ class _RegistrationState extends ConsumerState<Registration> {
                   ),
                   title: Text(ref
                       .watch(registrationController.notifier)
-                      .listModelCountry[ref.watch(selectedIndex)]
-                      .name
+                      .defaultValCountry
                       .toString()),
                   trailing: const Icon(Icons.keyboard_arrow_down_outlined),
                   onTap: () {
@@ -108,51 +108,18 @@ class _RegistrationState extends ConsumerState<Registration> {
                       Form(
                         key: _formKey,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
-                        child: TextFormField(
-                          controller: textEditingController,
-                          maxLines: 1,
-                          maxLength: 9,
+                        child:  MaskedTextField(
+                          mask: ref
+                              .watch(registrationController.notifier)
+                              .defaultValCountryMask,
+                          maxLength: 17,
                           keyboardType: TextInputType.number,
-                          inputFormatters: <TextInputFormatter>[
-                            FilteringTextInputFormatter.allow(
-                                RegExp(r'^\d+(?:\.\d+)?$')),
-                          ],
-                          decoration: InputDecoration(
-                              counter: const SizedBox.shrink(),
-                              border: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent, width: 1),
-                                  borderRadius: BorderRadius.circular(10)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent, width: 1),
-                                  borderRadius: BorderRadius.circular(10)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent, width: 1),
-                                  borderRadius: BorderRadius.circular(10)),
-                              errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent, width: 1),
-                                  borderRadius: BorderRadius.circular(10)),
-                              focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent, width: 1),
-                                  borderRadius: BorderRadius.circular(10)),
-                              filled: true,
-                              fillColor: Colors.grey.shade50,
-                              prefix: Text(
-                                "${ref.watch(registrationController.notifier).listModelCountry[ref.watch(selectedIndex)].code.toString()} | ",
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              )),
-                          validator: (value) {
-                            if (value.toString().length <= 8) {
-                              return "Telefon raqamda xato";
-                            } else {
-                              return "";
-                            }
+                          inputDecoration: const InputDecoration(
+                            hintText: "Telefon raqam kiriting",
+                          ),
+                          textFieldController: textEditingController,
+                          onChange: (String value) {
+                            ref.read(registrationController.notifier).getPhoneCodeByTypeUser(valPhone: value);
                           },
                         ),
                       ),
@@ -298,7 +265,7 @@ class _RegistrationState extends ConsumerState<Registration> {
                     const Divider(),
                     ListTile(
                       onTap: () {
-                        ref.read(selectedIndex.notifier).state = index;
+                        ref.read(selectedIndexReg.notifier).state = index;
                         Navigator.of(context).pop();
                       },
                       leading: CachedNetworkImage(
@@ -327,8 +294,7 @@ class _RegistrationState extends ConsumerState<Registration> {
                       ),
                       title: Text(ref
                           .watch(registrationController.notifier)
-                          .listModelCountry[index]
-                          .name
+                          .defaultValCountry
                           .toString()),
                     ),
                   ],

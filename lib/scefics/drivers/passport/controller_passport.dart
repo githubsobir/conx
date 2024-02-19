@@ -78,12 +78,12 @@ class ControllerPassport extends StateNotifier<ModelPassport> {
     } catch (e) {}
   }
 
-  Future sentServer({required BuildContext context}) async {
+  Future sentServer({required BuildContext context, required String serNum}) async {
     try {
 
       state = state.copyWith(boolGetData1: false, message1:"", list: [], errorMessage1: "");
       FormData formData = FormData.fromMap({
-        "seria_num": "A1234567",
+        "seria_num": serNum,
         "front_side": await MultipartFile.fromFile(file1.path,
             filename: "front_side"),
         "with_residence": await MultipartFile.fromFile(file2.path,

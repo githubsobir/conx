@@ -8,7 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final selectedIndex = StateProvider<int>((ref) => 0);
+final selectedIndexReg = StateProvider<int>((ref) => 0);
 
 final registrationController =
     StateNotifierProvider<ControllerReg, ModelForRegServer>(
@@ -20,7 +20,9 @@ class ControllerReg extends StateNotifier<ModelForRegServer> {
   }
 
   var dio = Dio();
-
+  String defaultValCountry = "Hududni tanlang";
+  String defaultValCountryId = "";
+  String defaultValCountryMask = "+xxx-xx-xxx-xx-xx";
   List<ModelRegCountry> listModelCountry = [];
   var box = HiveBoxes();
 
@@ -66,6 +68,24 @@ class ControllerReg extends StateNotifier<ModelForRegServer> {
       state = state.copyWith(boolGetData1: true, txtError1: e.toString());
       log(e.toString());
     }
+  }
+
+  Future getPhoneCodeByTypeUser({required String valPhone})async{
+    try{
+      for(int i = 0; i < listModelCountry.length; i++){
+        if(listModelCountry[i].code.toString().contains(valPhone.trim())){
+          state = state.copyWith(boolGetData1: false, txtError1: "");
+          defaultValCountry = listModelCountry[i].name;
+          defaultValCountryId = listModelCountry[i].code;
+
+          state = state.copyWith(boolGetData1: true, txtError1: "");
+          break;
+        }
+      }
+
+
+
+    }catch(e){}
   }
 
   Future setDefault()async{

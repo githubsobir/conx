@@ -83,13 +83,15 @@ class ControllerLicense extends StateNotifier<ModelLicense> {
     } catch (ee) {}
   }
 
-  Future setDriverLicense({required BuildContext context}) async {
-    log(imageList.length.toString());
+  Future setDriverLicense({required BuildContext context, required   String serNum, required String yyyyMMD}) async {
+    log(serNum.toString());
+    log(yyyyMMD.toString());
+    log("Bearer ${box.userToken}");
 
     try {
       FormData formData = FormData.fromMap({
-        "license_seria_num": "AA1234567",
-        "license_expiration_date": "2022-12-12",
+        "license_seria_num": serNum.toString(),
+        "license_expiration_date": yyyyMMD.toString(),
         "front_side": await MultipartFile.fromFile(file1.path,
             filename: "license_expiration_date"),
         "back_side": await MultipartFile.fromFile(file2.path,
@@ -97,12 +99,23 @@ class ControllerLicense extends StateNotifier<ModelLicense> {
         "face_img": await MultipartFile.fromFile(file3.path,
             filename: "face_img"),
       });
-      Response response = await dio.post(
-          "${MainUrl.urlMain}/api/driver/license/",
-          data: formData,
-          options:
-              Options(headers: {"Authorization": "Bearer ${box.userToken}"}));
-      log(jsonEncode(response.data).toString());
+     try {
+        Response response = await dio.post(
+            "${MainUrl.urlMain}/api/driver/license/",
+            data: formData,
+            options:
+                Options(headers: {"Authorization": "Bearer ${box.userToken}"}));
+        log(jsonEncode(response.data).toString());
+      }catch(e){
+       log(e.toString());
+       Response response = await dio.put(
+           "${MainUrl.urlMain}/api/driver/license/",
+           data: formData,
+           options:
+           Options(headers: {"Authorization": "Bearer ${box.userToken}"}));
+       log(jsonEncode(response.data).toString());
+     }
+
     } on DioException catch (e) {
       log(e.toString());
     } catch (ee) {

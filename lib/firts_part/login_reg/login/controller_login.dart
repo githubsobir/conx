@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:conx/firts_part/login_reg/login/models/model_state.dart';
-import 'package:conx/firts_part/login_reg/login/models/model_token.dart';
 import 'package:conx/firts_part/login_reg/reg/model_reg.dart';
 import 'package:conx/firts_part/login_reg/sms/sms_page.dart';
 import 'package:conx/widgets/main_url.dart';
@@ -14,7 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final selectedIndexLogin = StateProvider<int>((ref) => 0);
 
 final controllerLogin =
-    StateNotifierProvider<ControllerLoginData, ModelStateLogin>(
+    StateNotifierProvider.autoDispose<ControllerLoginData, ModelStateLogin>(
         (ref) => ControllerLoginData());
 
 class ControllerLoginData extends StateNotifier<ModelStateLogin> {
@@ -46,7 +45,8 @@ class ControllerLoginData extends StateNotifier<ModelStateLogin> {
   Future sentForLogin({required BuildContext context}) async {
     try {
       state = state.copyWith(boolGetData1: false, txtError1: "");
-      FormData formData = FormData.fromMap({"phone": box.userPhone});
+      log(box.userPhone.toString().replaceAll("-", ""));
+      FormData formData = FormData.fromMap({"phone": box.userPhone.toString().replaceAll("-", "")});
       Response response =
           await dio.post("${MainUrl.urlMain}/api/auth/login/", data: formData);
       log(jsonEncode(response.data).toString());
@@ -67,5 +67,29 @@ class ControllerLoginData extends StateNotifier<ModelStateLogin> {
 
   Future setDefault() async {
     state = state.copyWith(boolGetData1: true, txtError1: "");
+  }
+
+
+  String defaultValCountry = "Hududni tanlang";
+  String defaultValCountryId = "";
+  String defaultValCountryMask = "+xxx-xx-xxx-xx-xx";
+
+
+  Future getPhoneCodeByTypeUser({required String valPhone})async{
+    try{
+      for(int i = 0; i < listModelCountry.length; i++){
+        if(listModelCountry[i].code.toString().contains(valPhone.trim())){
+          state = state.copyWith(boolGetData1: false, txtError1: "");
+          defaultValCountry = listModelCountry[i].name;
+          defaultValCountryId = listModelCountry[i].code;
+
+          state = state.copyWith(boolGetData1: true, txtError1: "");
+          break;
+        }
+      }
+
+
+
+    }catch(e){}
   }
 }

@@ -1,3 +1,4 @@
+import 'package:conx/scefics/drivers/photo_car/photo_car_driver.dart';
 import 'package:conx/scefics/drivers/tex_car/controller_tex.dart';
 import 'package:conx/scefics/drivers/tex_car/widgets/photo_tex_car1.dart';
 import 'package:conx/scefics/drivers/tex_car/widgets/photo_tex_car2.dart';
@@ -137,6 +138,7 @@ class _PhotoTexCarState extends ConsumerState<PhotoTexCar> {
                       onPressed: () {
                         ref.read(controllerTexCar.notifier).setTexCarServer
                           (country1: widget.countryCode, serNum: widget.serialNumber);
+                        Navigator.push(context, CupertinoPageRoute(builder: (context) => PhotoCarDriver(),));
                       },
                       height: 55,
                       minWidth: double.infinity,

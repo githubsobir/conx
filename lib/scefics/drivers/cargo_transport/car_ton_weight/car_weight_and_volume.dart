@@ -1,4 +1,5 @@
 import 'package:conx/scefics/drivers/cargo_transport/car_ton_weight/controller_car_ton.dart';
+import 'package:conx/scefics/drivers/tex_car/tex_car.dart';
 import 'package:conx/widgets/app_colors.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:flutter/cupertino.dart';
@@ -223,6 +224,9 @@ class _CarTonWeightVolumeState extends ConsumerState<CarTonWeightVolume> {
                       ref
                           .read(controllerCarWeightAndVolume.notifier)
                           .setData(context: context);
+
+
+                      Navigator.push(context, CupertinoPageRoute(builder: (context) => TextCarEnterInfo(),));
                     } else {}
                   },
                   height: 50,

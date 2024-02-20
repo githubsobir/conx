@@ -36,7 +36,6 @@ class _CargoTransportState extends ConsumerState<CargoTransport> {
                       itemCount: ref.watch(controllerCarWeigthServer.notifier).listModelWeigth.length,
                       itemBuilder: (context, index) =>
 
-
                           Card(
                           color: Colors.grey.shade100,
                           child: ListTile(

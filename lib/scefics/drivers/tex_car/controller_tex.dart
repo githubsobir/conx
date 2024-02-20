@@ -89,13 +89,20 @@ class ControllerTexCar extends StateNotifier<ModelCarTextController> {
       FormData formData = FormData.fromMap({
         "country": country1,
         "serial_number":serNum,
-        "front_side": await MultipartFile.fromFile(file1.path,
+        "front_side_img": await MultipartFile.fromFile(file1.path,
             filename: "license_expiration_date"),
-        "back_side": await MultipartFile.fromFile(file2.path,
+        "back_side_img": await MultipartFile.fromFile(file2.path,
             filename: "front_side")
       });
+
+      log(box.userToken);
+      log(country1);
+
+
+
+
       Response response = await dio.post("${MainUrl.urlMain}/api/driver/technical-passport/",
-      options: Options(headers: {"":"Bearer ${box.userToken}"}),
+      options: Options(headers: {"Authorization":"Bearer ${box.userToken}"}),
         data: formData
       );
       log(jsonEncode(response.data).toString());

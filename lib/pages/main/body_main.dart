@@ -26,6 +26,7 @@ class _BodyMainState extends State<BodyMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade900,
       body: Center(
           child: Container(
         padding: const EdgeInsets.all(2),
@@ -125,7 +126,7 @@ class _BodyMainState extends State<BodyMain> {
             ),
             Text(
               "BENZIN",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
             ),
             const SizedBox(height: 10),
             MaterialButton(

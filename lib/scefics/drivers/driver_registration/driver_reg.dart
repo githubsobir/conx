@@ -1,3 +1,4 @@
+import 'package:conx/root_and_unver_page/root_page.dart';
 import 'package:conx/scefics/drivers/cargo_transport/cargo_transport.dart';
 import 'package:conx/scefics/drivers/choose_rate/choose_rate.dart';
 import 'package:conx/scefics/drivers/driver_registration/controller_driver_reg.dart';
@@ -187,7 +188,19 @@ class _DrawerRegistrationState extends ConsumerState<DrawerRegistration> {
                               }
                             },
                             title: Text(listCarInfoList[index]),
-                            trailing:const Icon(Icons.arrow_forward_ios),
+                            trailing:SizedBox(
+                                width: 50,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    ref.watch(controllerDriverReg).list[index+4] == "1"?
+                                    const Icon(Icons.check_circle_outline, color: AppColors.colorBackground)
+                                        :const SizedBox.shrink()
+                                    ,
+                                    const Icon(Icons.arrow_forward_ios),
+                                  ],
+                                )),
                           ),
                         );
                       },
@@ -201,7 +214,7 @@ class _DrawerRegistrationState extends ConsumerState<DrawerRegistration> {
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => const Passport(),
+                            builder: (context) => const RootPage(),
                           ));
                     },
                     height: 50,

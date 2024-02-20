@@ -80,7 +80,12 @@ class _ManufacturerState extends ConsumerState<Manufacturer> {
                                     Navigator.push(
                                         context,
                                         CupertinoPageRoute(
-                                          builder: (context) => const CarModel(),
+                                          builder: (context) =>  CarModel(
+                                            manufactureId: ref
+                                                .watch(controllerManufacturers.notifier)
+                                                .listManufacturers[index]
+                                                .id.toString(),
+                                          ),
                                         ));
                                   },
                                   title: Text(ref

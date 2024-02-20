@@ -24,7 +24,7 @@ class ControllerCarModel extends StateNotifier<ModelCarModelController> {
       state =
           state.copyWith(boolGetData1: false, message1: "", errorMessage1: "");
       Response response =
-          await dio.get("${MainUrl.urlMain}/api/driver/model-transport/");
+          await dio.get("${MainUrl.urlMain}/api/driver/model-transport/?filter_id=${box.modelManufacturer}");
       listCarModel = (response.data as List)
           .map((e) => MadelCarModel.fromJson(e))
           .toList();

@@ -1,4 +1,4 @@
-import 'package:conx/firts_part/login_reg/choose_page/choose_page.dart';
+import 'package:conx/firts_part/login_reg/choose_page/main_auth_page.dart';
 import 'package:conx/firts_part/login_reg/enter_page/user_category/model_user_category.dart';
 import 'package:conx/root_and_unver_page/root_page.dart';
 import 'package:conx/widgets/app_colors.dart';
@@ -108,7 +108,7 @@ class _UserCategoryState extends State<UserCategory> {
                       : Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => const ChoosePage(),
+                            builder: (context) => const MainAuthPage(),
                           ));
                 },
                 height: 55,

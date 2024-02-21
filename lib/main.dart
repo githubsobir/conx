@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:connection_notifier/connection_notifier.dart';
+import 'package:conx/firts_part/login_reg/choose_page/main_auth_page.dart';
+import 'package:conx/firts_part/login_reg/splash/splash_page.dart';
 import 'package:conx/root_and_unver_page/root_page.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -60,18 +62,15 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      debugShowCheckedModeBanner: false,
-      // darkTheme: darkMode,
-      // theme: ligthMode,
-      //   themeMode:  ref.watch(getTheme) ? ThemeMode.light : ThemeMode.dark,
-      home: box.userToken.length > 20
-          // ?ChooseLang()
-          ? RootPage()
-          : RootPage(),
-      // DrawerRegistration():DrawerRegistration(),
-    );
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        debugShowCheckedModeBanner: false,
+        // darkTheme: darkMode,
+        // theme: ligthMode,
+        //   themeMode:  ref.watch(getTheme) ? ThemeMode.light : ThemeMode.dark,
+        home: const SplashPage()
+        // DrawerRegistration():DrawerRegistration(),
+        );
   }
 }

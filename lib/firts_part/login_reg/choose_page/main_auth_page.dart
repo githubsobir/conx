@@ -6,14 +6,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ChoosePage extends StatefulWidget {
-  const ChoosePage({super.key});
+class MainAuthPage extends StatefulWidget {
+  const MainAuthPage({super.key});
 
   @override
-  State<ChoosePage> createState() => _ChoosePageState();
+  State<MainAuthPage> createState() => _MainAuthPageState();
 }
 
-class _ChoosePageState extends State<ChoosePage> {
+class _MainAuthPageState extends State<MainAuthPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

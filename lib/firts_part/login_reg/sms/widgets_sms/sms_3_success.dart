@@ -1,5 +1,5 @@
 import 'package:conx/firts_part/user_fill/user_fill.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

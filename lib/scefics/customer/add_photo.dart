@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:conx/scefics/drivers/choose_direct/choose_directs.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';

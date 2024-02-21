@@ -2,7 +2,7 @@ import 'package:conx/scefics/drivers/driver_registration/driver_license/controll
 import 'package:conx/scefics/drivers/driver_registration/driver_license/widgets/photo_license1.dart';
 import 'package:conx/scefics/drivers/driver_registration/driver_license/widgets/photo_license2.dart';
 import 'package:conx/scefics/drivers/driver_registration/driver_license/widgets/photo_license3.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/scefics/drivers/tex_car/controller_tex.dart';
 import 'package:conx/scefics/drivers/tex_car/widgets/photo_tex_car.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:conx/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';

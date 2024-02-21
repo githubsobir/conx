@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/root_and_unver_page/unversal_pages/detail_page.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';

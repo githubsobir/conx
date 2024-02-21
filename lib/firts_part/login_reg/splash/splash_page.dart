@@ -1,10 +1,9 @@
 import 'dart:async';
-
-import 'package:conx/firts_part/login_reg/choose_page/main_auth_page.dart';
 import 'package:conx/firts_part/login_reg/enter_page/lang_model/choose_lang.dart';
 import 'package:conx/generated/assets.dart';
-import 'package:conx/theme/AppColors.dart';
 import 'package:flutter/material.dart';
+
+import '../../../theme/app_colors.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});

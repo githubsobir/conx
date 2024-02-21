@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/pages/user/model_user/model_profile_list.dart';
 import 'package:conx/pages/user/user_profile/user_profiles.dart';
 import 'package:conx/pages/user/user_time_end/user_time_end.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

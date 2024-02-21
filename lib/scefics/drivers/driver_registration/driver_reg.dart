@@ -9,7 +9,7 @@ import 'package:conx/scefics/drivers/driver_registration/model_driver/model_driv
 import 'package:conx/scefics/drivers/passport/passport.dart';
 import 'package:conx/scefics/drivers/photo_car/photo_car_driver.dart';
 import 'package:conx/scefics/drivers/tex_car/tex_car.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

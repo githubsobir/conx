@@ -1,9 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
-
 final getTheme = StateProvider<bool>((ref) => true);
-
 
 ThemeData ligthMode = ThemeData(
   brightness: Brightness.light,
@@ -11,14 +9,12 @@ ThemeData ligthMode = ThemeData(
       color: Colors.blue.shade900,
       elevation: 0,
       centerTitle: true,
-
-      titleTextStyle:const TextStyle(
+      titleTextStyle: const TextStyle(
           color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
       actionsIconTheme: const IconThemeData(color: Colors.white),
       toolbarTextStyle: const TextStyle(
           color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
       iconTheme: const IconThemeData(color: Colors.white)),
-
   colorScheme: ColorScheme.light(
       background: Colors.grey.shade100,
 
@@ -37,14 +33,12 @@ ThemeData ligthMode = ThemeData(
       /// chat audio back border color
       // onSecondary: Colors.grey.shade200,
       onSecondary: Colors.grey.shade200,
+
       /// chat user text color
       onSurface: Colors.white,
+
       /// drawer back color
-      onBackground:  Colors.blue.shade900
-
-  ),
-
-
+      onBackground: Colors.blue.shade900),
 );
 
 ThemeData darkMode = ThemeData(
@@ -56,7 +50,7 @@ ThemeData darkMode = ThemeData(
         actionsIconTheme: const IconThemeData(color: Colors.white)),
     colorScheme: ColorScheme.dark(
 
-      /// orqa fon
+        /// orqa fon
         background: Colors.grey.shade900,
 
         /// qo'shimcha oraliqlar uchun
@@ -73,10 +67,9 @@ ThemeData darkMode = ThemeData(
 
         /// chat audio back border color
         onSecondary: Colors.grey.shade600,
+
         /// chat user text color
         onSurface: Colors.white,
+
         /// drawer back color
-        onBackground:  Colors.grey.shade900
-
-
-    ));
+        onBackground: Colors.grey.shade900));

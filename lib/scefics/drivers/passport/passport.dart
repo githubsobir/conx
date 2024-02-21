@@ -4,7 +4,7 @@ import 'package:conx/scefics/drivers/passport/controller_passport.dart';
 import 'package:conx/scefics/drivers/passport/widgets/photo_passport1.dart';
 import 'package:conx/scefics/drivers/passport/widgets/photo_passport2.dart';
 import 'package:conx/scefics/drivers/passport/widgets/photo_passport3.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
 import 'package:conx/scefics/drivers/cargo_transport/cargo_transport.dart';
 import 'package:conx/scefics/drivers/choose_rate/controller_payment.dart';
 import 'package:conx/scefics/drivers/choose_rate/model_payment/model_rate.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

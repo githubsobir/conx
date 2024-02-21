@@ -4,7 +4,7 @@ import 'package:conx/scefics/drivers/photo_car/widgets/image_car2.dart';
 import 'package:conx/scefics/drivers/photo_car/widgets/image_car3.dart';
 import 'package:conx/scefics/drivers/photo_car/widgets/image_car4.dart';
 import 'package:conx/scefics/drivers/photo_car/widgets/image_car5.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

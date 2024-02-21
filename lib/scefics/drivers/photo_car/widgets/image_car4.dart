@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:conx/scefics/drivers/passport/passport.dart';
 import 'package:conx/scefics/drivers/photo_car/controller_car_photo.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

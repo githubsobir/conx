@@ -1,5 +1,5 @@
 import 'package:conx/scefics/drivers/driver_registration/driver_license/photo_driver_license.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

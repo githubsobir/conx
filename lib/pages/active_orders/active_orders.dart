@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:conx/pages/active_orders/info_window/info_window.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

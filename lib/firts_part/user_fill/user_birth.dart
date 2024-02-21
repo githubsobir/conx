@@ -2,7 +2,7 @@ import 'package:conx/firts_part/user_fill/controller_user_birth.dart';
 import 'package:conx/firts_part/user_fill/widget_user_birth/user_1_birth_loading.dart';
 import 'package:conx/firts_part/user_fill/widget_user_birth/user_birth_error.dart';
 import 'package:conx/scefics/drivers/driver_registration/driver_reg.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';

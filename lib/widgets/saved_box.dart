@@ -3,15 +3,14 @@ import 'dart:developer';
 import 'package:hive/hive.dart';
 
 class HiveBoxes {
-  var box = Hive.box("sanx");
+  static final _box = Hive.box("sanx"); // private singleton object for hive
 
   // Hive box
   // 1 til tanlangani
-
   set langUser(String chooseLang) {
     try {
-      box.delete("langUser");
-      box.put("langUser", chooseLang);
+      _box.delete("langUser");
+      _box.put("langUser", chooseLang);
     } catch (e) {
       log(e.toString());
     }
@@ -19,7 +18,7 @@ class HiveBoxes {
 
   String get langUser {
     try {
-      return box.get("langUser");
+      return _box.get("langUser");
     } catch (e) {
       log(e.toString());
       return "-1";
@@ -29,8 +28,8 @@ class HiveBoxes {
   // 2 tanlangan til
   set langUserLang(String chooseLang) {
     try {
-      box.delete("langUserLang");
-      box.put("langUserLang", chooseLang);
+      _box.delete("langUserLang");
+      _box.put("langUserLang", chooseLang);
     } catch (e) {
       log(e.toString());
     }
@@ -38,7 +37,7 @@ class HiveBoxes {
 
   String get langUserLang {
     try {
-      return box.get("langUserLang");
+      return _box.get("langUserLang");
     } catch (e) {
       log(e.toString());
       return "-1";
@@ -47,8 +46,8 @@ class HiveBoxes {
 
   set langFulName(String chooseLang) {
     try {
-      box.delete("langFulName");
-      box.put("langFulName", chooseLang);
+      _box.delete("langFulName");
+      _box.put("langFulName", chooseLang);
     } catch (e) {
       log(e.toString());
     }
@@ -56,7 +55,7 @@ class HiveBoxes {
 
   String get langFulName {
     try {
-      return box.get("langFulName");
+      return _box.get("langFulName");
     } catch (e) {
       log(e.toString());
       return "O'zbek tili";
@@ -70,8 +69,8 @@ class HiveBoxes {
 
   set userType(String userType) {
     try {
-      box.delete("usertype");
-      box.put("usertype", userType);
+      _box.delete("usertype");
+      _box.put("usertype", userType);
     } catch (e) {
       log(e.toString());
     }
@@ -79,7 +78,7 @@ class HiveBoxes {
 
   String get userType {
     try {
-      return box.get("usertype");
+      return _box.get("usertype");
     } catch (e) {
       log(e.toString());
       return "-1";
@@ -90,8 +89,8 @@ class HiveBoxes {
 
   set userToken(String token) {
     try {
-      box.delete("userToken");
-      box.put("userToken", token);
+      _box.delete("userToken");
+      _box.put("userToken", token);
     } catch (e) {
       log(e.toString());
     }
@@ -99,7 +98,7 @@ class HiveBoxes {
 
   String get userToken {
     try {
-      return box.get("userToken");
+      return _box.get("userToken");
     } catch (e) {
       log(e.toString());
       return "-1";
@@ -108,8 +107,8 @@ class HiveBoxes {
 
   set userPhone(String token) {
     try {
-      box.delete("userPhone");
-      box.put("userPhone", token);
+      _box.delete("userPhone");
+      _box.put("userPhone", token);
     } catch (e) {
       log(e.toString());
     }
@@ -117,7 +116,7 @@ class HiveBoxes {
 
   String get userPhone {
     try {
-      return box.get("userPhone");
+      return _box.get("userPhone");
     } catch (e) {
       log(e.toString());
       return "-1";
@@ -126,8 +125,8 @@ class HiveBoxes {
 
   set userName(String name) {
     try {
-      box.delete("userName");
-      box.put("userName", name);
+      _box.delete("userName");
+      _box.put("userName", name);
     } catch (e) {
       log(e.toString());
     }
@@ -135,7 +134,7 @@ class HiveBoxes {
 
   String get userName {
     try {
-      return box.get("userName");
+      return _box.get("userName");
     } catch (e) {
       log(e.toString());
       return "_";
@@ -144,8 +143,8 @@ class HiveBoxes {
 
   set userFName(String name) {
     try {
-      box.delete("userFName");
-      box.put("userFName", name);
+      _box.delete("userFName");
+      _box.put("userFName", name);
     } catch (e) {
       log(e.toString());
     }
@@ -153,16 +152,17 @@ class HiveBoxes {
 
   String get userFName {
     try {
-      return box.get("userFName");
+      return _box.get("userFName");
     } catch (e) {
       log(e.toString());
       return "_";
     }
   }
+
   set userSName(String name) {
     try {
-      box.delete("userSName");
-      box.put("userSName", name);
+      _box.delete("userSName");
+      _box.put("userSName", name);
     } catch (e) {
       log(e.toString());
     }
@@ -170,7 +170,7 @@ class HiveBoxes {
 
   String get userSName {
     try {
-      return box.get("userSName");
+      return _box.get("userSName");
     } catch (e) {
       log(e.toString());
       return "_";
@@ -179,8 +179,8 @@ class HiveBoxes {
 
   set userBirth(String name) {
     try {
-      box.delete("userBirth");
-      box.put("userBirth", name);
+      _box.delete("userBirth");
+      _box.put("userBirth", name);
     } catch (e) {
       log(e.toString());
     }
@@ -188,18 +188,17 @@ class HiveBoxes {
 
   String get userBirth {
     try {
-      return box.get("userBirth");
+      return _box.get("userBirth");
     } catch (e) {
       log(e.toString());
       return "_";
     }
   }
 
-
   set payType(String name) {
     try {
-      box.delete("payType");
-      box.put("payType", name);
+      _box.delete("payType");
+      _box.put("payType", name);
     } catch (e) {
       log(e.toString());
     }
@@ -207,18 +206,17 @@ class HiveBoxes {
 
   String get payType {
     try {
-      return box.get("payType");
+      return _box.get("payType");
     } catch (e) {
       log(e.toString());
       return "_";
     }
   }
 
-
   set transportType(String name) {
     try {
-      box.delete("transportType");
-      box.put("transportType", name);
+      _box.delete("transportType");
+      _box.put("transportType", name);
     } catch (e) {
       log(e.toString());
     }
@@ -226,18 +224,17 @@ class HiveBoxes {
 
   String get transportType {
     try {
-      return box.get("transportType");
+      return _box.get("transportType");
     } catch (e) {
       log(e.toString());
       return "_";
     }
   }
 
-
   set modelTransport(String name) {
     try {
-      box.delete("modelTransport");
-      box.put("modelTransport", name);
+      _box.delete("modelTransport");
+      _box.put("modelTransport", name);
     } catch (e) {
       log(e.toString());
     }
@@ -245,18 +242,17 @@ class HiveBoxes {
 
   String get modelTransport {
     try {
-      return box.get("modelTransport");
+      return _box.get("modelTransport");
     } catch (e) {
       log(e.toString());
       return "_";
     }
   }
 
-
   set modelManufacturer(String name) {
     try {
-      box.delete("modelManufacturer");
-      box.put("modelManufacturer", name);
+      _box.delete("modelManufacturer");
+      _box.put("modelManufacturer", name);
     } catch (e) {
       log(e.toString());
     }
@@ -264,7 +260,7 @@ class HiveBoxes {
 
   String get modelManufacturer {
     try {
-      return box.get("modelManufacturer");
+      return _box.get("modelManufacturer");
     } catch (e) {
       log(e.toString());
       return "_";
@@ -273,8 +269,8 @@ class HiveBoxes {
 
   set modelCar(String name) {
     try {
-      box.delete("modelCar");
-      box.put("modelCar", name);
+      _box.delete("modelCar");
+      _box.put("modelCar", name);
     } catch (e) {
       log(e.toString());
     }
@@ -282,7 +278,7 @@ class HiveBoxes {
 
   String get modelCar {
     try {
-      return box.get("modelCar");
+      return _box.get("modelCar");
     } catch (e) {
       log(e.toString());
       return "_";
@@ -291,8 +287,8 @@ class HiveBoxes {
 
   set modelCarColor(String name) {
     try {
-      box.delete("modelCarColor");
-      box.put("modelCarColor", name);
+      _box.delete("modelCarColor");
+      _box.put("modelCarColor", name);
     } catch (e) {
       log(e.toString());
     }
@@ -300,18 +296,17 @@ class HiveBoxes {
 
   String get modelCarColor {
     try {
-      return box.get("modelCarColor");
+      return _box.get("modelCarColor");
     } catch (e) {
       log(e.toString());
       return "_";
     }
   }
 
-
   set modelCarYear(String name) {
     try {
-      box.delete("modelCarYear");
-      box.put("modelCarYear", name);
+      _box.delete("modelCarYear");
+      _box.put("modelCarYear", name);
     } catch (e) {
       log(e.toString());
     }
@@ -319,18 +314,17 @@ class HiveBoxes {
 
   String get modelCarYear {
     try {
-      return box.get("modelCarYear");
+      return _box.get("modelCarYear");
     } catch (e) {
       log(e.toString());
       return "_";
     }
   }
 
-
   set modelCarTonsFrom(String name) {
     try {
-      box.delete("modelCarTonsFrom");
-      box.put("modelCarTonsFrom", name);
+      _box.delete("modelCarTonsFrom");
+      _box.put("modelCarTonsFrom", name);
     } catch (e) {
       log(e.toString());
     }
@@ -338,7 +332,7 @@ class HiveBoxes {
 
   String get modelCarTonsFrom {
     try {
-      return box.get("modelCarTonsFrom");
+      return _box.get("modelCarTonsFrom");
     } catch (e) {
       log(e.toString());
       return "_";
@@ -347,8 +341,8 @@ class HiveBoxes {
 
   set modelCarTonsTo(String name) {
     try {
-      box.delete("modelCarTonsTo");
-      box.put("modelCarTonsTo", name);
+      _box.delete("modelCarTonsTo");
+      _box.put("modelCarTonsTo", name);
     } catch (e) {
       log(e.toString());
     }
@@ -356,19 +350,17 @@ class HiveBoxes {
 
   String get modelCarTonsTo {
     try {
-      return box.get("modelCarTonsTo");
+      return _box.get("modelCarTonsTo");
     } catch (e) {
       log(e.toString());
       return "_";
     }
   }
 
-
-
   set modelCarVolumeFrom(String name) {
     try {
-      box.delete("modelCarVolumeFrom");
-      box.put("modelCarVolumeFrom", name);
+      _box.delete("modelCarVolumeFrom");
+      _box.put("modelCarVolumeFrom", name);
     } catch (e) {
       log(e.toString());
     }
@@ -376,18 +368,17 @@ class HiveBoxes {
 
   String get modelCarVolumeFrom {
     try {
-      return box.get("modelCarVolumeFrom");
+      return _box.get("modelCarVolumeFrom");
     } catch (e) {
       log(e.toString());
       return "_";
     }
   }
 
-
   set modelCarVolumeTo(String name) {
     try {
-      box.delete("modelCarVolumeTo");
-      box.put("modelCarVolumeTo", name);
+      _box.delete("modelCarVolumeTo");
+      _box.put("modelCarVolumeTo", name);
     } catch (e) {
       log(e.toString());
     }
@@ -395,11 +386,10 @@ class HiveBoxes {
 
   String get modelCarVolumeTo {
     try {
-      return box.get("modelCarVolumeTo");
+      return _box.get("modelCarVolumeTo");
     } catch (e) {
       log(e.toString());
       return "_";
     }
   }
-
 }

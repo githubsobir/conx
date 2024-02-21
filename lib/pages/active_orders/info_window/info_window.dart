@@ -1,6 +1,6 @@
 import 'package:conx/pages/active_orders/info_window/model_product/model_product.dart';
 import 'package:conx/root_and_unver_page/unversal_pages/detail_page.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

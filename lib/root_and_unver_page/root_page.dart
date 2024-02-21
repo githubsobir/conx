@@ -6,7 +6,7 @@ import 'package:conx/pages/chat/chat.dart';
 import 'package:conx/pages/main/main_page.dart';
 import 'package:conx/pages/saved/saved.dart';
 import 'package:conx/pages/search/search_all.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

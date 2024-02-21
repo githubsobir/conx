@@ -1,7 +1,7 @@
 import 'package:conx/firts_part/login_reg/choose_page/main_auth_page.dart';
 import 'package:conx/firts_part/login_reg/enter_page/user_category/model_user_category.dart';
 import 'package:conx/root_and_unver_page/root_page.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';

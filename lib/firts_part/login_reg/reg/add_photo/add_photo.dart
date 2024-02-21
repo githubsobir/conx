@@ -1,6 +1,6 @@
 import 'package:conx/firts_part/login_reg/reg/add_photo/controller_add_photo_reg.dart';
 import 'package:conx/scefics/drivers/driver_registration/driver_reg.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -2,14 +2,15 @@
 class Assets {
   Assets._();
 
-  static const String androidSettings = 'android/settings.gradle';
-  static const String fontsPoppinsBlack = 'assets/fonts/Poppins-Black.ttf';
+  static const String fontsInterBold = 'assets/fonts/Inter-Bold.ttf';
+  static const String fontsInterMedium = 'assets/fonts/Inter-Medium.ttf';
+  static const String fontsInterRegular = 'assets/fonts/Inter-Regular.ttf';
+  static const String fontsInterSemiBold = 'assets/fonts/Inter-SemiBold.ttf';
   static const String fontsPoppinsBold = 'assets/fonts/Poppins-Bold.ttf';
-  static const String fontsPoppinsExtraBold = 'assets/fonts/Poppins-ExtraBold.ttf';
-  static const String fontsPoppinsLight = 'assets/fonts/Poppins-Light.ttf';
   static const String fontsPoppinsMedium = 'assets/fonts/Poppins-Medium.ttf';
   static const String fontsPoppinsRegular = 'assets/fonts/Poppins-Regular.ttf';
   static const String fontsPoppinsSemiBold = 'assets/fonts/Poppins-SemiBold.ttf';
+  static const String imagesBackground = 'assets/images/background.png';
   static const String imagesBoxCategory = 'assets/images/box_category.png';
   static const String imagesGlobus = 'assets/images/globus.png';
   static const String imagesIcSplash = 'assets/images/ic_splash.png';

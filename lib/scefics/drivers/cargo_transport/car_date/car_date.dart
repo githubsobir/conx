@@ -1,5 +1,5 @@
 import 'package:conx/scefics/drivers/cargo_transport/car_ton_weight/car_weight_and_volume.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';

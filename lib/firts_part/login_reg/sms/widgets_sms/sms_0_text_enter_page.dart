@@ -1,5 +1,5 @@
 import 'package:conx/firts_part/login_reg/sms/controller_sms.dart';
-import 'package:conx/widgets/app_colors.dart';
+import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

@@ -28,7 +28,7 @@ class SplashPage extends StatelessWidget {
           ),
           Align(
               alignment: Alignment.center,
-              child: Image.asset(Assets.imagesIcSplash)),
+              child: Image.asset(Assets.imagesImageSplash)),
           Align(
               alignment: Alignment.bottomCenter,
               child: Container(

@@ -12,6 +12,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'firts_part/login_reg/enter_page/user_category/user_category.dart';
+
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
@@ -70,6 +72,6 @@ class MyApp extends ConsumerWidget {
         // darkTheme: darkMode,
         // theme: ligthMode,
         //   themeMode:  ref.watch(getTheme) ? ThemeMode.light : ThemeMode.dark,
-        home: const ChooseLang());
+        home: const UserCategory());
   }
 }

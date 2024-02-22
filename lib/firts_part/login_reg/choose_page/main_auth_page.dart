@@ -2,134 +2,133 @@ import 'package:conx/firts_part/login_reg/login/login_page.dart';
 import 'package:conx/firts_part/login_reg/reg/reg.dart';
 import 'package:conx/root_and_unver_page/root_page.dart';
 import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/primary_button.dart';
+import 'package:conx/widgets/secondary_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MainAuthPage extends StatefulWidget {
+import '../../../generated/assets.dart';
+import '../../../widgets/background_widget.dart';
+
+class MainAuthPage extends StatelessWidget {
   const MainAuthPage({super.key});
 
   @override
-  State<MainAuthPage> createState() => _MainAuthPageState();
-}
-
-class _MainAuthPageState extends State<MainAuthPage> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(children: [
-        Stack(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.6,
-              margin: const EdgeInsets.only(right: 1, left: 1),
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
-                  ),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage(
-                      "assets/images/illustration.png",
-                    ),
-                  ),
-                  color: Colors.transparent),
-            ),
-            Align(
-                alignment: Alignment.topRight,
-                child: SafeArea(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => const RootPage(),
-                          ),
-                          (route) => false);
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.all(20),
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          color: const Color.fromRGBO(114, 127, 108, 0.7)),
-                      child: Text("transfer".tr(),
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                )),
-          ],
-        ),
-        const SizedBox(height: 30),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            margin: const EdgeInsets.only(left: 10, right: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
+      body: Stack(children: [
+        const BackgroundWidget(),
+        Column(children: [
+          const SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: Stack(
               children: [
-                Text(
-                  "explore".tr(),
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 32),
-                ),
                 Container(
-                  margin: const EdgeInsets.only(
-                      bottom: 15, top: 10, right: 22, left: 22),
-                  child: Text(
-                    "exploreText".tr(),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w400, fontSize: 17),
-                  ),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(32),
+                      ),
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage(
+                          Assets.imagesTruck,
+                        ),
+                      ),
+                      color: Colors.transparent),
                 ),
-                MaterialButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => LoginPage(),
-                        ));
-                  },
-                  height: 50,
-                  minWidth: double.infinity,
-                  color: AppColors.colorBackground,
-                  shape: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: Colors.grey)),
-                  child: Text("enter".tr(),
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white)),
-                ),
-                const SizedBox(height: 20),
-                MaterialButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => const Registration(),
-                        ));
-                  },
-                  height: 50,
-                  minWidth: double.infinity,
-                  shape: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: Colors.grey)),
-                  child: Text("registration".tr(),
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.colorBackground)),
-                ),
+                Align(
+                    alignment: Alignment.topRight,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => const RootPage(),
+                            ),
+                            (route) => false);
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(0, 60, 22, 0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 6),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            color: AppColors.primaryButton),
+                        child: Text("skip".tr(),
+                            style: TextStyle(
+                                fontFamily: "Inter",
+                                fontSize: 12,
+                                color: AppColors.white100,
+                                fontWeight: FontWeight.w600)),
+                      ),
+                    )),
               ],
             ),
           ),
-        ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                "explore".tr(),
+                style: TextStyle(
+                    fontFamily: "Poppins",
+                    color: AppColors.white100,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 32),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 36),
+                child: Text(
+                  "exploreText".tr(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontFamily: "Inter",
+                      color: AppColors.white80,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 17),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              PrimaryButton(
+                text: "enter".tr(),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => const LoginPage(),
+                      ));
+                },
+              ),
+              const SizedBox(height: 12),
+              SecondaryButton(
+                text: "registration".tr(),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => const Registration(),
+                      ));
+                },
+              ),
+              const SizedBox(
+                height: 20,
+              )
+            ],
+          ),
+        ])
       ]),
     );
   }

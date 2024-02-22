@@ -1,4 +1,3 @@
-import 'package:conx/firts_part/login_reg/choose_page/main_auth_page.dart';
 import 'package:conx/firts_part/login_reg/enter_page/user_category/model_user_category.dart';
 import 'package:conx/root_and_unver_page/root_page.dart';
 import 'package:conx/theme/app_colors.dart';
@@ -12,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../generated/assets.dart';
+import '../../choose_page/main_auth_page.dart';
 
 class UserCategory extends StatefulWidget {
   const UserCategory({super.key});
@@ -41,7 +41,7 @@ class _UserCategoryState extends State<UserCategory> {
                 ),
                 Text(
                   "chooseRoll".tr(),
-                  style: const TextStyle(
+                  style: TextStyle(
                       color: AppColors.white100,
                       fontFamily: "Poppins",
                       fontWeight: FontWeight.w700,
@@ -76,13 +76,13 @@ class _UserCategoryState extends State<UserCategory> {
                           ],
                         ),
                         title: Text(listModelUserCat[index].nameCategory,
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
                                 color: AppColors.white100,
                                 fontFamily: "Inter")),
                         subtitle: Text(listModelUserCat[index].textCategory,
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12,
                                 color: AppColors.white70,

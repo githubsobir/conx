@@ -33,7 +33,7 @@ class SplashPage extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Container(
                 margin: const EdgeInsets.only(bottom: 20),
-                child: const Text(
+                child: Text(
                   "App version: 1.0.0",
                   style: TextStyle(
                       color: AppColors.white100,

@@ -14,7 +14,6 @@ class Assets {
   static const String iconsIcGlobus = 'assets/icons/ic_globus.svg';
   static const String iconsIcTruck = 'assets/icons/ic_truck.svg';
   static const String imagesBackground = 'assets/images/background.png';
-  static const String imagesIllustration = 'assets/images/illustration.png';
   static const String imagesImageSplash = 'assets/images/image_splash.png';
   static const String imagesKz = 'assets/images/kz.png';
   static const String imagesRus = 'assets/images/rus.png';
@@ -23,6 +22,7 @@ class Assets {
   static const String imagesTj = 'assets/images/tj.png';
   static const String imagesTr = 'assets/images/tr.png';
   static const String imagesTrackCar = 'assets/images/track_car.png';
+  static const String imagesTruck = 'assets/images/truck.png';
   static const String imagesUk = 'assets/images/uk.png';
   static const String imagesUzb = 'assets/images/uzb.png';
   static const String langEnEN = 'assets/lang/en-EN.json';

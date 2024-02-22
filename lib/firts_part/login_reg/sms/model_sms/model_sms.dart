@@ -10,16 +10,16 @@ class ModelSms1 {
   });
 
   factory ModelSms1.fromJson(Map<String, dynamic> json) => ModelSms1(
-    message: json["message"],
-    token: Token.fromJson(json["token"]),
-    userId: json["user_id"],
-  );
+        message: json["message"],
+        token: Token.fromJson(json["token"]),
+        userId: json["user_id"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "message": message,
-    "token": token.toJson(),
-    "user_id": userId,
-  };
+        "message": message,
+        "token": token.toJson(),
+        "user_id": userId,
+      };
 }
 
 class Token {
@@ -32,12 +32,12 @@ class Token {
   });
 
   factory Token.fromJson(Map<String, dynamic> json) => Token(
-    refresh: json["refresh"],
-    access: json["access"],
-  );
+        refresh: json["refresh"],
+        access: json["access"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "refresh": refresh,
-    "access": access,
-  };
+        "refresh": refresh,
+        "access": access,
+      };
 }

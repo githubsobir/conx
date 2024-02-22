@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SmsVerificationPage extends ConsumerStatefulWidget {
-  SmsVerificationPage(this.windowId);
+  SmsVerificationPage(this.windowId, {super.key});
 
   String windowId;
 
@@ -31,13 +31,7 @@ class _SmsVerificationPageState extends ConsumerState<SmsVerificationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-        ),
-        body: buildBody());
+    return Scaffold(backgroundColor: Colors.white, body: buildBody());
   }
 
   Widget buildBody() {
@@ -46,8 +40,10 @@ class _SmsVerificationPageState extends ConsumerState<SmsVerificationPage> {
           ?
 
           /// sms kod tasdiq oldin
-          smsTextEnterPage(context: context, ref: ref, windowId: widget.windowId)
+          smsTextEnterPage(
+              context: context, ref: ref, windowId: widget.windowId)
           :
+
           /// sms kod tasdiqlangandan keyin
           smsSuccessEntered(context: context);
     } else if (ref.watch(smsMainController).actionCode == "0") {

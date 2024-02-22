@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:connection_notifier/connection_notifier.dart';
 import 'package:conx/firts_part/login_reg/choose_page/main_auth_page.dart';
 import 'package:conx/firts_part/login_reg/sms/sms_page.dart';
+import 'package:conx/firts_part/login_reg/splash/splash_page.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -68,6 +69,6 @@ class MyApp extends ConsumerWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         debugShowCheckedModeBanner: false,
-        home: SmsVerificationPage("reg"));
+        home: const SplashPage());
   }
 }

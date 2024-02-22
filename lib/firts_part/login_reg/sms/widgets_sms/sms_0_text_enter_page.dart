@@ -109,21 +109,24 @@ Widget smsTextEnterPage(
               ),
             ),
           ),
-          Visibility(
-              visible: ref.watch(smsMainController).txtSmsNote == "999",
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  Text(
-                    "smsError".tr(),
-                    style: TextStyle(
-                        fontFamily: "Inter",
-                        color: AppColors.red,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400),
-                  )
-                ],
-              )),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: Visibility(
+                visible: ref.watch(smsMainController).txtSmsNote == "999",
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    Text(
+                      "smsError".tr(),
+                      style: TextStyle(
+                          fontFamily: "Inter",
+                          color: AppColors.red,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400),
+                    )
+                  ],
+                )),
+          ),
           const SizedBox(height: 36),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -145,25 +148,33 @@ Widget smsTextEnterPage(
                   }
                 },
                 child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.5,
                     child: Text(
-                      "sendAgain".tr(),
-                      style: TextStyle(
-                        fontSize: !ref.read(smsTimeEnd) ? 17 : 16,
-                        color: !ref.read(smsTimeEnd)
-                            ? AppColors.red
-                            : AppColors.white100,
-                        fontWeight: !ref.read(smsTimeEnd)
-                            ? FontWeight.bold
-                            : FontWeight.normal,
-                      ),
-                    )),
+                  "sendAgain".tr(),
+                  style: TextStyle(
+                      fontFamily: "Inter",
+                      fontSize: 16,
+                      color: !ref.read(smsTimeEnd)
+                          ? AppColors.red
+                          : AppColors.white100,
+                      fontWeight: FontWeight.w400),
+                )),
+              ),
+              const SizedBox(
+                width: 12,
               ),
               Countdown(
                 seconds: ref.watch(smsTimer),
                 controller: countdownController,
                 build: (BuildContext context, double time) => Text(
-                    "00:${time.toInt() > 10 ? time.toInt().toString() : "0${time.toInt().toString()}"}"),
+                  "00:${time.toInt() > 10 ? time.toInt().toString() : "0${time.toInt().toString()}"}",
+                  style: TextStyle(
+                      fontFamily: "Inter",
+                      fontSize: 16,
+                      color: !ref.read(smsTimeEnd)
+                          ? AppColors.red
+                          : AppColors.white100,
+                      fontWeight: FontWeight.w400),
+                ),
                 interval: const Duration(seconds: 1),
                 onFinished: () {
                   ref.read(smsTimeEnd.notifier).state = false;

@@ -32,15 +32,15 @@ class _ChatState extends ConsumerState<Chat> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-        backgroundColor: AppColors.greyShade900,
+        backgroundColor: AppColors.white10,
         appBar: AppBar(
-          backgroundColor: AppColors.greyShade900,
+          backgroundColor: AppColors.white10,
           elevation: 0,
           centerTitle: true,
 
-          title: const Text("Chat", style: TextStyle(color: AppColors.white100),),
-          actions: const [ Padding(
-            padding: EdgeInsets.only(right: 20),
+          title:  Text("Chat", style: TextStyle(color: AppColors.white100),),
+          actions:  [ Padding(
+            padding: const EdgeInsets.only(right: 20),
             child: Icon(
               Icons.add_alert,
               color: AppColors.white100,
@@ -142,7 +142,7 @@ class _ChatState extends ConsumerState<Chat> {
                                           .lisChat[index]
                                           .userInfo
                                           .name,
-                                      style: const TextStyle(
+                                      style:  TextStyle(
                                         color: AppColors.white100,
                                       ),
                                     ),

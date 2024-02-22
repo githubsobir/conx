@@ -18,14 +18,14 @@ class _UserProfilesState extends State<UserProfiles> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.greyShade900,
+      backgroundColor: AppColors.white10,
       appBar: AppBar(
-        backgroundColor: AppColors.greyShade900,
-        title: const Text(
+        backgroundColor: AppColors.white10,
+        title:  Text(
           "Настройки профиля",
           style: TextStyle(color: AppColors.white100),
         ),
-        iconTheme: const IconThemeData(color: AppColors.white100),
+        iconTheme:  IconThemeData(color: AppColors.white100),
         centerTitle: true,
         elevation: 0,
       ),
@@ -67,7 +67,7 @@ class _UserProfilesState extends State<UserProfiles> {
                 ],
               ),
               const SizedBox(height: 30),
-            const  Text("Имя", style: TextStyle( color: AppColors.white100,),),
+              Text("Имя", style: TextStyle( color: AppColors.white100,),),
               const SizedBox(height: 10),
               TextFormField(
                 maxLines: 1,

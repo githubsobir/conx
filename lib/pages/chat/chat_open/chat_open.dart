@@ -37,7 +37,7 @@ class _ChatOpenState extends State<ChatOpen> {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: AppColors.greyShade900,
+      backgroundColor: AppColors.white10,
       appBar: AppBar(
         backgroundColor: AppColors.primaryButton,
         title: Row(

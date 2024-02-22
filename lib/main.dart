@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:connection_notifier/connection_notifier.dart';
 import 'package:conx/firts_part/login_reg/choose_page/main_auth_page.dart';
+import 'package:conx/scefics/drivers/driver_registration/driver_license/driver_license.dart';
+import 'package:conx/scefics/drivers/driver_registration/driver_reg.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +68,6 @@ class MyApp extends ConsumerWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         debugShowCheckedModeBanner: false,
-        home: const MainAuthPage());
+        home: const DrawerRegistration());
   }
 }

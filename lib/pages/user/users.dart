@@ -17,13 +17,13 @@ class _UsersState extends State<Users> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.greyShade900,
+      backgroundColor: AppColors.white10,
       appBar: AppBar(
           title: Text("Profile", style: TextStyle( color: AppColors.white100,),),
           elevation: 0,
-        backgroundColor:AppColors.greyShade900,
+        backgroundColor:AppColors.white10,
         centerTitle: true,
-          iconTheme:const IconThemeData(color: AppColors.white100),
+          iconTheme: IconThemeData(color: AppColors.white100),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 10),
@@ -36,9 +36,9 @@ class _UsersState extends State<Users> {
           children: [
             Container(
               height: MediaQuery.of(context).size.height * 0.2,
-              decoration: const BoxDecoration(
+              decoration:  BoxDecoration(
                   color: AppColors.primaryButton,
-                  borderRadius: BorderRadius.only(
+                  borderRadius:const BorderRadius.only(
                       bottomLeft: Radius.circular(25),
                       bottomRight: Radius.circular(25))),
               child: Container(

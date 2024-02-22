@@ -34,7 +34,7 @@ class _ChooseLangState extends State<ChooseLang> {
                 const SizedBox(height: 92),
                 Text(
                   "chooseLang".tr(),
-                  style: const TextStyle(
+                  style: TextStyle(
                       color: AppColors.white100,
                       fontFamily: "Poppins",
                       fontWeight: FontWeight.w700,
@@ -58,7 +58,7 @@ class _ChooseLangState extends State<ChooseLang> {
                                 ),
                               ),
                               title: Text(listLanguage[index].langName,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       color: AppColors.white100,
                                       fontFamily: "Inter",
                                       fontSize: 15,
@@ -117,7 +117,7 @@ class _ChooseLangState extends State<ChooseLang> {
                     Navigator.push(
                         context,
                         CupertinoPageRoute(
-                          builder: (context) => UserCategory(),
+                          builder: (context) => const UserCategory(),
                         ));
                   },
                   color: AppColors.primaryButton,
@@ -127,7 +127,7 @@ class _ChooseLangState extends State<ChooseLang> {
                       borderRadius: BorderRadius.circular(10)),
                   child: Text(
                     "continue".tr(),
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontFamily: "Inter",
                         fontSize: 16,
                         color: AppColors.white100,

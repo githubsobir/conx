@@ -2,9 +2,6 @@ import 'dart:io';
 
 import 'package:connection_notifier/connection_notifier.dart';
 import 'package:conx/firts_part/login_reg/choose_page/main_auth_page.dart';
-import 'package:conx/firts_part/login_reg/enter_page/lang_model/choose_lang.dart';
-import 'package:conx/firts_part/login_reg/splash/splash_page.dart';
-import 'package:conx/root_and_unver_page/root_page.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -69,9 +66,6 @@ class MyApp extends ConsumerWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         debugShowCheckedModeBanner: false,
-        // darkTheme: darkMode,
-        // theme: ligthMode,
-        //   themeMode:  ref.watch(getTheme) ? ThemeMode.light : ThemeMode.dark,
-        home: const UserCategory());
+        home: const MainAuthPage());
   }
 }

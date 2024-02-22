@@ -12,22 +12,24 @@ class SecondaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      onPressed: () {
-        onPressed();
-      },
-      height: 56,
-      minWidth: double.infinity,
-      shape: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide:
-              const BorderSide(width: 1, color: AppColors.primaryButton)),
-      child: Text(text,
-          style: const TextStyle(
-              fontSize: 16,
-              fontFamily: "Inter",
-              color: Colors.white,
-              fontWeight: FontWeight.w600)),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      child: MaterialButton(
+        onPressed: () {
+          onPressed();
+        },
+        height: 56,
+        minWidth: double.infinity,
+        shape: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(width: 1, color: AppColors.primaryButton)),
+        child: Text(text,
+            style: const TextStyle(
+                fontSize: 16,
+                fontFamily: "Inter",
+                color: Colors.white,
+                fontWeight: FontWeight.w600)),
+      ),
     );
   }
 }

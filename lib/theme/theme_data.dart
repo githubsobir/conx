@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 final getTheme = StateProvider<bool>((ref) => true);
 
-ThemeData ligthMode = ThemeData(
+ThemeData light = ThemeData(
   brightness: Brightness.light,
   appBarTheme: AppBarTheme(
       color: Colors.blue.shade900,
@@ -41,7 +41,7 @@ ThemeData ligthMode = ThemeData(
       onBackground: Colors.blue.shade900),
 );
 
-ThemeData darkMode = ThemeData(
+ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     appBarTheme: AppBarTheme(
         color: Colors.grey.shade900,

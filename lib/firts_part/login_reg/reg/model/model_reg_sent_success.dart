@@ -7,13 +7,14 @@ class ModelRegSentSuccess {
     required this.message,
   });
 
-  factory ModelRegSentSuccess.fromJson(Map<String, dynamic> json) => ModelRegSentSuccess(
-    success: json["success"],
-    message: json["message"],
-  );
+  factory ModelRegSentSuccess.fromJson(Map<String, dynamic> json) =>
+      ModelRegSentSuccess(
+        success: json["success"],
+        message: json["message"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "success": success,
-    "message": message,
-  };
+        "success": success,
+        "message": message,
+      };
 }

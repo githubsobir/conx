@@ -9,6 +9,7 @@ class AppColors {
   static Color white80 = const Color.fromRGBO(255, 255, 255, 0.8);
   static Color white70 = const Color.fromRGBO(255, 255, 255, 0.7);
   static Color white50 = const Color.fromRGBO(255, 255, 255, 0.5);
+  static Color white20 = const Color.fromRGBO(255, 255, 255, 0.2);
   static Color white10 = const Color.fromRGBO(255, 255, 255, 0.1);
   static Color primaryButton = CustomTheme.getPrimaryButtonColor();
 }

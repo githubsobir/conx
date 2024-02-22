@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'firts_part/login_reg/enter_page/user_category/user_category.dart';
+import 'firts_part/login_reg/reg/reg.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -66,6 +67,6 @@ class MyApp extends ConsumerWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         debugShowCheckedModeBanner: false,
-        home: const MainAuthPage());
+        home: const Registration());
   }
 }

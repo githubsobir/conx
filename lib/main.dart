@@ -13,6 +13,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import 'firts_part/login_reg/enter_page/user_category/user_category.dart';
 import 'firts_part/login_reg/reg/add_photo/add_photo.dart';
+import 'firts_part/login_reg/reg/add_row1/add_row.dart';
 import 'firts_part/login_reg/reg/reg.dart';
 
 class MyHttpOverrides extends HttpOverrides {
@@ -70,6 +71,6 @@ class MyApp extends ConsumerWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         debugShowCheckedModeBanner: false,
-        home: const AddPhotoRegistration());
+        home: const AddRow1());
   }
 }

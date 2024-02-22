@@ -10,23 +10,20 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      child: MaterialButton(
-        onPressed: () {
-          onPressed();
-        },
-        height: 56,
-        minWidth: double.infinity,
-        color: AppColors.primaryButton,
-        shape: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-        child: Text(text,
-            style: TextStyle(
-                fontSize: 16,
-                fontFamily: "Inter",
-                color: AppColors.white100,
-                fontWeight: FontWeight.w600)),
-      ),
+    return MaterialButton(
+      onPressed: () {
+        onPressed();
+      },
+      height: 56,
+      minWidth: double.infinity,
+      color: AppColors.primaryButton,
+      shape: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+      child: Text(text,
+          style: TextStyle(
+              fontSize: 16,
+              fontFamily: "Inter",
+              color: AppColors.white100,
+              fontWeight: FontWeight.w600)),
     );
   }
 }

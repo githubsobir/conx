@@ -12,6 +12,7 @@ class Assets {
   static const String fontsPoppinsSemiBold = 'assets/fonts/Poppins-SemiBold.ttf';
   static const String iconsIcBox = 'assets/icons/ic_box.svg';
   static const String iconsIcGlobus = 'assets/icons/ic_globus.svg';
+  static const String iconsIcProfile = 'assets/icons/ic_profile.svg';
   static const String iconsIcTruck = 'assets/icons/ic_truck.svg';
   static const String imagesBackground = 'assets/images/background.png';
   static const String imagesImageSplash = 'assets/images/image_splash.png';

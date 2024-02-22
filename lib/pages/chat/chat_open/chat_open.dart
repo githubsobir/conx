@@ -37,52 +37,36 @@ class _ChatOpenState extends State<ChatOpen> {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: AppColors.greyShade900,
+      appBar: AppBar(
+        backgroundColor: AppColors.primaryButton,
+        title: Row(
+          children: [
+            ClipRRect(
+              child: CachedNetworkImage(
+                  height: 50,
+                  imageUrl:
+                  "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgyWSD5QQzc6XtglJeSbsBLGXRb07SmRKqShMskHN2ya4NWFqgIBvFldrf-mYAC6G9LB_nxZyLu4r7Ne4LKtY8vaJ4rfJQHwHO2s_D26szkV9M7aR7gfl8YqohdEGTPmDv2dkKziIJff4tjXwmdTadiFMDfF5D8IAlXEtN7izxcdNE5dH6vVD3Eq61-SA/s8000/male.jpg"),
+            ),
+            SizedBox(width: 20),
+            const Text(
+              "Chat foydalanuvchisi",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: Icon(Icons.add_alert, color: AppColors.white100,),
+          )
+        ],
+      ),
       body: SafeArea(
           child: Column(
         children: [
           /// chat ui
-          Container(
-            margin: EdgeInsets.all(20),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  child: Icon(Icons.arrow_back_ios_new),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-                ClipRRect(
-                  child: CachedNetworkImage(
-                      height: 50,
-                      imageUrl:
-                          "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgyWSD5QQzc6XtglJeSbsBLGXRb07SmRKqShMskHN2ya4NWFqgIBvFldrf-mYAC6G9LB_nxZyLu4r7Ne4LKtY8vaJ4rfJQHwHO2s_D26szkV9M7aR7gfl8YqohdEGTPmDv2dkKziIJff4tjXwmdTadiFMDfF5D8IAlXEtN7izxcdNE5dH6vVD3Eq61-SA/s8000/male.jpg"),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Chat foydalanuvchisi",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 3),
-                    Text(
-                      "Yaqinda onlayn endi",
-                      style: TextStyle(
-                        color: Colors.grey.shade700,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox.shrink(),
-                SizedBox.shrink(),
-                SizedBox.shrink(),
-                Icon(Icons.add_alert)
-              ],
-            ),
-          ),
+
           Expanded(
             child: ListView.builder(
               itemCount: listChat.length,

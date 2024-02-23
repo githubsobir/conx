@@ -94,6 +94,7 @@ class _MainPageState extends ConsumerState<MainPage>
                   width: 50,
                   height: 55,
                   fit: BoxFit.cover,
+
                   progressIndicatorBuilder: (context, url, downloadProgress) =>
                       const CupertinoActivityIndicator(),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -142,7 +143,7 @@ class _MainPageState extends ConsumerState<MainPage>
             child: ListView(
           controller: _scrollController,
           children: [
-            const SizedBox(height: 500, child: HeaderMain()),
+            const SizedBox(height: 520, child: HeaderMain()),
             ConstrainedBox(
               constraints: const BoxConstraints(
                 minHeight: 400,
@@ -153,7 +154,7 @@ class _MainPageState extends ConsumerState<MainPage>
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) => index < countList
-                    ? const SizedBox(height: 440, child: BodyMain())
+                    ? const SizedBox(height: 510, child: BodyMain())
                     : const SizedBox(
                         height: 100,
                         child: Center(child: CupertinoActivityIndicator()),

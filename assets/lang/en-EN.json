@@ -27,5 +27,9 @@
   "city": "City",
   "doYouHaveAccount": "Do you have an account?",
   "login": "Login",
-  "date": "Date"
+  "date": "Date",
+  "enterNameAndSurname": "Enter your personal informations",
+  "name": "Name", // ism
+  "surname": "Surname", // familiya
+  "lastname": "Lastname" // sharifi
 }

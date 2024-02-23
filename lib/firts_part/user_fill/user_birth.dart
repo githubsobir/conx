@@ -11,6 +11,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../login_reg/login/login_page.dart';
+
 class UserBoth extends ConsumerStatefulWidget {
   const UserBoth({super.key});
 
@@ -27,9 +29,7 @@ class _UserBothState extends ConsumerState<UserBoth> {
   }
 
   Widget buildBody() {
-    return user0BirthDay(context: context, ref: ref);
-    // return user1BirthLoading();
-    /*if (ref.watch(userBirthController).success) {
+    if (ref.watch(userBirthController).success) {
       return user0BirthDay(context: context, ref: ref);
     } else if (!ref.watch(userBirthController).success) {
       return user1BirthLoading();
@@ -40,7 +40,7 @@ class _UserBothState extends ConsumerState<UserBoth> {
       return const Center(
         child: Text("default"),
       );
-    }*/
+    }
   }
 
   // late DateTime selectedDate = DateTime.now();
@@ -160,13 +160,22 @@ class _UserBothState extends ConsumerState<UserBoth> {
               const SizedBox(
                 width: 4,
               ),
-              Text(
-                "login".tr(),
-                style: TextStyle(
-                    fontFamily: "Inter",
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.white100,
-                    fontSize: 14),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => const LoginPage(),
+                      ));
+                },
+                child: Text(
+                  "login".tr(),
+                  style: TextStyle(
+                      fontFamily: "Inter",
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.white100,
+                      fontSize: 14),
+                ),
               )
             ],
           ),

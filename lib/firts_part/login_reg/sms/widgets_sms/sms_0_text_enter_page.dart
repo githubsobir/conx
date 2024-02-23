@@ -1,6 +1,7 @@
 import 'package:conx/data/models/theme_type.dart';
 import 'package:conx/firts_part/login_reg/sms/controller_sms.dart';
 import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/primary_button.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -23,13 +24,7 @@ Widget smsTextEnterPage(
 
   return Stack(
     children: [
-      SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Image.asset(
-            Assets.imagesBackground,
-            fit: BoxFit.fill,
-          )),
+      const BackgroundWidget(),
       Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

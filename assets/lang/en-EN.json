@@ -26,5 +26,6 @@
   "smsError": "Xato kod kiritildi yana urinib ko'ring",
   "city": "City",
   "doYouHaveAccount": "Do you have an account?",
-  "login": "Login"
+  "login": "Login",
+  "date": "Date"
 }

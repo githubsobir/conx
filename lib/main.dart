@@ -15,6 +15,7 @@ import 'firts_part/login_reg/enter_page/user_category/user_category.dart';
 import 'firts_part/login_reg/reg/add_photo/add_photo.dart';
 import 'firts_part/login_reg/reg/add_row1/add_row.dart';
 import 'firts_part/login_reg/reg/reg.dart';
+import 'firts_part/user_fill/user_birth.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -71,6 +72,6 @@ class MyApp extends ConsumerWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         debugShowCheckedModeBanner: false,
-        home: const AddRow1());
+        home: const UserBoth());
   }
 }

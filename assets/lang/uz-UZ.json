@@ -28,5 +28,8 @@
   "smsPasswordSuccessContinue": "Ro'yxatdan o'tishni davom eting",
   "enterWithLogin": "Login orqali kirish",
   "reTryNum": "Qayta raqam kirish",
-  "login": "Login"
+  "city": "City",
+  "doYouHaveAccount": "Do you have an account?",
+  "login": "Login",
+  "enterBirthday": "Tug'ulgan sanangizni kiriting"
 }

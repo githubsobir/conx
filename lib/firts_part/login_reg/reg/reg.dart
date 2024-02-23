@@ -172,22 +172,25 @@ class _RegistrationState extends ConsumerState<Registration> {
                 )),
             const SizedBox(height: 50),
             const Spacer(),
-            PrimaryButton(
-              text: "continue".tr(),
-              onPressed: () {
-                if (textEditingController.text.toString().length <= 8) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                        content: Text("checkInfo".tr()),
-                        duration: const Duration(milliseconds: 2200)),
-                  );
-                } else {
-                  box.userPhone = textEditingController.text.toString();
-                  ref
-                      .read(registrationController.notifier)
-                      .sentForRegistration(context: context);
-                }
-              },
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              child: PrimaryButton(
+                text: "continue".tr(),
+                onPressed: () {
+                  if (textEditingController.text.toString().length <= 8) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                          content: Text("checkInfo".tr()),
+                          duration: const Duration(milliseconds: 2200)),
+                    );
+                  } else {
+                    box.userPhone = textEditingController.text.toString();
+                    ref
+                        .read(registrationController.notifier)
+                        .sentForRegistration(context: context);
+                  }
+                },
+              ),
             ),
             const SizedBox(
               height: 20,

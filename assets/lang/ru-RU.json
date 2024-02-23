@@ -23,6 +23,9 @@
   "check": "Tekshirish",
   "checkInfo": "Ma'lumotlarni tekshiring",
   "tryAgain": "Qayta urunish",
-  "smsError": "Xato kod kiritildi yana urinib ko'ring"
+  "smsError": "Xato kod kiritildi yana urinib ko'ring",
+  "city": "City",
+  "doYouHaveAccount": "Do you have an account?",
+  "login": "Login"
 }
 

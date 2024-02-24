@@ -48,17 +48,17 @@ class _MapPickerPageState extends State<MapPickerPage> {
     return Scaffold(
         body: Stack(children: [
       GoogleMap(
+
           onMapCreated: _onMapCreated,
           onCameraMove: _onCameraMove,
+          mapType: MapType.terrain,
           initialCameraPosition: CameraPosition(
+            zoom: 16,
               target: LatLng(_userLocation.latitude, _userLocation.longitude))),
       Container(
         padding: const EdgeInsets.only(bottom: 18),
         child: Center(
-            child: SizedBox(
-                width: 36,
-                height: 36,
-                child: Icon(Icons.location_on, color: AppColors.red))),
+            child: Icon(Icons.location_on, color: AppColors.red, size: 36,)),
       ),
       Container(
         margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),

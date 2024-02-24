@@ -18,7 +18,7 @@ final controllerLogin =
 
 class ControllerLoginData extends StateNotifier<ModelStateLogin> {
   ControllerLoginData()
-      : super(ModelStateLogin(boolGetData: true, txtError: "")) {
+      : super(ModelStateLogin(boolGetData: true, txtError: "", message: "")) {
     getRegion();
   }
 
@@ -29,36 +29,36 @@ class ControllerLoginData extends StateNotifier<ModelStateLogin> {
 
   Future getRegion() async {
     try {
-      state = state.copyWith(boolGetData1: false, txtError1: "");
+      state = state.copyWith(boolGetData1: false, txtError1: "", message1: "");
       Response data =
           await dio.get("${MainUrl.urlMain}/api/auth/country-list/");
       listModelCountry
           .addAll((data.data as List).map((e) => ModelRegCountry.fromJson(e)));
 
-      state = state.copyWith(boolGetData1: true, txtError1: "");
+      state = state.copyWith(boolGetData1: true, txtError1: "", message1: "");
     } on DioException catch (e) {
-      state = state.copyWith(boolGetData1: true, txtError1: e.toString());
+      state = state.copyWith(boolGetData1: true, txtError1: e.toString(), message1: "");
       log(e.toString());
     }
   }
 
   Future sentForLogin({required BuildContext context}) async {
     try {
-      state = state.copyWith(boolGetData1: false, txtError1: "");
+      state = state.copyWith(boolGetData1: false, txtError1: "", message1: "");
       log(box.userPhone.toString().replaceAll("-", ""));
       FormData formData = FormData.fromMap({"phone": box.userPhone.toString().replaceAll("-", "")});
       Response response =
           await dio.post("${MainUrl.urlMain}/api/auth/login/", data: formData);
       log(jsonEncode(response.data).toString());
 
-      state = state.copyWith(boolGetData1: true, txtError1: "");
+      state = state.copyWith(boolGetData1: true, txtError1: "", message1: "");
       Navigator.push(
           context,
           CupertinoPageRoute(
             builder: (context) => SmsVerificationPage("log"),
           ));
     } on DioException catch (e) {
-      state = state.copyWith(boolGetData1: true, txtError1: e.toString());
+      state = state.copyWith(boolGetData1: true, txtError1: e.toString(), message1: "/api/auth/login/");
       log(e.toString());
     } catch (ww) {
       print(ww.toString());
@@ -66,7 +66,7 @@ class ControllerLoginData extends StateNotifier<ModelStateLogin> {
   }
 
   Future setDefault() async {
-    state = state.copyWith(boolGetData1: true, txtError1: "");
+    state = state.copyWith(boolGetData1: true, txtError1: "", message1: "");
   }
 
 
@@ -79,11 +79,11 @@ class ControllerLoginData extends StateNotifier<ModelStateLogin> {
     try{
       for(int i = 0; i < listModelCountry.length; i++){
         if(listModelCountry[i].code.toString().contains(valPhone.trim())){
-          state = state.copyWith(boolGetData1: false, txtError1: "");
+          state = state.copyWith(boolGetData1: false, txtError1: "", message1: "");
           defaultValCountry = listModelCountry[i].name;
           defaultValCountryId = listModelCountry[i].code;
 
-          state = state.copyWith(boolGetData1: true, txtError1: "");
+          state = state.copyWith(boolGetData1: true, txtError1: "", message1: "");
           break;
         }
       }

@@ -17,6 +17,7 @@ class Assets {
   static const String imagesBackground = 'assets/images/background.png';
   static const String imagesImageSplash = 'assets/images/image_splash.png';
   static const String imagesKz = 'assets/images/kz.png';
+  static const String imagesRoad = 'assets/images/road.jpeg';
   static const String imagesRus = 'assets/images/rus.png';
   static const String imagesSplash = 'assets/images/splash.png';
   static const String imagesStar = 'assets/images/star.png';

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/firts_part/login_reg/login/controller_login.dart';
 import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/error_page.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -160,33 +161,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           ),
         );
       } else {
-        return Container(
-          margin: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Center(
-                child: Text(ref.watch(controllerLogin).txtError,
-                    maxLines: 4, textAlign: TextAlign.center),
-              ),
-              const SizedBox(height: 35),
-              MaterialButton(
-                onPressed: () {
-                  ref.read(controllerLogin.notifier).setDefault();
-                },
-                height: 55,
-                color: AppColors.colorBackground,
-                minWidth: 100,
-                textColor: Colors.white,
-                shape: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.transparent)),
-                child: Text("tryAgain".tr()),
-              )
-            ],
-          ),
-        );
+        return ErrorPage(textUrl: ref.watch(controllerLogin).message, textError: ref.watch(controllerLogin).txtError, onPressed: (){
+          ref.read(controllerLogin.notifier).setDefault();
+
+        });
       }
     } else {
       return const Center(child: CupertinoActivityIndicator());

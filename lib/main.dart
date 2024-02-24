@@ -1,11 +1,15 @@
 import 'dart:io';
 
 import 'package:connection_notifier/connection_notifier.dart';
+<<<<<<< HEAD
 import 'package:conx/firts_part/login_reg/choose_page/main_auth_page.dart';
 import 'package:conx/firts_part/login_reg/enter_page/lang_model/choose_lang.dart';
 import 'package:conx/firts_part/login_reg/sms/sms_page.dart';
 import 'package:conx/firts_part/login_reg/splash/splash_page.dart';
 import 'package:conx/pages/map_picker_page.dart';
+=======
+import 'package:conx/firts_part/login_reg/enter_page/lang_model/choose_lang.dart';
+>>>>>>> 149ae0849b8dd000078ff06ace8e85069d17256a
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +17,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+<<<<<<< HEAD
 import 'firts_part/login_reg/enter_page/user_category/user_category.dart';
 import 'firts_part/login_reg/login/login_page.dart';
 import 'firts_part/login_reg/reg/add_photo/add_photo.dart';
@@ -21,6 +26,8 @@ import 'firts_part/login_reg/reg/reg.dart';
 import 'firts_part/user_fill/user_birth.dart';
 import 'firts_part/user_fill/user_fill.dart';
 
+=======
+>>>>>>> 149ae0849b8dd000078ff06ace8e85069d17256a
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
@@ -64,6 +71,7 @@ void main() async {
   );
 }
 
+@immutable
 class MyApp extends ConsumerWidget {
   MyApp({super.key});
 
@@ -76,6 +84,10 @@ class MyApp extends ConsumerWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         debugShowCheckedModeBanner: false,
+<<<<<<< HEAD
         home: const MapPickerPage());
+=======
+        home: ChooseLang());
+>>>>>>> 149ae0849b8dd000078ff06ace8e85069d17256a
   }
 }

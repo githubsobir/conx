@@ -18,10 +18,14 @@ class _UserProfilesState extends State<UserProfiles> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white10,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text("Настройки профиля"),
+        backgroundColor: AppColors.white10,
+        title:  Text(
+          "Настройки профиля",
+          style: TextStyle(color: AppColors.white100),
+        ),
+        iconTheme:  IconThemeData(color: AppColors.white100),
         centerTitle: true,
         elevation: 0,
       ),
@@ -59,11 +63,11 @@ class _UserProfilesState extends State<UserProfiles> {
                       ),
                     ),
                   ),
-                  Icon(Icons.photo_camera_outlined)
+                  Icon(Icons.photo_camera_outlined, color: AppColors.white100,)
                 ],
               ),
               const SizedBox(height: 30),
-              Text("Имя"),
+              Text("Имя", style: TextStyle( color: AppColors.white100,),),
               const SizedBox(height: 10),
               TextFormField(
                 maxLines: 1,
@@ -106,7 +110,7 @@ class _UserProfilesState extends State<UserProfiles> {
                   }
                 },
               ),
-              Text("Фамилия"),
+              Text("Фамилия", style: TextStyle( color: AppColors.white100,),),
               SizedBox(height: 10),
               TextFormField(
                 maxLines: 1,
@@ -149,7 +153,7 @@ class _UserProfilesState extends State<UserProfiles> {
                   }
                 },
               ),
-              Text("Отчества"),
+              Text("Отчества", style: TextStyle( color: AppColors.white100,),),
               SizedBox(height: 10),
               TextFormField(
                 maxLines: 1,
@@ -193,7 +197,7 @@ class _UserProfilesState extends State<UserProfiles> {
                 },
               ),
               SizedBox(height: 10),
-              Text("Дата рождения"),
+              Text("Дата рождения", style: TextStyle( color: AppColors.white100,),),
               GestureDetector(
                 onTap: () {
                   _selectDate(context);
@@ -216,7 +220,7 @@ class _UserProfilesState extends State<UserProfiles> {
                     )),
               ),
               SizedBox(height: 10),
-              Text("Телефон номер"),
+              Text("Телефон номер", style: TextStyle( color: AppColors.white100,),),
               TextFormField(
                 maxLines: 1,
                 maxLength: 30,
@@ -258,7 +262,7 @@ class _UserProfilesState extends State<UserProfiles> {
                   }
                 },
               ),
-              Text("Направление"),
+              Text("Направление", style: TextStyle( color: AppColors.white100,),),
               Card(
                 child: ListTile(
                   title: Text(""),
@@ -268,14 +272,14 @@ class _UserProfilesState extends State<UserProfiles> {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 6),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.import_export, size: 32),
+                  Icon(Icons.import_export, size: 32, color: AppColors.white100,),
                 ],
               ),
-              Text("Направление"),
+              Text("Направление", style: TextStyle( color: AppColors.white100,),),
               Card(
                 child: ListTile(
                   title: Text(""),
@@ -290,16 +294,15 @@ class _UserProfilesState extends State<UserProfiles> {
               Container(
                 height: 120,
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade300),
-                borderRadius: BorderRadius.circular(14)
-                ),
+                    border: Border.all(color: AppColors.white100),
+                    borderRadius: BorderRadius.circular(14)),
               ),
               const SizedBox(height: 20),
               MaterialButton(
                 onPressed: () {},
                 height: 60,
                 minWidth: MediaQuery.of(context).size.width * 0.9,
-                color: AppColors.colorBackground,
+                color: AppColors.primaryButton,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
                 child: SizedBox(

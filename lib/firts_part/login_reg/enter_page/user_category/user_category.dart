@@ -148,6 +148,9 @@ class _UserCategoryState extends State<UserCategory> {
                 SecondaryButton(
                   text: "skip".tr(),
                   onPressed: () {
+
+                    box.userType = "2";
+                    
                     Navigator.pushAndRemoveUntil(
                       context,
                       CupertinoPageRoute(

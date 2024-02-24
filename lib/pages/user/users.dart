@@ -17,25 +17,28 @@ class _UsersState extends State<Users> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white10,
       appBar: AppBar(
-          title: Text("Profile"),
+          title: Text("Profile", style: TextStyle( color: AppColors.white100,),),
           elevation: 0,
-          centerTitle: true,
+        backgroundColor:AppColors.white10,
+        centerTitle: true,
+          iconTheme: IconThemeData(color: AppColors.white100),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: IconButton(onPressed: () {}, icon: const Icon(Icons.add_alert)),
             )
           ],
-          backgroundColor: AppColors.colorBackground),
+          ),
       body: SafeArea(
         child: Column(
           children: [
             Container(
               height: MediaQuery.of(context).size.height * 0.2,
-              decoration: const BoxDecoration(
-                  color: AppColors.colorBackground,
-                  borderRadius: BorderRadius.only(
+              decoration:  BoxDecoration(
+                  color: AppColors.primaryButton,
+                  borderRadius:const BorderRadius.only(
                       bottomLeft: Radius.circular(25),
                       bottomRight: Radius.circular(25))),
               child: Container(
@@ -105,7 +108,9 @@ class _UsersState extends State<Users> {
                 child: ListView.builder(
                   itemCount: listProfile.length,
                   itemBuilder: (context, index) => Card(
+                    color: AppColors.white70,
                     child: ListTile(
+
                       onTap: () {
                         if(index == 0) {
                           Navigator.push(

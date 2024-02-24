@@ -50,8 +50,8 @@ class SmsControllerClass extends StateNotifier<ModelSmsAction> {
         String phone = box.userPhone.toString().replaceAll("-","");
       try {
         FormData formData = FormData.fromMap(
-            {"phone": phone, "code": smsCode, "role": box.userType == "1"?"Driver":"Client"});
-
+            {"phone": phone, "code": smsCode, "role": box.userType });
+    // box.userType == "1"?"Driver":"Client"
 
         Response response = await dio.post(
             "${MainUrl.urlMain}${windowId == "log"? "/api/auth/verify-login/":"/api/auth/verify-register/"}",

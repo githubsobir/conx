@@ -2,11 +2,13 @@ import 'dart:developer';
 
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:conx/pages/active_orders/active_orders.dart';
+import 'package:conx/pages/active_orders/driver/driver_orders.dart';
 import 'package:conx/pages/chat/chat.dart';
 import 'package:conx/pages/main/main_page.dart';
 import 'package:conx/pages/saved/saved.dart';
 import 'package:conx/pages/search/search_all.dart';
 import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/saved_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -41,9 +43,10 @@ class _RootPageState extends State<RootPage> {
     SearchAll(),
     Saved(),
     Chat(),
-    ActiveOrders()
+    ActiveOrder()
   ];
   int _bottomNavIndex = 4;
+  var box = HiveBoxes();
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +64,8 @@ class _RootPageState extends State<RootPage> {
         elevation: 0,
         backgroundColor:
             _bottomNavIndex == 4 ? AppColors.colorBackground : Colors.white,
-        child: Icon(CupertinoIcons.globe,
+        child: Icon(
+            box.userType == "1" ? CupertinoIcons.globe : CupertinoIcons.plus,
             color: _bottomNavIndex == 4 ? Colors.white : Colors.grey),
         onPressed: () {
           _bottomNavIndex = 4;

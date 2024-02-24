@@ -4,6 +4,7 @@ import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:flutter/material.dart';
 
+@immutable
 class ActiveOrder extends StatelessWidget {
   ActiveOrder({super.key});
 

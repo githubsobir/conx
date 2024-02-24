@@ -5,6 +5,7 @@ import 'package:conx/scefics/drivers/passport/widgets/photo_passport1.dart';
 import 'package:conx/scefics/drivers/passport/widgets/photo_passport2.dart';
 import 'package:conx/scefics/drivers/passport/widgets/photo_passport3.dart';
 import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,91 +25,109 @@ class _PassportState extends ConsumerState<Passport> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(
+      appBar: AppBar(
+        backgroundColor: AppColors.background,
+      ),
+      body: Stack(
+
         children: [
-          Container(
-            height: 50,
-            margin: const EdgeInsets.all(10),
-            child: Row(
-              children: [
-                Expanded(
-                  child: MaterialButton(
-                    onPressed: () {
+          const BackgroundWidget(),
+          Column(
+            children: [
 
-                      ref.read(controllerPassport.notifier).setDeafault();
+              Container(
+                height: 50,
+                margin: const EdgeInsets.only(right: 10, left: 10, top: 20),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: MaterialButton(
+                        onPressed: () {
 
-                      if (ref.watch(passportWindowID).toString() == "1") {
-                        ref.watch(passportWindowID.notifier).state = 0;
-                        controller.jumpToPage(1); // for regular jump
-                        controller
-                            .animateToPage(0,
-                                curve: Curves.decelerate,
-                                duration: const Duration(milliseconds: 200))
-                            .then((value) => setState(() {
+                          ref.read(controllerPassport.notifier).setDeafault();
 
-                                })); // for animated jump. Requires a curve and a duration
-                      }
-                    },
-                    height: 50,
-                    color: ref.watch(passportWindowID).toString() == "0"
-                        ? AppColors.colorBackground
-                        : Colors.grey.shade300,
-                    shape: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.transparent),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: const Text(
-                      "Pasport",
-                      // style: TextStyle(
-                      //     color: controller.page!.toInt().toString() == "0"
-                      //         ? Colors.white
-                      //         : Colors.black),
+                          if (ref.watch(passportWindowID).toString() == "1") {
+                            ref.watch(passportWindowID.notifier).state = 0;
+                            controller.jumpToPage(1); // for regular jump
+                            controller
+                                .animateToPage(0,
+                                    curve: Curves.decelerate,
+                                    duration: const Duration(milliseconds: 200))
+                                .then((value) => setState(() {
+
+                                    })); // for animated jump. Requires a curve and a duration
+                          }
+                        },
+                        height: 50,
+                        color: ref.watch(passportWindowID).toString() == "0"
+                            ? AppColors.white100
+                            : AppColors.colorBackground,
+                        shape: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.transparent),
+                            borderRadius: BorderRadius.circular(10)),
+                        child:  Text(
+                          "Pasport",
+                          style: TextStyle(
+                              color: ref.watch(passportWindowID.notifier).state == 0
+                                  ? AppColors.background
+                                  : AppColors.white100,
+                          fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: MaterialButton(
+                        onPressed: () {
+                          if (ref.watch(passportWindowID).toString() == "0") {
+                            ref.watch(passportWindowID.notifier).state = 1;
+                            controller.jumpToPage(0); // for regular jump
+                            controller
+                                .animateToPage(1,
+                                    curve: Curves.decelerate,
+                                    duration: const Duration(milliseconds: 300))
+                                .then((value) => setState(() {
+                                      log("Id Karta");
+                                      log(controller.initialPage.toString());
+                                    })); // for animated jump. Requires a curve and a duration
+                          }
+                        },
+                        height: 50,
+                        color: ref.watch(passportWindowID).toString() == "1"
+                            ? AppColors.white100
+                            : AppColors.colorBackground,
+                        shape: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.transparent),
+                            borderRadius: BorderRadius.circular(10)),
+                        child:  Text("ID karta",
+                          style: TextStyle(
+                              color: ref.watch(passportWindowID.notifier).state == 1
+                                  ? AppColors.background
+                                  : AppColors.white100,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: MaterialButton(
-                    onPressed: () {
-                      if (ref.watch(passportWindowID).toString() == "0") {
-                        ref.watch(passportWindowID.notifier).state = 1;
-                        controller.jumpToPage(0); // for regular jump
-                        controller
-                            .animateToPage(1,
-                                curve: Curves.decelerate,
-                                duration: const Duration(milliseconds: 300))
-                            .then((value) => setState(() {
-                                  log("Id Karta");
-                                  log(controller.initialPage.toString());
-                                })); // for animated jump. Requires a curve and a duration
-                      }
-                    },
-                    height: 50,
-                    color: ref.watch(passportWindowID).toString() == "1"
-                        ? AppColors.colorBackground
-                        : Colors.grey.shade300,
-                    shape: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.transparent),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: const Text("ID karta"),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child:
-            ref.watch(controllerPassport).boolGetData?
-            PageView(
-              controller: controller,
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                passport(),
-                idCard(),
-              ],
-            )
-            :const Center(child: CupertinoActivityIndicator())
-            ,
+              ),
+              Expanded(
+                child:
+                ref.watch(controllerPassport).boolGetData?
+                PageView(
+                  controller: controller,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    passport(),
+                    idCard(),
+                  ],
+                )
+                :const Center(child: CupertinoActivityIndicator())
+                ,
+              ),
+            ],
           ),
         ],
       ),
@@ -117,20 +136,20 @@ class _PassportState extends ConsumerState<Passport> {
 
   Widget passport() {
     return Container(
-      margin: const EdgeInsets.all(18),
+      margin: const EdgeInsets.all(15),
       height: MediaQuery.of(context).size.width * 0.9,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+             Text(
               "Pasport",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: AppColors.white100),
             ),
             const SizedBox(height: 5),
-            const Text("Введите здесь свои паспортные данные"),
+             Text("Введите здесь свои паспортные данные", style: TextStyle(color: AppColors.white100),),
             const SizedBox(height: 10),
-            const Text("Серия и номер"),
+             Text("Серия и номер", style: TextStyle(color: AppColors.white100)),
             const SizedBox(height: 5),
             Form(
               autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -162,11 +181,11 @@ class _PassportState extends ConsumerState<Passport> {
               ),
             ),
             const SizedBox(height: 30),
-            const Text(
+             Text(
               "Фотография документа",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: AppColors.white100,
                   fontSize: 20),
             ),
             const SizedBox(height: 20),
@@ -357,20 +376,20 @@ class _PassportState extends ConsumerState<Passport> {
 
   Widget idCard() {
     return Container(
-      margin: const EdgeInsets.all(18),
+      margin: const EdgeInsets.all(15),
       height: MediaQuery.of(context).size.width * 0.9,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Pasport",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+            Text(
+              "ID karta",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: AppColors.white100),
             ),
             const SizedBox(height: 5),
-            const Text("Введите здесь свои паспортные данные"),
+            Text("Введите здесь свои паспортные данные", style: TextStyle(color: AppColors.white100),),
             const SizedBox(height: 10),
-            const Text("Серия и номер"),
+            Text("Серия и номер", style: TextStyle(color: AppColors.white100)),
             const SizedBox(height: 5),
             Form(
               autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -402,11 +421,11 @@ class _PassportState extends ConsumerState<Passport> {
               ),
             ),
             const SizedBox(height: 30),
-            const Text(
+            Text(
               "Фотография документа",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: AppColors.white100,
                   fontSize: 20),
             ),
             const SizedBox(height: 20),
@@ -423,26 +442,29 @@ class _PassportState extends ConsumerState<Passport> {
                           builder: (context) => PhotoPassport1(),
                         ));
                   },
-                  child: getImage(ref, 0)=="1"?
-                  // Text("")
+                  child: getImage(ref, 0) =="1"
+                      ?
                   Card(
                     child: Image.file(
                         height: 104,
                         width: MediaQuery.of(context).size.width * 0.4,
                         fit: BoxFit.cover,
                         ref
-                            .watch(controllerPassport.notifier).file1),
+                            .watch(controllerPassport.notifier).file1
+                    ),
                   )
                       : Container(
                     height: 104,
                     width: MediaQuery.of(context).size.width * 0.4,
-                    padding: const EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
                         color: Colors.grey.shade300,
                         borderRadius: BorderRadius.circular(10)),
                     child: getImage(ref, 0) =="1"
                         ? Image.file(
-                        ref.watch(controllerPassport.notifier).file1)
+                      ref.watch(controllerPassport.notifier).file1,
+                      fit: BoxFit.cover,
+                    )
                         : const Center(
                       child: Column(
                         crossAxisAlignment:
@@ -508,13 +530,26 @@ class _PassportState extends ConsumerState<Passport> {
               child: GestureDetector(
                 onTap: () {
 
+                  // ref.watch(controllerPassport).list.isEmpty
+                  //     ? Navigator.push(
+                  //     context,
+                  //     CupertinoPageRoute(
+                  //       builder: (context) => PhotoPassport1(),
+                  //     ))
+                  //     :  ref.watch(controllerPassport).list.length == 1?
+                  //
+                  // Navigator.push(
+                  //     context,
+                  //     CupertinoPageRoute(
+                  //       builder: (context) => PhotoPassport2(),
+                  //     )) :
                   Navigator.push(
                       context,
                       CupertinoPageRoute(
                         builder: (context) => PhotoPassport3(),
                       )) ;
                 },
-                child: getImage(ref, 2)  =="1"
+                child: getImage(ref, 2) =="1"
                     ? Image.file(
                   ref.watch(controllerPassport.notifier).file3,
                   height: 104,
@@ -553,8 +588,10 @@ class _PassportState extends ConsumerState<Passport> {
               children: [
                 MaterialButton(
                   onPressed: () {
+
+
                     txtPassport.text.toString().length > 5 ?
-                    ref.read(controllerPassport.notifier).sentServer(context: context,serNum:txtPassport.text.toString()):{
+                    ref.read(controllerPassport.notifier).sentServer(context: context,  serNum:txtPassport.text.toString()):{
 
                       MyWidgets.snackBarMyWidgets(context: context, text: "Pasport ma'lumot kiriting")
                     };

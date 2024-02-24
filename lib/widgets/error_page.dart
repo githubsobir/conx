@@ -1,3 +1,4 @@
+import 'package:conx/widgets/saved_box.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../theme/app_colors.dart';
@@ -7,16 +8,19 @@ class ErrorPage extends StatelessWidget {
   final String textError;
   final VoidCallback onPressed;
 
-  const ErrorPage(
+   ErrorPage(
       {super.key,
       required this.textUrl,
       required this.textError,
       required this.onPressed});
 
+var box = HiveBoxes();
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
+      child:
+
+      Container(
         decoration: BoxDecoration(color: AppColors.white10),
 
         child: Container(

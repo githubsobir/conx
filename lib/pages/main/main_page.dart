@@ -5,6 +5,7 @@ import 'package:conx/pages/main/body_main.dart';
 import 'package:conx/pages/main/header_main.dart';
 import 'package:conx/pages/user/users.dart';
 import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/background_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -139,30 +140,37 @@ class _MainPageState extends ConsumerState<MainPage>
           ],
         ),
         //
-        body: SafeArea(
-            child: ListView(
-          controller: _scrollController,
+        body: Stack(
           children: [
-            const SizedBox(height: 522, child: HeaderMain()),
-            ConstrainedBox(
-              constraints: const BoxConstraints(
-                minHeight: 400,
-                maxHeight: double.infinity,
-              ),
-              child: ListView.builder(
-                itemCount: countList + 1,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) => index < countList
-                    ? const SizedBox(height: 520, child: BodyMain())
-                    : const SizedBox(
-                        height: 100,
-                        child: Center(child: CupertinoActivityIndicator()),
-                      ),
-              ),
-            )
+
+            const BackgroundWidget(),
+            ListView(
+              controller: _scrollController,
+
+              children: [
+                const SizedBox(height: 522, child: HeaderMain()),
+                ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    minHeight: 400,
+                    maxHeight: double.infinity,
+                  ),
+                  child:
+                  ListView.builder(
+                    itemCount: countList + 1,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => index < countList
+                        ? const SizedBox(height: 520, child: BodyMain())
+                        : const SizedBox(
+                      height: 100,
+                      child: Center(child: CupertinoActivityIndicator()),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ],
-        )),
+        ),
         floatingActionButton: Visibility(
             visible: countList > 10 && _scrollController.position.pixels > 1000,
             child: GestureDetector(

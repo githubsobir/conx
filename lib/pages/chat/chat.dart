@@ -2,7 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/pages/chat/chat_open/chat_open.dart';
 import 'package:conx/pages/chat/controller_chat.dart';
 import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/error_page.dart';
+import 'package:conx/widgets/login_or_reg.dart';
+import 'package:conx/widgets/saved_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,9 +35,9 @@ class _ChatState extends ConsumerState<Chat> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-        backgroundColor: AppColors.white10,
+
         appBar: AppBar(
-          backgroundColor: AppColors.white10,
+          backgroundColor: AppColors.background,
           elevation: 0,
           centerTitle: true,
 
@@ -47,18 +50,26 @@ class _ChatState extends ConsumerState<Chat> {
             ),
           )],
         ),
-        body: buildBody());
+        body: Stack(
+          children: [
+            const BackgroundWidget(),
+            buildBody(),
+          ],
+        ));
   }
 
+  var box = HiveBoxes();
   Widget buildBody() {
     return ref.watch(controllerChatList).boolGetData
         ? ref.watch(controllerChatList).errorMessage.toString().length > 4
-            ? ErrorPage(
+            ?
+    box.userToken.length > 20?
+    ErrorPage(
                 textUrl: ref.watch(controllerChatList).message,
                 textError: ref.watch(controllerChatList).errorMessage,
                 onPressed: () {
                   ref.read(controllerChatList.notifier).getData();
-                })
+                }):LoginOrRegistration()
             : Container(
                 margin: const EdgeInsets.all(20),
                 child:

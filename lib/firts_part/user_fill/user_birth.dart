@@ -24,7 +24,7 @@ class _UserBothState extends ConsumerState<UserBoth> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(children: [const BackgroundWidget(), buildBody()]),
+      body: Stack(children: [ BackgroundWidget(), buildBody()]),
     );
   }
 
@@ -125,25 +125,31 @@ class _UserBothState extends ConsumerState<UserBoth> {
           PrimaryButton(
               text: "continue".tr(),
               onPressed: () {
-                ref.read(userBirthController.notifier).getUserBirth();
+                // ref.read(userBirthController.notifier).getUserBirth();
 
-                if (box.userBirth.toString().length > 4) {
-                  ref.read(userBirthController.notifier).updateUserBirth(
-                      date: DateFormat('yyyy-MM-dd')
-                          .format(selectedDate)
-                          .toString());
-                } else {
-                  ref.read(userBirthController.notifier).setUserBirth(
-                      date: DateFormat('yyyy-MM-dd')
-                          .format(selectedDate)
-                          .toString());
-                }
 
-                Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (context) => const DrawerRegistration(),
-                    ));
+                ref.read(userBirthController.notifier).setUserBirth(
+                    date: DateFormat('yyyy-MM-dd')
+                        .format(selectedDate)
+                        .toString()).then((value) {
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => const DrawerRegistration(),
+                      ));
+                          return true;
+                        });
+
+                // if (box.userBirth.toString().length > 4) {
+                //   ref.read(userBirthController.notifier).updateUserBirth(
+                //       date: DateFormat('yyyy-MM-dd')
+                //           .format(selectedDate)
+                //           .toString());
+                // } else {
+                //
+                // }
+
+
               }),
           const Spacer(),
           Row(

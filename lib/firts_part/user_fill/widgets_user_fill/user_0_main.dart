@@ -90,12 +90,15 @@ Widget user0Main({required BuildContext context}) {
                     ref.read(userController.notifier).setUserFIO(
                         name: txtName.text.toString(),
                         lName: txtFName.text.toString(),
-                        sName: txtSName.text.toString());
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => const UserBoth(),
-                        ));
+                        sName: txtSName.text.toString()).then((value) => (value) {
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => const UserBoth(),
+                          ));
+                      return true;
+                        });
+
                   }
                 },
               ),

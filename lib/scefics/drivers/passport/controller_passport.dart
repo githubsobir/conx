@@ -141,7 +141,7 @@ class ControllerPassport extends StateNotifier<ModelPassport> {
   setDeafault() async{
     state = state.copyWith(
         boolGetData1: false, message1: '', list: [], errorMessage1: "");
-    await Future.delayed(const Duration(milliseconds: 800));
+    await Future.delayed(const Duration(milliseconds: 100));
     state = state.copyWith(
         boolGetData1: true, message1: '', list: [], errorMessage1: "");
   }

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/pages/saved/controller_saved.dart';
 import 'package:conx/root_and_unver_page/unversal_pages/detail_page.dart';
 import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/background_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -46,132 +47,138 @@ class _SavedState extends ConsumerState<Saved> {
             )
           ],
         ),
-        body: RefreshIndicator.adaptive(
-          onRefresh: ()async{
-            ref.read(controllerSaved.notifier).getData();
-          },
-          child: ListView.builder(
-                          itemCount: imageUrls.length,
-                          itemBuilder: (context, index) {
-          return Container(
-            margin:const EdgeInsets.all(20),
-            padding: const EdgeInsets.all(5),
-            decoration: BoxDecoration(
-                color: AppColors.white10,
-                borderRadius: BorderRadius.circular(10)),
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: CachedNetworkImage(
-                      width: 110,
-                      height: 150,
-                      fit: BoxFit.fitHeight,
-                      imageUrl: imageUrls[index]),
-                ),
-                const SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        body:
+        Stack(
+          children: [
+            const BackgroundWidget(),
+            RefreshIndicator.adaptive(
+              onRefresh: ()async{
+                ref.read(controllerSaved.notifier).getData();
+              },
+              child: ListView.builder(
+                              itemCount: imageUrls.length,
+                              itemBuilder: (context, index) {
+              return Container(
+                margin:const EdgeInsets.only(left: 20, right: 20, top: 4, bottom: 4),
+                padding: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    color: AppColors.white10,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Row(
                   children: [
-                    Text("Product",
-                        style: TextStyle(
-                          color: AppColors.white100,
-                          fontWeight: FontWeight.bold,
-                        )),
-                    index % 2 == 0
-                        ? MaterialButton(
-                            onPressed: () {},
-                            height: 35,
-                            shape: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: const BorderSide(
-                                    color: Colors.transparent)),
-                            color: AppColors.green,
-                            child: Text("Ko'rish",
-                                style: TextStyle(
-                                    color: AppColors.white100)),
-                          )
-                        : MaterialButton(
-                            onPressed: () {},
-                            height: 35,
-                            shape: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: const BorderSide(
-                                    color: Colors.transparent)),
-                            color:AppColors.yellow70,
-                            child: Text("Taklifni o'ylab ko'rish",
-                                style: TextStyle(
-                                    color: AppColors.white100)),
-                          ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: CachedNetworkImage(
+                          width: 110,
+                          height: 150,
+                          fit: BoxFit.fitHeight,
+                          imageUrl: imageUrls[index]),
+                    ),
+                    const SizedBox(width: 10),
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Icon(
-                          Icons.location_on_rounded,
-                          color: AppColors.white100,
-                          size: 18,
-                        ),
-                        SizedBox(
-                          width: 5,
+                        Text("Product",
+                            style: TextStyle(
+                              color: AppColors.white100,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        index % 2 == 0
+                            ? MaterialButton(
+                                onPressed: () {},
+                                height: 35,
+                                shape: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                        color: Colors.transparent)),
+                                color: AppColors.green,
+                                child: Text("Ko'rish",
+                                    style: TextStyle(
+                                        color: AppColors.white100)),
+                              )
+                            : MaterialButton(
+                                onPressed: () {},
+                                height: 35,
+                                shape: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                        color: Colors.transparent)),
+                                color:AppColors.yellow70,
+                                child: Text("Taklifni o'ylab ko'rish",
+                                    style: TextStyle(
+                                        color: AppColors.white100)),
+                              ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.location_on_rounded,
+                              color: AppColors.white100,
+                              size: 18,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              "Toshkent-Moskva",
+                              style: TextStyle(
+                                  color: AppColors.white100,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
                         ),
                         Text(
-                          "Toshkent-Moskva",
+                          "\$5200",
                           style: TextStyle(
-                              color: AppColors.white100,
-                              fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
-                    Text(
-                      "\$5200",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.white100),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        MaterialButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                CupertinoPageRoute(
-                                  builder: (context) => DetailPage(),
-                                ));
-                          },
-                          minWidth: 120,
-                          height: 35,
-                          shape: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                  color: Colors.transparent)),
-                          color: AppColors.colorBackground,
-                          child:  Text("To'liqroq",
-                              style:
-                                  TextStyle(color: AppColors.white100)),
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.white100),
                         ),
-                        const SizedBox(width: 10),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: AppColors.white10,
-                              borderRadius: BorderRadius.circular(5)),
-                          padding: const EdgeInsets.all(5),
-                          child: const Icon(
-                            Icons.favorite,
-                            color: AppColors.colorBackground,
-                          ),
-                        )
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            MaterialButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                      builder: (context) => DetailPage(),
+                                    ));
+                              },
+                              minWidth: 120,
+                              height: 35,
+                              shape: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(
+                                      color: Colors.transparent)),
+                              color: AppColors.colorBackground,
+                              child:  Text("To'liqroq",
+                                  style:
+                                      TextStyle(color: AppColors.white100)),
+                            ),
+                            const SizedBox(width: 10),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: AppColors.white10,
+                                  borderRadius: BorderRadius.circular(5)),
+                              padding: const EdgeInsets.all(5),
+                              child: const Icon(
+                                Icons.favorite,
+                                color: AppColors.colorBackground,
+                              ),
+                            )
+                          ],
+                        ),
                       ],
-                    ),
+                    )
                   ],
-                )
-              ],
+                ),
+              );
+                              },
+                            ),
             ),
-          );
-                          },
-                        ),
+          ],
         ));
   }
 }

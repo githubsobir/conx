@@ -143,7 +143,7 @@ class _MainPageState extends ConsumerState<MainPage>
             child: ListView(
           controller: _scrollController,
           children: [
-            const SizedBox(height: 520, child: HeaderMain()),
+            const SizedBox(height: 522, child: HeaderMain()),
             ConstrainedBox(
               constraints: const BoxConstraints(
                 minHeight: 400,
@@ -154,7 +154,7 @@ class _MainPageState extends ConsumerState<MainPage>
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) => index < countList
-                    ? const SizedBox(height: 510, child: BodyMain())
+                    ? const SizedBox(height: 520, child: BodyMain())
                     : const SizedBox(
                         height: 100,
                         child: Center(child: CupertinoActivityIndicator()),
@@ -170,7 +170,7 @@ class _MainPageState extends ConsumerState<MainPage>
                 _scrollController.animateTo(
                   0.0,
                   curve: Curves.easeOut,
-                  duration: const Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 510),
                 );
               },
               child: Container(

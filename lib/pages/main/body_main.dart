@@ -4,6 +4,7 @@ import 'package:conx/theme/app_colors.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 class BodyMain extends StatefulWidget {
@@ -141,7 +142,7 @@ class _BodyMainState extends State<BodyMain> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 8),
                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -189,7 +190,7 @@ class _BodyMainState extends State<BodyMain> {
                               style: TextStyle(color: AppColors.white100),
                             ),
                           ]),
-                          SizedBox(height: 2),
+                          SizedBox(height: 1),
                           Row(mainAxisSize: MainAxisSize.min, children: [
                             Icon(
                               Icons.car_crash_sharp,
@@ -222,13 +223,15 @@ class _BodyMainState extends State<BodyMain> {
                               ],
                             ),
                           ),
-                          const SizedBox(height: 35),
+                          const SizedBox(height: 50),
                           Stack(
                             children: [
-                              Container(height: 40,
+                              SizedBox(height: 40,
                                 width: 120,
                                 child: PieChart(PieChartData(
+
                                   pieTouchData: PieTouchData(
+
                                     touchCallback:
                                         (FlTouchEvent event, pieTouchResponse) {
                                       setState(() {
@@ -320,7 +323,7 @@ class _BodyMainState extends State<BodyMain> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 50),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.end,

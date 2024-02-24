@@ -17,7 +17,8 @@ class PrimaryButton extends StatelessWidget {
       height: 56,
       minWidth: double.infinity,
       color: AppColors.primaryButton,
-      shape: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+      shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
       child: Text(text,
           style: TextStyle(
               fontSize: 16,

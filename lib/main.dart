@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:connection_notifier/connection_notifier.dart';
 import 'package:conx/firts_part/login_reg/choose_page/main_auth_page.dart';
+import 'package:conx/firts_part/login_reg/enter_page/lang_model/choose_lang.dart';
 import 'package:conx/firts_part/login_reg/sms/sms_page.dart';
 import 'package:conx/firts_part/login_reg/splash/splash_page.dart';
 import 'package:conx/widgets/saved_box.dart';
@@ -73,6 +74,6 @@ class MyApp extends ConsumerWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         debugShowCheckedModeBanner: false,
-        home:  UserFIO());
+        home:  ChooseLang());
   }
 }

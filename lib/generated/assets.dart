@@ -10,9 +10,16 @@ class Assets {
   static const String fontsPoppinsMedium = 'assets/fonts/Poppins-Medium.ttf';
   static const String fontsPoppinsRegular = 'assets/fonts/Poppins-Regular.ttf';
   static const String fontsPoppinsSemiBold = 'assets/fonts/Poppins-SemiBold.ttf';
+  static const String fontsSFProDisplayBold = 'assets/fonts/SF-Pro-Display-Bold.otf';
+  static const String fontsSFProDisplayMedium = 'assets/fonts/SF-Pro-Display-Medium.otf';
+  static const String fontsSFProDisplayRegular = 'assets/fonts/SF-Pro-Display-Regular.otf';
+  static const String fontsSFProDisplaySemiBold = 'assets/fonts/SF-Pro-Display-SemiBold.otf';
   static const String iconsIcBox = 'assets/icons/ic_box.svg';
   static const String iconsIcGlobus = 'assets/icons/ic_globus.svg';
+  static const String iconsIcOrders = 'assets/icons/ic_orders.png';
   static const String iconsIcProfile = 'assets/icons/ic_profile.svg';
+  static const String iconsIcRouting = 'assets/icons/ic_routing.svg';
+  static const String iconsIcSquareDollar = 'assets/icons/ic_square_dollar.svg';
   static const String iconsIcTruck = 'assets/icons/ic_truck.svg';
   static const String imagesBackground = 'assets/images/background.png';
   static const String imagesImageSplash = 'assets/images/image_splash.png';

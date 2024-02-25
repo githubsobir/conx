@@ -15,6 +15,8 @@ class AppColors {
   static Color white10 = const Color.fromRGBO(255, 255, 255, 0.1);
   static Color primaryButton = const Color.fromRGBO(240, 113, 20, 1);
   static Color red = const Color.fromRGBO(235, 67, 53, 1);
+  static Color black = Colors.black;
+  static Color black50 = const Color.fromRGBO(0, 0, 0, 0.5);
 
   static Color transparent = Colors.transparent;
 }

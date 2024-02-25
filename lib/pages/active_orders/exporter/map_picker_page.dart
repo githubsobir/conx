@@ -1,5 +1,6 @@
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/primary_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -14,29 +15,53 @@ class MapPickerPage extends StatefulWidget {
 class _MapPickerPageState extends State<MapPickerPage> {
   GoogleMapController? _controller;
   LatLng _userLocation = const LatLng(41.310996, 69.280038);
+
   late LatLng _lastMapPosition;
 
   @override
   void initState() {
-    getUserPosition().then(
-        (value) => _userLocation = LatLng(value.latitude, value.longitude));
-
-    _lastMapPosition = _userLocation;
     super.initState();
+    _getLocationPermission();
   }
 
   void _onMapCreated(GoogleMapController controller) {
     _controller = controller;
   }
 
-  Future<Position> getUserPosition() async {
-    await Geolocator.requestPermission()
-        .then((value) {})
-        .onError((error, stackTrace) {
-      print(error.toString());
-    });
+  void _getLocationPermission() async {
+    LocationPermission permission = await Geolocator.checkPermission();
 
-    return await Geolocator.getCurrentPosition();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // Handle denied permission
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Handle permanently denied permission
+      return;
+    }
+
+    if (permission == LocationPermission.whileInUse ||
+        permission == LocationPermission.always) {
+      _getCurrentLocation();
+    }
+  }
+
+  void _getCurrentLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+
+      setState(() {
+        _userLocation = LatLng(position.latitude, position.longitude);
+      });
+    } catch (e) {
+      print('Error getting current location: $e');
+    }
   }
 
   void _onCameraMove(CameraPosition position) {
@@ -47,25 +72,33 @@ class _MapPickerPageState extends State<MapPickerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(children: [
-      GoogleMap(
-
+      SafeArea(
+        child: GoogleMap(
           onMapCreated: _onMapCreated,
           onCameraMove: _onCameraMove,
           mapType: MapType.terrain,
-          initialCameraPosition: CameraPosition(
-            zoom: 16,
-              target: LatLng(_userLocation.latitude, _userLocation.longitude))),
+          initialCameraPosition:
+              CameraPosition(target: _userLocation, zoom: 16.0),
+          myLocationEnabled: true,
+          myLocationButtonEnabled: true,
+          zoomControlsEnabled: false,
+        ),
+      ),
       Container(
         padding: const EdgeInsets.only(bottom: 18),
         child: Center(
-            child: Icon(Icons.location_on, color: AppColors.red, size: 36,)),
+            child: Icon(
+          Icons.location_on,
+          color: AppColors.red,
+          size: 36,
+        )),
       ),
       Container(
         margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         child: Align(
           alignment: Alignment.bottomCenter,
           child: PrimaryButton(
-              text: "Select",
+              text: "select".tr(),
               onPressed: () {
                 print(_lastMapPosition.latitude);
                 print(_lastMapPosition.longitude);

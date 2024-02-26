@@ -42,13 +42,15 @@ class _BodyMainState extends State<BodyMain> {
   Widget build(BuildContext context) {
     return Center(
         child: Container(
-          padding: const EdgeInsets.all(2),
-          margin: const EdgeInsets.fromLTRB(15, 5, 15, 4),
+          padding: const EdgeInsets.all(1),
+          margin: const EdgeInsets.fromLTRB(15, 2, 15, 2),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              image: const DecorationImage(
-                  image: AssetImage("assets/images/road.jpeg"),
-                  fit: BoxFit.fill)),
+              border: Border.all(color: AppColors.white10, width: 2)
+              // image: const DecorationImage(
+              //     image: AssetImage("assets/images/road.jpeg"),
+              //     fit: BoxFit.fill),
+          ),
           child: Column(
             children: [
               Column(

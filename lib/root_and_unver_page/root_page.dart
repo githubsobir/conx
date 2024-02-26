@@ -26,11 +26,13 @@ class _RootPageState extends State<RootPage> {
   ///
   dynamic selected;
   var heart = false;
+  var box = HiveBoxes();
 
   int currentIndex = 0;
   final List<IconData> icons = [
     Icons.add_home_outlined,
     CupertinoIcons.search,
+    CupertinoIcons.plus,
     Icons.favorite_border,
     CupertinoIcons.chat_bubble_2,
   ];
@@ -41,12 +43,12 @@ class _RootPageState extends State<RootPage> {
   final List<Widget> bottomBarPages = [
     MainPage(),
     SearchAll(),
+    ActiveOrder(),
     Saved(),
     Chat(),
-    ActiveOrder()
+
   ];
-  int _bottomNavIndex = 4;
-  var box = HiveBoxes();
+  int _bottomNavIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -58,23 +60,24 @@ class _RootPageState extends State<RootPage> {
         toolbarHeight: 1,
       ),
       body: Container(child: bottomBarPages[_bottomNavIndex]),
-      floatingActionButton: FloatingActionButton(
-        disabledElevation: 0,
-        shape: const CircleBorder(),
-        elevation: 0,
-        backgroundColor:
-            _bottomNavIndex == 4 ? AppColors.colorBackground : Colors.white,
-        child: Icon(
-            box.userType == "1" ? CupertinoIcons.globe : CupertinoIcons.plus,
-            color: _bottomNavIndex == 4 ? Colors.white : Colors.grey),
-        onPressed: () {
-          _bottomNavIndex = 4;
-          setState(() {});
-        },
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton: FloatingActionButton(
+      //   disabledElevation: 0,
+      //   shape: const CircleBorder(),
+      //   elevation: 0,
+      //   backgroundColor:
+      //       _bottomNavIndex == 4 ? AppColors.colorBackground : Colors.white,
+      //   child: Icon(
+      //       box.userType == "1" ? CupertinoIcons.globe : CupertinoIcons.plus,
+      //       color: _bottomNavIndex == 4 ? Colors.white : Colors.grey),
+      //   onPressed: () {
+      //     _bottomNavIndex = 4;
+      //     setState(() {});
+      //   },
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
         backgroundColor: Colors.black,
+
         splashColor: Colors.red,
         borderColor: Colors.transparent,
         icons: icons,
@@ -88,8 +91,8 @@ class _RootPageState extends State<RootPage> {
 
         // leftCornerRadius: 32,
         // rightCornerRadius: 32,
-        gapLocation: GapLocation.center,
-        notchSmoothness: NotchSmoothness.softEdge,
+        gapLocation: GapLocation.none,
+        notchSmoothness: NotchSmoothness.defaultEdge,
         onTap: (index) => setState(() {
           log(index.toString());
           if (_bottomNavIndex != 4) {

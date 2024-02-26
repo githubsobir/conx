@@ -4,6 +4,7 @@ import 'package:conx/theme/app_colors.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 class BodyMain extends StatefulWidget {
@@ -79,7 +80,7 @@ class _BodyMainState extends State<BodyMain> {
                       },
                       child: CachedNetworkImage(
                         width: MediaQuery.of(context).size.width,
-                        height: 250,
+                        height: 320,
                         fit: BoxFit.cover,
                         imageUrl: imageUrls[indexImage],
                         alignment: Alignment.topCenter,
@@ -139,191 +140,204 @@ class _BodyMainState extends State<BodyMain> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    const SizedBox(height: 3),
+                    Column(
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.favorite_border,
-                                  color: AppColors.white100,
-                                ),
-                                const SizedBox(width: 20),
-                                Icon(
-                                  Icons.send,
-                                  color: AppColors.white100,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 2),
-                            Text(
-                              "Нравится 1252",
-                              style: TextStyle(
-                                  color: AppColors.white100,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            const SizedBox(height: 2),
-                            Text(
-                              "\$ 6 000",
-                              style: TextStyle(
-                                  color: AppColors.white100,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                            const SizedBox(height: 2),
-                            Row(mainAxisSize: MainAxisSize.min, children: [
-                              Icon(
-                                Icons.screen_rotation_alt,
-                                size: 16,
-                                color: AppColors.white100,
-                              ),
-                              const SizedBox(width: 2),
-                              Text(
-                                "Moskva-Toshkent",
-                                style: TextStyle(color: AppColors.white100),
-                              ),
-                            ]),
-                            SizedBox(height: 1),
-                            Row(mainAxisSize: MainAxisSize.min, children: [
-                              Icon(
-                                Icons.car_crash_sharp,
-                                size: 16,
-                                color: AppColors.white100,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                "Transport",
-                                style: TextStyle(color: AppColors.white100),
-                              ),
-                            ]),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: 100,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.end,
+                        SizedBox(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Row(
                                 children: [
                                   Icon(
-                                    Icons.turned_in_not_sharp,
-                                    size: 30,
+                                    Icons.favorite_border,
+                                    color: AppColors.white100,
+                                  ),
+                                  const SizedBox(width: 20),
+                                  Icon(
+                                    Icons.send,
                                     color: AppColors.white100,
                                   ),
                                 ],
                               ),
-                            ),
-                            const SizedBox(height: 50),
-                            Stack(
+                              Icon(
+                                Icons.turned_in_not_sharp,
+                                size: 30,
+                                color: AppColors.white100,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
-                                  height: 40,
-                                  width: 120,
-                                  child: PieChart(PieChartData(
-                                    pieTouchData: PieTouchData(
-                                      touchCallback:
-                                          (FlTouchEvent event, pieTouchResponse) {
-                                        setState(() {
-                                          if (!event
-                                              .isInterestedForInteractions ||
-                                              pieTouchResponse == null ||
-                                              pieTouchResponse.touchedSection ==
-                                                  null) {
-                                            return;
-                                          }
-                                        });
-                                      },
-                                    ),
-                                    borderData: FlBorderData(
-                                      border: Border.all(
-                                          color: Colors.black,
-                                          width: 1,
-                                          strokeAlign: 2),
-                                      show: true,
-                                    ),
-                                    sectionsSpace: 0,
-                                    centerSpaceRadius: 40,
-                                    sections: sections,
-                                  )),
+
+                                const SizedBox(height: 10),
+                                Text(
+                                  "Нравится 1252",
+                                  style: TextStyle(
+                                      color: AppColors.white100,
+                                      fontWeight: FontWeight.bold),
                                 ),
-                                Align(
-                                    alignment: Alignment.center,
-                                    heightFactor: 0.32,
-                                    widthFactor: 1.9,
-                                    child: Column(
-                                      children: [
-                                        Align(
-                                          child: Text(
-                                            "50",
-                                            style: TextStyle(
+                                const SizedBox(height: 8),
+                                Text(
+                                  "\$ 6 000",
+                                  style: TextStyle(
+                                      color: AppColors.white100,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                                const SizedBox(height: 8),
+                                Row(mainAxisSize: MainAxisSize.min, children: [
+                                  Icon(
+                                    Icons.screen_rotation_alt,
+                                    size: 16,
+                                    color: AppColors.white100,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    "Moskva-Toshkent",
+                                    style: TextStyle(color: AppColors.white100,  fontSize: 15, fontWeight: FontWeight.bold),
+                                  ),
+                                ]),
+                                SizedBox(height: 10),
+                                Row(mainAxisSize: MainAxisSize.min, children: [
+                                  Icon(
+                                    Icons.car_crash_sharp,
+                                    size: 16,
+                                    color: AppColors.white100,
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    "Transport",
+                                    style: TextStyle(color: AppColors.white100,  fontSize: 15, fontWeight: FontWeight.bold),
+                                  ),
+                                ]),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+
+                                const SizedBox(height: 50),
+                                Stack(
+                                  children: [
+                                    SizedBox(
+                                      height: 40,
+                                      width: 120,
+                                      child: PieChart(PieChartData(
+                                        pieTouchData: PieTouchData(
+                                          touchCallback:
+                                              (FlTouchEvent event, pieTouchResponse) {
+                                            setState(() {
+                                              if (!event
+                                                  .isInterestedForInteractions ||
+                                                  pieTouchResponse == null ||
+                                                  pieTouchResponse.touchedSection ==
+                                                      null) {
+                                                return;
+                                              }
+                                            });
+                                          },
+                                        ),
+                                        borderData: FlBorderData(
+                                          border: Border.all(
+                                              color: Colors.black,
+                                              width: 1,
+                                              strokeAlign: 2),
+                                          show: true,
+                                        ),
+                                        sectionsSpace: 0,
+                                        centerSpaceRadius: 40,
+                                        sections: sections,
+                                      )),
+                                    ),
+                                    Align(
+                                        alignment: Alignment.center,
+                                        heightFactor: 0.28,
+                                        widthFactor: 1.9,
+                                        child: Column(
+                                          children: [
+                                            Align(
+                                              child: Text(
+                                                "50",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: AppColors.white100),
+                                              ),
+                                              alignment: Alignment.topCenter,
+                                            ),
+                                            SizedBox(height: 15),
+                                            Text(
+                                              "50 %",
+                                              style: TextStyle(
+                                                  color: AppColors.white100,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Text(
+                                              "Производител",
+                                              style: TextStyle(
+                                                  color: AppColors.white100,
+                                                  fontSize: 9,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Container(
+                                              height: 1,
+                                              width: 65,
+                                              color: Colors.white,
+                                            ),
+                                            Text(
+                                              "Производител",
+                                              style: TextStyle(
+                                                color: Colors.orange,
+                                                fontSize: 9,
                                                 fontWeight: FontWeight.bold,
-                                                color: AppColors.white100),
-                                          ),
-                                          alignment: Alignment.topCenter,
-                                        ),
-                                        SizedBox(height: 15),
-                                        Text(
-                                          "50 %",
-                                          style: TextStyle(
-                                              color: AppColors.white100,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Text(
-                                          "Производител",
-                                          style: TextStyle(
-                                              color: AppColors.white100,
-                                              fontSize: 9,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Container(
-                                          height: 1,
-                                          width: 65,
-                                          color: Colors.white,
-                                        ),
-                                        Text(
-                                          "Производител",
-                                          style: TextStyle(
-                                            color: Colors.orange,
-                                            fontSize: 9,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          "50 %",
-                                          style: TextStyle(
-                                              color: Colors.orange,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        SizedBox(height: 20),
-                                        Align(
-                                          child: Text(
-                                            "50",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white),
-                                          ),
-                                          alignment: Alignment.bottomCenter,
-                                        ),
-                                      ],
-                                    )),
+                                              ),
+                                            ),
+                                            Text(
+                                              "50 %",
+                                              style: TextStyle(
+                                                  color: Colors.orange,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            SizedBox(height: 20),
+                                            Align(
+                                              child: Text(
+                                                "50",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white),
+                                              ),
+                                              alignment: Alignment.bottomCenter,
+                                            ),
+                                          ],
+                                        )),
+                                  ],
+                                ),
                               ],
                             ),
                           ],
                         ),
                       ],
                     ),
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 35),
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        Text(
+                          "Показать перевод",
+                          style: TextStyle(
+                              color: AppColors.white100,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600),
+                        ),
                         Text(
                           "Час назад",
                           style: TextStyle(
@@ -333,23 +347,49 @@ class _BodyMainState extends State<BodyMain> {
                         )
                       ],
                     ),
-                    MaterialButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (context) => DetailPage(),
-                            ));
-                      },
-                      minWidth: double.infinity,
-                      height: 30,
-                      shape: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.transparent),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Text("To'liq ma'lumot",
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold)),
+                    SizedBox(height: 14),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+
+                        GestureDetector(
+                          onTap:(){
+                            Navigator.push(
+                                        context,
+                                        CupertinoPageRoute(
+                                          builder: (context) => DetailPage(),
+                                        ));
+                          },
+                          child: Text(
+                            "To'liq ma'lumot",
+                            style: TextStyle(
+                                color: AppColors.white100,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+
+
+                      ],
                     ),
+                    // MaterialButton(
+                    //   onPressed: () {
+                    //     Navigator.push(
+                    //         context,
+                    //         CupertinoPageRoute(
+                    //           builder: (context) => DetailPage(),
+                    //         ));
+                    //   },
+                    //   minWidth: double.infinity,
+                    //   height: 30,
+                    //   shape: OutlineInputBorder(
+                    //       borderSide: BorderSide(color: Colors.transparent),
+                    //       borderRadius: BorderRadius.circular(10)),
+                    //   child: Text("To'liq ma'lumot",
+                    //       style: TextStyle(
+                    //           color: Colors.white, fontWeight: FontWeight.bold)),
+                    // ),
                   ],
                 ),
               ),

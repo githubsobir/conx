@@ -148,7 +148,7 @@ class _MainPageState extends ConsumerState<MainPage>
               controller: _scrollController,
 
               children: [
-                const SizedBox(height: 522, child: HeaderMain()),
+                const SizedBox(height: 600, child: HeaderMain()),
                 ConstrainedBox(
                   constraints: const BoxConstraints(
                     minHeight: 400,
@@ -160,7 +160,7 @@ class _MainPageState extends ConsumerState<MainPage>
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) => index < countList
-                        ? const SizedBox(height: 520, child: BodyMain())
+                        ? const SizedBox(height: 600, child: BodyMain())
                         : const SizedBox(
                       height: 100,
                       child: Center(child: CupertinoActivityIndicator()),

@@ -36,5 +36,7 @@
   "enterNameAndSurname": "Enter your personal informations",
   "name": "Name",
   "surname": "Surname",
-  "lastname": "Lastname"
+  "lastname": "Lastname",
+  "more": "More",
+  "select": "Select"
 }

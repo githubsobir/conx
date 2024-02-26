@@ -46,7 +46,7 @@ class _BodyMainState extends State<BodyMain> {
           margin: const EdgeInsets.fromLTRB(15, 2, 15, 2),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              border: Border.all(color: AppColors.white10, width: 2)
+              border: Border.all(color: AppColors.white10, width: 1 )
               // image: const DecorationImage(
               //     image: AssetImage("assets/images/road.jpeg"),
               //     fit: BoxFit.fill),

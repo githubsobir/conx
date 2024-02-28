@@ -24,7 +24,8 @@ class _HeaderMainState extends ConsumerState<HeaderMain> {
   Widget build(BuildContext context) {
     return  Container(
       height: 520,
-      margin: const EdgeInsets.fromLTRB(25, 10, 25, 10),
+      margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
       decoration: BoxDecoration(
           color: Colors.grey.shade900,
           borderRadius: BorderRadius.circular(15)),

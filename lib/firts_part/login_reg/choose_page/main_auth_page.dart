@@ -70,63 +70,66 @@ class MainAuthPage extends StatelessWidget {
               ],
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                "explore".tr(),
-                style: TextStyle(
-                    fontFamily: "Poppins",
-                    color: AppColors.white100,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 32),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 36),
-                child: Text(
-                  "exploreText".tr(),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: "Inter",
-                      color: AppColors.white80,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 17),
+          Container(
+            margin: const EdgeInsets.only(right: 25, left: 25),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              PrimaryButton(
-                text: "enter".tr(),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => const LoginPage(),
-                      ));
-                },
-              ),
-              const SizedBox(height: 12),
-              SecondaryButton(
-                text: "registration".tr(),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => const Registration(),
-                      ));
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              )
-            ],
+                Text(
+                  "explore".tr(),
+                  style: TextStyle(
+                      fontFamily: "Poppins",
+                      color: AppColors.white100,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 32),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 36),
+                  child: Text(
+                    "exploreText".tr(),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontFamily: "Inter",
+                        color: AppColors.white80,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 17),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                PrimaryButton(
+                  text: "enter".tr(),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ));
+                  },
+                ),
+                const SizedBox(height: 12),
+                SecondaryButton(
+                  text: "registration".tr(),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const Registration(),
+                        ));
+                  },
+                ),
+                const SizedBox(
+                  height: 20,
+                )
+              ],
+            ),
           ),
         ])
       ]),

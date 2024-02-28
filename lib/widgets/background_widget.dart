@@ -11,7 +11,7 @@ class BackgroundWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Image.asset(
-        Assets.imagesBackground,
+        Assets.imagesRoad,
         fit: BoxFit.fill,
       ),
     );

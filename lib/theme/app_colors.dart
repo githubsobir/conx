@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'custom_theme.dart';
 
 class AppColors {
   static const Color colorBackground = Color.fromRGBO(240, 113, 20, 1);

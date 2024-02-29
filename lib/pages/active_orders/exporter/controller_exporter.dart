@@ -38,7 +38,7 @@ final getCountryList =
 });
 
 final controllerExporter =
-    StateNotifierProvider<ControllerExporter, ModelControllerExporter>(
+    StateNotifierProvider.autoDispose<ControllerExporter, ModelControllerExporter>(
         (ref) => ControllerExporter());
 
 class ControllerExporter extends StateNotifier<ModelControllerExporter> {

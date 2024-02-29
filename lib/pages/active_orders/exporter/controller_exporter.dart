@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -6,6 +7,7 @@ import 'package:conx/pages/active_orders/exporter/model_exporter/model_controlle
 import 'package:conx/pages/active_orders/exporter/model_exporter/model_region_district.dart';
 import 'package:conx/pages/active_orders/exporter/model_exporter/model_transport_type.dart';
 import 'package:conx/widgets/main_url.dart';
+import 'package:conx/widgets/saved_box.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -155,6 +157,8 @@ class ControllerExporter extends StateNotifier<ModelControllerExporter> {
       {required String districtName,
       required String districtId,
       required String windowId}) async {
+    state =
+        state.copyWith(boolGetData1: false, message1: "", errorMessage1: "");
     if (windowId == "1") {
       district1Name = districtName;
       district1Id = districtId;
@@ -162,6 +166,8 @@ class ControllerExporter extends StateNotifier<ModelControllerExporter> {
       district2Name = districtName;
       district2Id = districtId;
     }
+
+    state = state.copyWith(boolGetData1: true, message1: "", errorMessage1: "");
   }
 
   String transportId = "";
@@ -199,5 +205,58 @@ class ControllerExporter extends StateNotifier<ModelControllerExporter> {
         state.copyWith(boolGetData1: false, message1: "", errorMessage1: "");
     costName = paymentType;
     state = state.copyWith(boolGetData1: true, message1: "", errorMessage1: "");
+  }
+
+  final _box = HiveBoxes();
+
+  Future setOrder({
+    required String name,
+    required String weight,
+    required String volumeM3,
+    required String locationFrom,
+    required String locationTo,
+    required String transportType,
+    required String date,
+    required String price,
+    required String typePayment,
+    required String longitude,
+    required String latitude,
+    required String description,
+  }) async {
+    try {
+      FormData formData = FormData.fromMap({
+        "transport_type": transportType,
+        "name": name,
+        "location_from": locationFrom,
+        "location_to": locationTo,
+        "date": date,
+        "weight": weight,
+        "volume_m3": volumeM3,
+        "price": price,
+        "type_payment": typePayment,
+        "description": description,
+        "order_files": [
+          {
+            await MultipartFile.fromFile(file5.path, filename: "image_user"),
+          }
+        ],
+        "longitude": longitude,
+        "latitude": latitude
+      });
+
+      Response response = await _dio.post(
+          "${MainUrl.urlMain}/api/client/order-create/",
+          options:
+              Options(headers: {"Authorization": "Bearer ${_box.userToken}"}),
+          data: formData);
+
+      log(jsonEncode(response.data).toString());
+    }
+    on DioException catch(r){
+      log(r.toString());
+    }
+    catch (e) {
+      log(e.toString());
+    }
   }
 }

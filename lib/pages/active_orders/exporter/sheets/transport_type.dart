@@ -1,10 +1,13 @@
 import 'package:conx/pages/active_orders/exporter/controller_exporter.dart';
 import 'package:conx/theme/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
 getBottomSheetTransportType({required BuildContext context}) {
+
+
   showModalBottomSheet(
       context: context,
       barrierColor: AppColors.white50,
@@ -12,7 +15,7 @@ getBottomSheetTransportType({required BuildContext context}) {
         return Container(
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(14)),
             height: MediaQuery.of(context).size.height * 0.6,
-            child: TransportTypeBottomSheet());
+            child: const TransportTypeBottomSheet());
       });
 }
 
@@ -37,7 +40,9 @@ class _TransportTypeBottomSheetState extends ConsumerState<TransportTypeBottomSh
       child: Column(
         children: [
           Expanded(
-            child: ListView.builder(
+            child:
+            ref.watch(controllerExporter).boolGetData?
+            ListView.builder(
               itemCount: ref.read(controllerExporter.notifier).listTransportType.length,
               itemBuilder: (context, index) => ListTile(
                 onTap: (){
@@ -59,7 +64,9 @@ class _TransportTypeBottomSheetState extends ConsumerState<TransportTypeBottomSh
                   color: AppColors.white100,
                 ),
               ),
-            ),
+            )
+            :const Center(child: CupertinoActivityIndicator(),)
+            ,
           ),
         ],
       ),

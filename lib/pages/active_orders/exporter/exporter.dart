@@ -1,12 +1,13 @@
-import 'package:conx/pages/active_orders/exporter/sheets/region_sheet.dart';
 import 'package:conx/pages/active_orders/exporter/controller_exporter.dart';
 import 'package:conx/pages/active_orders/exporter/get_images/get_images.dart';
 import 'package:conx/pages/active_orders/exporter/get_images/map_picker_page.dart';
+import 'package:conx/pages/active_orders/exporter/sheets/region_sheet.dart';
 import 'package:conx/pages/active_orders/exporter/sheets/transport_type.dart';
 import 'package:conx/pages/active_orders/exporter/sheets/type_cost.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/primary_button.dart';
+import 'package:conx/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -211,17 +212,12 @@ class _ExporterState extends ConsumerState<Exporter> {
                       },
                       leading: ref.watch(controllerExporter).boolGetData
                           ? Text(
-                        "${ref
-                            .watch(controllerExporter.notifier)
-                            .region1Name} ${ref
-                            .watch(controllerExporter.notifier)
-                            .region2Name}"
-                        ,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.white100,
-                            fontSize: 16),
-                      )
+                              "${ref.watch(controllerExporter.notifier).region1Name}.  ${ref.watch(controllerExporter.notifier).district1Name}",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.white100,
+                                  fontSize: 16),
+                            )
                           : const Text(""),
                       trailing: Icon(
                         Icons.keyboard_arrow_down,
@@ -243,17 +239,17 @@ class _ExporterState extends ConsumerState<Exporter> {
                         color: AppColors.white20,
                         borderRadius: BorderRadius.circular(10)),
                     child: ListTile(
+                      onTap: () {
+                        getBottomSheet(context: context, id: 2);
+                      },
                       leading: ref.watch(controllerExporter).boolGetData
                           ? Text(
-                        ref
-                            .watch(controllerExporter.notifier)
-                            .region2Name
-                            .toString(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.white100,
-                            fontSize: 16),
-                      )
+                              "${ref.watch(controllerExporter.notifier).region2Name}.  ${ref.watch(controllerExporter.notifier).district2Name}",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.white100,
+                                  fontSize: 16),
+                            )
                           : const Text(""),
                       trailing: Icon(
                         Icons.keyboard_arrow_down,
@@ -274,6 +270,9 @@ class _ExporterState extends ConsumerState<Exporter> {
                         borderRadius: BorderRadius.circular(10)),
                     child: ListTile(
                       onTap: () {
+                        ref
+                            .read(controllerExporter.notifier)
+                            .getTransportType();
                         getBottomSheetTransportType(context: context);
                       },
                       leading: ref.watch(controllerExporter).boolGetData
@@ -384,9 +383,9 @@ class _ExporterState extends ConsumerState<Exporter> {
                             ? ref.watch(controllerExporter.notifier).costName
                             : "",
                         style: TextStyle(
-                            color: AppColors.white100,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                          color: AppColors.white100,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       trailing: Icon(
@@ -465,7 +464,57 @@ class _ExporterState extends ConsumerState<Exporter> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  PrimaryButton(text: "Сохранить", onPressed: () {}),
+                  PrimaryButton(
+                      text: "Сохранить",
+                      onPressed: () {
+                        if (textFormController1.text.isNotEmpty &&
+                            textFormController2.text.isNotEmpty &&
+                            textFormController3.text.isNotEmpty &&
+                            textFormController4.text.isNotEmpty &&
+                            textFormController5.text.isNotEmpty &&
+                            ref
+                                .watch(controllerExporter.notifier)
+                                .region1Id
+                                .isNotEmpty &&
+                            ref
+                                .watch(controllerExporter.notifier)
+                                .region2Id
+                                .isNotEmpty &&
+                            ref
+                                .watch(controllerExporter.notifier)
+                                .transportId
+                                .isNotEmpty &&
+                            boolSelected &&
+                            ref
+                                .watch(controllerExporter.notifier)
+                                .costName
+                                .isNotEmpty &&
+                            ref.watch(controllerGetPositionSelect)) {
+                          ref.read(controllerExporter.notifier).setOrder(
+                              name: textFormController1.text.toString(),
+                              weight: textFormController2.text.toString(),
+                              volumeM3: textFormController3.text.toString(),
+                              locationFrom:  ref
+                                  .watch(controllerExporter.notifier)
+                                  .district1Id,
+                              locationTo:  ref
+                                  .watch(controllerExporter.notifier)
+                                  .district2Id,
+                              transportType:  ref
+                                  .watch(controllerExporter.notifier)
+                                  .transportId,
+                              date: DateFormat('yyyy-MM-dd').format(selectedDate),
+                              price: textFormController4.text.toString(),
+                              typePayment: ref.watch(controllerExporter.notifier).costName,
+                              longitude: ref.watch(controllerGetPositionLat).toString(),
+                              latitude: ref.watch(controllerGetPositionLong).toString(),
+                              description: textFormController5.text.toString());
+                        } else {
+                          MyWidgets.snackBarMyWidgets(
+                              context: context,
+                              text: "Yuqoridagi maydinlarni to'ldiring");
+                        }
+                      }),
                   const SizedBox(height: 20),
                 ],
               ),

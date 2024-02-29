@@ -27,10 +27,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-
-        body: bodyBuild());
+    return Scaffold(body: bodyBuild());
   }
 
   Widget bodyBuild() {
@@ -45,29 +42,46 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 30,
-                  child: Row(children: [
-                    IconButton(onPressed:(){}, icon: Icon(Platform.isIOS ? Icons.arrow_back_ios_rounded:Icons.arrow_back, color: AppColors.white100,))
-                  ],),
+                  SizedBox(
+                    height: 30,
+                    child: Row(
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            icon: Icon(
+                              Platform.isIOS
+                                  ? Icons.arrow_back_ios_rounded
+                                  : Icons.arrow_back,
+                              color: AppColors.white100,
+                            ))
+                      ],
+                    ),
                   ),
-
                   const SizedBox(height: 30),
                   Text(
                     "login".tr(),
-                    style:
-                         TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: AppColors.white100,),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      color: AppColors.white100,
+                    ),
                   ),
                   const SizedBox(height: 10),
                   Text(
                     "registrationText".tr(),
-                    style:
-                        const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                        color: AppColors.white100),
                   ),
                   const SizedBox(height: 20),
                   Container(
                     decoration: BoxDecoration(
                         border: Border.symmetric(
-                            horizontal: BorderSide(color: Colors.grey.shade300))),
+                            horizontal:
+                                BorderSide(color: Colors.grey.shade300))),
                     child: ListTile(
                       leading: CachedNetworkImage(
                         imageUrl:
@@ -94,10 +108,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
                       ),
-                      title: Text(ref
-                          .read(controllerLogin.notifier)
-                          .defaultValCountry
-                          .toString()),
+                      title: Text(
+                        ref
+                            .read(controllerLogin.notifier)
+                            .defaultValCountry
+                            .toString(),
+                        style: TextStyle(
+                            color: AppColors.white100,
+                            fontWeight: FontWeight.bold),
+                      ),
                       trailing: const Icon(Icons.keyboard_arrow_down_outlined),
                       onTap: () {
                         getCountryList();
@@ -108,8 +127,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       height: 100,
                       decoration: const BoxDecoration(
                           // color: Colors.grey.shade50,
-                          border: Border.symmetric(
-                              horizontal: BorderSide(color: Colors.white))),
+                          // border: Border.symmetric(
+                          //     horizontal: BorderSide(color: Colors.white)),
+                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -119,22 +139,68 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           ),
                           Form(
                               key: _formKey,
-                              autovalidateMode: AutovalidateMode.onUserInteraction,
-                              child: MaskedTextField(
-                                mask: ref
-                                    .watch(controllerLogin.notifier)
-                                    .defaultValCountryMask,
-                                maxLength: 17,
-                                keyboardType: TextInputType.number,
-                                inputDecoration: const InputDecoration(
-                                  hintText: "Telefon raqam kiriting",
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              child: Theme(
+                                data: ThemeData(
+                                  primaryColor: AppColors.white100,
+                                  focusColor:  AppColors.white100,
+                                  hoverColor:  AppColors.white100,
+                                  indicatorColor: AppColors.white100,
+
+
+                                  textTheme: const TextTheme().copyWith(
+                                    bodySmall:
+                                        TextStyle(color: AppColors.white100),
+                                    bodyMedium:
+                                        TextStyle(color: AppColors.white100),
+                                    bodyLarge:
+                                        TextStyle(color: AppColors.white100),
+                                    labelSmall:
+                                        TextStyle(color: AppColors.white100),
+                                    labelMedium:
+                                        TextStyle(color: AppColors.white100),
+                                    labelLarge:
+                                        TextStyle(color: AppColors.white100),
+                                    displaySmall:
+                                        TextStyle(color: AppColors.white100),
+                                    displayMedium:
+                                        TextStyle(color: AppColors.white100),
+                                    displayLarge:
+                                        TextStyle(color: AppColors.white100),
+                                  ),
                                 ),
-                                textFieldController: textEditingController,
-                                onChange: (String value) {
-                                  ref.read(controllerLogin.notifier).getPhoneCodeByTypeUser(valPhone: value);
-                                },
-                              )
-                          ),
+                                child: MaskedTextField(
+                                  mask: ref
+                                      .watch(controllerLogin.notifier)
+                                      .defaultValCountryMask,
+                                  maxLength: 17,
+                                  keyboardType: TextInputType.number,
+                                  inputDecoration: InputDecoration(
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(color: AppColors.white100),
+                                      ),
+                                      focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(color: AppColors.white100),
+                                      ),
+                                      hintText: "Telefon raqam kiriting",
+                                      counterStyle:
+                                          TextStyle(color: AppColors.white100),
+                                      hintStyle: TextStyle(
+                                          color: AppColors.white100,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 17,
+                                          fontFamily: "Inter",
+                                          fontWeight: FontWeight.w700)),
+                                  textFieldController: textEditingController,
+                                  onChange: (String value) {
+                                    ref
+                                        .read(controllerLogin.notifier)
+                                        .getPhoneCodeByTypeUser(
+                                            valPhone: value);
+                                  },
+                                ),
+                              )),
                         ],
                       )),
                   const SizedBox(height: 50),
@@ -169,20 +235,20 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 ],
               ),
             ),
-
           ],
         );
       } else {
-        return ErrorPage(textUrl: ref.watch(controllerLogin).message, textError: ref.watch(controllerLogin).txtError, onPressed: (){
-          ref.read(controllerLogin.notifier).setDefault();
-
-        });
+        return ErrorPage(
+            textUrl: ref.watch(controllerLogin).message,
+            textError: ref.watch(controllerLogin).txtError,
+            onPressed: () {
+              ref.read(controllerLogin.notifier).setDefault();
+            });
       }
     } else {
       return const Center(child: CupertinoActivityIndicator());
     }
   }
-
 
   getCountryList() {
     showModalBottomSheet(

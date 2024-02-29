@@ -115,7 +115,7 @@ class _DriverOrdersState extends State<DriverOrders>
     await Geolocator.requestPermission()
         .then((value) {})
         .onError((error, stackTrace) {
-      print(error.toString());
+
     });
 
     return await Geolocator.getCurrentPosition();
@@ -123,7 +123,7 @@ class _DriverOrdersState extends State<DriverOrders>
 
   packData() {
     getUserPosition().then((value) async {
-      print("my location");
+
       print(value.latitude.toString() + " " + value.longitude.toString());
 
       myMarker.add(Marker(

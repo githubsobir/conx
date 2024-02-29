@@ -17,6 +17,7 @@ class AppColors {
   static Color red = const Color.fromRGBO(235, 67, 53, 1);
   static Color black = Colors.black;
   static Color black50 = const Color.fromRGBO(0, 0, 0, 0.5);
+  static Color newOrangeColorForIcon = const Color.fromRGBO(242, 162, 60, 1);
 
   static Color transparent = Colors.transparent;
 }

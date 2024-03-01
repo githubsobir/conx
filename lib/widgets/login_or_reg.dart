@@ -1,5 +1,7 @@
+import 'package:conx/firts_part/login_reg/enter_page/user_category/user_category.dart';
 import 'package:conx/firts_part/login_reg/login/login_page.dart';
 import 'package:conx/firts_part/login_reg/reg/reg.dart';
+import 'package:conx/widgets/primary_button.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +10,7 @@ import '../theme/app_colors.dart';
 
 @immutable
 class LoginOrRegistration extends StatelessWidget {
-
-
-  LoginOrRegistration(
-      {super.key});
+  LoginOrRegistration({super.key});
 
   var box = HiveBoxes();
 
@@ -23,6 +22,8 @@ class LoginOrRegistration extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               "SanX:",
@@ -31,8 +32,8 @@ class LoginOrRegistration extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 30),
             ),
-            Divider(),
-            SizedBox(
+            const Divider(),
+           const  SizedBox(
               height: 50,
             ),
             Text(
@@ -40,39 +41,35 @@ class LoginOrRegistration extends StatelessWidget {
               style: TextStyle(color: AppColors.white100),
             ),
             const SizedBox(height: 50),
-            MaterialButton(
+            PrimaryButton(
               onPressed: () {
-                Navigator.push(context, CupertinoPageRoute(builder: (context) => Registration(),));
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => LoginPage(),
+                    ));
               },
-              height: 56,
-              minWidth: double.infinity,
-              color: AppColors.primaryButton,
-              shape:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              child: Text("Ro'yxatdan o'tish",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: "Inter",
-                      color: AppColors.white100,
-                      fontWeight: FontWeight.w600)),
+              text: "Login va parol orqali kirish",
             ),
-            const SizedBox(height: 20),
-            MaterialButton(
-              onPressed: () {
-                Navigator.push(context, CupertinoPageRoute(builder: (context) => LoginPage(),));
-
-              },
-              height: 56,
-              minWidth: double.infinity,
-              color: AppColors.primaryButton,
-              shape:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-              child: Text("Login va parol orqali kirish",
+            SizedBox(
+              height: 50,
+              child: Center(
+                child: Text(
+                  "YOKI",
                   style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: "Inter",
-                      color: AppColors.white100,
-                      fontWeight: FontWeight.w600)),
+                      color: AppColors.white100, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            PrimaryButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => UserCategory(windowIdReg: "0",),
+                    ));
+              },
+              text: "Ro'yxatdan o'tish",
             ),
           ],
         ),

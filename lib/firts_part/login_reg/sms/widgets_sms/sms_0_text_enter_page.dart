@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:conx/data/models/theme_type.dart';
 import 'package:conx/firts_part/login_reg/sms/controller_sms.dart';
 import 'package:conx/theme/app_colors.dart';
@@ -35,7 +37,8 @@ Widget smsTextEnterPage(
                 Navigator.of(context).pop();
               },
               icon: Icon(
-                Icons.navigate_before,
+                Platform.isIOS? Icons.arrow_back_ios:
+                Icons.arrow_back,
                 color: AppColors.white100,
               )),
           const SizedBox(height: 40),

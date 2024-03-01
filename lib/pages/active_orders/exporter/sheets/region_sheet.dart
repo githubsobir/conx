@@ -5,7 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-getBottomSheet({required BuildContext context, required int id}) {
+getBottomSheet({required BuildContext context, required int id, required WidgetRef ref}) {
+  ref.read(getCountryList);
   showModalBottomSheet(
       context: context,
       barrierColor: AppColors.white50,
@@ -31,52 +32,54 @@ class UserBottomSheet extends ConsumerStatefulWidget {
 class _UserBottomSheetState extends ConsumerState<UserBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    var controllerGetRegion = ref.watch(getCountryList);
-    return controllerGetRegion.when(data: (data) {
-      return Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/images/road2.png"),
-                fit: BoxFit.fill)),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                itemCount: data.length,
-                itemBuilder: (context, index) => ListTile(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    ref.read(controllerExporter.notifier).getRegion(
-                        index: data[index].id.toString(),
-                        regionName: data[index].name.toString(),
-                        windowId: widget.idWindow);
-                    getDistrictSheet(context: context, winId: widget.idWindow.toString());
-                  },
-                  leading: Text(
-                    data[index].name.toString(),
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.white100,
-                        fontSize: 16),
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_forward_ios_sharp,
-                    color: AppColors.white100,
-                  ),
+
+
+
+    return  Container(
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/images/road2.png"),
+              fit: BoxFit.fill)),
+      child: Column(
+        children: [
+          Expanded(
+            child:
+            ref.watch(controllerExporter).boolGetData?
+            ListView.builder(
+              itemCount: ref.read(controllerExporter.notifier).listCountry.length,
+              itemBuilder: (context, index) => ListTile(
+                onTap: (){
+                  Navigator.of(context).pop();
+                  ref.read(controllerExporter.notifier).getRegion(windowId: widget.idWindow,
+
+                      regionName:  ref.read(controllerExporter.notifier).listCountry[index].name.toString(),
+                    index:  ref.read(controllerExporter.notifier).listCountry[index].id.toString()
+                  );
+                  getDistrictSheet(context: context, winId: widget.idWindow.toString());
+
+
+                },
+
+                leading: Text(
+                  ref.read(controllerExporter.notifier).listCountry[index].name.toString(),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.white100,
+                      fontSize: 16),
+                ),
+                trailing: Icon(
+                  Icons.arrow_forward_ios_sharp,
+                  color: AppColors.white100,
                 ),
               ),
-            ),
-          ],
-        ),
-      );
-    }, error: (error, textError) {
-      return Center(
-        child: Text(textError.toString()),
-      );
-    }, loading: () {
-      return const Center(
-        child: CupertinoActivityIndicator(),
-      );
-    });
+            )
+                :const Center(child: CupertinoActivityIndicator(
+              color: AppColors.colorBackground,
+            ),)
+            ,
+          ),
+        ],
+      ),
+    );
   }
 }

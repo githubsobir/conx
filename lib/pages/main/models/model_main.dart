@@ -1,5 +1,11 @@
-class ModelMainPage {
+class ModelOrderList {
   dynamic id;
+  dynamic file1;
+  dynamic file2;
+  dynamic file3;
+  dynamic file4;
+  dynamic file5;
+  dynamic file6;
   dynamic transportType;
   dynamic name;
   dynamic locationFrom;
@@ -13,10 +19,18 @@ class ModelMainPage {
   dynamic createdAt;
   dynamic updatedAt;
   dynamic status;
-  List<OrderFile> orderFiles;
+  dynamic views;
+  dynamic longitude;
+  dynamic latitude;
 
-  ModelMainPage({
+  ModelOrderList({
     this.id,
+    this.file1,
+    this.file2,
+    this.file3,
+    this.file4,
+    this.file5,
+    this.file6,
     this.transportType,
     this.name,
     this.locationFrom,
@@ -30,11 +44,19 @@ class ModelMainPage {
     this.createdAt,
     this.updatedAt,
     this.status,
-    required this.orderFiles,
+    this.views,
+    this.longitude,
+    this.latitude,
   });
 
-  factory ModelMainPage.fromJson(Map<String, dynamic> json) => ModelMainPage(
+  factory ModelOrderList.fromJson(Map<String, dynamic> json) => ModelOrderList(
         id: json["id"],
+        file1: json["file_1"],
+        file2: json["file_2"],
+        file3: json["file_3"],
+        file4: json["file_4"],
+        file5: json["file_5"],
+        file6: json["file_6"],
         transportType: json["transport_type"],
         name: json["name"],
         locationFrom: json["location_from"],
@@ -48,12 +70,19 @@ class ModelMainPage {
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
         status: json["status"],
-        orderFiles: List<OrderFile>.from(
-            json["order_files"].map((x) => OrderFile.fromJson(x))),
+        views: json["views"],
+        longitude: json["longitude"],
+        latitude: json["latitude"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "file_1": file1,
+        "file_2": file2,
+        "file_3": file3,
+        "file_4": file4,
+        "file_5": file5,
+        "file_6": file6,
         "transport_type": transportType,
         "name": name,
         "location_from": locationFrom,
@@ -67,26 +96,8 @@ class ModelMainPage {
         "created_at": createdAt,
         "updated_at": updatedAt,
         "status": status,
-        "order_files": List<dynamic>.from(orderFiles.map((x) => x.toJson())),
-      };
-}
-
-class OrderFile {
-  String id;
-  String file;
-
-  OrderFile({
-    required this.id,
-    required this.file,
-  });
-
-  factory OrderFile.fromJson(Map<String, dynamic> json) => OrderFile(
-        id: json["id"],
-        file: json["file"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "file": file,
+        "views": views,
+        "longitude": longitude,
+        "latitude": latitude,
       };
 }

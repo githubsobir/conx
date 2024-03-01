@@ -1,5 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:conx/generated/assets.dart';
 import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/background_widget.dart';
+import 'package:conx/widgets/primary_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -18,302 +21,310 @@ class _UserProfilesState extends State<UserProfiles> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white10,
-      appBar: AppBar(
-        backgroundColor: AppColors.white10,
-        title:  Text(
-          "Настройки профиля",
-          style: TextStyle(color: AppColors.white100),
-        ),
-        iconTheme:  IconThemeData(color: AppColors.white100),
-        centerTitle: true,
-        elevation: 0,
-      ),
-      body: SafeArea(
-          child: Container(
-        margin: const EdgeInsets.all(20),
-        child: SingleChildScrollView(
+        body: Stack(children: [
+      const BackgroundWidget(),
+      SafeArea(
+        child: Container(
+          margin: const EdgeInsets.all(20),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        border:
-                            Border.all(color: Colors.grey.shade400, width: 4),
-                        shape: BoxShape.circle),
-                    margin: const EdgeInsets.only(right: 20),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            "https://yt3.googleusercontent.com/ytc/AGIKgqPwtgj5FwEJ7cFln7T_qxosKFA-gCZTtaDbRMhCGw=s900-c-k-c0x00ffffff-no-rj",
-                        alignment: Alignment.topCenter,
-                        width: 80,
-                        height: 80,
-                        fit: BoxFit.cover,
-                        progressIndicatorBuilder:
-                            (context, url, downloadProgress) =>
-                                const CupertinoActivityIndicator(),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
-                      ),
-                    ),
-                  ),
-                  Icon(Icons.photo_camera_outlined, color: AppColors.white100,)
-                ],
-              ),
-              const SizedBox(height: 30),
-              Text("Имя", style: TextStyle( color: AppColors.white100,),),
-              const SizedBox(height: 10),
-              TextFormField(
-                maxLines: 1,
-                maxLength: 30,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                    counter: const SizedBox.shrink(),
-                    border: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    errorBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    focusedErrorBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    filled: true,
-                    fillColor: Colors.white,
-                    prefix: Text(
-                      "",
-                      style: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                    )),
-                validator: (value) {
-                  if (value.toString().length <= 8) {
-                    return "xato";
-                  } else {
-                    return "";
-                  }
-                },
-              ),
-              Text("Фамилия", style: TextStyle( color: AppColors.white100,),),
-              SizedBox(height: 10),
-              TextFormField(
-                maxLines: 1,
-                maxLength: 30,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                    counter: const SizedBox.shrink(),
-                    border: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    errorBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    focusedErrorBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    filled: true,
-                    fillColor: Colors.white,
-                    prefix: const Text(
-                      "",
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                    )),
-                validator: (value) {
-                  if (value.toString().length <= 8) {
-                    return "xato";
-                  } else {
-                    return "";
-                  }
-                },
-              ),
-              Text("Отчества", style: TextStyle( color: AppColors.white100,),),
-              SizedBox(height: 10),
-              TextFormField(
-                maxLines: 1,
-                maxLength: 30,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                    counter: const SizedBox.shrink(),
-                    border: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    errorBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    focusedErrorBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    filled: true,
-                    fillColor: Colors.white,
-                    prefix: const Text(
-                      "",
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                    )),
-                validator: (value) {
-                  if (value.toString().length <= 8) {
-                    return "xato";
-                  } else {
-                    return "";
-                  }
-                },
-              ),
-              SizedBox(height: 10),
-              Text("Дата рождения", style: TextStyle( color: AppColors.white100,),),
-              GestureDetector(
-                onTap: () {
-                  _selectDate(context);
-                },
-                child: Container(
-                    height: 60,
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color: Colors.grey.shade50,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.grey)),
-                    child: Row(
-                      children: [
-                        boolSelected
-                            ? Text(
-                                DateFormat('yyyy-MM-dd').format(selectedDate))
-                            : const SizedBox(),
-                      ],
-                    )),
-              ),
-              SizedBox(height: 10),
-              Text("Телефон номер", style: TextStyle( color: AppColors.white100,),),
-              TextFormField(
-                maxLines: 1,
-                maxLength: 30,
-                keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                    counter: const SizedBox.shrink(),
-                    border: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    errorBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    focusedErrorBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 1),
-                        borderRadius: BorderRadius.circular(10)),
-                    filled: true,
-                    fillColor: Colors.white,
-                    prefix: const Text(
-                      "",
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                    )),
-                validator: (value) {
-                  if (value.toString().length <= 8) {
-                    return "xato";
-                  } else {
-                    return "";
-                  }
-                },
-              ),
-              Text("Направление", style: TextStyle( color: AppColors.white100,),),
-              Card(
-                child: ListTile(
-                  title: Text(""),
-                  trailing: Icon(
-                    Icons.keyboard_arrow_down_sharp,
-                    size: 32,
-                  ),
+              AppBar(
+                backgroundColor: AppColors.transparent,
+                title: Text(
+                  "Настройки профиля",
+                  style: TextStyle(color: AppColors.white100),
                 ),
+                iconTheme: IconThemeData(color: AppColors.white100),
+                centerTitle: true,
+                elevation: 0,
               ),
-              SizedBox(height: 6),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.import_export, size: 32, color: AppColors.white100,),
-                ],
-              ),
-              Text("Направление", style: TextStyle( color: AppColors.white100,),),
-              Card(
-                child: ListTile(
-                  title: Text(""),
-                  trailing: Icon(
-                    Icons.keyboard_arrow_down_sharp,
-                    size: 32,
-                  ),
-                ),
-              ),
-              SizedBox(height: 10),
-              Text("Комментарий"),
-              Container(
-                height: 120,
-                decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.white100),
-                    borderRadius: BorderRadius.circular(14)),
-              ),
-              const SizedBox(height: 20),
-              MaterialButton(
-                onPressed: () {},
-                height: 60,
-                minWidth: MediaQuery.of(context).size.width * 0.9,
-                color: AppColors.primaryButton,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(Icons.output),
-                      SizedBox(width: 10),
-                      Text("Выйти")
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.grey.shade400, width: 4),
+                                shape: BoxShape.circle),
+                            margin: const EdgeInsets.only(right: 20),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(100),
+                              child: CachedNetworkImage(
+                                imageUrl:
+                                    "https://yt3.googleusercontent.com/ytc/AGIKgqPwtgj5FwEJ7cFln7T_qxosKFA-gCZTtaDbRMhCGw=s900-c-k-c0x00ffffff-no-rj",
+                                alignment: Alignment.topCenter,
+                                width: 80,
+                                height: 80,
+                                fit: BoxFit.cover,
+                                progressIndicatorBuilder:
+                                    (context, url, downloadProgress) =>
+                                        const CupertinoActivityIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                              ),
+                            ),
+                          ),
+                          Icon(
+                            Icons.photo_camera_outlined,
+                            color: AppColors.white100,
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 30),
+                      Text(
+                        "Имя",
+                        style: TextStyle(
+                          color: AppColors.white100,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Container(
+                        height: 56,
+                        padding:const EdgeInsets.only(left: 12),
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(image: AssetImage(Assets.imagesRoad4), fit: BoxFit.fill)
+                        ),
+                        child: TextFormField(
+                          maxLines: 1,
+                          maxLength: 30,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(color: AppColors.white100),
+                          decoration: const InputDecoration(
+                              counter:  SizedBox.shrink(),
+                              border: InputBorder.none,
+
+                              prefix: Text(
+                                "",
+                                style:  TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                          validator: (value) {
+                            if (value.toString().length <= 8) {
+                              return "xato";
+                            } else {
+                              return "";
+                            }
+                          },
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        "Фамилия",
+                        style: TextStyle(
+                          color: AppColors.white100,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Container(
+                        height: 56,
+                        padding:const EdgeInsets.only(left: 12),
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(image: AssetImage(Assets.imagesRoad4), fit: BoxFit.fill)
+                        ),
+                        child: TextFormField(
+                          maxLines: 1,
+                          maxLength: 30,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(color: AppColors.white100),
+                          decoration: const InputDecoration(
+                              counter:  SizedBox.shrink(),
+                              border: InputBorder.none,
+
+                              prefix: Text(
+                                "",
+                                style:  TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                          validator: (value) {
+                            if (value.toString().length <= 8) {
+                              return "xato";
+                            } else {
+                              return "";
+                            }
+                          },
+                        ),
+                      ),
+                      Text(
+                        "Отчества",
+                        style: TextStyle(
+                          color: AppColors.white100,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Container(
+                        height: 56,
+                        padding:const EdgeInsets.only(left: 12),
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(image: AssetImage(Assets.imagesRoad4), fit: BoxFit.fill)
+                        ),
+                        child: TextFormField(
+                          maxLines: 1,
+                          maxLength: 30,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(color: AppColors.white100),
+                          decoration: const InputDecoration(
+                              counter:  SizedBox.shrink(),
+                              border: InputBorder.none,
+
+                              prefix: Text(
+                                "",
+                                style:  TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                          validator: (value) {
+                            if (value.toString().length <= 8) {
+                              return "xato";
+                            } else {
+                              return "";
+                            }
+                          },
+                        ),
+                      ),
+                     const SizedBox(height: 10),
+                      Text(
+                        "Дата рождения",
+                        style: TextStyle(
+                          color: AppColors.white100,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          _selectDate(context);
+                        },
+                        child: Container(
+                            height: 56,
+                            width: double.infinity,
+                            padding: const EdgeInsets.only(left: 10),
+                            decoration: BoxDecoration(
+
+                                borderRadius: BorderRadius.circular(10),
+                               image: const DecorationImage(image: AssetImage(Assets.imagesRoad4), fit: BoxFit.fill)),
+                            child: Row(
+                              children: [
+                                boolSelected
+                                    ? Text(DateFormat('yyyy-MM-dd')
+                                        .format(selectedDate), style: TextStyle(color: AppColors.white100, fontWeight: FontWeight.bold),)
+                                    : const SizedBox(),
+                              ],
+                            )),
+                      ),
+                     const SizedBox(height: 10),
+                      Text(
+                        "Телефон номер",
+                        style: TextStyle(
+                          color: AppColors.white100,
+                        ),
+                      ),
+                      Container(
+                        height: 56,
+                        padding:const EdgeInsets.only(left: 12),
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(image: AssetImage(Assets.imagesRoad4),
+                                fit: BoxFit.fill, )
+                        ),
+                        child: TextFormField(
+                          maxLines: 1,
+                          maxLength: 30,
+                          keyboardType: TextInputType.phone,
+                          style: TextStyle(color: AppColors.white100),
+                          decoration: const InputDecoration(
+                              counter:  SizedBox.shrink(),
+                              border: InputBorder.none,
+
+                              prefix: Text(
+                                "",
+                                style:  TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                          validator: (value) {
+                            if (value.toString().length <= 8) {
+                              return "xato";
+                            } else {
+                              return "";
+                            }
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        "Направление",
+                        style: TextStyle(
+                          color: AppColors.white100,
+                        ),
+                      ),
+                       Container(
+                        height: 56,
+                        padding:const EdgeInsets.only(left: 12),
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(image: AssetImage(Assets.imagesRoad4),
+                              fit: BoxFit.fill, )
+                        ),
+                        child: ListTile(
+                          title: Text(""),
+                          trailing: Icon(
+                            Icons.keyboard_arrow_down_sharp,
+                            color: AppColors.white100,
+                            size: 32,
+                          ),
+                        ),
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.import_export,
+                            size: 32,
+                            color: AppColors.newOrangeColorForIcon,
+                          ),
+                        ],
+                      ),
+                      Text(
+                        "Направление",
+                        style: TextStyle(
+                          color: AppColors.white100,
+                        ),
+                      ),
+                      Container(
+                       height: 56,
+                       padding:const EdgeInsets.only(left: 12),
+                       decoration: const BoxDecoration(
+                           image: DecorationImage(image: AssetImage(Assets.imagesRoad4),
+                             fit: BoxFit.fill, )
+                       ),
+                        child: ListTile(
+                          title: Text(""),
+                          trailing: Icon(
+                            Icons.keyboard_arrow_down_sharp,
+                            color: AppColors.white100,
+                            size: 32,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        "Комментарий",
+                        style: TextStyle(color: AppColors.white100),
+                      ),
+                      Container(
+                        height: 120,
+                        decoration: BoxDecoration(
+
+                          image: DecorationImage(image: AssetImage(Assets.imagesRoad4), fit: BoxFit.fill),
+                            borderRadius: BorderRadius.circular(14)),
+                      ),
+                      const SizedBox(height: 20),
+                      PrimaryButton(onPressed: () {}, text: "Сохранить")
                     ],
                   ),
                 ),
@@ -322,8 +333,8 @@ class _UserProfilesState extends State<UserProfiles> {
             ],
           ),
         ),
-      )),
-    );
+      )
+    ]));
   }
 
   Future<void> _selectDate(BuildContext context) async {

@@ -2,10 +2,12 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/pages/main/body_main.dart';
+import 'package:conx/pages/main/controller_main_page.dart';
 import 'package:conx/pages/main/header_main.dart';
 import 'package:conx/pages/user/users.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
+import 'package:conx/widgets/loading_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -46,15 +48,12 @@ class _MainPageState extends ConsumerState<MainPage>
 
         countList = countList + 10;
         await Future.delayed(const Duration(seconds: 1));
-        setState(() {});
 
         log(countList.toString());
       } catch (e) {
         log(e.toString());
       }
-    } else {
-      setState(() {});
-    }
+    } else {}
   }
 
   @override
@@ -95,7 +94,6 @@ class _MainPageState extends ConsumerState<MainPage>
                   width: 50,
                   height: 55,
                   fit: BoxFit.cover,
-
                   progressIndicatorBuilder: (context, url, downloadProgress) =>
                       const CupertinoActivityIndicator(),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -142,11 +140,9 @@ class _MainPageState extends ConsumerState<MainPage>
         //
         body: Stack(
           children: [
-
             const BackgroundWidget(),
             ListView(
               controller: _scrollController,
-
               children: [
                 const SizedBox(height: 600, child: HeaderMain()),
                 ConstrainedBox(
@@ -154,18 +150,35 @@ class _MainPageState extends ConsumerState<MainPage>
                     minHeight: 400,
                     maxHeight: double.infinity,
                   ),
-                  child:
-                  ListView.builder(
-                    itemCount: countList + 1,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => index < countList
-                        ? const SizedBox(height: 600, child: BodyMain())
-                        : const SizedBox(
-                      height: 100,
-                      child: Center(child: CupertinoActivityIndicator()),
-                    ),
-                  ),
+                  child: ref.watch(controllerMainPage).boolGetData
+                      ? ListView.builder(
+                          itemCount: ref
+                                  .watch(controllerMainPage.notifier)
+                                  .listMainPage
+                                  .length +
+                              1,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) => index <
+                                  ref
+                                      .watch(controllerMainPage.notifier)
+                                      .listMainPage
+                                      .length
+                              ? SizedBox(
+                                  height: 600,
+                                  child:
+                                      ref.watch(controllerMainPage).boolGetData
+                                          ? BodyMain(index: index)
+                                          : loadingIndicator())
+                              : const SizedBox(
+                                  height: 100,
+                                  child: Center(
+                                      child: CupertinoActivityIndicator()),
+                                ),
+                        )
+                      : const Center(
+                          child: CupertinoActivityIndicator(),
+                        ),
                 )
               ],
             ),

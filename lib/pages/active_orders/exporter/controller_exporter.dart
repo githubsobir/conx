@@ -30,16 +30,18 @@ final getCountryList =
     FutureProvider.autoDispose<List<ModelCountryList>>((ref) async {
   List<ModelCountryList> listCountry = [];
   var _dio = Dio();
+  log("123");
+
   Response response =
       await _dio.get("${MainUrl.urlMain}/api/auth/country-list/");
+  log("3");
   listCountry =
       (response.data as List).map((e) => ModelCountryList.fromJson(e)).toList();
   return listCountry;
 });
 
-final controllerExporter =
-    StateNotifierProvider.autoDispose<ControllerExporter, ModelControllerExporter>(
-        (ref) => ControllerExporter());
+final controllerExporter = StateNotifierProvider.autoDispose<ControllerExporter,
+    ModelControllerExporter>((ref) => ControllerExporter());
 
 class ControllerExporter extends StateNotifier<ModelControllerExporter> {
   ControllerExporter()
@@ -128,6 +130,29 @@ class ControllerExporter extends StateNotifier<ModelControllerExporter> {
 
   List<ModelRegionDistrict> listRegionDistrict = [];
 
+  List<ModelCountryList> listCountry = [];
+
+  Future getCountry() async {
+    try {
+      log("message");
+      log("message");
+      state =
+          state.copyWith(boolGetData1: false, message1: "", errorMessage1: "");
+
+      Response response =
+          await _dio.get("${MainUrl.urlMain}/api/auth/country-list/");
+      listCountry = (response.data as List)
+          .map((e) => ModelCountryList.fromJson(e))
+          .toList();
+      state =
+          state.copyWith(boolGetData1: true, message1: "", errorMessage1: "");
+    } catch (e) {
+      log("message");
+      log("message");
+      log(e.toString());
+    }
+  }
+
   Future getRegion(
       {required String index,
       required String regionName,
@@ -142,15 +167,23 @@ class ControllerExporter extends StateNotifier<ModelControllerExporter> {
         region2Name = regionName;
         region2Id = index;
       }
+      log(index.toString());
+      log(index.toString());
+      log(index.toString());
 
       Response response =
           await _dio.get("${MainUrl.urlMain}/api/auth/district-list/$index/");
       listRegionDistrict = (response.data as List)
           .map((e) => ModelRegionDistrict.fromJson(e))
           .toList();
+
+      log(jsonEncode(response.data).toString());
+
       state =
           state.copyWith(boolGetData1: true, message1: "", errorMessage1: "");
-    } catch (e) {}
+    } catch (e) {
+      log(e.toString());
+    }
   }
 
   Future setRegion(
@@ -227,35 +260,50 @@ class ControllerExporter extends StateNotifier<ModelControllerExporter> {
       FormData formData = FormData.fromMap({
         "transport_type": transportType,
         "name": name,
-        "location_from": locationFrom,
-        "location_to": locationTo,
+        "location_from": locationFrom.toString(),
+        "location_to": locationTo.toString(),
         "date": date,
         "weight": weight,
         "volume_m3": volumeM3,
         "price": price,
         "type_payment": typePayment,
         "description": description,
-        "order_files": [
-          {
-            await MultipartFile.fromFile(file5.path, filename: "image_user"),
-          }
-        ],
+        "file_1": await MultipartFile.fromFile(file5.path, filename: "image_user"),
+        "file_2": await MultipartFile.fromFile(file5.path, filename: "image_user"),
+        "file_3": await MultipartFile.fromFile(file5.path, filename: "image_user"),
+        "file_4": await MultipartFile.fromFile(file5.path, filename: "image_user"),
+        "file_5": await MultipartFile.fromFile(file5.path, filename: "image_user"),
+        "file_6": await MultipartFile.fromFile(file5.path, filename: "image_user"),
+        // "order_files": [],
         "longitude": longitude,
         "latitude": latitude
       });
 
+      log("token:${_box.userToken}");
+      log("transport_type:$transportType");
+      log("name:$name");
+      log("location_from:$locationFrom");
+      log("location_to:$locationTo");
+      log("date:$date");
+      log("weight:$weight");
+      log("volume_m3:$volumeM3");
+      log("price:$price");
+      log("type_payment:$typePayment");
+      log("description:$description");
+      log("order_files:${file5.path.toString()}");
+      log("longitude:$longitude");
+      log("latitude:$latitude");
+
       Response response = await _dio.post(
           "${MainUrl.urlMain}/api/client/order-create/",
+          // "http://192.168.1.9:8000/api/client/order-create/",
           options:
               Options(headers: {"Authorization": "Bearer ${_box.userToken}"}),
           data: formData);
-
       log(jsonEncode(response.data).toString());
-    }
-    on DioException catch(r){
+    } on DioException catch (r) {
       log(r.toString());
-    }
-    catch (e) {
+    } catch (e) {
       log(e.toString());
     }
   }

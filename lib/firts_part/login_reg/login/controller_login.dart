@@ -78,13 +78,13 @@ class ControllerLoginData extends StateNotifier<ModelStateLogin> {
   Future getPhoneCodeByTypeUser({required String valPhone})async{
     try{
       for(int i = 0; i < listModelCountry.length; i++){
-        if(listModelCountry[i].code.toString().contains(valPhone.trim())){
+        if(listModelCountry[i].code.toString().trim().contains(valPhone.trim())){
+
           state = state.copyWith(boolGetData1: false, txtError1: "", message1: "");
           defaultValCountry = listModelCountry[i].name;
           defaultValCountryId = listModelCountry[i].code;
 
           state = state.copyWith(boolGetData1: true, txtError1: "", message1: "");
-          break;
         }
       }
 

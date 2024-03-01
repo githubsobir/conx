@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:conx/firts_part/login_reg/enter_page/user_category/model_user_category.dart';
+import 'package:conx/firts_part/login_reg/reg/reg.dart';
 import 'package:conx/root_and_unver_page/root_page.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
@@ -8,13 +11,16 @@ import 'package:conx/widgets/secondary_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../generated/assets.dart';
 import '../../choose_page/main_auth_page.dart';
 
 class UserCategory extends StatefulWidget {
-  const UserCategory({super.key});
+  String windowIdReg;
+   UserCategory({super.key, required this.windowIdReg});
+
 
   @override
   State<UserCategory> createState() => _UserCategoryState();
@@ -31,6 +37,12 @@ class _UserCategoryState extends State<UserCategory> {
       body: Stack(
         children: [
           const BackgroundWidget(),
+          Container(
+            margin: const EdgeInsets.all(20),
+            child: IconButton(onPressed: () {
+              Navigator.of(context).pop();
+            }, icon: Icon(Platform.isIOS ? Icons.arrow_back_ios: Icons.arrow_back, color: AppColors.white100,)),
+          ),
           Container(
             margin: const EdgeInsets.only(right: 25, left: 25),
             child: Column(
@@ -90,7 +102,7 @@ class _UserCategoryState extends State<UserCategory> {
                         trailing: GestureDetector(
                           child: Radio(
                               fillColor: MaterialStateColor.resolveWith(
-                                (Set<MaterialState> states) {
+                                    (Set<MaterialState> states) {
                                   if (states.contains(MaterialState.selected)) {
                                     return AppColors.primaryButton;
                                   }
@@ -124,46 +136,62 @@ class _UserCategoryState extends State<UserCategory> {
                 PrimaryButton(
                   text: "continue".tr(),
                   onPressed: () {
+
+
+
                     textCheckBoxValue.length < 4
                         ? {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(
-                                "chooseRoll".tr(),
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                              duration: const Duration(milliseconds: 2500),
-                              backgroundColor: Colors.black,
-                            ))
-                          }
-                        : Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (context) => const MainAuthPage(),
-                            ));
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(
+                          "chooseRoll".tr(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        duration: const Duration(milliseconds: 2500),
+                        backgroundColor: Colors.black,
+                      ))
+                    }
+                        : widget.windowIdReg == "1"? Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const MainAuthPage(),
+                        )):
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const Registration(),
+                        ))
+                    ;
                   },
                 ),
                 const SizedBox(height: 12),
-                SecondaryButton(
-                  text: "skip".tr(),
-                  onPressed: () {
 
-                    box.userType = "2";
-                    
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => const RootPage(),
-                      ),
-                      (route) => false,
-                    );
-                  },
+
+                Visibility(
+                  visible: widget.windowIdReg == "1",
+                  child: SecondaryButton(
+                    text: "skip".tr(),
+                    onPressed: () {
+
+                      box.userType = "2";
+
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const RootPage(),
+                        ),
+                            (route) => false,
+                      );
+                    },
+                  ),
                 ),
                 const SizedBox(height: 20),
               ],
             ),
-          )
+          ),
+
+
         ],
       ),
     );

@@ -1,6 +1,8 @@
 import 'package:conx/scefics/drivers/cargo_transport/car_date/car_date.dart';
 import 'package:conx/scefics/drivers/cargo_transport/car_models/controller_car_model.dart';
 import 'package:conx/scefics/drivers/cargo_transport/color_car/controller_car%20_color.dart';
+import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +22,16 @@ class _CarColorState extends ConsumerState<CarColor> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: buildBody(),
+      appBar: AppBar(
+        backgroundColor: AppColors.background,
+        iconTheme: IconThemeData(color: AppColors.white100),
+      ),
+      body: Stack(
+        children: [
+          const BackgroundWidget(),
+          buildBody(),
+        ],
+      ),
     );
   }
 
@@ -38,10 +48,11 @@ class _CarColorState extends ConsumerState<CarColor> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    const SizedBox(height: 20),
+                    Text(
                       "Какого цвета ваша машина?",
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: AppColors.white100),
                     ),
                     const SizedBox(height: 20),
                     SizedBox(
@@ -55,12 +66,12 @@ class _CarColorState extends ConsumerState<CarColor> {
                                   const BorderSide(color: Colors.transparent),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                              borderSide: BorderSide(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: const BorderSide(color: Colors.transparent),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                              borderSide: BorderSide(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: const BorderSide(color: Colors.transparent),
                             ),
                             filled: true,
                             fillColor: Colors.grey.shade200),
@@ -84,17 +95,17 @@ class _CarColorState extends ConsumerState<CarColor> {
                                             .watch(controllerCarColor.notifier)
                                             .listModelCarColor[index]
                                             .id.toString();
-                                        Navigator.push(context, CupertinoPageRoute(builder: (context) => CarDateYear(),));
+                                        Navigator.push(context, CupertinoPageRoute(builder: (context) => const CarDateYear(),));
 
                                       },
 
                                       title: Text(ref
                                           .watch(controllerCarColor.notifier)
                                           .listModelCarColor[index]
-                                          .name),
+                                          .name, style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),),
                                       // subtitle: Text(ref.watch(controllerCarModel.notifier).listCarModel[index].description),
-                                      trailing:const Icon(Icons.arrow_forward_ios,
-                                          color: Colors.grey),
+                                      trailing: Icon(Icons.arrow_forward_ios,
+                                          color:  AppColors.black),
                                     ),
                                   ],
                                 ))))

@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:conx/firts_part/login_reg/reg/add_photo/controller_add_photo_reg.dart';
 import 'package:conx/generated/assets.dart';
+import 'package:conx/root_and_unver_page/root_page.dart';
 import 'package:conx/scefics/drivers/driver_registration/driver_reg.dart';
 import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/primary_button.dart';
+import 'package:conx/widgets/saved_box.dart';
 import 'package:conx/widgets/secondary_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,37 +24,16 @@ class AddPhotoRegistration extends ConsumerStatefulWidget {
 }
 
 class _AddPhotoRegistrationState extends ConsumerState<AddPhotoRegistration> {
+
+  var _box = HiveBoxes();
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context1) {
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
-      /*appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.grey.shade900,
-        actions: [
-          Visibility(
-              visible: getImage() == "0" ? false : true,
-              child: Padding(
-                  padding: const EdgeInsets.only(right: 20),
-                  child: IconButton(
-                      onPressed: () {
-                        ref
-                            .read(controllerAddPhotoDriver.notifier)
-                            .setImageServer(context: context);
-                      },
-                      icon: const Icon(
-                        Icons.check,
-                        color: Colors.white,
-                      )))),
-        ],
-      ),*/
       body: ref.watch(controllerAddPhotoDriver).statusData == "1"
           ? Stack(
               children: [
-                SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                    child: Image.asset(Assets.imagesBackground)),
+                const BackgroundWidget(),
                 Container(
                   margin: const EdgeInsets.all(20),
                   child: Center(
@@ -60,15 +44,31 @@ class _AddPhotoRegistrationState extends ConsumerState<AddPhotoRegistration> {
                         const SizedBox(
                           height: 36,
                         ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.navigate_before,
-                                color: AppColors.white100,
-                              )),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  Navigator.of(context1).pop();
+                                },
+                                icon: Icon(
+                                  Platform.isIOS?
+                                  Icons.arrow_back_ios:Icons.arrow_back,
+                                  color: AppColors.white100,
+                                )),
+                            IconButton(
+                                onPressed: () {
+                                  ref.read(controllerAddPhotoDriver.notifier).setImageServer(context: context1);
+                                },
+                                icon: Icon(
+
+                                  Icons.check_box_outlined,
+                                  size: 32,
+                                  color: AppColors.newOrangeColorForIcon,
+                                )),
+                          ],
                         ),
+
                         Container(
                           margin: const EdgeInsets.all(30),
                           padding: const EdgeInsets.all(10),
@@ -113,12 +113,23 @@ class _AddPhotoRegistrationState extends ConsumerState<AddPhotoRegistration> {
                         SecondaryButton(
                           text: "skip".tr(),
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                CupertinoDialogRoute(
-                                    builder: (context) =>
-                                        const DrawerRegistration(),
-                                    context: context));
+
+                            if(_box.userType.toString() == "2"){
+                              Navigator.push(
+                                  context,
+                                  CupertinoDialogRoute(
+                                      builder: (context) =>
+                                      const RootPage(),
+                                      context: context));
+                            }else{
+                              Navigator.push(
+                                  context,
+                                  CupertinoDialogRoute(
+                                      builder: (context) =>
+                                      const DrawerRegistration(),
+                                      context: context));
+                            }
+
                           },
                         )
                       ],

@@ -28,10 +28,13 @@ class ControllerReg extends StateNotifier<ModelForRegServer> {
 
   Future sentForRegistration({required BuildContext context}) async {
     try {
+      String phone = box.userPhone.toString().replaceAll("-", "");
+      log("sentRegistration");
+      log(phone);
       state = state.copyWith(boolGetData1: false, txtError1: "");
-      FormData formData = FormData.fromMap({"phone": box.userPhone});
-      Response response = await dio.post("${MainUrl.urlMain}/api/auth/register/",
-      data: formData);
+      FormData formData = FormData.fromMap({"phone": phone});
+      Response response = await dio
+          .post("${MainUrl.urlMain}/api/auth/register/", data: formData);
       log(response.data.toString());
       state = state.copyWith(boolGetData1: true, txtError1: "");
       Navigator.push(
@@ -39,15 +42,14 @@ class ControllerReg extends StateNotifier<ModelForRegServer> {
           CupertinoPageRoute(
             builder: (context) => SmsVerificationPage("reg"),
           ));
-
     } on DioException catch (e) {
-      if(e.response!.statusCode.toString() == "404") {
+      if (e.response!.statusCode.toString() == "404") {
         state = state.copyWith(boolGetData1: true, txtError1: e.toString());
-      }else if(e.response!.statusCode.toString() == "400"){
+      } else if (e.response!.statusCode.toString() == "400") {
         log(e.toString());
-        state = state.copyWith(boolGetData1: true, txtError1: e.error.toString());
-      }
-      else{
+        state =
+            state.copyWith(boolGetData1: true, txtError1: e.error.toString());
+      } else {
         state = state.copyWith(boolGetData1: true, txtError1: e.toString());
       }
     } catch (ww) {
@@ -70,10 +72,10 @@ class ControllerReg extends StateNotifier<ModelForRegServer> {
     }
   }
 
-  Future getPhoneCodeByTypeUser({required String valPhone})async{
-    try{
-      for(int i = 0; i < listModelCountry.length; i++){
-        if(listModelCountry[i].code.toString().contains(valPhone.trim())){
+  Future getPhoneCodeByTypeUser({required String valPhone}) async {
+    try {
+      for (int i = 0; i < listModelCountry.length; i++) {
+        if (listModelCountry[i].code.toString().contains(valPhone.trim())) {
           state = state.copyWith(boolGetData1: false, txtError1: "");
           defaultValCountry = listModelCountry[i].name;
           defaultValCountryId = listModelCountry[i].code;
@@ -82,13 +84,10 @@ class ControllerReg extends StateNotifier<ModelForRegServer> {
           break;
         }
       }
-
-
-
-    }catch(e){}
+    } catch (e) {}
   }
 
-  Future setDefault()async{
+  Future setDefault() async {
     state = state.copyWith(boolGetData1: true, txtError1: "");
   }
 }

@@ -1,5 +1,7 @@
 import 'package:conx/scefics/drivers/cargo_transport/body_type.dart';
 import 'package:conx/scefics/drivers/cargo_transport/controler_weigth/controller_weigth.dart';
+import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,41 +21,51 @@ class _CargoTransportState extends ConsumerState<CargoTransport> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body:
-      ref.watch(controllerCarWeigthServer).boolGetData ?
-      SafeArea(
-        child: Container(
-          margin: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              const Text(
-                "Грузовые транспорты по полной массе",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-              ),
-              Expanded(
-                  child: ListView.builder(
-                      itemCount: ref.watch(controllerCarWeigthServer.notifier).listModelWeigth.length,
-                      itemBuilder: (context, index) =>
+      appBar: AppBar(
+        backgroundColor: AppColors.background,
+        iconTheme: IconThemeData(color: AppColors.white100),
+        elevation: 0,
+      ),
+      body: Stack(
+        children: [
+          const BackgroundWidget(),
+          ref.watch(controllerCarWeigthServer).boolGetData ?
+          SafeArea(
+            child: Container(
+              margin: const EdgeInsets.all(20),
+              child: Column(
+                children: [
+                   Text(
+                    "Грузовые транспорты по полной массе",
+                    style: TextStyle(fontWeight: FontWeight.bold,
+                        color: AppColors.white100,
+                        fontSize: 30),
+                  ),
+                  Expanded(
+                      child: ListView.builder(
+                          itemCount: ref.watch(controllerCarWeigthServer.notifier).listModelWeigth.length,
+                          itemBuilder: (context, index) =>
 
-                          Card(
-                          color: Colors.grey.shade100,
-                          child: ListTile(
-                            onTap: () {
-                              box.transportType = ref.watch(controllerCarWeigthServer.notifier).listModelWeigth[index].id.toString();
-                              Navigator.push(context, CupertinoPageRoute(builder: (context) => BodyType(bodyType:ref.watch(controllerCarWeigthServer.notifier).listModelWeigth[index].name ),));
-                            },
-                            title: Text(ref.watch(controllerCarWeigthServer.notifier).listModelWeigth[index].name.toString()),
-                            subtitle: Text(
-                                ref.watch(controllerCarWeigthServer.notifier).listModelWeigth[index].description.toString()),
-                            trailing: const Icon(Icons.arrow_forward_ios),
-                          ))))
-            ],
-          ),
-        ),
+                              Card(
+                                  color: Colors.grey.shade100,
+                                  child: ListTile(
+                                    onTap: () {
+                                      box.transportType = ref.watch(controllerCarWeigthServer.notifier).listModelWeigth[index].id.toString();
+                                      Navigator.push(context, CupertinoPageRoute(builder: (context) => BodyType(bodyType:ref.watch(controllerCarWeigthServer.notifier).listModelWeigth[index].name ),));
+                                    },
+                                    title: Text(ref.watch(controllerCarWeigthServer.notifier).listModelWeigth[index].name.toString()),
+                                    subtitle: Text(
+                                        ref.watch(controllerCarWeigthServer.notifier).listModelWeigth[index].description.toString()),
+                                    trailing: const Icon(Icons.arrow_forward_ios),
+                                  ))))
+                ],
+              ),
+            ),
+          )
+              :const Center(child: CupertinoActivityIndicator()),
+        ],
       )
-      :const Center(child: CupertinoActivityIndicator())
-      ,
+
     );
   }
 }

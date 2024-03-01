@@ -84,7 +84,7 @@ class _CustomInfoWindowState extends State<CustomInfoWindows> {
                     minWidth: MediaQuery.of(context).size.width * 0.3,
                     color: AppColors.colorBackground,
                     onPressed: (){
-                      Navigator.push(context,CupertinoPageRoute(builder: (context) => DetailPage(),));
+                      // Navigator.push(context,CupertinoPageRoute(builder: (context) => DetailPage(),));
                     },
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     child: const Text("Ko'rish", style: TextStyle(color: Colors.white)),

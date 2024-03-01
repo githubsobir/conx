@@ -208,7 +208,9 @@ class _ExporterState extends ConsumerState<Exporter> {
                         borderRadius: BorderRadius.circular(10)),
                     child: ListTile(
                       onTap: () {
-                        getBottomSheet(context: context, id: 1);
+                        ref.read(controllerExporter.notifier).getCountry();
+
+                        getBottomSheet(context: context, id: 1, ref: ref);
                       },
                       leading: ref.watch(controllerExporter).boolGetData
                           ? Text(
@@ -240,7 +242,7 @@ class _ExporterState extends ConsumerState<Exporter> {
                         borderRadius: BorderRadius.circular(10)),
                     child: ListTile(
                       onTap: () {
-                        getBottomSheet(context: context, id: 2);
+                        getBottomSheet(context: context, id: 2, ref: ref);
                       },
                       leading: ref.watch(controllerExporter).boolGetData
                           ? Text(
@@ -496,10 +498,10 @@ class _ExporterState extends ConsumerState<Exporter> {
                               volumeM3: textFormController3.text.toString(),
                               locationFrom:  ref
                                   .watch(controllerExporter.notifier)
-                                  .district1Id,
+                                  .region1Id,
                               locationTo:  ref
                                   .watch(controllerExporter.notifier)
-                                  .district2Id,
+                                  .region2Id,
                               transportType:  ref
                                   .watch(controllerExporter.notifier)
                                   .transportId,

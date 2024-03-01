@@ -1,8 +1,14 @@
-import 'package:conx/generated/assets.dart';
+import 'dart:io';
+
+import 'package:conx/firts_part/login_reg/reg/add_row1/controller_row.dart';
+import 'package:conx/firts_part/login_reg/reg/add_row1/sheet_region.dart';
+import 'package:conx/scefics/drivers/driver_registration/driver_reg.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/primary_button.dart';
+import 'package:conx/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -34,7 +40,7 @@ class _AddRow1State extends ConsumerState<AddRow1> {
                     Navigator.of(context).pop();
                   },
                   icon: Icon(
-                    Icons.navigate_before,
+                    Platform.isIOS? Icons.arrow_back_ios: Icons.arrow_back,
                     color: AppColors.white100,
                   ),
                 ),
@@ -60,8 +66,16 @@ class _AddRow1State extends ConsumerState<AddRow1> {
                 Card(
                   color: AppColors.white10,
                   child: ListTile(
-                    onTap: () {},
-                    title: Text(""),
+                    onTap: () {
+                      getBottomSheetRegionList(context: context, id: 1);
+                    },
+                    title:
+
+                    Text(
+                      ref.watch(controllerRowChooseFirstTime).statusData == "1"?
+                      ref.watch(controllerRowChooseFirstTime.notifier).region1Name:"",
+                    style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.white100),
+                    ),
                     trailing: Icon(
                       Icons.keyboard_arrow_down,
                       color: AppColors.white50,
@@ -82,8 +96,14 @@ class _AddRow1State extends ConsumerState<AddRow1> {
                 Card(
                   color: AppColors.white10,
                   child: ListTile(
-                    onTap: () {},
-                    title: const Text(""),
+                    onTap: () {
+                      getBottomSheetRegionList(context: context, id: 2);
+                    },
+                    title: Text(
+                      ref.watch(controllerRowChooseFirstTime).statusData == "1"?
+                      ref.watch(controllerRowChooseFirstTime.notifier).region2Name:"",
+                      style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.white100),
+                    ),
                     trailing: Icon(
                       Icons.keyboard_arrow_down,
                       color: AppColors.white50,
@@ -93,35 +113,20 @@ class _AddRow1State extends ConsumerState<AddRow1> {
                 const SizedBox(
                   height: 20,
                 ),
-                PrimaryButton(text: "continue".tr(), onPressed: () {}),
-                const Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "doYouHaveAccount".tr(),
-                      style: TextStyle(
-                          fontFamily: "Inter",
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.white80,
-                          fontSize: 14),
-                    ),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    Text(
-                      "login".tr(),
-                      style: TextStyle(
-                          fontFamily: "Inter",
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.white100,
-                          fontSize: 14),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                )
+                PrimaryButton(text: "continue".tr(), onPressed: () {
+                  if(ref.watch(controllerRowChooseFirstTime.notifier).region1Id.isNotEmpty &&
+                      ref.watch(controllerRowChooseFirstTime.notifier).region2Id.isNotEmpty
+                  ) {
+                        ref.read(controllerRowChooseFirstTime.notifier)
+                            .setRegionServer(context: context);
+
+                      }
+                  else{
+                    MyWidgets.snackBarMyWidgets(context: context, text: "Yo'nalishlarni tanlang");
+                  }
+                    }),
+
+
               ],
             ),
           )

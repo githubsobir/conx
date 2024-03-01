@@ -1,8 +1,6 @@
 import 'dart:developer';
-import 'dart:ffi';
 
 import 'package:conx/data/models/theme_type.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:hive/hive.dart';
 
 class HiveBoxes {
@@ -81,7 +79,7 @@ class HiveBoxes {
 
   String get userType {
     try {
-      return _box.get("usertype");
+      return  "2";//_box.get("usertype");
     } catch (e) {
       log(e.toString());
       return "-1";
@@ -140,7 +138,7 @@ class HiveBoxes {
       return _box.get("userName");
     } catch (e) {
       log(e.toString());
-      return "_";
+      return " ";
     }
   }
 
@@ -158,7 +156,7 @@ class HiveBoxes {
       return _box.get("userFName");
     } catch (e) {
       log(e.toString());
-      return "_";
+      return " ";
     }
   }
 
@@ -176,7 +174,7 @@ class HiveBoxes {
       return _box.get("userSName");
     } catch (e) {
       log(e.toString());
-      return "_";
+      return " ";
     }
   }
 
@@ -403,6 +401,18 @@ class HiveBoxes {
     } catch (e) {
       log(e.toString());
     }
+  }
+
+  deleteAllBox() {
+    // Hive.box('sanx').clear();
+    _box.delete("usertype");
+    _box.delete("userToken");
+    _box.delete("userPhone");
+    _box.delete("userName");
+    _box.delete("userFName");
+    _box.delete("userSName");
+    _box.delete("payType");
+    _box.delete("userBirth");
   }
 
   ThemeType getTheme() {

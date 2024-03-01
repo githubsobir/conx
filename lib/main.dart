@@ -1,5 +1,8 @@
 import 'dart:io';
 import 'package:connection_notifier/connection_notifier.dart';
+import 'package:conx/firts_part/login_reg/enter_page/lang_model/choose_lang.dart';
+import 'package:conx/firts_part/login_reg/reg/add_row1/add_row.dart';
+import 'package:conx/pages/search/search_details/search_details.dart';
 import 'package:conx/root_and_unver_page/root_page.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -64,6 +67,6 @@ class MyApp extends ConsumerWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         debugShowCheckedModeBanner: false,
-        home: const RootPage());
+        home: const SearchDetails());
   }
 }

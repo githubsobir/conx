@@ -60,21 +60,6 @@ class _RootPageState extends State<RootPage> {
         toolbarHeight: 1,
       ),
       body: Container(child: bottomBarPages[_bottomNavIndex]),
-      // floatingActionButton: FloatingActionButton(
-      //   disabledElevation: 0,
-      //   shape: const CircleBorder(),
-      //   elevation: 0,
-      //   backgroundColor:
-      //       _bottomNavIndex == 4 ? AppColors.colorBackground : Colors.white,
-      //   child: Icon(
-      //       box.userType == "1" ? CupertinoIcons.globe : CupertinoIcons.plus,
-      //       color: _bottomNavIndex == 4 ? Colors.white : Colors.grey),
-      //   onPressed: () {
-      //     _bottomNavIndex = 4;
-      //     setState(() {});
-      //   },
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
         backgroundColor: Colors.black,
 

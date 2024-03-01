@@ -1,7 +1,10 @@
 import 'package:conx/scefics/drivers/cargo_transport/car_ton_weight/controller_car_ton.dart';
 import 'package:conx/scefics/drivers/tex_car/tex_car.dart';
 import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/background_widget.dart';
+import 'package:conx/widgets/primary_button.dart';
 import 'package:conx/widgets/saved_box.dart';
+import 'package:conx/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,224 +27,252 @@ class _CarTonWeightVolumeState extends ConsumerState<CarTonWeightVolume> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: SafeArea(
-          child: Container(
-        margin: EdgeInsets.all(20),
-        child: SingleChildScrollView(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Сколько тонн вы можете загрузить в свой автомобиль?",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                ),
-                SizedBox(height: 40),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      appBar: AppBar(
+        backgroundColor: AppColors.background,
+        iconTheme: IconThemeData(color: AppColors.white100),
+        elevation: 0,
+      ),
+      body: Stack(
+        children: [
+          const BackgroundWidget(),
+          SafeArea(
+              child: Container(
+            margin: const EdgeInsets.all(20),
+            child: SingleChildScrollView(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.44,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("От"),
-                          SizedBox(height: 4),
-                          TextFormField(
-                            controller: txtM1,
-                            maxLines: 1,
-                            maxLength: 3,
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                                counter: const SizedBox.shrink(),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                disabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                                hoverColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                        color: Colors.grey.shade200)),
-                                fillColor: Colors.grey.shade200,
-                                filled: true),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.44,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("До"),
-                          SizedBox(height: 4),
-                          TextFormField(
-                            controller: txtM2,
-                            keyboardType: TextInputType.number,
-                            maxLines: 1,
-                            maxLength: 3,
-                            decoration: InputDecoration(
-                                counter: SizedBox.shrink(),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                disabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                                hoverColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                        color: Colors.grey.shade200)),
-                                fillColor: Colors.grey.shade200,
-                                filled: true),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 30),
-                Text("Объём м³"),
-                SizedBox(height: 4),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.44,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("От"),
-                          SizedBox(height: 4),
-                          TextFormField(
-                            controller: txtM3,
-                            keyboardType: TextInputType.number,
-                            maxLines: 1,
-                            maxLength: 3,
-                            decoration: InputDecoration(
-                                counter: SizedBox.shrink(),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                disabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                                hoverColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                        color: Colors.grey.shade200)),
-                                fillColor: Colors.grey.shade200,
-                                filled: true),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.44,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("До"),
-                          SizedBox(height: 4),
-                          TextFormField(
-                            controller: txtM4,
-                            keyboardType: TextInputType.number,
-                            maxLines: 1,
-                            maxLength: 3,
-                            decoration: InputDecoration(
-                                counter: SizedBox.shrink(),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                disabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(10)),
-                                hoverColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                        color: Colors.grey.shade200)),
-                                fillColor: Colors.grey.shade200,
-                                filled: true),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 30),
-                MaterialButton(
-                  onPressed: () {
-                    if (txtM1.text.isNotEmpty &&
-                        txtM2.text.isNotEmpty &&
-                        txtM3.text.isNotEmpty &&
-                        txtM4.text.isNotEmpty) {
-                      box.modelCarTonsFrom = txtM1.text.toString();
-                      box.modelCarTonsTo = txtM2.text.toString();
-                      box.modelCarVolumeFrom = txtM3.text.toString();
-                      box.modelCarVolumeTo = txtM4.text.toString();
-
-                      ref
-                          .read(controllerCarWeightAndVolume.notifier)
-                          .setData(context: context);
-
-
-                      Navigator.push(context, CupertinoPageRoute(builder: (context) => TextCarEnterInfo(),));
-                    } else {}
-                  },
-                  height: 50,
-                  minWidth: double.infinity,
-                  color: AppColors.colorBackground,
-                  shape: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: Colors.grey)),
-                  child: const Text("Davom etish",
+                    const SizedBox(height: 20),
+                    Text(
+                      "Сколько тонн вы можете загрузить в свой автомобиль?",
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white)),
-                ),
-              ]),
-        ),
-      )),
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.white100,
+                          fontSize: 30),
+                    ),
+                    const SizedBox(height: 30),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.44,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "От",
+                                style: TextStyle(color: AppColors.white100),
+                              ),
+                              const SizedBox(height: 4),
+                              TextFormField(
+                                controller: txtM1,
+                                maxLines: 1,
+                                maxLength: 3,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                    counter: const SizedBox.shrink(),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent)),
+                                    disabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    hoverColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                            color: Colors.grey.shade200)),
+                                    fillColor: Colors.grey.shade200,
+                                    filled: true),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.44,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "До",
+                                style: TextStyle(color: AppColors.white100),
+                              ),
+                              const SizedBox(height: 4),
+                              TextFormField(
+                                controller: txtM2,
+                                keyboardType: TextInputType.number,
+                                maxLines: 1,
+                                maxLength: 3,
+                                decoration: InputDecoration(
+                                    counter: const SizedBox.shrink(),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent)),
+                                    disabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    hoverColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                            color: Colors.grey.shade200)),
+                                    fillColor: Colors.grey.shade200,
+                                    filled: true),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                    Text(
+                      "Объём м³",
+                      style: TextStyle(color: AppColors.white100),
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.44,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "От",
+                                style: TextStyle(color: AppColors.white100),
+                              ),
+                              const SizedBox(height: 4),
+                              TextFormField(
+                                controller: txtM3,
+                                keyboardType: TextInputType.number,
+                                maxLines: 1,
+                                maxLength: 3,
+                                decoration: InputDecoration(
+                                    counter: const SizedBox.shrink(),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent)),
+                                    disabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    hoverColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                            color: Colors.grey.shade200)),
+                                    fillColor: Colors.grey.shade200,
+                                    filled: true),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.44,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "До",
+                                style: TextStyle(color: AppColors.white100),
+                              ),
+                              const SizedBox(height: 4),
+                              TextFormField(
+                                controller: txtM4,
+                                keyboardType: TextInputType.number,
+                                maxLines: 1,
+                                maxLength: 3,
+                                decoration: InputDecoration(
+                                    counter: const SizedBox.shrink(),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent)),
+                                    disabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    hoverColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                            color: Colors.grey.shade200)),
+                                    fillColor: Colors.grey.shade200,
+                                    filled: true),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                    PrimaryButton(
+                        onPressed: () {
+                          if (txtM1.text.isNotEmpty &&
+                              txtM2.text.isNotEmpty &&
+                              txtM3.text.isNotEmpty &&
+                              txtM4.text.isNotEmpty) {
+                            box.modelCarTonsFrom = txtM1.text.toString();
+                            box.modelCarTonsTo = txtM2.text.toString();
+                            box.modelCarVolumeFrom = txtM3.text.toString();
+                            box.modelCarVolumeTo = txtM4.text.toString();
+
+                            ref
+                                .read(controllerCarWeightAndVolume.notifier)
+                                .setData(context: context);
+
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (context) => const TextCarEnterInfo(),
+                                ));
+                          } else {
+                            MyWidgets.snackBarMyWidgets(context: context, text: "Maydonlarni to'ldiring");
+                          }
+                        },
+                        text: "Davom etish"),
+                  ]),
+            ),
+          )),
+        ],
+      ),
     );
   }
 

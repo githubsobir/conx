@@ -138,25 +138,25 @@ class _SavedState extends ConsumerState<Saved> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            MaterialButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(
-                                      builder: (context) => DetailPage(),
-                                    ));
-                              },
-                              minWidth: 120,
-                              height: 35,
-                              shape: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent)),
-                              color: AppColors.colorBackground,
-                              child:  Text("To'liqroq",
-                                  style:
-                                      TextStyle(color: AppColors.white100)),
-                            ),
+                            // MaterialButton(
+                            //   onPressed: () {
+                            //     Navigator.push(
+                            //         context,
+                            //         CupertinoPageRoute(
+                            //           builder: (context) => DetailPage(),
+                            //         ));
+                            //   },
+                            //   minWidth: 120,
+                            //   height: 35,
+                            //   shape: OutlineInputBorder(
+                            //       borderRadius: BorderRadius.circular(10),
+                            //       borderSide: const BorderSide(
+                            //           color: Colors.transparent)),
+                            //   color: AppColors.colorBackground,
+                            //   child:  Text("To'liqroq",
+                            //       style:
+                            //           TextStyle(color: AppColors.white100)),
+                            // ),
                             const SizedBox(width: 10),
                             Container(
                               decoration: BoxDecoration(

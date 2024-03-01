@@ -6,6 +6,7 @@ import 'package:conx/firts_part/login_reg/login/controller_login.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/error_page.dart';
+import 'package:conx/widgets/primary_button.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -129,7 +130,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           // color: Colors.grey.shade50,
                           // border: Border.symmetric(
                           //     horizontal: BorderSide(color: Colors.white)),
-                      ),
+                          ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -144,11 +145,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               child: Theme(
                                 data: ThemeData(
                                   primaryColor: AppColors.white100,
-                                  focusColor:  AppColors.white100,
-                                  hoverColor:  AppColors.white100,
+                                  focusColor: AppColors.white100,
+                                  hoverColor: AppColors.white100,
                                   indicatorColor: AppColors.white100,
-
-
                                   textTheme: const TextTheme().copyWith(
                                     bodySmall:
                                         TextStyle(color: AppColors.white100),
@@ -178,10 +177,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                   keyboardType: TextInputType.number,
                                   inputDecoration: InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: AppColors.white100),
+                                        borderSide: BorderSide(
+                                            color: AppColors.white100),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: AppColors.white100),
+                                        borderSide: BorderSide(
+                                            color: AppColors.white100),
                                       ),
                                       hintText: "Telefon raqam kiriting",
                                       counterStyle:
@@ -204,7 +205,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         ],
                       )),
                   const SizedBox(height: 50),
-                  MaterialButton(
+                  PrimaryButton(
                     onPressed: () {
                       if (textEditingController.text.toString().length <= 8) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -214,23 +215,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         );
                       } else {
                         box.userPhone = textEditingController.text;
-
-                        log("login bosildi");
                         ref
                             .read(controllerLogin.notifier)
                             .sentForLogin(context: context);
                       }
                     },
-                    height: 55,
-                    minWidth: double.infinity,
-                    color: AppColors.colorBackground,
-                    shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide:
-                            const BorderSide(color: AppColors.colorBackground)),
-                    child: Text("continue".tr(),
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white)),
+                    text: "continue".tr(),
                   ),
                 ],
               ),

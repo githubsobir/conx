@@ -263,11 +263,11 @@ class _RegistrationState extends ConsumerState<Registration> {
                   children: [
                     Center(
                       child: Text(
-                        "${box.userPhone} raqam oldin ro'yxatdan o'tgan \nlogin orqali kiring",
+                        "${box.userPhone} raqam oldin ro'yxatdan o'tgan",
                         maxLines: 4,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
+                        style:  TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18, color: AppColors.white100),
                       ),
                     ),
                     const SizedBox(height: 40),
@@ -287,7 +287,7 @@ class _RegistrationState extends ConsumerState<Registration> {
                           borderRadius: BorderRadius.circular(10),
                           borderSide:
                               const BorderSide(color: Colors.transparent)),
-                      child: Text("enterWithLogin".tr()),
+                      child: Text("enterWithLogin".tr(), style: TextStyle(color: AppColors.white100, fontWeight: FontWeight.bold),),
                     ),
                     const SizedBox(height: 20),
                     MaterialButton(
@@ -302,9 +302,9 @@ class _RegistrationState extends ConsumerState<Registration> {
                           borderSide: const BorderSide(
                               color: AppColors.colorBackground)),
                       child: Text("reTryNum".tr(),
-                          style: const TextStyle(
+                          style:  TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: AppColors.colorBackground)),
+                              color: AppColors.white100)),
                     )
                   ],
                 ),

@@ -1,6 +1,5 @@
 import 'package:conx/firts_part/login_reg/enter_page/user_category/user_category.dart';
 import 'package:conx/firts_part/login_reg/login/login_page.dart';
-import 'package:conx/firts_part/login_reg/reg/reg.dart';
 import 'package:conx/widgets/primary_button.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:flutter/cupertino.dart';

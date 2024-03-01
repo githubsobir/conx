@@ -4,7 +4,6 @@ import 'package:conx/firts_part/login_reg/reg/add_photo/add_photo.dart';
 import 'package:conx/firts_part/user_fill/controller_user_birth.dart';
 import 'package:conx/firts_part/user_fill/widget_user_birth/user_1_birth_loading.dart';
 import 'package:conx/firts_part/user_fill/widget_user_birth/user_birth_error.dart';
-import 'package:conx/scefics/drivers/driver_registration/driver_reg.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/primary_button.dart';
@@ -15,7 +14,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../login_reg/login/login_page.dart';
 
 class UserBoth extends ConsumerStatefulWidget {
   const UserBoth({super.key});

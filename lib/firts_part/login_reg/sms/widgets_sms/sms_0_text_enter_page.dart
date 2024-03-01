@@ -13,7 +13,6 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
-import '../../../../generated/assets.dart';
 
 Widget smsTextEnterPage(
     {required BuildContext context,

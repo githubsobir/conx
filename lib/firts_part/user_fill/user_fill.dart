@@ -3,18 +3,16 @@ import 'dart:io';
 
 import 'package:conx/firts_part/login_reg/login/login_page.dart';
 import 'package:conx/firts_part/user_fill/controller_user.dart';
-import 'package:conx/firts_part/user_fill/user_birth.dart';
-import 'package:conx/firts_part/user_fill/widgets_user_fill/user_0_main.dart';
 import 'package:conx/firts_part/user_fill/widgets_user_fill/user_1_loading.dart';
 import 'package:conx/firts_part/user_fill/widgets_user_fill/user_2_error.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/primary_button.dart';
 import 'package:conx/widgets/saved_box.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class UserFIO extends ConsumerStatefulWidget {
   var box = HiveBoxes();
@@ -34,13 +32,12 @@ class _UserFIOState extends ConsumerState<UserFIO> {
       body: Stack(children: [const BackgroundWidget(), buildBody()]),
     );
   }
+
   var box = HiveBoxes();
 
   TextEditingController txtName = TextEditingController();
-  TextEditingController txtFName =
-  TextEditingController();
-  TextEditingController txtSName =
-  TextEditingController();
+  TextEditingController txtFName = TextEditingController();
+  TextEditingController txtSName = TextEditingController();
 
   Widget buildBody() {
     // return user0Main(context: context);
@@ -60,7 +57,11 @@ class _UserFIOState extends ConsumerState<UserFIO> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    icon: Icon( Platform.isIOS? Icons.arrow_back_ios: Icons.arrow_back, color: AppColors.white100)),
+                    icon: Icon(
+                        Platform.isIOS
+                            ? Icons.arrow_back_ios
+                            : Icons.arrow_back,
+                        color: AppColors.white100)),
                 const SizedBox(height: 40),
                 Text("enterNameAndSurname".tr(),
                     style: TextStyle(
@@ -87,12 +88,14 @@ class _UserFIOState extends ConsumerState<UserFIO> {
                         color: AppColors.white100),
                     decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.red, width: 1),
+                          borderSide:
+                              BorderSide(color: AppColors.red, width: 1),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: AppColors.white50, width: 1))),
+                            borderSide: BorderSide(
+                                color: AppColors.white50, width: 1))),
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -114,12 +117,14 @@ class _UserFIOState extends ConsumerState<UserFIO> {
                         color: AppColors.white100),
                     decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.red, width: 1),
+                          borderSide:
+                              BorderSide(color: AppColors.red, width: 1),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: AppColors.white50, width: 1))),
+                            borderSide: BorderSide(
+                                color: AppColors.white50, width: 1))),
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -141,12 +146,14 @@ class _UserFIOState extends ConsumerState<UserFIO> {
                         color: AppColors.white100),
                     decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: AppColors.red, width: 1),
+                          borderSide:
+                              BorderSide(color: AppColors.red, width: 1),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: AppColors.white50, width: 1))),
+                            borderSide: BorderSide(
+                                color: AppColors.white50, width: 1))),
                   ),
                 ),
                 const SizedBox(height: 42),
@@ -154,7 +161,6 @@ class _UserFIOState extends ConsumerState<UserFIO> {
                   builder: (context1, ref, child) => PrimaryButton(
                     text: "continue".tr(),
                     onPressed: () {
-
                       log(txtName.text);
                       log(txtFName.text);
                       log(txtSName.text);
@@ -163,7 +169,6 @@ class _UserFIOState extends ConsumerState<UserFIO> {
                           name: txtName.text.toString(),
                           lName: txtFName.text.toString(),
                           sName: txtSName.text.toString());
-
 
                       // if (box.userName.toString().length > 4 ||
                       //     box.userSName.toString().length > 4 ||

@@ -2,13 +2,11 @@ import 'dart:io';
 
 import 'package:conx/firts_part/login_reg/reg/add_row1/controller_row.dart';
 import 'package:conx/firts_part/login_reg/reg/add_row1/sheet_region.dart';
-import 'package:conx/scefics/drivers/driver_registration/driver_reg.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/primary_button.dart';
 import 'package:conx/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

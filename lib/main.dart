@@ -67,8 +67,7 @@ class MyApp extends ConsumerWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         debugShowCheckedModeBanner: false,
-        home:Orders()
-        //mainPage(),
+        home:mainPage(),
     );
   }
 

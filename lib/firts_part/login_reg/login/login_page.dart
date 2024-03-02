@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/firts_part/login_reg/login/controller_login.dart';
+import 'package:conx/generated/assets.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/error_page.dart';
@@ -235,7 +236,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             });
       }
     } else {
-      return const Center(child: CupertinoActivityIndicator());
+      return Container(
+          decoration: BoxDecoration(color: AppColors.black),
+          child:  Center(child: CupertinoActivityIndicator(color: AppColors.white100,)));
     }
   }
 

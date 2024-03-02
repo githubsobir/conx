@@ -38,13 +38,13 @@ class _UserCategoryState extends State<UserCategory> {
         children: [
           const BackgroundWidget(),
           Container(
-            margin: const EdgeInsets.all(20),
+            margin: const EdgeInsets.only(top: 25, left: 10, right: 10),
             child: IconButton(onPressed: () {
               Navigator.of(context).pop();
             }, icon: Icon(Platform.isIOS ? Icons.arrow_back_ios: Icons.arrow_back, color: AppColors.white100,)),
           ),
           Container(
-            margin: const EdgeInsets.only(right: 25, left: 25),
+            margin: const EdgeInsets.only(right: 20, left: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -72,7 +72,7 @@ class _UserCategoryState extends State<UserCategory> {
                                 : AppColors.white50,
                           ),
                           borderRadius: BorderRadius.circular(20.0)),
-                      margin: const EdgeInsets.all(6),
+
                       color: AppColors.white10,
                       child: ListTile(
                         leading: Column(
@@ -136,9 +136,6 @@ class _UserCategoryState extends State<UserCategory> {
                 PrimaryButton(
                   text: "continue".tr(),
                   onPressed: () {
-
-
-
                     textCheckBoxValue.length < 4
                         ? {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -166,8 +163,6 @@ class _UserCategoryState extends State<UserCategory> {
                   },
                 ),
                 const SizedBox(height: 12),
-
-
                 Visibility(
                   visible: widget.windowIdReg == "1",
                   child: SecondaryButton(

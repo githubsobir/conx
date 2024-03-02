@@ -24,7 +24,7 @@ var box = HiveBoxes();
       Stack(
         children: [
           const BackgroundWidget(),
-          Container(
+         if (textUrl.toString() == "407") Container(
             margin:const EdgeInsets.all(20),
             child: Column(
               children: [
@@ -37,8 +37,8 @@ var box = HiveBoxes();
                   style: TextStyle(color: AppColors.white100),
                 ),
 
-                Divider(),
-                  Text(
+                const Divider(),
+                Text(
                   "error:",
                   style: TextStyle(color: AppColors.white100),
                 ),
@@ -55,19 +55,22 @@ var box = HiveBoxes();
                   minWidth: double.infinity,
                   color: AppColors.primaryButton,
                   shape:
-                      OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                   child:  Text("tryAgain".tr(),
                       style:  TextStyle(
-                          fontSize: 16,
+                          fontSize: 17,
                           fontFamily: "Inter",
                           color: AppColors.white100,
                           fontWeight: FontWeight.w600)),
                 ),
               ],
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+          ) else Row(
+            children: [
+              Container(
+                child: Text("Raqamingiz tizimda mavjud login orqali kitring", style: TextStyle(color: AppColors.white100
+                      ),
+                    ),
+              ),
+            ],
+    )]));}}

@@ -58,7 +58,10 @@ class ControllerLoginData extends StateNotifier<ModelStateLogin> {
             builder: (context) => SmsVerificationPage("log"),
           ));
     } on DioException catch (e) {
-      state = state.copyWith(boolGetData1: true, txtError1: e.toString(), message1: "/api/auth/login/");
+      if(e.response!.statusCode.toString() == "407" ){
+        state = state.copyWith(boolGetData1: true, txtError1: e.response!.statusCode.toString(), message1: e.response!.statusCode.toString());
+      }else{
+      state = state.copyWith(boolGetData1: true, txtError1: e.toString(), message1: "/api/auth/login/");}
       log(e.toString());
     } catch (ww) {
       print(ww.toString());

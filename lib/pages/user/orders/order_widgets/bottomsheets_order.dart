@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/generated/assets.dart';
-import 'package:conx/pages/active_orders/exporter/controller_exporter.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/primary_button.dart';
 import 'package:flutter/cupertino.dart';

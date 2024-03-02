@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:connection_notifier/connection_notifier.dart';
-import 'package:conx/pages/search/search_details/search_details.dart';
 import 'package:conx/root_and_unver_page/root_page.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';

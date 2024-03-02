@@ -12,7 +12,6 @@ class SearchDetails extends StatefulWidget {
 }
 
 class _SearchDetailsState extends State<SearchDetails> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,17 +20,39 @@ class _SearchDetailsState extends State<SearchDetails> {
         SafeArea(
             child: Container(
           margin: const EdgeInsets.all(20),
-          child:
-              SingleChildScrollView(
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                            Row(
+          child: SingleChildScrollView(
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
+                    height: 65,
                     width: MediaQuery.of(context).size.width * 0.75,
-                    child: TextFormField(),
+                    child: TextFormField(
+                      style: TextStyle(
+                          color: AppColors.white100,
+                          fontWeight: FontWeight.bold),
+                      cursorColor: AppColors.white100,
+                      decoration: InputDecoration(
+                          counter: const SizedBox.shrink(),
+                          prefixIcon: Icon(
+                            CupertinoIcons.search,
+                            color: AppColors.white100,
+                          ),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(35)),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(35)),
+                          fillColor: AppColors.white20,
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(35)),
+                          filled: true),
+                    ),
                   ),
                   Container(
                       padding: const EdgeInsets.all(5),
+                      margin: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                           color: AppColors.white20, shape: BoxShape.circle),
                       child: Center(
@@ -41,16 +62,16 @@ class _SearchDetailsState extends State<SearchDetails> {
                         size: 32,
                       )))
                 ],
-                            ),
-                            const SizedBox(height: 10),
-                            Text(
+              ),
+              const SizedBox(height: 10),
+              Text(
                 "FILTER",
                 style: TextStyle(
                     color: AppColors.white100,
                     fontSize: 26,
                     fontWeight: FontWeight.bold),
-                            ),
-                            Row(
+              ),
+              Row(
                 children: [
                   Expanded(
                     child: MaterialButton(
@@ -71,222 +92,224 @@ class _SearchDetailsState extends State<SearchDetails> {
                         child: Text("1")),
                   )
                 ],
-                            ),
-                            const SizedBox(height: 20),
-                            Text("Ves", style: TextStyle(color: AppColors.white100)),
-                            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                      child: Container(
-                          margin: const EdgeInsets.all(3),
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: AppColors.white100)),
-                          child: ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            trailing: Icon(
-                              Icons.keyboard_arrow_down,
-                              color: AppColors.white100,
-                            ),
-                          ))),
-                  const SizedBox(width: 4),
-                  Expanded(
-                      child: Container(
-                          margin: const EdgeInsets.all(3),
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: AppColors.white100)),
-                          child: ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            trailing: Icon(
-                              Icons.keyboard_arrow_down,
-                              color: AppColors.white100,
-                            ),
-                          ))),
-                ],
-                            ),
-                            const SizedBox(height: 10),
-                            Text("OByom", style: TextStyle(color: AppColors.white100)),
-                            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                      child: Container(
-                          margin: const EdgeInsets.all(3),
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: AppColors.white100)),
-                          child: ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            trailing: Icon(
-                              Icons.keyboard_arrow_down,
-                              color: AppColors.white100,
-                            ),
-                          ))),
-                  const SizedBox(width: 4),
-                  Expanded(
-                      child: Container(
-                          margin: const EdgeInsets.all(3),
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: AppColors.white100)),
-                          child: ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            trailing: Icon(
-                              Icons.keyboard_arrow_down,
-                              color: AppColors.white100,
-                            ),
-                          ))),
-                ],
-                            ),
-                  const SizedBox(height: 10),
-                  Text("Napravleniya", style: TextStyle(color: AppColors.white100)),
-                  Container(
-                      margin: const EdgeInsets.all(3),
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppColors.white100)),
-                      child: ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        trailing: Icon(
-                          Icons.keyboard_arrow_down,
-                          color: AppColors.white100,
-                        ),
-                      )),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.import_export, color: AppColors.white100, ),
-                    ],
-                  ),
-                  Container(
-                      margin: const EdgeInsets.all(3),
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppColors.white100)),
-                      child: ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        trailing: Icon(
-                          Icons.keyboard_arrow_down,
-                          color: AppColors.white100,
-                        ),
-                      )),
-                  SizedBox(height: 15),
-                  Text("Data", style: TextStyle(color: AppColors.white100)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                          child: Container(
-                              margin: const EdgeInsets.all(3),
-                              padding: const EdgeInsets.symmetric(horizontal: 5),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(color: AppColors.white100)),
-                              child: ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                trailing: Icon(
-                                  Icons.keyboard_arrow_down,
-                                  color: AppColors.white100,
-                                ),
-                              ))),
-                      const SizedBox(width: 4),
-                      Expanded(
-                          child: Container(
-                              margin: const EdgeInsets.all(3),
-                              padding: const EdgeInsets.symmetric(horizontal: 5),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(color: AppColors.white100)),
-                              child: ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                trailing: Icon(
-                                  Icons.keyboard_arrow_down,
-                                  color: AppColors.white100,
-                                ),
-                              ))),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  Text("Tip transport", style: TextStyle(color: AppColors.white100)),
-                  Container(
-                      margin: const EdgeInsets.all(3),
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppColors.white100)),
-                      child: ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        trailing: Icon(
-                          Icons.keyboard_arrow_down,
-                          color: AppColors.white100,
-                        ),
-                      )),
-                  SizedBox(height: 10),
-                  Text("sena", style: TextStyle(color: AppColors.white100)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                          child: Container(
-                              margin: const EdgeInsets.all(3),
-                              padding: const EdgeInsets.symmetric(horizontal: 5),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(color: AppColors.white100)),
-                              child: ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                trailing: Icon(
-                                  Icons.keyboard_arrow_down,
-                                  color: AppColors.white100,
-                                ),
-                              ))),
-                      const SizedBox(width: 4),
-                      Expanded(
-                          child: Container(
-                              margin: const EdgeInsets.all(3),
-                              padding: const EdgeInsets.symmetric(horizontal: 5),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(color: AppColors.white100)),
-                              child: ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                trailing: Icon(
-                                  Icons.keyboard_arrow_down,
-                                  color: AppColors.white100,
-                                ),
-                              ))),
-
-                    ],
-                  ),
-                  const  SizedBox(height: 10),
-                  Text("Tip oplata", style: TextStyle(color: AppColors.white100)),
-                  Container(
-                      margin: const EdgeInsets.all(3),
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      width: MediaQuery.of(context).size.width*0.9,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppColors.white100)),
-                      child: ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        trailing: Icon(
-                          Icons.keyboard_arrow_down,
-                          color: AppColors.white100,
-                        ),
-                      )),
-                  const SizedBox(height: 20),
-                  PrimaryButton(text: "Prinimat", onPressed: (){})
-                  
-                          ]),
               ),
+              const SizedBox(height: 20),
+              Text("Ves", style: TextStyle(color: AppColors.white100)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                      child: Container(
+                          margin: const EdgeInsets.all(3),
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: AppColors.white100)),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            trailing: Icon(
+                              Icons.keyboard_arrow_down,
+                              color: AppColors.white100,
+                            ),
+                          ))),
+                  const SizedBox(width: 4),
+                  Expanded(
+                      child: Container(
+                          margin: const EdgeInsets.all(3),
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: AppColors.white100)),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            trailing: Icon(
+                              Icons.keyboard_arrow_down,
+                              color: AppColors.white100,
+                            ),
+                          ))),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Text("OByom", style: TextStyle(color: AppColors.white100)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                      child: Container(
+                          margin: const EdgeInsets.all(3),
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: AppColors.white100)),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            trailing: Icon(
+                              Icons.keyboard_arrow_down,
+                              color: AppColors.white100,
+                            ),
+                          ))),
+                  const SizedBox(width: 4),
+                  Expanded(
+                      child: Container(
+                          margin: const EdgeInsets.all(3),
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: AppColors.white100)),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            trailing: Icon(
+                              Icons.keyboard_arrow_down,
+                              color: AppColors.white100,
+                            ),
+                          ))),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Text("Napravleniya", style: TextStyle(color: AppColors.white100)),
+              Container(
+                  margin: const EdgeInsets.all(3),
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: AppColors.white100)),
+                  child: ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    trailing: Icon(
+                      Icons.keyboard_arrow_down,
+                      color: AppColors.white100,
+                    ),
+                  )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.import_export,
+                    color: AppColors.white100,
+                  ),
+                ],
+              ),
+              Container(
+                  margin: const EdgeInsets.all(3),
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: AppColors.white100)),
+                  child: ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    trailing: Icon(
+                      Icons.keyboard_arrow_down,
+                      color: AppColors.white100,
+                    ),
+                  )),
+              SizedBox(height: 15),
+              Text("Data", style: TextStyle(color: AppColors.white100)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                      child: Container(
+                          margin: const EdgeInsets.all(3),
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: AppColors.white100)),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            trailing: Icon(
+                              Icons.keyboard_arrow_down,
+                              color: AppColors.white100,
+                            ),
+                          ))),
+                  const SizedBox(width: 4),
+                  Expanded(
+                      child: Container(
+                          margin: const EdgeInsets.all(3),
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: AppColors.white100)),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            trailing: Icon(
+                              Icons.keyboard_arrow_down,
+                              color: AppColors.white100,
+                            ),
+                          ))),
+                ],
+              ),
+              SizedBox(height: 10),
+              Text("Tip transport",
+                  style: TextStyle(color: AppColors.white100)),
+              Container(
+                  margin: const EdgeInsets.all(3),
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: AppColors.white100)),
+                  child: ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    trailing: Icon(
+                      Icons.keyboard_arrow_down,
+                      color: AppColors.white100,
+                    ),
+                  )),
+              SizedBox(height: 10),
+              Text("sena", style: TextStyle(color: AppColors.white100)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                      child: Container(
+                          margin: const EdgeInsets.all(3),
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: AppColors.white100)),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            trailing: Icon(
+                              Icons.keyboard_arrow_down,
+                              color: AppColors.white100,
+                            ),
+                          ))),
+                  const SizedBox(width: 4),
+                  Expanded(
+                      child: Container(
+                          margin: const EdgeInsets.all(3),
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: AppColors.white100)),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            trailing: Icon(
+                              Icons.keyboard_arrow_down,
+                              color: AppColors.white100,
+                            ),
+                          ))),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Text("Tip oplata", style: TextStyle(color: AppColors.white100)),
+              Container(
+                  margin: const EdgeInsets.all(3),
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: AppColors.white100)),
+                  child: ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    trailing: Icon(
+                      Icons.keyboard_arrow_down,
+                      color: AppColors.white100,
+                    ),
+                  )),
+              const SizedBox(height: 20),
+              PrimaryButton(text: "Prinimat", onPressed: () {})
+            ]),
+          ),
         ))
       ]),
     );

@@ -10,6 +10,7 @@ import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({super.key});
@@ -53,11 +54,7 @@ class _RootPageState extends State<RootPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
-      appBar: AppBar(
-        backgroundColor: AppColors.colorBackground,
-        elevation: 0,
-        toolbarHeight: 1,
-      ),
+
       body: Container(child: bottomBarPages[_bottomNavIndex]),
       bottomNavigationBar: AnimatedBottomNavigationBar(
         backgroundColor: Colors.black,
@@ -65,7 +62,7 @@ class _RootPageState extends State<RootPage> {
         splashColor: Colors.red,
         borderColor: Colors.transparent,
         icons: icons,
-        activeColor: AppColors.colorBackground,
+        activeColor: AppColors.background,
         shadow: const Shadow(
             color: Colors.white, offset: Offset(0, 0), blurRadius: 0),
         elevation: 0,

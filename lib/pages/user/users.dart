@@ -165,7 +165,7 @@ class _UsersState extends State<Users> {
                                 fit: BoxFit.cover)),
                         child: ListTile(
                           onTap: () {
-                            if (index == 0) {
+                            if (index == 3) {
                               Navigator.push(
                                   context,
                                   CupertinoPageRoute(

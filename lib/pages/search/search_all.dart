@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/generated/assets.dart';
+import 'package:conx/pages/search/search_details/search_details.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,7 +25,7 @@ final List<String> imageUrls = [
 
 class _SearchAllState extends State<SearchAll> {
   final List<String> items = List.generate(20, (index) => 'Item $index');
-
+  final TextEditingController _textEditControllerSearch = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,41 +35,59 @@ class _SearchAllState extends State<SearchAll> {
         Column(
           children: [
             AppBar(
-              backgroundColor: AppColors.transparent,
-              toolbarHeight: 70,
+              backgroundColor: AppColors.black50,
+              elevation: 0,
+              toolbarHeight: 80,
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    margin: const EdgeInsets.fromLTRB(20, 5, 20, 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: AppColors.white10,
-                    ),
+                    margin: const EdgeInsets.fromLTRB(10, 5, 5, 10),
+                    height: 65,
                     width: MediaQuery.of(context).size.width * 0.7,
                     child: TextFormField(
+                      controller: _textEditControllerSearch,
+                      style: TextStyle(
+                          color: AppColors.white100,
+                          fontWeight: FontWeight.bold),
+                      cursorColor: AppColors.white100,
                       decoration: InputDecoration(
+
+                          counter: const SizedBox.shrink(),
                           prefixIcon: Icon(
                             CupertinoIcons.search,
                             color: AppColors.white100,
                           ),
-                          border: InputBorder.none),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(35)),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(35)),
+                          fillColor: AppColors.white20,
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(35)),
+                          filled: true),
                     ),
                   ),
-                  const SizedBox(width: 5),
                   Container(
-                    padding: EdgeInsets.only(right: 5, left: 5, top: 7, bottom: 8),
+                    padding: const EdgeInsets.all(16),
+                    margin: const EdgeInsets.all(1),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: AppColors.white10,
+                      shape: BoxShape.circle,
+                      color: AppColors.white20,
                     ),
                     child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (context) => const SearchDetails(),
+                              ));
+                        },
                         child: SvgPicture.asset(
                           Assets.imagesLinear,
-                          width: 24,
-                          height: 24,
+                          width: 20,
+                          height: 20,
                         )),
                   )
                 ],

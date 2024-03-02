@@ -17,7 +17,7 @@ class AppChartPie extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100,
+      height: 90,
       width: 90,
       child: Stack(
         children: [
@@ -28,8 +28,9 @@ class AppChartPie extends StatelessWidget {
             pieType: PieType.crust,
             onTap: (index) {},
             gap: 0.05,
-            start: 50,
-            animateFromEnd: true,
+            start: 0,
+            shouldAnimate: true,
+            animateFromEnd: false,
             size: 100,
           ),
           Center(

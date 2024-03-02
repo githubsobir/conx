@@ -6,10 +6,10 @@ import 'package:conx/root_and_unver_page/unversal_pages/model_detail/model_detai
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/chart_pie.dart';
+import 'package:conx/widgets/loading_indicator.dart';
 import 'package:conx/widgets/primary_button.dart';
 import 'package:easy_pie_chart/easy_pie_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatefulWidget {
@@ -102,7 +102,7 @@ class _DetaelPageState extends State<DetailPage> {
                             } else {
                               indexImage = indexImage + 1;
                             }
-                            setState(() {});
+                            // setState(() {});
                           } else {
                             // drag from left to right
                             if (indexImage <= 0) {
@@ -111,7 +111,7 @@ class _DetaelPageState extends State<DetailPage> {
                               indexImage = indexImage - 1;
                             }
 
-                            setState(() {});
+                            // setState(() {});
                           }
                         },
                         child: Stack(
@@ -122,25 +122,11 @@ class _DetaelPageState extends State<DetailPage> {
                               fit: BoxFit.cover,
                               imageUrl: widget.list[indexImage],
                               alignment: Alignment.topCenter,
-                              progressIndicatorBuilder: (context, url,
-                                      downloadProgress) =>
-                                  // CircularProgressIndicator(value: downloadProgress.progress),
-                                  const LoadingIndicator(
-                                      indicatorType: Indicator.ballPulse,
-                                      colors: [
-                                        Colors.red,
-                                        Colors.orange,
-                                        Colors.yellow,
-                                        Colors.green,
-                                        Colors.blue,
-                                        Colors.indigo,
-                                        Colors.purple,
-                                      ],
-                                      strokeWidth: 1,
-                                      backgroundColor: Colors.white,
-                                      pathBackgroundColor: Colors.black),
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) =>
+                                      loadingIndicator(),
                               errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
+                                  const Icon(Icons.error),
                             ),
                             Container(
                               padding:
@@ -198,7 +184,7 @@ class _DetaelPageState extends State<DetailPage> {
                         itemBuilder: (context, index) => GestureDetector(
                               onTap: () {
                                 indexImage = index;
-                                setState(() {});
+                                // setState(() {});
                               },
                               child: Container(
                                 height: index == indexImage ? 5 : 2,
@@ -275,7 +261,7 @@ class _DetaelPageState extends State<DetailPage> {
                       ],
                     )),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height,
+                  height: MediaQuery.of(context).size.height * 1.6,
                   child: Stack(
                     children: [
                       Expanded(
@@ -299,7 +285,7 @@ class _DetaelPageState extends State<DetailPage> {
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                0.8,
+                                                0.75,
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
@@ -310,17 +296,19 @@ class _DetaelPageState extends State<DetailPage> {
                                                   listDetails[index].name,
                                                   style: TextStyle(
                                                       color: AppColors.white100,
-                                                      fontSize: 15,
+                                                      fontSize: 16,
+                                                      fontFamily: "Inter",
                                                       fontWeight:
-                                                          FontWeight.bold),
+                                                          FontWeight.w600),
                                                 ),
                                                 Text(
                                                   listDetails[index].name2,
                                                   style: TextStyle(
                                                       color: AppColors.white100,
-                                                      fontSize: 15,
+                                                      fontSize: 12,
+                                                      fontFamily: "Inter",
                                                       fontWeight:
-                                                          FontWeight.bold),
+                                                          FontWeight.w500),
                                                 ),
                                               ],
                                             ),
@@ -328,10 +316,76 @@ class _DetaelPageState extends State<DetailPage> {
                                         ]),
                                   )
                                 : Container(
-                                    margin: EdgeInsets.all(10),
+                                    margin: const EdgeInsets.all(10),
                                     child: Column(
                                       children: [
-                                        PrimaryButton(
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            MaterialButton(
+                                                onPressed: () {},
+                                                shape: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20)),
+                                                color: AppColors.red,
+                                                textColor: AppColors.white100,
+                                                child: Text("Na reyse")),
+                                            const SizedBox(width: 10),
+                                            MaterialButton(
+                                              onPressed: () {},
+                                              color: AppColors.green2,
+                                              shape: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20)),
+                                              textColor: AppColors.white100,
+                                              child: Text("Obratniy"),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 10),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                                child: MaterialButton(
+                                              onPressed: () {},
+                                              height: 60,
+                                              shape: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              color: AppColors.white100,
+                                              child: const Column(
+                                                children: [
+                                                  Icon(Icons.phone),
+                                                  Text("Zvanok")
+                                                ],
+                                              ),
+                                            )),
+                                            const SizedBox(width: 10),
+                                            Expanded(
+                                                child: MaterialButton(
+                                              onPressed: () {},
+                                              color: AppColors.white100,
+                                              height: 60,
+                                              shape: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              child: const Column(
+                                                children: [
+                                                  Icon(Icons
+                                                      .chat_bubble_outlined),
+                                                  Text("Chat")
+                                                ],
+                                              ),
+                                            )),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 15),
+                                        PrimaryButton2(
                                             text: "Оформит Зоказ",
                                             onPressed: () {})
                                       ],
@@ -363,10 +417,19 @@ class _DetaelPageState extends State<DetailPage> {
   List<ModelDetailsPage> listDetails = [
     ModelDetailsPage(
       id: "1",
+      name: "Сагдуллаев Сардорбек",
+      name2: "Владелец",
+      icon: Icon(
+        Icons.person_outline,
+        color: AppColors.newOrangeColorForIcon,
+      ),
+    ),
+    ModelDetailsPage(
+      id: "1",
       name: "7800",
       name2: "Цена",
       icon: Icon(
-        Icons.local_atm,
+        Icons.attach_money,
         color: AppColors.newOrangeColorForIcon,
       ),
     ),
@@ -374,45 +437,47 @@ class _DetaelPageState extends State<DetailPage> {
       id: "1",
       name: "Ташкент-Москва",
       name2: "направление",
-      icon: Icon(Icons.location_on_rounded,
+      icon: Icon(Icons.location_on_outlined,
           color: AppColors.newOrangeColorForIcon),
     ),
     ModelDetailsPage(
       id: "1",
       name: "Рефрижераторный  +5",
       name2: "Запрошенный транспорт",
-      icon: Icon(Icons.local_atm, color: AppColors.newOrangeColorForIcon),
+      icon: Icon(Icons.local_shipping_outlined,
+          color: AppColors.newOrangeColorForIcon),
     ),
     ModelDetailsPage(
       id: "1",
       name: "12.03.24-16.03.24",
       name2: "Срок прибытия в пункт назначения ",
-      icon: Icon(Icons.local_atm, color: AppColors.newOrangeColorForIcon),
+      icon: Icon(Icons.calendar_month_outlined,
+          color: AppColors.newOrangeColorForIcon),
     ),
     ModelDetailsPage(
       id: "1",
       name: "Наличные, картой, перечисление",
       name2: "Тип оплаты",
-      icon:
-          Icon(Icons.payments_outlined, color: AppColors.newOrangeColorForIcon),
+      icon: Icon(Icons.account_balance_wallet_outlined,
+          color: AppColors.newOrangeColorForIcon),
     ),
     ModelDetailsPage(
       id: "1",
       name: "Документы",
       name2: "Документы",
-      icon: Icon(Icons.local_atm, color: AppColors.newOrangeColorForIcon),
+      icon: Icon(Icons.book_outlined, color: AppColors.newOrangeColorForIcon),
     ),
     ModelDetailsPage(
       id: "1",
       name: "Узбекистан",
       name2: "Страна",
-      icon: Icon(Icons.local_atm, color: AppColors.newOrangeColorForIcon),
+      icon: Icon(Icons.language, color: AppColors.newOrangeColorForIcon),
     ),
     ModelDetailsPage(
       id: "1",
       name: "01 F 132 YA автомобиль \n01 F 132 YA прицеп",
       name2: "Гос Номер  автомобиль и прицеп  ",
-      icon: Icon(Icons.local_atm, color: AppColors.newOrangeColorForIcon),
+      icon: Icon(Icons.account_balance, color: AppColors.newOrangeColorForIcon),
     ),
     ModelDetailsPage(
       id: "1",
@@ -428,8 +493,8 @@ class _DetaelPageState extends State<DetailPage> {
     ),
     ModelDetailsPage(
       id: "1",
-      name: "7800",
-      name2: "Цена",
+      name: "",
+      name2: "",
       icon: Icon(Icons.local_atm, color: AppColors.newOrangeColorForIcon),
     ),
   ];

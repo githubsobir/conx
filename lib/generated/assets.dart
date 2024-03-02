@@ -21,6 +21,7 @@ class Assets {
   static const String iconsIcRouting = 'assets/icons/ic_routing.svg';
   static const String iconsIcSquareDollar = 'assets/icons/ic_square_dollar.svg';
   static const String iconsIcTruck = 'assets/icons/ic_truck.svg';
+  static const String iconsWallet = 'assets/icons/wallet.svg';
   static const String imagesBackground = 'assets/images/background.png';
   static const String imagesImageSplash = 'assets/images/image_splash.png';
   static const String imagesKz = 'assets/images/kz.png';

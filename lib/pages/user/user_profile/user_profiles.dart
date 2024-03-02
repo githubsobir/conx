@@ -114,14 +114,14 @@ class _UserProfilesState extends State<UserProfiles> {
                           },
                         ),
                       ),
-                      SizedBox(height: 10),
+                     const SizedBox(height: 10),
                       Text(
                         "Фамилия",
                         style: TextStyle(
                           color: AppColors.white100,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Container(
                         height: 56,
                         padding:const EdgeInsets.only(left: 12),

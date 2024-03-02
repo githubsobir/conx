@@ -79,7 +79,11 @@ class HiveBoxes {
 
   String get userType {
     try {
-      return  "2";//_box.get("usertype");
+      if (_box.get("usertype").toString() == "null") {
+        return "-1";
+      } else {
+        return _box.get("usertype");
+      }
     } catch (e) {
       log(e.toString());
       return "-1";

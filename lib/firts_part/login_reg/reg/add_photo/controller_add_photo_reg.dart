@@ -58,7 +58,7 @@ class ControllerAddPhotoReg extends StateNotifier<ModelAddPhotoReg> {
       log(_box.userType);
       log(_box.userType);
       log(_box.userType);
-      if(_box.userType == "Driver"){
+      if(_box.userType == "1"){
         Navigator.push(
             context,
             CupertinoPageRoute(

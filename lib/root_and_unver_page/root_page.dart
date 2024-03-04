@@ -10,7 +10,6 @@ import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({super.key});

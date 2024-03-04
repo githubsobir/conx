@@ -44,37 +44,43 @@ class ControllerMainPage extends StateNotifier<ModelControllerMainPage> {
           "${MainUrl.urlMain}/api/client/order-list/",
           options:
               Options(headers: {"Authorization": "Bearer ${box.userToken}"}));
-      log(jsonEncode(response.data).toString());
+
       listMainPage = (response.data as List)
           .map((e) => ModelOrderList.fromJson(e))
           .toList();
 
+
+
       for (int i = 0; i < listMainPage.length; i++) {
+         listImages.add(ModelOrderImagesList(image: [i.toString()]));
+
         if (listMainPage[i].file1.toString() != "null") {
-          listImages.add(
+          listImages[i] = (
               ModelOrderImagesList(image:[ listMainPage[i].file1.toString()]));
         }
         if (listMainPage[i].file2.toString() != "null") {
-          listImages.add(
+          listImages[i] = (
               ModelOrderImagesList(image: [listMainPage[i].file2.toString()]));
         }
         if (listMainPage[i].file3.toString() != "null") {
-          listImages.add(
+          listImages[i] = (
               ModelOrderImagesList(image: [listMainPage[i].file3.toString()]));
         }
         if (listMainPage[i].file4.toString() != "null") {
-          listImages.add(
+          listImages[i] = (
               ModelOrderImagesList(image: [listMainPage[i].file4.toString()]));
         }
         if (listMainPage[i].file5.toString() != "null") {
-          listImages.add(
+          listImages[i] = (
               ModelOrderImagesList(image: [listMainPage[i].file5.toString()]));
         }
         if (listMainPage[i].file6.toString() != "null") {
-          listImages.add(
+          listImages[i] = (
               ModelOrderImagesList(image: [listMainPage[i].file6.toString()]));
         }
       }
+      log(jsonEncode(listImages).toString());
+
       // serverdan file list qilib kelaydigan qilish kerak.
 
       state =

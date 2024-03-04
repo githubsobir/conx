@@ -67,8 +67,7 @@ class ControllerChooseDirectionClass extends StateNotifier<ModelRow1Choose> {
   Future setRegionServer({required BuildContext context}) async {
     try {
       FormData formData = FormData.fromMap(
-          // {"direction_from": region1Id, "direction_to": region2Id});// ishlaydigani
-          {"direction_from": "1", "direction_to": "2"});
+          {"direction_from": region1Id, "direction_to": region2Id});// ishlaydigani
       Response response = await _dio.post(
           "${MainUrl.urlMain}/api/driver/direction/",
           data: formData,

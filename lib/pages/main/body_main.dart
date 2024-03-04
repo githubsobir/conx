@@ -29,7 +29,7 @@ class _BodyMainState extends ConsumerState<BodyMain> {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
         padding: const EdgeInsets.all(1),
         margin: const EdgeInsets.fromLTRB(15, 5, 15, 5),
         decoration: BoxDecoration(
@@ -38,7 +38,8 @@ class _BodyMainState extends ConsumerState<BodyMain> {
         child: Column(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
               child: GestureDetector(
                 onHorizontalDragEnd: (DragEndDetails drag) {
                   if (drag.primaryVelocity == null) return;
@@ -46,28 +47,28 @@ class _BodyMainState extends ConsumerState<BodyMain> {
                     // drag from right to left
                     if (indexImage >=
                         ref
-                            .watch(controllerMainPage.notifier)
-                            .listImages
-                            .length -
+                                .watch(controllerMainPage.notifier)
+                                .listImages
+                                .length -
                             1) {
                       indexImage = 0;
                     } else {
                       indexImage = indexImage + 1;
                     }
-                    // setState(() {});
+                    setState(() {});
                   } else {
                     // drag from left to right
                     if (indexImage <= 0) {
                       indexImage = ref
-                          .watch(controllerMainPage.notifier)
-                          .listImages
-                          .length -
+                              .watch(controllerMainPage.notifier)
+                              .listImages
+                              .length -
                           1;
                     } else {
                       indexImage = indexImage - 1;
                     }
 
-                    // setState(() {});
+                    setState(() {});
                   }
                 },
                 child: Stack(
@@ -84,9 +85,9 @@ class _BodyMainState extends ConsumerState<BodyMain> {
                       alignment: Alignment.topCenter,
                       progressIndicatorBuilder:
                           (context, url, downloadProgress) =>
-                          loadingIndicator(),
+                              loadingIndicator(),
                       errorWidget: (context, url, error) =>
-                      const Icon(Icons.error),
+                          const Icon(Icons.error),
                     ),
                     Container(
                       padding: const EdgeInsets.only(right: 10, bottom: 10),
@@ -121,21 +122,21 @@ class _BodyMainState extends ConsumerState<BodyMain> {
                         .length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {
-                        indexImage = index;
-                        // setState(() {});
-                      },
-                      child: Container(
-                        height: index == indexImage ? 5 : 2,
-                        width: index == indexImage ? 20 : 10,
-                        margin: const EdgeInsets.all(3),
-                        decoration: BoxDecoration(
-                            color: index == indexImage
-                                ? AppColors.newOrangeColorForIcon
-                                : AppColors.newOrangeColorForIcon,
-                            borderRadius: BorderRadius.circular(5)),
-                      ),
-                    )),
+                          onTap: () {
+                            indexImage = index;
+                            // setState(() {});
+                          },
+                          child: Container(
+                            height: index == indexImage ? 5 : 2,
+                            width: index == indexImage ? 20 : 10,
+                            margin: const EdgeInsets.all(3),
+                            decoration: BoxDecoration(
+                                color: index == indexImage
+                                    ? AppColors.newOrangeColorForIcon
+                                    : AppColors.newOrangeColorForIcon,
+                                borderRadius: BorderRadius.circular(5)),
+                          ),
+                        )),
               ),
             ),
             Container(
@@ -181,66 +182,56 @@ class _BodyMainState extends ConsumerState<BodyMain> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Icon(
-                                        Icons.local_atm,
-                                        color:
-                                        AppColors.newOrangeColorForIcon,
-                                      ),
-                                      const SizedBox(width: 8),
-                                      Text(
-                                        ref
-                                            .watch(
-                                            controllerMainPage.notifier)
-                                            .listMainPage[widget.index]
-                                            .price
-                                            .toString(),
-                                        style: TextStyle(
-                                            color: AppColors.white100,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ]),
+                                Row(mainAxisSize: MainAxisSize.min, children: [
+                                  Icon(
+                                    Icons.local_atm,
+                                    color: AppColors.newOrangeColorForIcon,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    ref
+                                        .watch(controllerMainPage.notifier)
+                                        .listMainPage[widget.index]
+                                        .price
+                                        .toString(),
+                                    style: TextStyle(
+                                        color: AppColors.white100,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ]),
                                 const SizedBox(height: 8),
-                                Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      SvgPicture.asset(
-                                        Assets.iconsIcRouting,
-                                        color:
-                                        AppColors.newOrangeColorForIcon,
-                                        fit: BoxFit.cover,
-                                      ),
-                                      const SizedBox(width: 8),
-                                      Text(
-                                        "${ref.watch(controllerMainPage.notifier).listMainPage[widget.index].locationFrom}-${ref.watch(controllerMainPage.notifier).listMainPage[widget.index].locationTo}",
-                                        style: TextStyle(
-                                            color: AppColors.white100,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ]),
+                                Row(mainAxisSize: MainAxisSize.min, children: [
+                                  SvgPicture.asset(
+                                    Assets.iconsIcRouting,
+                                    color: AppColors.newOrangeColorForIcon,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    "${ref.watch(controllerMainPage.notifier).listMainPage[widget.index].locationFrom.name}-${ref.watch(controllerMainPage.notifier).listMainPage[widget.index].locationTo.name}",
+                                    style: TextStyle(
+                                        color: AppColors.white100,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ]),
                                 const SizedBox(height: 10),
-                                Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Icon(
-                                        Icons.local_shipping_outlined,
-                                        size: 16,
-                                        color:
-                                        AppColors.newOrangeColorForIcon,
-                                      ),
-                                      const SizedBox(width: 4),
-                                      Text(
-                                        "Transport ${ref.watch(controllerMainPage.notifier).listMainPage[widget.index].transportType}",
-                                        style: TextStyle(
-                                            color: AppColors.white100,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ]),
+                                Row(mainAxisSize: MainAxisSize.min, children: [
+                                  Icon(
+                                    Icons.local_shipping_outlined,
+                                    size: 16,
+                                    color: AppColors.newOrangeColorForIcon,
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    "Transport ${ref.watch(controllerMainPage.notifier).listMainPage[widget.index].transportType}",
+                                    style: TextStyle(
+                                        color: AppColors.white100,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ]),
                               ],
                             ),
                             Column(

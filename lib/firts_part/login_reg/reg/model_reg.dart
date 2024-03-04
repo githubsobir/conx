@@ -38,8 +38,8 @@ class ModelForRegServer{
     required String txtError1,
   }) {
     return ModelForRegServer(
-      boolGetData: boolGetData1 ?? boolGetData,
-      txtError: txtError1 ?? txtError,
+      boolGetData: boolGetData1,
+      txtError: txtError1,
     );
   }
 

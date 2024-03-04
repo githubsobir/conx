@@ -166,6 +166,10 @@ class _UserBothState extends ConsumerState<UserBoth> {
             children: [
               GestureDetector(
                 onTap: () {
+                  if(!boolSelected){
+                    boolSelected = true;
+                    selectedDate = DateTime(2006, 1, 1);
+                  }
                   Navigator.of(context).pop();
                 },
                 child: Container(

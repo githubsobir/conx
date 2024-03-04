@@ -38,7 +38,7 @@ class _UserTimeEndState extends State<UserTimeEnd> {
             child: Column(
               children: [
                 Container(
-                  height: 150,
+                  height: 175,
                   width: double.infinity,
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(

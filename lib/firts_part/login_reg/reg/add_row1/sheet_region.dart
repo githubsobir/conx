@@ -39,6 +39,8 @@ class _UserBottomSheetRegionListState
     if (ref.watch(controllerRowChooseFirstTime).statusData == "1") {
       return Container(
         decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(15), topLeft: Radius.circular(15)),
             image: DecorationImage(
                 image: AssetImage("assets/images/road2.png"),
                 fit: BoxFit.fill)),

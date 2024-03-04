@@ -16,7 +16,7 @@ class UserBothNotifairProvider extends StateNotifier<ModelUserBirthController> {
   UserBothNotifairProvider()
       : super(ModelUserBirthController(
             success: true, message: "", errorMessage: "")) {
-    getUserBirth();
+
   }
 
   var box = HiveBoxes();

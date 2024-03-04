@@ -10,6 +10,10 @@ import 'package:conx/widgets/saved_box.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+
+
+final controllerSearchOpen = StateProvider<bool>((ref) => false);
+
 final controllerMainPage = StateNotifierProvider.autoDispose<ControllerMainPage,
     ModelControllerMainPage>((ref) => ControllerMainPage());
 

@@ -25,7 +25,7 @@ class AddPhotoRegistration extends ConsumerStatefulWidget {
 
 class _AddPhotoRegistrationState extends ConsumerState<AddPhotoRegistration> {
 
-  var _box = HiveBoxes();
+  final _box = HiveBoxes();
   @override
   Widget build(BuildContext context1) {
     return Scaffold(
@@ -69,26 +69,46 @@ class _AddPhotoRegistrationState extends ConsumerState<AddPhotoRegistration> {
                           ],
                         ),
 
-                        Container(
-                          margin: const EdgeInsets.all(30),
-                          padding: const EdgeInsets.all(10),
-                          child: getImage() == "0"
-                              ? SvgPicture.asset(
-                                  Assets.iconsIcProfile,
-                                  width: 120,
-                                  height: 120,
-                                )
-                              : ClipRRect(
-                                  borderRadius: BorderRadius.circular(100),
-                                  child: Image.file(
-                                      height: 180,
-                                      width: 180,
-                                      fit: BoxFit.fill,
+                        SizedBox(
+                          height: 250,
+                          width: MediaQuery.of(context).size.width,
+                          child: Stack(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.all(30),
+                                padding: const EdgeInsets.all(10),
+                                alignment: Alignment.center,
+                                child: getImage() == "0"
+                                    ? SvgPicture.asset(
+                                        Assets.iconsIcProfile,
+                                        width: 120,
+                                        height: 120,
+                                      )
+                                    : ClipRRect(
+                                        borderRadius: BorderRadius.circular(100),
+                                        child: Image.file(
+                                            height: 180,
+                                            width: 180,
+                                            fit: BoxFit.cover,
+                                            alignment: Alignment.center,
+                                            ref
+                                                .watch(
+                                                  controllerAddPhotoDriver.notifier,
+                                                )
+                                                .imageList[0])),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 20),
+                                child: Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: IconButton(onPressed: (){
                                       ref
-                                          .watch(
-                                            controllerAddPhotoDriver.notifier,
-                                          )
-                                          .imageList[0])),
+                                          .read(controllerAddPhotoDriver.notifier)
+                                          .getImageFromGallery();
+                                    }, icon:  Icon(Icons.change_circle_outlined, color: AppColors.white100,),)),
+                              )
+                            ],
+                          ),
                         ),
                         const SizedBox(height: 20),
                         Text("Rasmingizni kiriting",

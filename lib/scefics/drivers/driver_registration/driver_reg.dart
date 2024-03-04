@@ -99,8 +99,10 @@ class _DrawerRegistrationState extends ConsumerState<DrawerRegistration> {
                           itemCount: listDriverModel.length,
                           itemBuilder: (context, index) {
                             return Container(
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
+                              margin: const EdgeInsets.all(1),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: const DecorationImage(
                                       image: AssetImage(Assets.imagesRoad3),
                                       fit: BoxFit.cover)),
                               child: ListTile(
@@ -110,14 +112,15 @@ class _DrawerRegistrationState extends ConsumerState<DrawerRegistration> {
                                       Navigator.push(
                                           context,
                                           CupertinoPageRoute(
-                                            builder: (context) => const Passport(),
+                                            builder: (context) =>
+                                                const Passport(),
                                           ));
                                     case "2":
                                       Navigator.push(
                                           context,
                                           CupertinoPageRoute(
                                             builder: (context) =>
-                                            const    DriverLicense(),
+                                                const DriverLicense(),
                                           ));
                                     case "3":
                                       Navigator.push(
@@ -130,7 +133,8 @@ class _DrawerRegistrationState extends ConsumerState<DrawerRegistration> {
                                       Navigator.push(
                                           context,
                                           CupertinoPageRoute(
-                                            builder: (context) => const ChooseRate(),
+                                            builder: (context) =>
+                                                const ChooseRate(),
                                           ));
                                   }
                                 },
@@ -155,8 +159,11 @@ class _DrawerRegistrationState extends ConsumerState<DrawerRegistration> {
                                                 Icons.check_circle_outline,
                                                 color:
                                                     AppColors.colorBackground)
-                                            :const SizedBox.shrink(),
-                                         Icon(Icons.arrow_forward_ios, color: AppColors.white100,),
+                                            : const SizedBox.shrink(),
+                                        Icon(
+                                          Icons.arrow_forward_ios,
+                                          color: AppColors.white100,
+                                        ),
                                       ],
                                     )),
                               ),
@@ -186,8 +193,9 @@ class _DrawerRegistrationState extends ConsumerState<DrawerRegistration> {
                           itemCount: listCarInfoList.length,
                           itemBuilder: (context, index) {
                             return Container(
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: const  DecorationImage(
                                       image: AssetImage(Assets.imagesRoad3),
                                       fit: BoxFit.cover)),
                               child: ListTile(
@@ -197,7 +205,7 @@ class _DrawerRegistrationState extends ConsumerState<DrawerRegistration> {
                                         context,
                                         CupertinoPageRoute(
                                           builder: (context) =>
-                                             const CargoTransport(),
+                                              const CargoTransport(),
                                         ));
                                   } else if (index == 1) {
                                     Navigator.push(
@@ -215,7 +223,12 @@ class _DrawerRegistrationState extends ConsumerState<DrawerRegistration> {
                                         ));
                                   }
                                 },
-                                title: Text(listCarInfoList[index], style: TextStyle(color: AppColors.white100, fontWeight: FontWeight.w500),),
+                                title: Text(
+                                  listCarInfoList[index],
+                                  style: TextStyle(
+                                      color: AppColors.white100,
+                                      fontWeight: FontWeight.w500),
+                                ),
                                 trailing: SizedBox(
                                     width: 50,
                                     child: Row(
@@ -232,7 +245,10 @@ class _DrawerRegistrationState extends ConsumerState<DrawerRegistration> {
                                                 color:
                                                     AppColors.colorBackground)
                                             : const SizedBox.shrink(),
-                                         Icon(Icons.arrow_forward_ios, color: AppColors.white100,),
+                                        Icon(
+                                          Icons.arrow_forward_ios,
+                                          color: AppColors.white100,
+                                        ),
                                       ],
                                     )),
                               ),
@@ -240,16 +256,16 @@ class _DrawerRegistrationState extends ConsumerState<DrawerRegistration> {
                           },
                         ),
                       ),
-                      const SizedBox(height: 30),
+
                       PrimaryButton(
-                        onPressed: () async {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (context) => const RootPage(),
-                              ));
-                        },
-                       text:"Tekshiruv uchun yuborish")
+                          onPressed: () async {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (context) => const RootPage(),
+                                ));
+                          },
+                          text: "Tekshiruv uchun yuborish")
                     ],
                   ),
                 )

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/generated/assets.dart';
 import 'package:conx/pages/user/model_user/model_profile_list.dart';
+import 'package:conx/pages/user/orders/orders.dart';
 import 'package:conx/pages/user/user_profile/user_profiles.dart';
 import 'package:conx/pages/user/user_time_end/user_time_end.dart';
 import 'package:conx/root_and_unver_page/root_page.dart';
@@ -177,7 +178,15 @@ class _UsersState extends State<Users> {
                                   CupertinoPageRoute(
                                     builder: (context) => const UserTimeEnd(),
                                   ));
-                            } else if (index == 8) {
+                            }
+                            else if (index == 2) {
+                              Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (context) => const Orders(),
+                                  ));
+                            }
+                            else if (index == 8) {
                               showDialog(
                                 context: context,
                                 builder: (context) => Container(

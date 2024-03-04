@@ -5,6 +5,7 @@ import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
@@ -32,16 +33,17 @@ class _SearchAllState extends State<SearchAll> {
         body: Stack(
       children: [
         const BackgroundWidget(),
-        Column(
-          children: [
-            AppBar(
-              backgroundColor: AppColors.black50,
-              elevation: 0,
-              toolbarHeight: 80,
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+        SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment. spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  const SizedBox(width: 1),
                   Container(
                     margin: const EdgeInsets.fromLTRB(10, 5, 5, 10),
                     height: 65,
@@ -89,66 +91,67 @@ class _SearchAllState extends State<SearchAll> {
                           width: 20,
                           height: 20,
                         )),
-                  )
+                  ),
+                  const SizedBox(width: 1),
                 ],
               ),
-            ),
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 120,
-                    childAspectRatio: 1,
-                    mainAxisExtent: 150,
-                    mainAxisSpacing: 0,
-                    crossAxisSpacing: 0),
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     CupertinoPageRoute(
-                      //       builder: (context) => DetailPage(),
-                      //     ));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2.0),
-                      ),
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: CachedNetworkImage(
-                          fit: BoxFit.cover,
-                          width: 120,
-                          height: 180,
-                          imageUrl: imageUrls[index < 5 ? index : index % 5],
-                          alignment: Alignment.topCenter,
-                          progressIndicatorBuilder:
-                              (context, url, downloadProgress) =>
-                                  const LoadingIndicator(
-                                      indicatorType: Indicator.ballPulse,
-                                      colors: [
-                                        Colors.red,
-                                        Colors.orange,
-                                        Colors.yellow,
-                                        Colors.green,
-                                        Colors.blue,
-                                        Colors.indigo,
-                                        Colors.purple,
-                                      ],
-                                      strokeWidth: 0,
-                                      backgroundColor: Colors.white,
-                                      pathBackgroundColor: Colors.black),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 120,
+                      childAspectRatio: 1,
+                      mainAxisExtent: 150,
+                      mainAxisSpacing: 0,
+                      crossAxisSpacing: 0),
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        // Navigator.push(
+                        //     context,
+                        //     CupertinoPageRoute(
+                        //       builder: (context) => DetailPage(),
+                        //     ));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(2.0),
+                        ),
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: CachedNetworkImage(
+                            fit: BoxFit.cover,
+                            width: 120,
+                            height: 180,
+                            imageUrl: imageUrls[index < 5 ? index : index % 5],
+                            alignment: Alignment.topCenter,
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) =>
+                                    const LoadingIndicator(
+                                        indicatorType: Indicator.ballPulse,
+                                        colors: [
+                                          Colors.red,
+                                          Colors.orange,
+                                          Colors.yellow,
+                                          Colors.green,
+                                          Colors.blue,
+                                          Colors.indigo,
+                                          Colors.purple,
+                                        ],
+                                        strokeWidth: 0,
+                                        backgroundColor: Colors.white,
+                                        pathBackgroundColor: Colors.black),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     ));

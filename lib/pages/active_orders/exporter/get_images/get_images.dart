@@ -107,9 +107,12 @@ class _GetImagesExporterState extends ConsumerState<GetImagesExporter> {
                         children: [
                           IconButton(
                               onPressed: () async {
-                                ref
-                                    .read(controllerExporter.notifier)
-                                    .getImagePhoto(5);
+                                // ref
+                                //     .read(controllerExporter.notifier)
+                                //     .getImagePhoto(5);
+                                XFile? video = await ImagePicker().pickVideo(
+                                  source: ImageSource.camera,
+                                );
                               },
                               icon: Icon(
                                 Icons.photo_camera,

@@ -19,7 +19,7 @@ class UserNotifairProvider extends StateNotifier<ModelUserController> {
   UserNotifairProvider()
       : super(
             ModelUserController(success: true, message: "", errorMessage: "")){
-    getUserFio();
+
   }
 
   var box = HiveBoxes();

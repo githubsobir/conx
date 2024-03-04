@@ -55,7 +55,10 @@ class ControllerAddPhotoReg extends StateNotifier<ModelAddPhotoReg> {
           options:
               Options(headers: {"Authorization": "Bearer ${box.userToken}"}));
 
-      if(_box.userType == "1"){
+      log(_box.userType);
+      log(_box.userType);
+      log(_box.userType);
+      if(_box.userType == "Driver"){
         Navigator.push(
             context,
             CupertinoPageRoute(

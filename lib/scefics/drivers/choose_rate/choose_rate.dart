@@ -46,7 +46,7 @@ class _ChooseRateState extends ConsumerState<ChooseRate> {
                   ),
                   const SizedBox(height: 30),
                   SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.6,
+                      height: 250,
                       child: ListView.builder(
                         itemCount: listModelChooseRate.length,
                         itemBuilder: (context, index) => Card(
@@ -78,25 +78,20 @@ class _ChooseRateState extends ConsumerState<ChooseRate> {
                           ),
                         ),
                       )),
-                  Expanded(
-                      child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      PrimaryButton(
-                        onPressed: () {
-                          ref
-                              .read(controllerPayment.notifier)
-                              .setData(index: valNum);
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (context) => const CargoTransport(),
-                              ));
-                        },
-                        text: "Davom etish",
-                      ),
-                    ],
-                  ))
+                  const Spacer(),
+                  PrimaryButton(
+                    onPressed: () {
+                      ref
+                          .read(controllerPayment.notifier)
+                          .setData(index: valNum);
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => const CargoTransport(),
+                          ));
+                    },
+                    text: "Davom etish",
+                  )
                 ],
               ),
             ),

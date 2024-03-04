@@ -59,7 +59,7 @@ class ControllerLoginData extends StateNotifier<ModelStateLogin> {
           ));
     } on DioException catch (e) {
       if(e.response!.statusCode.toString() == "407" ){
-        state = state.copyWith(boolGetData1: true, txtError1: e.response!.statusCode.toString(), message1: e.response!.statusCode.toString());
+        state = state.copyWith(boolGetData1: true, txtError1: e.message.toString(), message1: e.response!.statusCode.toString());
       }else{
       state = state.copyWith(boolGetData1: true, txtError1: e.toString(), message1: "/api/auth/login/");}
       log(e.toString());

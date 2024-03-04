@@ -329,7 +329,7 @@ class _UserProfilesState extends State<UserProfiles> {
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
+
             ],
           ),
         ),

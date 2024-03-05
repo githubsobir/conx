@@ -247,7 +247,7 @@ class _MainPageState extends ConsumerState<MainPage>
                                       .listMainPage
                                       .length
                               ? SizedBox(
-                                  height: 560,
+                                  height: 660,
                                   child:
                                       ref.watch(controllerMainPage).boolGetData
                                           ? BodyMain(index: index)

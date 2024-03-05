@@ -15,11 +15,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserFIO extends ConsumerStatefulWidget {
-  var box = HiveBoxes();
+  final  box = HiveBoxes();
 
-  UserFIO({super.key}) {
-    print(box.userToken.toString());
-  }
+  UserFIO({super.key});
 
   @override
   ConsumerState<UserFIO> createState() => _UserFIOState();

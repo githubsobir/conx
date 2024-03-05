@@ -137,7 +137,7 @@ class _PhotoTexCar2State extends ConsumerState<PhotoTexCar2> {
             ),
           ),
         ),
-      ):Center(child: CupertinoActivityIndicator()),
+      ):const Center(child: CupertinoActivityIndicator()),
     );
   }
   String getDataFile(){

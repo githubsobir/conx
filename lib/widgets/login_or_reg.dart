@@ -11,7 +11,7 @@ import '../theme/app_colors.dart';
 class LoginOrRegistration extends StatelessWidget {
   LoginOrRegistration({super.key});
 
-  var box = HiveBoxes();
+  final box = HiveBoxes();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class LoginOrRegistration extends StatelessWidget {
                 Navigator.push(
                     context,
                     CupertinoPageRoute(
-                      builder: (context) => LoginPage(),
+                      builder: (context) => const LoginPage(),
                     ));
               },
               text: "Login va parol orqali kirish",
@@ -65,7 +65,7 @@ class LoginOrRegistration extends StatelessWidget {
                 Navigator.push(
                     context,
                     CupertinoPageRoute(
-                      builder: (context) => UserCategory(windowIdReg: "0",),
+                      builder: (context) => const UserCategory(windowIdReg: "0",),
                     ));
               },
               text: "Ro'yxatdan o'tish",

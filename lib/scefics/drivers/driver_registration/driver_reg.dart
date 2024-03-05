@@ -212,14 +212,14 @@ class _DrawerRegistrationState extends ConsumerState<DrawerRegistration> {
                                         context,
                                         CupertinoPageRoute(
                                           builder: (context) =>
-                                              TextCarEnterInfo(),
+                                          const TextCarEnterInfo(),
                                         ));
                                   } else if (index == 2) {
                                     Navigator.push(
                                         context,
                                         CupertinoPageRoute(
                                           builder: (context) =>
-                                              PhotoCarDriver(),
+                                          const PhotoCarDriver(),
                                         ));
                                   }
                                 },

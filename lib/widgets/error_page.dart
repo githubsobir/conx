@@ -6,17 +6,22 @@ import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
 
-class ErrorPage extends StatelessWidget {
+class ErrorPage extends StatefulWidget {
   final String textUrl;
   final String textError;
   final VoidCallback onPressed;
 
-  ErrorPage(
+   const ErrorPage(
       {super.key,
       required this.textUrl,
       required this.textError,
       required this.onPressed});
 
+  @override
+  State<ErrorPage> createState() => _ErrorPageState();
+}
+
+class _ErrorPageState extends State<ErrorPage> {
   var box = HiveBoxes();
 
   @override
@@ -24,7 +29,7 @@ class ErrorPage extends StatelessWidget {
     return Center(
         child: Stack(children: [
       const BackgroundWidget(),
-      textError.toString() == "407"
+      widget.textError.toString() == "407"
           ? Container(
               margin: const EdgeInsets.all(20),
               child: Column(
@@ -34,7 +39,7 @@ class ErrorPage extends StatelessWidget {
                     style: TextStyle(color: AppColors.white100),
                   ),
                   Text(
-                    textUrl,
+                    widget.textUrl,
                     style: TextStyle(color: AppColors.white100),
                   ),
                   const Divider(),
@@ -43,13 +48,13 @@ class ErrorPage extends StatelessWidget {
                     style: TextStyle(color: AppColors.white100),
                   ),
                   Text(
-                    textError,
+                    widget.textError,
                     style: TextStyle(color: AppColors.white100),
                   ),
                   const SizedBox(height: 20),
                   MaterialButton(
                     onPressed: () {
-                      onPressed();
+                      widget.onPressed();
                     },
                     height: 56,
                     minWidth: double.infinity,

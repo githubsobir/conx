@@ -10,10 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PhotoDiverLicense extends ConsumerStatefulWidget {
-  String yyyyMMDs1;
-  String serNums;
+final   String yyyyMMDs1;
+ final String serNums;
 
-  PhotoDiverLicense(
+ const PhotoDiverLicense(
       {super.key, required this.yyyyMMDs1, required this.serNums});
 
   @override

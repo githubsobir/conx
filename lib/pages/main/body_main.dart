@@ -12,9 +12,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BodyMain extends ConsumerStatefulWidget {
-  int index;
+  final int index;
 
-  BodyMain({super.key, required this.index});
+  const BodyMain({super.key, required this.index});
 
   @override
   ConsumerState<BodyMain> createState() => _BodyMainState();

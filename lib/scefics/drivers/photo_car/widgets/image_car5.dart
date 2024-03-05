@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PhotoCarPhoto5 extends ConsumerStatefulWidget {
-  PhotoCarPhoto5({super.key});
+  const PhotoCarPhoto5({super.key});
 
   @override
   ConsumerState<PhotoCarPhoto5> createState() => _PhotoCarPhoto5State();
@@ -88,14 +88,14 @@ class _PhotoCarPhoto5State extends ConsumerState<PhotoCarPhoto5> {
                                     fontSize: 30,
                                     fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.start),
-                            SizedBox(height: 20),
+                            const   SizedBox(height: 20),
                             Text(
                                 "Добейтес совпадения ИД карты с рамкой.\nУбедитес что:",
                                 style: TextStyle(
                                     color:  AppColors.white100,
                                     fontWeight: FontWeight.normal),
                                 textAlign: TextAlign.start),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             Text("-ИД карта хорошо освещена",
                                 style: TextStyle(
                                     color:  AppColors.white100,

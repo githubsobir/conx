@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PhotoCarPhoto6 extends ConsumerStatefulWidget {
-  PhotoCarPhoto6({super.key});
+  const  PhotoCarPhoto6({super.key});
 
   @override
   ConsumerState<PhotoCarPhoto6> createState() => _PhotoCarPhoto6State();

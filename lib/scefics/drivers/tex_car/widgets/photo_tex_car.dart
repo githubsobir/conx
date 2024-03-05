@@ -7,14 +7,13 @@ import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/primary_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PhotoTexCar extends ConsumerStatefulWidget {
-  String countryCode;
-  String serialNumber;
+  final String countryCode;
+  final String serialNumber;
 
-  PhotoTexCar(
+  const PhotoTexCar(
       {super.key, required this.countryCode, required this.serialNumber});
 
   @override

@@ -13,10 +13,10 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatefulWidget {
-  ModelOrderList modelOrderList;
-  List<String> list;
+  final ModelOrderList modelOrderList;
+  final List<String> list;
 
-  DetailPage({super.key, required this.modelOrderList, required this.list});
+  const DetailPage({super.key, required this.modelOrderList, required this.list});
 
   @override
   State<DetailPage> createState() => _DetaelPageState();

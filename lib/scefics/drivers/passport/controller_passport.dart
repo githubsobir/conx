@@ -97,7 +97,7 @@ class ControllerPassport extends StateNotifier<ModelPassport> {
           options:
               Options(headers: {"Authorization": "Bearer ${box.userToken}"}));
       state = state.copyWith(boolGetData1: true, message1:"111", list: [], errorMessage1: "");
-      Navigator.push(context, CupertinoPageRoute(builder: (context) => DriverLicense(),));
+      Navigator.push(context, CupertinoPageRoute(builder: (context) => const DriverLicense(),));
       log(jsonEncode(response.data).toString());
       ModelPassportFile modelPassportFile =
           ModelPassportFile.fromJson(response.data);

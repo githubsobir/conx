@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PhotoCarPhoto1 extends ConsumerStatefulWidget {
-  PhotoCarPhoto1({super.key});
+  const PhotoCarPhoto1({super.key});
 
   @override
   ConsumerState<PhotoCarPhoto1> createState() => _PhotoCarPhoto1State();
@@ -101,7 +101,7 @@ class _PhotoCarPhoto1State extends ConsumerState<PhotoCarPhoto1> {
                                             color: AppColors.white100,
                                             fontWeight: FontWeight.normal),
                                         textAlign: TextAlign.start),
-                                    SizedBox(height: 20),
+                                    const SizedBox(height: 20),
                                     Text("-ИД карта хорошо освещена",
                                         style: TextStyle(
                                             color: AppColors.white100,

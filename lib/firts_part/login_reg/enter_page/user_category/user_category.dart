@@ -19,9 +19,9 @@ import '../../../../generated/assets.dart';
 import '../../choose_page/main_auth_page.dart';
 
 class UserCategory extends StatefulWidget {
-  String windowIdReg;
+final  String windowIdReg;
 
-  UserCategory({super.key, required this.windowIdReg});
+  const UserCategory({super.key, required this.windowIdReg});
 
   @override
   State<UserCategory> createState() => _UserCategoryState();

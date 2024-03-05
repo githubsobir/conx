@@ -12,6 +12,6 @@ class PlacesApiGoogleMapSearch extends ConsumerStatefulWidget {
 class _SearchInMapState extends ConsumerState<PlacesApiGoogleMapSearch> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold();
   }
 }

@@ -10,9 +10,9 @@ ModelStateLogin copyWith({
   required String txtError1,
 }) {
   return ModelStateLogin(
-    boolGetData: boolGetData1 ?? boolGetData,
-    txtError: txtError1 ?? txtError,
-    message: message1 ?? message,
+    boolGetData: boolGetData1,
+    txtError: txtError1,
+    message: message1,
   );
 }
 

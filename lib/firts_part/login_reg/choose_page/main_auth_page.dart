@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:conx/firts_part/login_reg/login/login_page.dart';
 import 'package:conx/firts_part/login_reg/reg/reg.dart';
 import 'package:conx/root_and_unver_page/root_page.dart';
@@ -41,32 +43,47 @@ class MainAuthPage extends StatelessWidget {
                       ),
                       color: Colors.transparent),
                 ),
-                Align(
-                    alignment: Alignment.topRight,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (context) => const RootPage(),
-                            ),
-                            (route) => false);
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.fromLTRB(0, 60, 22, 0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                        margin: const EdgeInsets.fromLTRB(0, 55, 22, 0),
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 6),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6),
-                            color: AppColors.primaryButton),
-                        child: Text("skip".tr(),
-                            style: TextStyle(
-                                fontFamily: "Inter",
-                                fontSize: 12,
-                                color: AppColors.white100,
-                                fontWeight: FontWeight.w600)),
-                      ),
-                    )),
+                            horizontal: 12),
+                        child: IconButton(onPressed: (){
+                          Navigator.pop(context);
+                        }, icon: Icon(
+                            Platform.isIOS?Icons.arrow_back_ios:
+                            Icons.arrow_back, color: AppColors.white100,))),
+                    Align(
+                        alignment: Alignment.topRight,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (context) => const RootPage(),
+                                ),
+                                (route) => false);
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.fromLTRB(0, 60, 22, 0),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 6),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6),
+                                color: AppColors.primaryButton),
+                            child: Text("skip".tr(),
+                                style: TextStyle(
+                                    fontFamily: "Inter",
+                                    fontSize: 12,
+                                    color: AppColors.white100,
+                                    fontWeight: FontWeight.w600)),
+                          ),
+                        )),
+                  ],
+                ),
               ],
             ),
           ),

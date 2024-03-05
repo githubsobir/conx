@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/pages/saved/controller_saved.dart';
-import 'package:conx/root_and_unver_page/unversal_pages/detail_page.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -138,25 +136,25 @@ class _SavedState extends ConsumerState<Saved> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            MaterialButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(
-                                      builder: (context) => DetailPage(),
-                                    ));
-                              },
-                              minWidth: 120,
-                              height: 35,
-                              shape: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: const BorderSide(
-                                      color: Colors.transparent)),
-                              color: AppColors.colorBackground,
-                              child:  Text("To'liqroq",
-                                  style:
-                                      TextStyle(color: AppColors.white100)),
-                            ),
+                            // MaterialButton(
+                            //   onPressed: () {
+                            //     Navigator.push(
+                            //         context,
+                            //         CupertinoPageRoute(
+                            //           builder: (context) => DetailPage(),
+                            //         ));
+                            //   },
+                            //   minWidth: 120,
+                            //   height: 35,
+                            //   shape: OutlineInputBorder(
+                            //       borderRadius: BorderRadius.circular(10),
+                            //       borderSide: const BorderSide(
+                            //           color: Colors.transparent)),
+                            //   color: AppColors.colorBackground,
+                            //   child:  Text("To'liqroq",
+                            //       style:
+                            //           TextStyle(color: AppColors.white100)),
+                            // ),
                             const SizedBox(width: 10),
                             Container(
                               decoration: BoxDecoration(

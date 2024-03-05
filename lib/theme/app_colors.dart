@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'custom_theme.dart';
 
 class AppColors {
   static const Color colorBackground = Color.fromRGBO(240, 113, 20, 1);
   static Color background = const Color.fromRGBO(240, 113, 20, 1);
   static Color white100 = const Color.fromRGBO(255, 255, 255, 1);
   static Color green = const Color.fromRGBO(76, 167, 99, 1);
+  static Color green2 = const Color.fromRGBO(117, 252, 106, 1);
+  static Color blue2 = const Color.fromRGBO(65, 94, 106, 1);
   static Color yellow70 = const Color.fromRGBO(225, 207, 68, 1);
   static Color white80 = const Color.fromRGBO(255, 255, 255, 0.8);
   static Color white70 = const Color.fromRGBO(255, 255, 255, 0.7);
@@ -17,6 +18,7 @@ class AppColors {
   static Color red = const Color.fromRGBO(235, 67, 53, 1);
   static Color black = Colors.black;
   static Color black50 = const Color.fromRGBO(0, 0, 0, 0.5);
+  static Color newOrangeColorForIcon = const Color.fromRGBO(242, 162, 60, 1);
 
   static Color transparent = Colors.transparent;
 }

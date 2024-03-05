@@ -4,6 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/scefics/drivers/tex_car/controller_tex.dart';
 import 'package:conx/scefics/drivers/tex_car/widgets/photo_tex_car.dart';
 import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/background_widget.dart';
+import 'package:conx/widgets/primary_button.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:conx/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -19,7 +21,7 @@ class TextCarEnterInfo extends ConsumerStatefulWidget {
 }
 
 class _TextCarEnterInfoState extends ConsumerState<TextCarEnterInfo> {
-  var box =HiveBoxes();
+  var box = HiveBoxes();
   String txtCountryText = "";
   String txtCountyCode = "";
   TextEditingController txt1 = TextEditingController();
@@ -28,129 +30,145 @@ class _TextCarEnterInfoState extends ConsumerState<TextCarEnterInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: SafeArea(
-          child: Container(
-        margin: const EdgeInsets.all(20),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Text(
-                "Какой у машины госномер?",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-              ),
-              const SizedBox(height: 20),
-              const Text("Страна"),
-              const SizedBox(height: 5),
-              GestureDetector(
-                onTap: () {
-                  getCountryList();
-                },
-                child: Container(
-                  height: 60,
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        txtCountryText,
-                        textAlign: TextAlign.start,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Text("Гос номер"),
-              const SizedBox(height: 5),
-              SizedBox(
-                height: 60,
-                child: TextFormField(
-                  controller: txt1,
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                      fillColor: Colors.grey.shade100,
-                      filled: true,
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              const BorderSide(color: Colors.grey, width: 1)),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              const BorderSide(color: Colors.grey, width: 1)),
-                      border: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Colors.transparent, width: 1),
-                          borderRadius: BorderRadius.circular(10))),
-                ),
-              ),
-              const SizedBox(height: 20),
-              const Text("Гос номер прицеп"),
-              const SizedBox(height: 5),
-              SizedBox(
-                height: 60,
-                child: TextFormField(
-                  controller: txt2,
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                      fillColor: Colors.grey.shade100,
-                      filled: true,
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              const BorderSide(color: Colors.grey, width: 1)),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              const BorderSide(color: Colors.grey, width: 1)),
-                      border: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Colors.transparent, width: 1),
-                          borderRadius: BorderRadius.circular(10))),
-                ),
-              ),
-              const SizedBox(height: 40),
-              MaterialButton(
-                onPressed: () {
-                  if (txtCountryText.isNotEmpty &&
-                      txt1.text.isNotEmpty &&
-                      txt2.text.isNotEmpty) {
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => PhotoTexCar(
-                            countryCode: txtCountyCode.toString(),
-                            serialNumber: "${txt1.text} ${txt2.text}",
-                          ),
-                        ));
-                  } else {
-                    log(box.userToken);
-                    MyWidgets.snackBarMyWidgets(
-                        context: context, text: "Maydonlarni to'ldiring");
-                  }
-                },
-                height: 55,
-                minWidth: double.infinity,
-                color: AppColors.colorBackground,
-                shape: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.grey)),
-                child: const Text("Davom etish",
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: AppColors.white100),
+        backgroundColor: AppColors.background,
+        elevation: 0,
+      ),
+      body: Stack(
+        children: [
+          const BackgroundWidget(),
+          SafeArea(
+              child: Container(
+            margin: const EdgeInsets.all(20),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 20),
+                  Text(
+                    "Какой у машины госномер?",
                     style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white)),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                        color: AppColors.white100),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    "Страна",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: AppColors.white100),
+                  ),
+                  const SizedBox(height: 5),
+                  GestureDetector(
+                    onTap: () {
+                      getCountryList();
+                    },
+                    child: Container(
+                      height: 60,
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            txtCountryText,
+                            textAlign: TextAlign.start,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "Гос номер",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: AppColors.white100),
+                  ),
+                  const SizedBox(height: 5),
+                  SizedBox(
+                    height: 60,
+                    child: TextFormField(
+                      controller: txt1,
+                      maxLines: 1,
+                      decoration: InputDecoration(
+                          fillColor: Colors.grey.shade100,
+                          filled: true,
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                  color: Colors.grey, width: 1)),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                  color: Colors.grey, width: 1)),
+                          border: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Colors.transparent, width: 1),
+                              borderRadius: BorderRadius.circular(10))),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    "Гос номер прицеп",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: AppColors.white100),
+                  ),
+                  const SizedBox(height: 5),
+                  SizedBox(
+                    height: 60,
+                    child: TextFormField(
+                      controller: txt2,
+                      maxLines: 1,
+                      decoration: InputDecoration(
+                          fillColor: Colors.grey.shade100,
+                          filled: true,
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                  color: Colors.grey, width: 1)),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                  color: Colors.grey, width: 1)),
+                          border: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Colors.transparent, width: 1),
+                              borderRadius: BorderRadius.circular(10))),
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  PrimaryButton(
+                      onPressed: () {
+                        if (txtCountryText.isNotEmpty &&
+                            txt1.text.isNotEmpty &&
+                            txt2.text.isNotEmpty) {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (context) => PhotoTexCar(
+                                  countryCode: txtCountyCode.toString(),
+                                  serialNumber: "${txt1.text} ${txt2.text}",
+                                ),
+                              ));
+                        } else {
+                          log(box.userToken);
+                          MyWidgets.snackBarMyWidgets(
+                              context: context, text: "Maydonlarni to'ldiring");
+                        }
+                      },
+                      text: "Davom etish"),
+                ],
               ),
-            ],
-          ),
-        ),
-      )),
+            ),
+          )),
+        ],
+      ),
     );
   }
 

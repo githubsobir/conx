@@ -2,10 +2,12 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/pages/main/body_main.dart';
+import 'package:conx/pages/main/controller_main_page.dart';
 import 'package:conx/pages/main/header_main.dart';
 import 'package:conx/pages/user/users.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
+import 'package:conx/widgets/loading_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -46,15 +48,12 @@ class _MainPageState extends ConsumerState<MainPage>
 
         countList = countList + 10;
         await Future.delayed(const Duration(seconds: 1));
-        setState(() {});
 
         log(countList.toString());
       } catch (e) {
         log(e.toString());
       }
-    } else {
-      setState(() {});
-    }
+    } else {}
   }
 
   @override
@@ -69,103 +68,199 @@ class _MainPageState extends ConsumerState<MainPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.grey.shade900,
-          leading: Container(
-            width: 50,
-            height: 50,
-            margin: const EdgeInsets.all(10),
-            decoration: const BoxDecoration(boxShadow: [
-              BoxShadow(color: Colors.grey, blurRadius: 1, spreadRadius: 1)
-            ], shape: BoxShape.circle, color: Colors.grey),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(100),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => Users(),
-                      ));
-                },
-                child: CachedNetworkImage(
-                  imageUrl:
-                      "https://yt3.googleusercontent.com/ytc/AGIKgqPwtgj5FwEJ7cFln7T_qxosKFA-gCZTtaDbRMhCGw=s900-c-k-c0x00ffffff-no-rj",
-                  alignment: Alignment.topCenter,
-                  width: 50,
-                  height: 55,
-                  fit: BoxFit.cover,
 
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      const CupertinoActivityIndicator(),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                ),
-              ),
-            ),
-          ),
-          title: const Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Ruziyev Abduraxmon",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Colors.grey)),
-              Row(
-                children: [
-                  Icon(Icons.star, color: Colors.yellow),
-                  Text(
-                    "4.95",
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
-                  )
-                ],
-              ),
-            ],
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(1, 1, 20, 5),
-              child: Container(
-                padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-                decoration: BoxDecoration(
-                    color: Colors.grey.shade200, shape: BoxShape.circle),
-                child: Center(
-                    child: Icon(
-                  CupertinoIcons.bell,
-                  color: Colors.grey.shade700,
-                )),
-              ),
-            )
-          ],
-        ),
         //
         body: Stack(
           children: [
-
             const BackgroundWidget(),
+
             ListView(
               controller: _scrollController,
-
               children: [
-                const SizedBox(height: 522, child: HeaderMain()),
+                Container(
+                  margin: const EdgeInsets.only(right: 20, left:20, top: 10),
+                  child: AppBar(
+                    backgroundColor: AppColors.transparent,
+                    leading: Container(
+                      width: 50,
+                      height: 50,
+                      margin: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(boxShadow: [
+                        BoxShadow(color: Colors.grey, blurRadius: 1, spreadRadius: 1)
+                      ], shape: BoxShape.circle, color: Colors.grey),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (context) => Users(),
+                                ));
+                          },
+                          child: CachedNetworkImage(
+                            imageUrl:
+                            "https://yt3.googleusercontent.com/ytc/AGIKgqPwtgj5FwEJ7cFln7T_qxosKFA-gCZTtaDbRMhCGw=s900-c-k-c0x00ffffff-no-rj",
+                            alignment: Alignment.topCenter,
+                            width: 50,
+                            height: 55,
+                            fit: BoxFit.cover,
+                            progressIndicatorBuilder: (context, url, downloadProgress) =>
+                            const CupertinoActivityIndicator(),
+                            errorWidget: (context, url, error) => const Icon(Icons.error),
+                          ),
+                        ),
+                      ),
+                    ),
+                    title: const Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Ruziyev Abduraxmon",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.grey)),
+                        Row(
+                          children: [
+                            Icon(Icons.star, color: Colors.yellow),
+                            Text(
+                              "4.95",
+                              style: TextStyle(color: Colors.grey, fontSize: 14),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                    actions: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(1, 1, 20, 5),
+                        child: Container(
+                          padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade200, shape: BoxShape.circle),
+                          child: Center(
+                              child: Icon(
+                                CupertinoIcons.bell,
+                                color: Colors.grey.shade700,
+                              )),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 600),
+                    height: ref.watch(controllerSearchOpen)?
+                 350:80, child: const HeaderMain()),
+                Container(
+                  margin: const EdgeInsets.all(20),
+                  child:
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            child: const Text("Logistik kompaniya",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 22,
+                                    color: Colors.grey)),
+                          ),
+                          const Text("Hammasini ko'rish",
+                              style: TextStyle(color: Colors.grey)),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                          height: 120,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 20,
+                            itemBuilder: (context, index) => Column(
+                              children: [
+                                Container(
+                                  width: 65,
+                                  height: 65,
+                                  padding: const EdgeInsets.all(3),
+                                  margin: const EdgeInsets.fromLTRB(5, 2, 5, 2),
+                                  decoration: const BoxDecoration(
+                                      gradient: LinearGradient(colors: [
+                                        AppColors.colorBackground,
+                                        Colors.white,
+                                        AppColors.colorBackground,
+                                        AppColors.colorBackground,
+                                        AppColors.colorBackground,
+                                      ]),
+                                      shape: BoxShape.circle,
+                                      color: Colors.grey),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(100),
+                                    child: CachedNetworkImage(
+                                      imageUrl: index % 2 == 0
+                                          ? "https://vectorportal.com/storage/x-vplogo1b_3108.jpg"
+                                          : "https://avatars.mds.yandex.net/i?id=01acf525d652cf7169d54ed7aea9874c6f7aeb17-11459613-images-thumbs&n=13",
+                                      alignment: Alignment.topCenter,
+                                      fit: BoxFit.fill,
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                      const CupertinoActivityIndicator(),
+                                      errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                  height: 30,
+                                  child: const Text(
+                                    "companiya\n nomi",
+                                    maxLines: 2,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )),
+                    ],
+                  ),),
                 ConstrainedBox(
                   constraints: const BoxConstraints(
                     minHeight: 400,
                     maxHeight: double.infinity,
                   ),
-                  child:
-                  ListView.builder(
-                    itemCount: countList + 1,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => index < countList
-                        ? const SizedBox(height: 520, child: BodyMain())
-                        : const SizedBox(
-                      height: 100,
-                      child: Center(child: CupertinoActivityIndicator()),
-                    ),
-                  ),
+                  child: ref.watch(controllerMainPage).boolGetData
+                      ? ListView.builder(
+                          itemCount: ref
+                                  .watch(controllerMainPage.notifier)
+                                  .listMainPage
+                                  .length +
+                              1,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) => index <
+                                  ref
+                                      .watch(controllerMainPage.notifier)
+                                      .listMainPage
+                                      .length
+                              ? SizedBox(
+                                  height: 560,
+                                  child:
+                                      ref.watch(controllerMainPage).boolGetData
+                                          ? BodyMain(index: index)
+                                          : loadingIndicator())
+                              : const SizedBox(
+                                  height: 100,
+                                  child: Center(
+                                      child: CupertinoActivityIndicator()),
+                                ),
+                        )
+                      : const Center(
+                          child: CupertinoActivityIndicator(),
+                        ),
                 )
               ],
             ),

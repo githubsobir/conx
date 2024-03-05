@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -6,6 +5,7 @@ import 'package:conx/firts_part/login_reg/login/controller_login.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/error_page.dart';
+import 'package:conx/widgets/primary_button.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -47,7 +47,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     child: Row(
                       children: [
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
                             icon: Icon(
                               Platform.isIOS
                                   ? Icons.arrow_back_ios_rounded
@@ -69,8 +71,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   const SizedBox(height: 10),
                   Text(
                     "registrationText".tr(),
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w400, fontSize: 16),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                        color: AppColors.white100),
                   ),
                   const SizedBox(height: 20),
                   Container(
@@ -104,10 +108,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
                       ),
-                      title: Text(ref
-                          .read(controllerLogin.notifier)
-                          .defaultValCountry
-                          .toString()),
+                      title: Text(
+                        ref
+                            .read(controllerLogin.notifier)
+                            .defaultValCountry
+                            .toString(),
+                        style: TextStyle(
+                            color: AppColors.white100,
+                            fontWeight: FontWeight.bold),
+                      ),
                       trailing: const Icon(Icons.keyboard_arrow_down_outlined),
                       onTap: () {
                         getCountryList();
@@ -118,8 +127,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       height: 100,
                       decoration: const BoxDecoration(
                           // color: Colors.grey.shade50,
-                          border: Border.symmetric(
-                              horizontal: BorderSide(color: Colors.white))),
+                          // border: Border.symmetric(
+                          //     horizontal: BorderSide(color: Colors.white)),
+                          ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -131,7 +141,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               key: _formKey,
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
-                              child: MaskedTextField(
+/*                              child: MaskedTextField(
                                 mask: ref
                                     .watch(controllerLogin.notifier)
                                     .defaultValCountryMask,
@@ -145,12 +155,71 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                   ref
                                       .read(controllerLogin.notifier)
                                       .getPhoneCodeByTypeUser(valPhone: value);
-                                },
+                                },*/
+                              child: Theme(
+                                data: ThemeData(
+                                  primaryColor: AppColors.white100,
+                                  focusColor: AppColors.white100,
+                                  hoverColor: AppColors.white100,
+                                  indicatorColor: AppColors.white100,
+                                  textTheme: const TextTheme().copyWith(
+                                    bodySmall:
+                                        TextStyle(color: AppColors.white100),
+                                    bodyMedium:
+                                        TextStyle(color: AppColors.white100),
+                                    bodyLarge:
+                                        TextStyle(color: AppColors.white100),
+                                    labelSmall:
+                                        TextStyle(color: AppColors.white100),
+                                    labelMedium:
+                                        TextStyle(color: AppColors.white100),
+                                    labelLarge:
+                                        TextStyle(color: AppColors.white100),
+                                    displaySmall:
+                                        TextStyle(color: AppColors.white100),
+                                    displayMedium:
+                                        TextStyle(color: AppColors.white100),
+                                    displayLarge:
+                                        TextStyle(color: AppColors.white100),
+                                  ),
+                                ),
+                                child: MaskedTextField(
+                                  mask: ref
+                                      .watch(controllerLogin.notifier)
+                                      .defaultValCountryMask,
+                                  maxLength: 17,
+                                  keyboardType: TextInputType.number,
+                                  inputDecoration: InputDecoration(
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: AppColors.white100),
+                                      ),
+                                      focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: AppColors.white100),
+                                      ),
+                                      hintText: "Telefon raqam kiriting",
+                                      counterStyle:
+                                          TextStyle(color: AppColors.white100),
+                                      hintStyle: TextStyle(
+                                          color: AppColors.white100,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 17,
+                                          fontFamily: "Inter",
+                                          fontWeight: FontWeight.w700)),
+                                  textFieldController: textEditingController,
+                                  onChange: (String value) {
+                                    ref
+                                        .read(controllerLogin.notifier)
+                                        .getPhoneCodeByTypeUser(
+                                            valPhone: value);
+                                  },
+                                ),
                               )),
                         ],
                       )),
                   const SizedBox(height: 50),
-                  MaterialButton(
+                  PrimaryButton(
                     onPressed: () {
                       if (textEditingController.text.toString().length <= 8) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -160,23 +229,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         );
                       } else {
                         box.userPhone = textEditingController.text;
-
-                        log("login bosildi");
                         ref
                             .read(controllerLogin.notifier)
                             .sentForLogin(context: context);
                       }
                     },
-                    height: 55,
-                    minWidth: double.infinity,
-                    color: AppColors.colorBackground,
-                    shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide:
-                            const BorderSide(color: AppColors.colorBackground)),
-                    child: Text("continue".tr(),
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white)),
+                    text: "continue".tr(),
                   ),
                 ],
               ),
@@ -192,7 +250,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             });
       }
     } else {
-      return const Center(child: CupertinoActivityIndicator());
+      return Container(
+          decoration: BoxDecoration(color: AppColors.black),
+          child: Center(
+              child: CupertinoActivityIndicator(
+            color: AppColors.white100,
+          )));
     }
   }
 

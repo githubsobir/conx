@@ -5,46 +5,46 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.2.4 <4.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
-  flutter_riverpod: ^2.4.9
+  cupertino_icons: ^1.0.6
+  flutter_riverpod: ^2.4.10
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  easy_localization: ^3.0.3
+  easy_localization: ^3.0.5
   connection_notifier: ^2.0.1
-  animated_bottom_navigation_bar: ^1.3.2
+  animated_bottom_navigation_bar: ^1.3.3
   ntp: ^2.0.0
-  google_maps_flutter: ^2.5.3
-  geocoding: ^2.1.1
-  geolocator: ^10.1.0
+  google_maps_flutter: ^2.6.0
+  geocoding: ^2.2.0
+  geolocator: ^11.0.0
   #  location: ^4.3.0
   custom_info_window: ^1.0.1
   cached_network_image: ^3.3.1
   loading_indicator: ^3.1.1
-  url_launcher: ^6.2.4
+  url_launcher: ^6.2.5
   pin_code_fields: ^8.0.1
   image_picker: ^1.0.7
   video_player: ^2.8.2
-  dio: ^5.4.0
+  dio: ^5.4.1
   timer_count_down: ^2.2.2
   intl: ^0.18.1
   masked_text_field: ^1.0.2
-  calendar_date_picker2: ^0.5.3
+  calendar_date_picker2: ^0.5.5
   flutter_svg: ^2.0.10+1
-  permission_handler: ^10.2.0
-  fl_chart: ^0.66.2
-
+  permission_handler: ^11.3.0
+  easy_pie_chart: ^1.0.0
+  flutter_rating_null_safe: ^0.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 flutter:
   uses-material-design: true

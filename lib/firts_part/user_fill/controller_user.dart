@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:conx/firts_part/user_fill/model_user/model_main_user.dart';
 import 'package:conx/firts_part/user_fill/model_user/model_user_fio.dart';
+import 'package:conx/firts_part/user_fill/user_birth.dart';
 import 'package:conx/widgets/main_url.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:dio/dio.dart';
@@ -18,7 +19,7 @@ class UserNotifairProvider extends StateNotifier<ModelUserController> {
   UserNotifairProvider()
       : super(
             ModelUserController(success: true, message: "", errorMessage: "")){
-    getUserFio();
+
   }
 
   var box = HiveBoxes();
@@ -67,11 +68,13 @@ class UserNotifairProvider extends StateNotifier<ModelUserController> {
   }
 
   Future setUserFIO(
-      {required String lName,
+      {
+        required BuildContext context,
+        required String lName,
       required String sName,
       required String name}) async {
     late Response response;
-    log("setUserFIO");
+
     try {
       FormData formData = FormData.fromMap({
         "name": name,
@@ -80,22 +83,43 @@ class UserNotifairProvider extends StateNotifier<ModelUserController> {
       });
       state = state.copyWith(success1: false, message1: "", errorMessage1: "");
       if (box.userType == "1") {
-        response = await dio.post("${MainUrl.urlMain}/api/driver/full-name/",
-            data: formData,
-            options:
-                Options(headers: {"Authorization": "Bearer ${box.userToken}"}));
+        log("1");
+       try{
+         response = await dio.post("${MainUrl.urlMain}/api/driver/full-name/",
+             data: formData,
+             options:
+             Options(headers: {"Authorization": "Bearer ${box.userToken}"}));
+         ModelUserFio modelUserFio = ModelUserFio.fromJson(response.data);
+         box.userName = modelUserFio.name??"";
+         box.userFName = modelUserFio.lastName??"";
+         box.userSName = modelUserFio.surname??"";
+       }catch(ee){
+         log("ee.toString()");
+         log(ee.toString());
+       }
+
+
+
       } else {
         response = await dio.post("${MainUrl.urlMain}/api/client/full-name/",
             data: formData,
             options:
                 Options(headers: {"Authorization": "Bearer ${box.userToken}"}));
+        ModelUserFio modelUserFio = ModelUserFio.fromJson(response.data);
+        box.userName = modelUserFio.name??"";
+        box.userFName = modelUserFio.lastName??"";
+        box.userSName = modelUserFio.surname??"";
       }
-      ModelUserFio modelUserFio = ModelUserFio.fromJson(response.data);
-      box.userName = modelUserFio.name;
-      box.userFName = modelUserFio.lastName;
-      box.userSName = modelUserFio.surname;
-      log(jsonEncode(response.data).toString());
+
+      Navigator.push(
+          context,
+          CupertinoPageRoute(
+            builder: (context) => const UserBoth(),
+          ));
+
+
       state = state.copyWith(success1: true, message1: "", errorMessage1: "");
+
     } on DioException catch (e) {
       log("DioException setName");
       state = state.copyWith(
@@ -104,7 +128,7 @@ class UserNotifairProvider extends StateNotifier<ModelUserController> {
           errorMessage1: e.message.toString());
       log(e.toString());
     } catch (ee) {
-      log("ee setName");
+      log("ee setName 23er");
       state = state.copyWith(
           success1: true, message1: "1111", errorMessage1: ee.toString());
       log(ee.toString());

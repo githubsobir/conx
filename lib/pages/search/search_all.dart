@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:conx/root_and_unver_page/unversal_pages/detail_page.dart';
+import 'package:conx/generated/assets.dart';
+import 'package:conx/pages/search/search_details/search_details.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 class SearchAll extends StatefulWidget {
@@ -23,115 +26,134 @@ final List<String> imageUrls = [
 
 class _SearchAllState extends State<SearchAll> {
   final List<String> items = List.generate(20, (index) => 'Item $index');
-
+  final TextEditingController _textEditControllerSearch = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.background,
-          toolbarHeight: 70,
-          title: Container(
-            padding: const EdgeInsets.all(1.0),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 55,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.search),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide:
-                                const BorderSide(color: Colors.transparent)),
-                        disabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide:
-                                const BorderSide(color: Colors.transparent)),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(15)),
-                        hoverColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide:
-                                BorderSide(color: Colors.grey.shade200)),
-                        fillColor: AppColors.white100,
-                        filled: true),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
         body: Stack(
-          children: [
-            const BackgroundWidget(),
-            Container(
-                margin:
-                    const EdgeInsets.only(left: 15, right: 15, top: 5, bottom: 15),
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 0,
-                    mainAxisSpacing: 1,
+      children: [
+        const BackgroundWidget(),
+        SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment. spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(width: 1),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(10, 5, 5, 10),
+                    height: 65,
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    child: TextFormField(
+                      controller: _textEditControllerSearch,
+                      style: TextStyle(
+                          color: AppColors.white100,
+                          fontWeight: FontWeight.bold),
+                      cursorColor: AppColors.white100,
+                      decoration: InputDecoration(
+
+                          counter: const SizedBox.shrink(),
+                          prefixIcon: Icon(
+                            CupertinoIcons.search,
+                            color: AppColors.white100,
+                          ),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(35)),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(35)),
+                          fillColor: AppColors.white20,
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(35)),
+                          filled: true),
+                    ),
                   ),
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    margin: const EdgeInsets.all(1),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.white20,
+                    ),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (context) => const SearchDetails(),
+                              ));
+                        },
+                        child: SvgPicture.asset(
+                          Assets.imagesLinear,
+                          width: 20,
+                          height: 20,
+                        )),
+                  ),
+                  const SizedBox(width: 1),
+                ],
+              ),
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 120,
+                      childAspectRatio: 1,
+                      mainAxisExtent: 150,
+                      mainAxisSpacing: 0,
+                      crossAxisSpacing: 0),
                   itemCount: items.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        // Handle item tap
-                       Navigator.push(context,CupertinoPageRoute(builder: (context) => DetailPage(),));
+                        // Navigator.push(
+                        //     context,
+                        //     CupertinoPageRoute(
+                        //       builder: (context) => DetailPage(),
+                        //     ));
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(2.0),
                         ),
                         child: Align(
                           alignment: Alignment.bottomCenter,
                           child: CachedNetworkImage(
-                              fit: BoxFit.cover,
-                              width: 120,
-                              height: 180,
-                              imageUrl: imageUrls[index < 5 ? index : index % 5],
+                            fit: BoxFit.cover,
+                            width: 120,
+                            height: 180,
+                            imageUrl: imageUrls[index < 5 ? index : index % 5],
                             alignment: Alignment.topCenter,
-                            progressIndicatorBuilder: (context, url, downloadProgress) =>
-                            // CircularProgressIndicator(value: downloadProgress.progress),
-                            const LoadingIndicator(
-                                indicatorType: Indicator.ballPulse,
-
-                                /// Required, The loading type of the widget
-                                colors: [
-                                  Colors.red,
-                                  Colors.orange,
-                                  Colors.yellow,
-                                  Colors.green,
-                                  Colors.blue,
-                                  Colors.indigo,
-                                  Colors.purple,
-                                ],
-
-                                /// Optional, The color collections
-                                strokeWidth: 0,
-
-                                /// Optional, The stroke of the line, only applicable to widget which contains line
-                                backgroundColor: Colors.white,
-
-                                /// Optional, Background of the widget
-
-                                pathBackgroundColor: Colors.black
-
-                              /// Optional, the stroke backgroundColor
-                            ),
-                            errorWidget: (context, url, error) => const Icon(Icons.error),
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) =>
+                                    const LoadingIndicator(
+                                        indicatorType: Indicator.ballPulse,
+                                        colors: [
+                                          Colors.red,
+                                          Colors.orange,
+                                          Colors.yellow,
+                                          Colors.green,
+                                          Colors.blue,
+                                          Colors.indigo,
+                                          Colors.purple,
+                                        ],
+                                        strokeWidth: 0,
+                                        backgroundColor: Colors.white,
+                                        pathBackgroundColor: Colors.black),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
                           ),
                         ),
                       ),
                     );
                   },
-                )),
-          ],
-        ));
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ));
   }
 }

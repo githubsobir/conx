@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:conx/data/models/theme_type.dart';
 import 'package:conx/firts_part/login_reg/sms/controller_sms.dart';
 import 'package:conx/theme/app_colors.dart';
@@ -11,7 +13,6 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
-import '../../../../generated/assets.dart';
 
 Widget smsTextEnterPage(
     {required BuildContext context,
@@ -35,7 +36,8 @@ Widget smsTextEnterPage(
                 Navigator.of(context).pop();
               },
               icon: Icon(
-                Icons.navigate_before,
+                Platform.isIOS? Icons.arrow_back_ios:
+                Icons.arrow_back,
                 color: AppColors.white100,
               )),
           const SizedBox(height: 40),

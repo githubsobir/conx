@@ -27,6 +27,7 @@ class _PassportState extends ConsumerState<Passport> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.background,
+        iconTheme: IconThemeData(color: AppColors.white100),
       ),
       body: Stack(
 

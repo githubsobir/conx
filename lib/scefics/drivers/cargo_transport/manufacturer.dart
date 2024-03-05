@@ -1,5 +1,7 @@
 import 'package:conx/scefics/drivers/cargo_transport/car_model.dart';
 import 'package:conx/scefics/drivers/cargo_transport/controller_manufactory/controller_manufactory.dart';
+import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +20,14 @@ class _ManufacturerState extends ConsumerState<Manufacturer> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(), body: buildBody());
+    return Scaffold(appBar: AppBar(
+      backgroundColor: AppColors.background,
+      iconTheme: IconThemeData(color: AppColors.white100),
+    ), body:
+    Stack(children: [
+      const BackgroundWidget(),
+      buildBody()],)
+    );
   }
 
   Widget buildBody() {
@@ -31,9 +40,10 @@ class _ManufacturerState extends ConsumerState<Manufacturer> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                const SizedBox(height: 20),
+                Text(
                   "Кто производител?",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: AppColors.white100),
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
@@ -47,12 +57,12 @@ class _ManufacturerState extends ConsumerState<Manufacturer> {
                               const BorderSide(color: Colors.transparent),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide(color: Colors.transparent),
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide:const BorderSide(color: Colors.transparent),
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide(color: Colors.transparent),
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(color: Colors.transparent),
                         ),
                         filled: true,
                         fillColor: Colors.grey.shade200),
@@ -92,9 +102,9 @@ class _ManufacturerState extends ConsumerState<Manufacturer> {
                                       .watch(controllerManufacturers.notifier)
                                       .listManufacturers[index]
                                       .name
-                                      .toString()),
-                                  trailing: const Icon(Icons.arrow_forward_ios,
-                                      color: Colors.grey),
+                                      .toString(), style: TextStyle(color: AppColors.black),),
+                                  trailing: Icon(Icons.arrow_forward_ios,
+                                      color: AppColors.black),
                                 ),
                               ],
                             ))))

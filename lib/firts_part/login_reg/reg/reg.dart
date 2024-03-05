@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/firts_part/login_reg/login/login_page.dart';
 import 'package:conx/firts_part/login_reg/reg/controller_reg.dart';
 import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/primary_button.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -9,8 +12,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:masked_text_field/masked_text_field.dart';
-
-import '../../../generated/assets.dart';
 
 class Registration extends ConsumerStatefulWidget {
   const Registration({super.key});
@@ -28,16 +29,7 @@ class _RegistrationState extends ConsumerState<Registration> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        body: Stack(children: [
-          SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: Image.asset(
-                Assets.imagesBackground,
-                fit: BoxFit.fill,
-              )),
-          bodyBuild()
-        ]));
+        body: Stack(children: [const BackgroundWidget(), bodyBuild()]));
   }
 
   Widget bodyBuild() {
@@ -55,7 +47,7 @@ class _RegistrationState extends ConsumerState<Registration> {
                   Navigator.of(context).pop();
                 },
                 icon: Icon(
-                  Icons.navigate_before,
+                 Platform.isIOS? Icons.arrow_back_ios:Icons.arrow_back,
                   color: AppColors.white100,
                 )),
             const SizedBox(
@@ -147,26 +139,65 @@ class _RegistrationState extends ConsumerState<Registration> {
                     Form(
                       key: _formKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      child: MaskedTextField(
-                        mask: ref
-                            .watch(registrationController.notifier)
-                            .defaultValCountryMask,
-                        maxLength: 17,
-                        keyboardType: TextInputType.number,
-                        inputDecoration: InputDecoration(
-                            hintText: "Telefon raqam kiriting",
-                            hintStyle: TextStyle(
-                                color: AppColors.white50,
-                                fontSize: 17,
-                                fontFamily: "Inter",
-                                fontWeight: FontWeight.w400)),
-                        textFieldController: textEditingController,
-                        onChange: (String value) {
-                          ref
-                              .read(registrationController.notifier)
-                              .getPhoneCodeByTypeUser(valPhone: value);
-                        },
-                      ),
+                      child: Theme(
+                          // Create a unique theme with `ThemeData`.
+                          data: ThemeData(
+                            textTheme: const TextTheme().copyWith(
+                              bodySmall: TextStyle(color: AppColors.white100),
+                              bodyMedium: TextStyle(color: AppColors.white100),
+                              bodyLarge: TextStyle(color: AppColors.white100),
+                              labelSmall: TextStyle(color: AppColors.white100),
+                              labelMedium: TextStyle(color: AppColors.white100),
+                              labelLarge: TextStyle(color: AppColors.white100),
+                              displaySmall:
+                                  TextStyle(color: AppColors.white100),
+                              displayMedium:
+                                  TextStyle(color: AppColors.white100),
+                              displayLarge:
+                                  TextStyle(color: AppColors.white100),
+                            ),
+                          ),
+
+                          //   ThemeData(
+                          //     textTheme:  TextTheme(
+                          //       bodyText1: TextStyle(),
+                          //       bodyText2: TextStyle(),
+                          //       bodyMedium: TextStyle(),
+                          //     ).apply(
+                          //       bodyColor: AppColors.white100,
+                          //       displayColor: Colors.blue,
+                          //     ),
+                          //
+                          // ),
+                          child: MaskedTextField(
+                            mask: ref
+                                .watch(registrationController.notifier)
+                                .defaultValCountryMask,
+                            maxLength: 17,
+                            keyboardType: TextInputType.number,
+
+                            inputDecoration: InputDecoration(
+                                hintText: "Telefon raqam kiriting",
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: AppColors.white100),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: AppColors.white100),
+                                ),
+                                counterStyle: TextStyle(color: AppColors.white100),
+                                hintStyle: TextStyle(
+                                    color: AppColors.white100,
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 17,
+                                    fontFamily: "Inter",
+                                    fontWeight: FontWeight.w400)),
+                            textFieldController: textEditingController,
+                            onChange: (String value) {
+                              ref
+                                  .read(registrationController.notifier)
+                                  .getPhoneCodeByTypeUser(valPhone: value);
+                            },
+                          )),
                     ),
                   ],
                 )),
@@ -232,11 +263,11 @@ class _RegistrationState extends ConsumerState<Registration> {
                   children: [
                     Center(
                       child: Text(
-                        "${box.userPhone} raqam oldin ro'yxatdan o'tgan \nlogin orqali kiring",
+                        "${box.userPhone} raqam oldin ro'yxatdan o'tgan",
                         maxLines: 4,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
+                        style:  TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18, color: AppColors.white100),
                       ),
                     ),
                     const SizedBox(height: 40),
@@ -256,7 +287,7 @@ class _RegistrationState extends ConsumerState<Registration> {
                           borderRadius: BorderRadius.circular(10),
                           borderSide:
                               const BorderSide(color: Colors.transparent)),
-                      child: Text("enterWithLogin".tr()),
+                      child: Text("enterWithLogin".tr(), style: TextStyle(color: AppColors.white100, fontWeight: FontWeight.bold),),
                     ),
                     const SizedBox(height: 20),
                     MaterialButton(
@@ -271,9 +302,9 @@ class _RegistrationState extends ConsumerState<Registration> {
                           borderSide: const BorderSide(
                               color: AppColors.colorBackground)),
                       child: Text("reTryNum".tr(),
-                          style: const TextStyle(
+                          style:  TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: AppColors.colorBackground)),
+                              color: AppColors.white100)),
                     )
                   ],
                 ),

@@ -1,7 +1,6 @@
 import 'package:conx/pages/active_orders/driver/info_window/model_product/model_product.dart';
 import 'package:conx/root_and_unver_page/unversal_pages/detail_page.dart';
 import 'package:conx/theme/app_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomInfoWindows extends StatefulWidget {
@@ -84,7 +83,7 @@ class _CustomInfoWindowState extends State<CustomInfoWindows> {
                     minWidth: MediaQuery.of(context).size.width * 0.3,
                     color: AppColors.colorBackground,
                     onPressed: (){
-                      Navigator.push(context,CupertinoPageRoute(builder: (context) => DetailPage(),));
+                      // Navigator.push(context,CupertinoPageRoute(builder: (context) => DetailPage(),));
                     },
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     child: const Text("Ko'rish", style: TextStyle(color: Colors.white)),

@@ -1,5 +1,7 @@
 import 'package:conx/scefics/drivers/cargo_transport/car_models/controller_car_model.dart';
 import 'package:conx/scefics/drivers/cargo_transport/color_car/color_car.dart';
+import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,15 @@ class _CarModelState extends ConsumerState<CarModel> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(), body: buildBody());
+    return Scaffold(appBar: AppBar(
+      backgroundColor: AppColors.background,
+      iconTheme: IconThemeData(color: AppColors.white100,),
+    ), body: Stack(
+      children: [
+        const BackgroundWidget(),
+        buildBody(),
+      ],
+    ));
   }
 
   Widget buildBody() {
@@ -35,10 +45,11 @@ class _CarModelState extends ConsumerState<CarModel> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    const SizedBox(height: 20),
+                     Text(
                       "Какая у вас модель?",
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: AppColors.white100),
                     ),
                     const SizedBox(height: 20),
                     SizedBox(
@@ -52,12 +63,12 @@ class _CarModelState extends ConsumerState<CarModel> {
                                   const BorderSide(color: Colors.transparent),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                              borderSide: BorderSide(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide:const BorderSide(color: Colors.transparent),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                              borderSide: BorderSide(color: Colors.transparent),
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: const BorderSide(color: Colors.transparent),
                             ),
                             filled: true,
                             fillColor: Colors.grey.shade200),
@@ -82,16 +93,16 @@ class _CarModelState extends ConsumerState<CarModel> {
                                         Navigator.push(
                                             context,
                                             CupertinoPageRoute(
-                                              builder: (context) => CarColor(),
+                                              builder: (context) =>const CarColor(),
                                             ));
                                       },
                                       title: Text(ref
                                           .watch(controllerCarModel.notifier)
                                           .listCarModel[index]
-                                          .name),
+                                          .name, style:const TextStyle(fontWeight: FontWeight.bold),),
                                       // subtitle: Text(ref.watch(controllerCarModel.notifier).listCarModel[index].description),
-                                      trailing: Icon(Icons.arrow_forward_ios,
-                                          color: Colors.grey),
+                                      trailing:  Icon(Icons.arrow_forward_ios,
+                                          color: AppColors.black),
                                     ),
                                   ],
                                 ))))

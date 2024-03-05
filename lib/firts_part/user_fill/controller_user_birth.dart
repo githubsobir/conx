@@ -16,7 +16,7 @@ class UserBothNotifairProvider extends StateNotifier<ModelUserBirthController> {
   UserBothNotifairProvider()
       : super(ModelUserBirthController(
             success: true, message: "", errorMessage: "")) {
-    getUserBirth();
+
   }
 
   var box = HiveBoxes();
@@ -68,34 +68,29 @@ class UserBothNotifairProvider extends StateNotifier<ModelUserBirthController> {
     late Response response;
     log("setUserBirth");
     try {
-      FormData formData = FormData.fromMap({
-        "date": date,
-      });
+
+
+
       log("###");
-      log( box.userBirth.toString());
+      log(box.userType.toString());
+      log(box.userToken.toString());
+
       state = state.copyWith(success1: false, message1: "", errorMessage1: "");
-      if (box.userType == "1") {
+      if (box.userType.toString() == "1") {
+        FormData formData = FormData.fromMap({
 
-
-        box.userBirth.toString().length > 6?
-        response = await dio.patch(
-            "${MainUrl.urlMain}/api/driver/date-birth-retrieve-update/",
-            data: formData,
-            options:
-            Options(headers: {"Authorization": "Bearer ${box.userToken}"}))
-            :
+          "date": date,
+        });
         response = await dio.post(
             "${MainUrl.urlMain}/api/driver/date-birth/",
             data: formData,
             options:
                 Options(headers: {"Authorization": "Bearer ${box.userToken}"}));
       } else {
-        box.userBirth.toString().length > 6?
-        response = await dio.patch("${MainUrl.urlMain}/api/client/date-birth-retrieve-update/",
-            data: formData,
-            options:
-            Options(headers: {"Authorization": "Bearer ${box.userToken}"}))
-            :
+        FormData formData = FormData.fromMap({
+
+          "birth_date": date,
+        });
         response = await dio.post("${MainUrl.urlMain}/api/client/date-birth/",
             data: formData,
             options:

@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:conx/firts_part/login_reg/enter_page/user_category/controller_user_category.dart';
 import 'package:conx/firts_part/login_reg/enter_page/user_category/model_user_category.dart';
+import 'package:conx/firts_part/login_reg/reg/reg.dart';
 import 'package:conx/root_and_unver_page/root_page.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
@@ -8,21 +12,22 @@ import 'package:conx/widgets/secondary_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../generated/assets.dart';
 import '../../choose_page/main_auth_page.dart';
 
 class UserCategory extends StatefulWidget {
-  const UserCategory({super.key});
+  String windowIdReg;
+
+  UserCategory({super.key, required this.windowIdReg});
 
   @override
   State<UserCategory> createState() => _UserCategoryState();
 }
 
 class _UserCategoryState extends State<UserCategory> {
-  int lastIndex = 0;
-  String textCheckBoxValue = "";
   var box = HiveBoxes();
 
   @override
@@ -32,7 +37,18 @@ class _UserCategoryState extends State<UserCategory> {
         children: [
           const BackgroundWidget(),
           Container(
-            margin: const EdgeInsets.only(right: 25, left: 25),
+            margin: const EdgeInsets.only(top: 25, left: 10, right: 10),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: Icon(
+                  Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
+                  color: AppColors.white100,
+                )),
+          ),
+          Container(
+            margin: const EdgeInsets.only(right: 20, left: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -48,21 +64,26 @@ class _UserCategoryState extends State<UserCategory> {
                       fontSize: 30),
                 ),
                 const SizedBox(height: 18),
-                Expanded(
-                  child: ListView.builder(
+                Expanded(child: Consumer(
+                  builder: (context, ref, child) => ListView.builder(
                     itemCount: listModelUserCat.length,
-                    itemBuilder: (context, index) => Card(
-                      shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                            width: (lastIndex == index + 1) ? 1 : 0,
-                            color: (lastIndex == index + 1)
+                    itemBuilder: (context, index) => Container(
+                      margin: const EdgeInsets.only(top: 4, bottom: 4),
+                      decoration: BoxDecoration(
+                          color: AppColors.white10,
+                          border: Border.all(
+                            width: (ref.watch(userCategoryControllerIndex) ==
+                                    index + 1)
+                                ? 1
+                                : 0,
+                            color: (ref.watch(userCategoryControllerIndex) ==
+                                    index + 1)
                                 ? AppColors.primaryButton
                                 : AppColors.white50,
                           ),
                           borderRadius: BorderRadius.circular(20.0)),
-                      margin: const EdgeInsets.all(6),
-                      color: AppColors.white10,
                       child: ListTile(
+                        // focusColor: AppColors.transparent,
                         leading: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -76,12 +97,14 @@ class _UserCategoryState extends State<UserCategory> {
                           ],
                         ),
                         title: Text(listModelUserCat[index].nameCategory,
+                            textAlign: TextAlign.justify,
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
                                 color: AppColors.white100,
                                 fontFamily: "Inter")),
                         subtitle: Text(listModelUserCat[index].textCategory,
+                            textAlign: TextAlign.justify,
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12,
@@ -97,13 +120,16 @@ class _UserCategoryState extends State<UserCategory> {
                                   return AppColors.white50;
                                 },
                               ),
-                              value: textCheckBoxValue,
+                              value: ref
+                                  .watch(userCategoryControllerCheckBoxValue),
                               autofocus: false,
                               groupValue: listModelUserCat[index].nameCategory,
                               onChanged: (val) {
-                                textCheckBoxValue =
+                                ref.read(userCategoryControllerCheckBoxValue.notifier).state =
                                     listModelUserCat[index].nameCategory;
-                                setState(() {});
+
+                                ref.read(userCategoryControllerIndex.notifier).state =
+                                    index + 1;
 
                                 /// 1 haydovchi
                                 /// 2 yuk jo'natuvchi
@@ -111,62 +137,83 @@ class _UserCategoryState extends State<UserCategory> {
                               }),
                         ),
                         onTap: () {
-                          textCheckBoxValue =
-                              listModelUserCat[index].nameCategory;
+                          ref
+                              .read(
+                                  userCategoryControllerCheckBoxValue.notifier)
+                              .state = listModelUserCat[index].nameCategory;
                           box.userType = (index + 1).toString();
-                          lastIndex = index + 1;
-                          setState(() {});
+
+                          ref.read(userCategoryControllerIndex.notifier).state =
+                              index + 1;
                         },
                       ),
                     ),
                   ),
-                ),
-                PrimaryButton(
-                  text: "continue".tr(),
-                  onPressed: () {
-                    textCheckBoxValue.length < 4
-                        ? {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(
-                                "chooseRoll".tr(),
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                              duration: const Duration(milliseconds: 2500),
-                              backgroundColor: Colors.black,
-                            ))
-                          }
-                        : Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (context) => const MainAuthPage(),
-                            ));
-                  },
+                )),
+                Consumer(
+                  builder: (context, ref, child) => PrimaryButton(
+                      text: "continue".tr(),
+                      onPressed: () {
+                        actionButtonContinue(ref: ref);
+                      }),
                 ),
                 const SizedBox(height: 12),
-                SecondaryButton(
-                  text: "skip".tr(),
-                  onPressed: () {
+                Visibility(
+                  visible: widget.windowIdReg == "1",
+                  child: SecondaryButton(
+                    text: "skip".tr(),
+                    onPressed: () {
+                      box.userType = "2";
 
-                    box.userType = "2";
-                    
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => const RootPage(),
-                      ),
-                      (route) => false,
-                    );
-                  },
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const RootPage(),
+                        ),
+                        (route) => false,
+                      );
+                    },
+                  ),
                 ),
                 const SizedBox(height: 20),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
+  }
+
+  actionButtonContinue({required WidgetRef ref}) {
+    if (ref.watch(userCategoryControllerCheckBoxValue).length > 4) {
+      if (ref.watch(userCategoryControllerIndex) < 3) {
+        if (widget.windowIdReg == "1") {
+          Navigator.push(
+              context,
+              CupertinoPageRoute(
+                builder: (context) => const MainAuthPage(),
+              ));
+        } else {
+          Navigator.push(
+              context,
+              CupertinoPageRoute(
+                builder: (context) => const Registration(),
+              ));
+        }
+      } else {
+        print("web");
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+          "chooseRoll".tr(),
+          style:
+              const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+        duration: const Duration(milliseconds: 2500),
+        backgroundColor: Colors.black,
+      ));
+    }
   }
 
   List<ModelUserCategory> listModelUserCat = [

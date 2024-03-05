@@ -1,17 +1,19 @@
+import 'dart:io';
+
+import 'package:conx/firts_part/login_reg/reg/add_photo/add_photo.dart';
 import 'package:conx/firts_part/user_fill/controller_user_birth.dart';
 import 'package:conx/firts_part/user_fill/widget_user_birth/user_1_birth_loading.dart';
 import 'package:conx/firts_part/user_fill/widget_user_birth/user_birth_error.dart';
-import 'package:conx/scefics/drivers/driver_registration/driver_reg.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/primary_button.dart';
 import 'package:conx/widgets/saved_box.dart';
+import 'package:conx/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../login_reg/login/login_page.dart';
 
 class UserBoth extends ConsumerStatefulWidget {
   const UserBoth({super.key});
@@ -70,7 +72,9 @@ class _UserBothState extends ConsumerState<UserBoth> {
               Navigator.of(context).pop();
             },
             icon: Icon(
-              Icons.navigate_before,
+
+              Platform.isIOS?Icons.arrow_back_ios:
+              Icons.arrow_back,
               color: AppColors.white100,
             ),
           ),
@@ -125,69 +129,27 @@ class _UserBothState extends ConsumerState<UserBoth> {
           PrimaryButton(
               text: "continue".tr(),
               onPressed: () {
-                // ref.read(userBirthController.notifier).getUserBirth();
+                if(boolSelected){
+                  ref.read(userBirthController.notifier).setUserBirth(
+                      date: DateFormat('yyyy-MM-dd')
+                          .format(selectedDate)
+                          .toString()).then((value) {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const AddPhotoRegistration( ),
+                        ));
+                    return true;
+                  });
 
+                }else{
+                  MyWidgets.snackBarMyWidgets(context: context, text: "Tug'ulgan sanani tanlang");
+                }
 
-                ref.read(userBirthController.notifier).setUserBirth(
-                    date: DateFormat('yyyy-MM-dd')
-                        .format(selectedDate)
-                        .toString()).then((value) {
-                  Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => const DrawerRegistration(),
-                      ));
-                          return true;
-                        });
-
-                // if (box.userBirth.toString().length > 4) {
-                //   ref.read(userBirthController.notifier).updateUserBirth(
-                //       date: DateFormat('yyyy-MM-dd')
-                //           .format(selectedDate)
-                //           .toString());
-                // } else {
-                //
-                // }
 
 
               }),
-          const Spacer(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "doYouHaveAccount".tr(),
-                style: TextStyle(
-                    fontFamily: "Inter",
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.white80,
-                    fontSize: 14),
-              ),
-              const SizedBox(
-                width: 4,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => const LoginPage(),
-                      ));
-                },
-                child: Text(
-                  "login".tr(),
-                  style: TextStyle(
-                      fontFamily: "Inter",
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.white100,
-                      fontSize: 14),
-                ),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          )
+    
         ],
       ),
     );
@@ -204,6 +166,10 @@ class _UserBothState extends ConsumerState<UserBoth> {
             children: [
               GestureDetector(
                 onTap: () {
+                  if(!boolSelected){
+                    boolSelected = true;
+                    selectedDate = DateTime(2006, 1, 1);
+                  }
                   Navigator.of(context).pop();
                 },
                 child: Container(

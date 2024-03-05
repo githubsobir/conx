@@ -27,10 +27,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-
-        body: bodyBuild());
+    return Scaffold(body: bodyBuild());
   }
 
   Widget bodyBuild() {
@@ -45,29 +42,42 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 30,
-                  child: Row(children: [
-                    IconButton(onPressed:(){}, icon: Icon(Platform.isIOS ? Icons.arrow_back_ios_rounded:Icons.arrow_back, color: AppColors.white100,))
-                  ],),
+                  SizedBox(
+                    height: 30,
+                    child: Row(
+                      children: [
+                        IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Platform.isIOS
+                                  ? Icons.arrow_back_ios_rounded
+                                  : Icons.arrow_back,
+                              color: AppColors.white100,
+                            ))
+                      ],
+                    ),
                   ),
-
                   const SizedBox(height: 30),
                   Text(
                     "login".tr(),
-                    style:
-                         TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: AppColors.white100,),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      color: AppColors.white100,
+                    ),
                   ),
                   const SizedBox(height: 10),
                   Text(
                     "registrationText".tr(),
-                    style:
-                        const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w400, fontSize: 16),
                   ),
                   const SizedBox(height: 20),
                   Container(
                     decoration: BoxDecoration(
                         border: Border.symmetric(
-                            horizontal: BorderSide(color: Colors.grey.shade300))),
+                            horizontal:
+                                BorderSide(color: Colors.grey.shade300))),
                     child: ListTile(
                       leading: CachedNetworkImage(
                         imageUrl:
@@ -119,7 +129,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           ),
                           Form(
                               key: _formKey,
-                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
                               child: MaskedTextField(
                                 mask: ref
                                     .watch(controllerLogin.notifier)
@@ -131,10 +142,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 ),
                                 textFieldController: textEditingController,
                                 onChange: (String value) {
-                                  ref.read(controllerLogin.notifier).getPhoneCodeByTypeUser(valPhone: value);
+                                  ref
+                                      .read(controllerLogin.notifier)
+                                      .getPhoneCodeByTypeUser(valPhone: value);
                                 },
-                              )
-                          ),
+                              )),
                         ],
                       )),
                   const SizedBox(height: 50),
@@ -169,20 +181,20 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 ],
               ),
             ),
-
           ],
         );
       } else {
-        return ErrorPage(textUrl: ref.watch(controllerLogin).message, textError: ref.watch(controllerLogin).txtError, onPressed: (){
-          ref.read(controllerLogin.notifier).setDefault();
-
-        });
+        return ErrorPage(
+            textUrl: ref.watch(controllerLogin).message,
+            textError: ref.watch(controllerLogin).txtError,
+            onPressed: () {
+              ref.read(controllerLogin.notifier).setDefault();
+            });
       }
     } else {
       return const Center(child: CupertinoActivityIndicator());
     }
   }
-
 
   getCountryList() {
     showModalBottomSheet(

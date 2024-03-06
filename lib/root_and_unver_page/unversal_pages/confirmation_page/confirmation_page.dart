@@ -3,7 +3,6 @@ import 'package:conx/pages/search/search_details/controller_search.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/primary_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -40,78 +39,18 @@ class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
               child: SingleChildScrollView(
                 child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        height: 65,
-                        width: MediaQuery.of(context).size.width * 0.75,
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          style: TextStyle(
-                              color: AppColors.white100,
-                              fontWeight: FontWeight.bold),
-                          cursorColor: AppColors.white100,
-                          decoration: InputDecoration(
-                              counter: const SizedBox.shrink(),
-                              prefixIcon: Icon(
-                                CupertinoIcons.search,
-                                color: AppColors.white100,
-                              ),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(35)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(35)),
-                              fillColor: AppColors.white20,
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(35)),
-                              filled: true),
-                        ),
-                      ),
-                      Container(
-                          padding: const EdgeInsets.all(5),
-                          margin: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                              color: AppColors.white20, shape: BoxShape.circle),
-                          child: Center(
-                              child: Icon(
-                                CupertinoIcons.xmark,
-                                color: AppColors.white100,
-                                size: 32,
-                              )))
-                    ],
+
+                  Center(
+                    child: Text(
+                      "TASDIQLASH",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: AppColors.white100,
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                   const SizedBox(height: 10),
-                  Text(
-                    "FILTER",
-                    style: TextStyle(
-                        color: AppColors.white100,
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: MaterialButton(
-                            height: 36,
-                            color: AppColors.newOrangeColorForIcon,
-                            shape: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(6)),
-                            onPressed: () {},
-                            child: Text("1")),
-                      ),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: MaterialButton(
-                            color: AppColors.newOrangeColorForIcon,
-                            shape: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            onPressed: () {},
-                            child: Text("1")),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 20),
                   Text("Ves kg", style: TextStyle(color: AppColors.white100)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -127,23 +66,7 @@ class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
                                 onTap: () {
                                   _f1.requestFocus();
                                 },
-                                leading: Container(
-                                  width: 60,
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: TextFormField(
-                                    controller: _txt1,
-                                    focusNode: _f1,
-                                    maxLines: 1,
-                                    maxLength: 4,
-                                    keyboardType: TextInputType.number,
-                                    style: TextStyle(
-                                        color: AppColors.white100,
-                                        fontWeight: FontWeight.bold),
-                                    decoration: const InputDecoration(
-                                        border: InputBorder.none,
-                                        counter: SizedBox.shrink()),
-                                  ),
-                                ),
+                                leading:Text(""),
                                 contentPadding: EdgeInsets.zero,
                                 trailing: Icon(
                                   Icons.keyboard_arrow_down,
@@ -162,23 +85,7 @@ class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
                                 onTap: () {
                                   _f2.requestFocus();
                                 },
-                                leading: Container(
-                                  width: 60,
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: TextFormField(
-                                    controller: _txt2,
-                                    focusNode: _f2,
-                                    maxLines: 1,
-                                    maxLength: 4,
-                                    keyboardType: TextInputType.number,
-                                    style: TextStyle(
-                                        color: AppColors.white100,
-                                        fontWeight: FontWeight.bold),
-                                    decoration: const InputDecoration(
-                                        border: InputBorder.none,
-                                        counter: SizedBox.shrink()),
-                                  ),
-                                ),
+                                leading:Text(""),
                                 contentPadding: EdgeInsets.zero,
                                 trailing: Icon(
                                   Icons.keyboard_arrow_down,
@@ -203,23 +110,7 @@ class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
                                 onTap: () {
                                   _f3.requestFocus();
                                 },
-                                leading: Container(
-                                  width: 60,
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: TextFormField(
-                                    controller: _txt3,
-                                    focusNode: _f3,
-                                    maxLines: 1,
-                                    maxLength: 4,
-                                    keyboardType: TextInputType.number,
-                                    style: TextStyle(
-                                        color: AppColors.white100,
-                                        fontWeight: FontWeight.bold),
-                                    decoration: const InputDecoration(
-                                        border: InputBorder.none,
-                                        counter: SizedBox.shrink()),
-                                  ),
-                                ),
+                                leading:Text(""),
                                 contentPadding: EdgeInsets.zero,
                                 trailing: Icon(
                                   Icons.keyboard_arrow_down,
@@ -238,23 +129,7 @@ class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
                                 onTap: () {
                                   _f4.requestFocus();
                                 },
-                                leading: Container(
-                                  width: 60,
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: TextFormField(
-                                    controller: _txt4,
-                                    focusNode: _f4,
-                                    maxLines: 1,
-                                    maxLength: 4,
-                                    keyboardType: TextInputType.number,
-                                    style: TextStyle(
-                                        color: AppColors.white100,
-                                        fontWeight: FontWeight.bold),
-                                    decoration: const InputDecoration(
-                                        border: InputBorder.none,
-                                        counter: SizedBox.shrink()),
-                                  ),
-                                ),
+                                leading: Text(""),
                                 contentPadding: EdgeInsets.zero,
                                 trailing: Icon(
                                   Icons.keyboard_arrow_down,
@@ -273,6 +148,7 @@ class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
                           border: Border.all(color: AppColors.white100)),
                       child: ListTile(
                         contentPadding: EdgeInsets.zero,
+                        leading: Text(""),
                         trailing: Icon(
                           Icons.keyboard_arrow_down,
                           color: AppColors.white100,
@@ -295,12 +171,13 @@ class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
                           border: Border.all(color: AppColors.white100)),
                       child: ListTile(
                         contentPadding: EdgeInsets.zero,
+                        leading: Text(""),
                         trailing: Icon(
                           Icons.keyboard_arrow_down,
                           color: AppColors.white100,
                         ),
                       )),
-                  SizedBox(height: 15),
+                 const SizedBox(height: 15),
                   Text("Data", style: TextStyle(color: AppColors.white100)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -314,6 +191,7 @@ class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
                                   border: Border.all(color: AppColors.white100)),
                               child: ListTile(
                                 contentPadding: EdgeInsets.zero,
+                                leading: Text(""),
                                 trailing: Icon(
                                   Icons.keyboard_arrow_down,
                                   color: AppColors.white100,
@@ -329,6 +207,7 @@ class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
                                   border: Border.all(color: AppColors.white100)),
                               child: ListTile(
                                 contentPadding: EdgeInsets.zero,
+                                leading: const Text(""),
                                 trailing: Icon(
                                   Icons.keyboard_arrow_down,
                                   color: AppColors.white100,
@@ -336,24 +215,8 @@ class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
                               ))),
                     ],
                   ),
-                  SizedBox(height: 10),
-                  Text("Tip transport",
-                      style: TextStyle(color: AppColors.white100)),
-                  Container(
-                      margin: const EdgeInsets.all(3),
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppColors.white100)),
-                      child: ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        trailing: Icon(
-                          Icons.keyboard_arrow_down,
-                          color: AppColors.white100,
-                        ),
-                      )),
-                  SizedBox(height: 10),
-                  Text("sena", style: TextStyle(color: AppColors.white100)),
+                 const SizedBox(height: 10),
+                  Text("sana", style: TextStyle(color: AppColors.white100)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -368,23 +231,7 @@ class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
                                 onTap: () {
                                   _f5.requestFocus();
                                 },
-                                leading: Container(
-                                  width: 60,
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: TextFormField(
-                                    controller: _txt5,
-                                    focusNode: _f5,
-                                    maxLines: 1,
-                                    maxLength: 4,
-                                    keyboardType: TextInputType.number,
-                                    style: TextStyle(
-                                        color: AppColors.white100,
-                                        fontWeight: FontWeight.bold),
-                                    decoration: const InputDecoration(
-                                        border: InputBorder.none,
-                                        counter: SizedBox.shrink()),
-                                  ),
-                                ),
+                                leading:  Text(""),
                                 contentPadding: EdgeInsets.zero,
                                 trailing: Icon(
                                   Icons.keyboard_arrow_down,
@@ -403,23 +250,7 @@ class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
                                 onTap: () {
                                   _f6.requestFocus();
                                 },
-                                leading: Container(
-                                  width: 60,
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: TextFormField(
-                                    controller: _txt6,
-                                    focusNode: _f6,
-                                    maxLines: 1,
-                                    maxLength: 4,
-                                    keyboardType: TextInputType.number,
-                                    style: TextStyle(
-                                        color: AppColors.white100,
-                                        fontWeight: FontWeight.bold),
-                                    decoration: const InputDecoration(
-                                        border: InputBorder.none,
-                                        counter: SizedBox.shrink()),
-                                  ),
-                                ),
+                                leading:  Text(""),
                                 contentPadding: EdgeInsets.zero,
                                 trailing: Icon(
                                   Icons.keyboard_arrow_down,
@@ -429,7 +260,7 @@ class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
                     ],
                   ),
                   const SizedBox(height: 10),
-                  Text("Tip oplata", style: TextStyle(color: AppColors.white100)),
+                  Text("Narxi", style: TextStyle(color: AppColors.white100)),
                   Container(
                       margin: const EdgeInsets.all(3),
                       padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -439,6 +270,19 @@ class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
                           border: Border.all(color: AppColors.white100)),
                       child: ListTile(
                         contentPadding: EdgeInsets.zero,
+                        leading: SizedBox(
+                          width: 200,
+                          child: TextFormField(
+                            style: TextStyle(color: AppColors.white100, fontWeight: FontWeight.bold),
+                            keyboardType: TextInputType.number,
+                            maxLength: 5,
+                            maxLines: 1,
+                            decoration:const InputDecoration(
+                              counter: SizedBox.shrink(),
+                              border: InputBorder.none
+                            ),
+                          ),
+                        ),
                         trailing: Icon(
                           Icons.keyboard_arrow_down,
                           color: AppColors.white100,

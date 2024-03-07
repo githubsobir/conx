@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:conx/widgets/main_url.dart';
+import 'package:conx/widgets/saved_box.dart';
 import 'package:dio/dio.dart';
 
 class Place {
@@ -29,15 +31,16 @@ class Suggestion {
 }
 
 class PlaceApiProvider {
+  final _hive = HiveBoxes();
+
   final dio = Dio();
-  final apiKey = "";
   String sessionToken = "";
 
   PlaceApiProvider(this.sessionToken);
 
   Future<List<Suggestion>> fetchSuggestions(String input, String lang) async {
     final request =
-        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&language=$lang&key=$apiKey';
+        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&language=${_hive.langUser}&key=${MainUrl.googleMapApiKey}';
     final response = await dio.get(request);
 
     print(response);
@@ -60,7 +63,7 @@ class PlaceApiProvider {
 
   Future<Place> getLocationFromPlaceId(String placeId) async {
     final url =
-        'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=$apiKey';
+        'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=${MainUrl.googleMapApiKey}';
 
     final response = await dio.get(url);
 

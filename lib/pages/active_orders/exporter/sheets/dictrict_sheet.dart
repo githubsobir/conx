@@ -20,8 +20,8 @@ getDistrictSheet({required BuildContext context, required String winId}) {
 }
 
 class DistrictSheet extends ConsumerStatefulWidget {
-  String windowId;
-  DistrictSheet({super.key, required this.windowId});
+  final String windowId;
+  const DistrictSheet({super.key, required this.windowId});
 
   @override
   ConsumerState<DistrictSheet> createState() => _DistrictSheetState();

@@ -1,12 +1,11 @@
 import 'package:conx/pages/active_orders/driver/info_window/model_product/model_product.dart';
-import 'package:conx/root_and_unver_page/unversal_pages/detail_page.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomInfoWindows extends StatefulWidget {
-  int id;
+  final int id;
 
-  CustomInfoWindows({super.key, required this.id});
+  const CustomInfoWindows({super.key, required this.id});
 
   @override
   State<CustomInfoWindows> createState() => _CustomInfoWindowState();
@@ -49,14 +48,14 @@ class _CustomInfoWindowState extends State<CustomInfoWindows> {
                         fit: BoxFit.cover)),
               ),
               Container(
-                margin: EdgeInsets.all(5),
+                margin: const EdgeInsets.all(5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Maxsulot ${listModelProduct[widget.id].title}",
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    Row(
+                        style: const TextStyle(fontWeight: FontWeight.bold)),
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [

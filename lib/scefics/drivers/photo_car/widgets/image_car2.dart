@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PhotoCarPhoto2 extends ConsumerStatefulWidget {
-  PhotoCarPhoto2({super.key});
+  const PhotoCarPhoto2({super.key});
 
   @override
   ConsumerState<PhotoCarPhoto2> createState() => _PhotoCarPhoto2State();

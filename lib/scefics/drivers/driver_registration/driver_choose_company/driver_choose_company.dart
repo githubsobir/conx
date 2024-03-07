@@ -64,8 +64,8 @@ class _DriverChooseCompanyState extends ConsumerState<DriverChooseCompany> {
                                       onTap: () {
                                         Navigator.of(context).pop();
                                       },
-                                      title: Text("Не указать"),
-                                      trailing: Icon(Icons.arrow_forward_ios),
+                                      title: const Text("Не указать"),
+                                      trailing: const Icon(Icons.arrow_forward_ios),
                                     ))
                                 : Card(
                                     color: Colors.grey.shade100,
@@ -108,14 +108,14 @@ class _DriverChooseCompanyState extends ConsumerState<DriverChooseCompany> {
                                           .listCompany[index - 1]
                                           .companyName),
                                       subtitle:
-                                          Text("Logistics service in Tashkent"),
+                                      const Text("Logistics service in Tashkent"),
                                       trailing: Icon(Icons.arrow_forward_ios),
                                     ))))
                   ],
                 ),
               ),
             )
-          : Center(child: CupertinoActivityIndicator()),
+          : const Center(child: CupertinoActivityIndicator()),
     );
   }
 }

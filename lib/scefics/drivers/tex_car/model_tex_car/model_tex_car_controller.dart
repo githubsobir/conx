@@ -8,8 +8,8 @@ class ModelCarTextController{
     required String txtError1,
   }) {
     return ModelCarTextController(
-      boolGetData: boolGetData1 ?? boolGetData,
-      txtError: txtError1 ?? txtError,
+      boolGetData: boolGetData1,
+      txtError: txtError1,
     );
   }
 

@@ -19,9 +19,9 @@ getBottomSheetRegionList({required BuildContext context, required int id}) {
 }
 
 class UserBottomSheetRegionList extends ConsumerStatefulWidget {
-  String ids;
+  final String ids;
 
-  UserBottomSheetRegionList({super.key, required this.ids});
+  const UserBottomSheetRegionList({super.key, required this.ids});
 
   @override
   ConsumerState<UserBottomSheetRegionList> createState() =>

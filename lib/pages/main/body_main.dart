@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/generated/assets.dart';
 import 'package:conx/pages/main/controller_main_page.dart';
-import 'package:conx/root_and_unver_page/unversal_pages/detail_page.dart';
+import 'package:conx/root_and_unver_page/unversal_pages/details_page/detail_page.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/chart_pie.dart';
 import 'package:conx/widgets/loading_indicator.dart';
@@ -12,9 +12,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BodyMain extends ConsumerStatefulWidget {
-  int index;
+  final int index;
 
-  BodyMain({super.key, required this.index});
+  const BodyMain({super.key, required this.index});
 
   @override
   ConsumerState<BodyMain> createState() => _BodyMainState();
@@ -48,14 +48,14 @@ class _BodyMainState extends ConsumerState<BodyMain> {
                     if (indexImage >=
                         ref
                                 .watch(controllerMainPage.notifier)
-                                .listImages
+                                .listImages[widget.index].image
                                 .length -
                             1) {
                       indexImage = 0;
                     } else {
                       indexImage = indexImage + 1;
                     }
-                    setState(() {});
+                    // setState(() {});
                   } else {
                     // drag from left to right
                     if (indexImage <= 0) {
@@ -68,30 +68,40 @@ class _BodyMainState extends ConsumerState<BodyMain> {
                       indexImage = indexImage - 1;
                     }
 
-                    setState(() {});
+                    // setState(() {});
                   }
                 },
                 child: Stack(
                   children: [
-                    CachedNetworkImage(
-                      width: MediaQuery.of(context).size.width,
-                      height: 320,
-                      fit: BoxFit.cover,
-                      imageUrl: ref
-                          .watch(controllerMainPage.notifier)
-                          .listImages[indexImage]
-                          .image[0]
-                          .toString(),
-                      alignment: Alignment.topCenter,
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) =>
-                              loadingIndicator(),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
+                    SizedBox(
+                      height: 420,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        physics:const NeverScrollableScrollPhysics(),
+                        itemCount: ref
+                            .watch(controllerMainPage.notifier)
+                            .listImages[indexImage]
+                            .image.length,
+                        itemBuilder: (context, index) => CachedNetworkImage(
+                        width: MediaQuery.of(context).size.width,
+                        height: 400,
+                        fit: BoxFit.cover,
+                        imageUrl: ref
+                            .watch(controllerMainPage.notifier)
+                            .listImages[indexImage]
+                            .image[index]
+                            .toString(),
+                        alignment: Alignment.topCenter,
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) =>
+                            loadingIndicator(),
+                        errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                      ),),
                     ),
                     Container(
                       padding: const EdgeInsets.only(right: 10, bottom: 10),
-                      height: 320,
+                      height: 420,
                       child: Align(
                         alignment: Alignment.bottomRight,
                         child: Container(
@@ -118,7 +128,7 @@ class _BodyMainState extends ConsumerState<BodyMain> {
                     scrollDirection: Axis.horizontal,
                     itemCount: ref
                         .watch(controllerMainPage.notifier)
-                        .listImages
+                        .listImages[0].image
                         .length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) => GestureDetector(
@@ -291,7 +301,7 @@ class _BodyMainState extends ConsumerState<BodyMain> {
                                   .listMainPage[widget.index],
                               list: ref
                                   .watch(controllerMainPage.notifier)
-                                  .listImages[indexImage]
+                                  .listImages[widget.index]
                                   .image),
                         ));
                   },

@@ -148,7 +148,7 @@ class _PhotoPassport3State extends ConsumerState<PhotoPassport3> {
             ),
           ),
         ),
-      ):Center(child: CupertinoActivityIndicator(),),
+      ):const Center(child: CupertinoActivityIndicator(),),
     );
   }
   String getDataFile(){

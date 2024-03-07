@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 
 
 class AppChartPie extends StatelessWidget {
-  List<PieData> pies;
-  String text1;
-  String text2;
+  final List<PieData> pies;
+  final String text1;
+  final String text2;
 
-  AppChartPie(
+  const AppChartPie(
       {super.key,
       required this.pies,
       required this.text1,
@@ -57,13 +57,13 @@ class AppChartPie extends StatelessWidget {
                 ),
                 Text(
                   text2,
-                  style: TextStyle(
+                  style: const  TextStyle(
                     color: Colors.orange,
                     fontSize: 9,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(
+                const   Text(
                   "50 %",
                   style: TextStyle(
                       color: Colors.orange, fontWeight: FontWeight.bold),

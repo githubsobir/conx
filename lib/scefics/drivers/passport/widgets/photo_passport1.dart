@@ -91,25 +91,25 @@ class _PhotoPassport1State extends ConsumerState<PhotoPassport1> {
                                     fontSize: 30,
                                     fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.start),
-                            SizedBox(height: 20),
-                            Text(
+                            const  SizedBox(height: 20),
+                            const   Text(
                                 "Добейтес совпадения ИД карты с рамкой.\nУбедитес что:",
                                 style: TextStyle(
                                     color: Colors.grey,
                                     fontWeight: FontWeight.normal),
                                 textAlign: TextAlign.start),
-                            SizedBox(height: 20),
-                            Text("-ИД карта хорошо освещена",
+                            const  SizedBox(height: 20),
+                            const   Text("-ИД карта хорошо освещена",
                                 style: TextStyle(
                                     color: Colors.grey,
                                     fontWeight: FontWeight.normal),
                                 textAlign: TextAlign.start),
-                            Text("ИД карта не перекрывается пальцем",
+                            const   Text("ИД карта не перекрывается пальцем",
                                 style: TextStyle(
                                     color: Colors.grey,
                                     fontWeight: FontWeight.normal),
                                 textAlign: TextAlign.start),
-                            Text("-Отсутствуют блики",
+                            const  Text("-Отсутствуют блики",
                                 style: TextStyle(
                                     color: Colors.grey,
                                     fontWeight: FontWeight.normal),

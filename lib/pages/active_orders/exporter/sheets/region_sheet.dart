@@ -21,9 +21,9 @@ getBottomSheet({required BuildContext context, required int id, required WidgetR
 }
 
 class UserBottomSheet extends ConsumerStatefulWidget {
-  int idWindow;
+  final int idWindow;
 
-  UserBottomSheet({super.key, required this.idWindow});
+  const UserBottomSheet({super.key, required this.idWindow});
 
   @override
   ConsumerState<UserBottomSheet> createState() => _UserBottomSheetState();

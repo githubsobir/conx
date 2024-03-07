@@ -10,9 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SmsVerificationPage extends ConsumerStatefulWidget {
-  SmsVerificationPage(this.windowId, {super.key});
+  final String windowId;
+  const SmsVerificationPage(this.windowId, {super.key});
 
-  String windowId;
+
 
   @override
   ConsumerState<SmsVerificationPage> createState() =>

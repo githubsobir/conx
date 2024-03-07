@@ -59,7 +59,7 @@ class _PhotoCarDriverState extends ConsumerState<PhotoCarDriver> {
                               Navigator.push(
                                   context,
                                   CupertinoPageRoute(
-                                    builder: (context) => PhotoCarPhoto1(),
+                                    builder: (context) => const PhotoCarPhoto1(),
                                   ));
                             },
                             child: getImage(ref, 0) == "1"
@@ -106,7 +106,7 @@ class _PhotoCarDriverState extends ConsumerState<PhotoCarDriver> {
                               Navigator.push(
                                   context,
                                   CupertinoPageRoute(
-                                    builder: (context) => PhotoCarPhoto2(),
+                                    builder: (context) => const PhotoCarPhoto2(),
                                   ));
                             },
                             child: getImage(ref, 1) == "1"
@@ -162,7 +162,7 @@ class _PhotoCarDriverState extends ConsumerState<PhotoCarDriver> {
                               Navigator.push(
                                   context,
                                   CupertinoPageRoute(
-                                    builder: (context) => PhotoCarPhoto3(),
+                                    builder: (context) => const PhotoCarPhoto3(),
                                   ));
                             },
                             child: getImage(ref, 2) == "1"
@@ -209,7 +209,7 @@ class _PhotoCarDriverState extends ConsumerState<PhotoCarDriver> {
                               Navigator.push(
                                   context,
                                   CupertinoPageRoute(
-                                    builder: (context) => PhotoCarPhoto4(),
+                                    builder: (context) => const PhotoCarPhoto4(),
                                   ));
                             },
                             child: getImage(ref, 3) == "1"
@@ -260,7 +260,7 @@ class _PhotoCarDriverState extends ConsumerState<PhotoCarDriver> {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                builder: (context) => PhotoCarPhoto5(),
+                                builder: (context) => const PhotoCarPhoto5(),
                               ));
                         },
                         child: getImage(ref, 4) == "1"

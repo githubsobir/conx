@@ -29,9 +29,9 @@ getOrderBottomSheet(
 }
 
 class UserBottomSheetComment extends ConsumerStatefulWidget {
-  int idWindow;
+  final int idWindow;
 
-  UserBottomSheetComment({super.key, required this.idWindow});
+ const UserBottomSheetComment({super.key, required this.idWindow});
 
   @override
   ConsumerState<UserBottomSheetComment> createState() =>

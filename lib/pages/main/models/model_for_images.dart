@@ -1,12 +1,15 @@
 class ModelOrderImagesList {
+  dynamic idItem;
   List<String> image;
 
   ModelOrderImagesList({
+     this.idItem,
     required this.image,
   });
 
   factory ModelOrderImagesList.fromJson(Map<String, dynamic> json) => ModelOrderImagesList(
-    image: List<String>.from(json["String"].map((x) => x)),
+    idItem: json["idItem"],
+    image: List<String>.from(json["image"].map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {

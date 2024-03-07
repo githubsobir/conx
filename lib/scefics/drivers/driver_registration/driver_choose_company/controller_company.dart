@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:conx/scefics/drivers/choose_rate/choose_rate.dart';
 import 'package:conx/scefics/drivers/driver_registration/driver_choose_company/model/model_choose_company.dart';
 import 'package:conx/scefics/drivers/driver_registration/driver_choose_company/model/model_controller.dart';
 import 'package:conx/widgets/main_url.dart';

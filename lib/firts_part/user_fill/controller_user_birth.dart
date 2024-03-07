@@ -15,9 +15,7 @@ final userBirthController =
 class UserBothNotifairProvider extends StateNotifier<ModelUserBirthController> {
   UserBothNotifairProvider()
       : super(ModelUserBirthController(
-            success: true, message: "", errorMessage: "")) {
-
-  }
+            success: true, message: "", errorMessage: ""));
 
   var box = HiveBoxes();
   var dio = Dio();
@@ -29,8 +27,7 @@ class UserBothNotifairProvider extends StateNotifier<ModelUserBirthController> {
     late Response response;
     late ModelUserBirth modelUserBirth;
     try {
-      print("getUserBirth");
-      print(box.userType.toString());
+
       state = state.copyWith(success1: false, message1: "", errorMessage1: "");
       if (box.userType.toString() == "1") {
         response = await dio.get(

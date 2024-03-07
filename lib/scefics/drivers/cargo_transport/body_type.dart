@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class BodyType extends ConsumerStatefulWidget {
-  String bodyType;
+  final String bodyType;
 
-  BodyType({super.key, required this.bodyType});
+  const BodyType({super.key, required this.bodyType});
 
   @override
   ConsumerState<BodyType> createState() => _BodyTypeState();

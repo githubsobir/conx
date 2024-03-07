@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PhotoCarPhoto3 extends ConsumerStatefulWidget {
-  PhotoCarPhoto3({super.key});
+  const PhotoCarPhoto3({super.key});
 
   @override
   ConsumerState<PhotoCarPhoto3> createState() => _PhotoCarPhoto3State();
@@ -92,14 +92,14 @@ class _PhotoCarPhoto3State extends ConsumerState<PhotoCarPhoto3> {
                                           fontSize: 30,
                                           fontWeight: FontWeight.bold),
                                       textAlign: TextAlign.start),
-                                  SizedBox(height: 20),
+                                  const   SizedBox(height: 20),
                                   Text(
                                       "Добейтес совпадения ИД карты с рамкой.\nУбедитес что:",
                                       style: TextStyle(
                                           color: AppColors.white100,
                                           fontWeight: FontWeight.normal),
                                       textAlign: TextAlign.start),
-                                  SizedBox(height: 20),
+                                  const SizedBox(height: 20),
                                   Text("-ИД карта хорошо освещена",
                                       style: TextStyle(
                                           color: AppColors.white100,

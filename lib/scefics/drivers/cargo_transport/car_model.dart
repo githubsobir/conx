@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CarModel extends ConsumerStatefulWidget {
-  String manufactureId;
-  CarModel({super.key, required this.manufactureId});
+  final String manufactureId;
+  const CarModel({super.key, required this.manufactureId});
 
   @override
   ConsumerState<CarModel> createState() => _CarModelState();

@@ -18,10 +18,7 @@ final userController =
 class UserNotifairProvider extends StateNotifier<ModelUserController> {
   UserNotifairProvider()
       : super(
-            ModelUserController(success: true, message: "", errorMessage: "")){
-
-  }
-
+            ModelUserController(success: true, message: "", errorMessage: ""));
   var box = HiveBoxes();
   var dio = Dio();
 

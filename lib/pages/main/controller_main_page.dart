@@ -10,8 +10,6 @@ import 'package:conx/widgets/saved_box.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
-
 final controllerSearchOpen = StateProvider<bool>((ref) => false);
 
 final controllerMainPage = StateNotifierProvider.autoDispose<ControllerMainPage,
@@ -44,40 +42,33 @@ class ControllerMainPage extends StateNotifier<ModelControllerMainPage> {
           "${MainUrl.urlMain}/api/client/order-list/",
           options:
               Options(headers: {"Authorization": "Bearer ${box.userToken}"}));
-
+      log(jsonEncode(response.data).toString());
       listMainPage = (response.data as List)
           .map((e) => ModelOrderList.fromJson(e))
           .toList();
-
-
-
+      log("1");
       for (int i = 0; i < listMainPage.length; i++) {
-         listImages.add(ModelOrderImagesList(image: [i.toString()]));
-
+        listImages.add(ModelOrderImagesList(idItem: i.toString(), image: []));
+        log("2");
         if (listMainPage[i].file1.toString() != "null") {
-          listImages[i] = (
-              ModelOrderImagesList(image:[ listMainPage[i].file1.toString()]));
+          listImages[i].image.add(listMainPage[i].file1.toString());
         }
         if (listMainPage[i].file2.toString() != "null") {
-          listImages[i] = (
-              ModelOrderImagesList(image: [listMainPage[i].file2.toString()]));
+          listImages[i].image.add(listMainPage[i].file2.toString());
         }
         if (listMainPage[i].file3.toString() != "null") {
-          listImages[i] = (
-              ModelOrderImagesList(image: [listMainPage[i].file3.toString()]));
+          listImages[i].image.add(listMainPage[i].file3.toString());
         }
         if (listMainPage[i].file4.toString() != "null") {
-          listImages[i] = (
-              ModelOrderImagesList(image: [listMainPage[i].file4.toString()]));
+          listImages[i].image.add(listMainPage[i].file4.toString());
         }
         if (listMainPage[i].file5.toString() != "null") {
-          listImages[i] = (
-              ModelOrderImagesList(image: [listMainPage[i].file5.toString()]));
+          listImages[i].image.add(listMainPage[i].file5.toString());
         }
         if (listMainPage[i].file6.toString() != "null") {
-          listImages[i] = (
-              ModelOrderImagesList(image: [listMainPage[i].file6.toString()]));
+          listImages[i].image.add(listMainPage[i].file6.toString());
         }
+        log("3");
       }
       log(jsonEncode(listImages).toString());
 

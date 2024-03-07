@@ -103,12 +103,12 @@ class ModelOrderList {
 }
 
 class Location {
-  int id;
-  String name;
+  dynamic id;
+  dynamic name;
 
   Location({
-    required this.id,
-    required this.name,
+    this.id,
+    this.name,
   });
 
   factory Location.fromJson(Map<String, dynamic> json) => Location(

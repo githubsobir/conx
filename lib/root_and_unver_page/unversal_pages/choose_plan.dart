@@ -162,16 +162,16 @@ class _ChoosePlabnState extends State<ChoosePlan> {
                         color: Colors.white,
                      ),),
                   ),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   MaterialButton(
                     onPressed: () {},
                     height: 50,
                     shape: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: AppColors.colorBackground)),
+                        borderSide: const BorderSide(color: AppColors.colorBackground)),
                     color: Colors.white,
                     minWidth: double.infinity,
-                    child: Text("O'tkazib yuborish", style: TextStyle(
+                    child: const Text("O'tkazib yuborish", style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color:AppColors.colorBackground,
                     ),),

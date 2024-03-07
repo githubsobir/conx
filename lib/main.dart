@@ -64,23 +64,24 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        debugShowCheckedModeBanner: false,
-        home:mainPage(),
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      debugShowCheckedModeBanner: false,
+      // home:mainPage(),
+      home: const DriverOrders(),
     );
   }
 
-  Widget mainPage(){
-    try{
+  Widget mainPage() {
+    try {
       // _box.langUser == "1" bo'lsa til tanlangan
-      if(_box.langUser == "1"){
-      return const RootPage();
-      }else{
+      if (_box.langUser == "1") {
+        return const RootPage();
+      } else {
         return const ChooseLang();
       }
-    }catch(e){
+    } catch (e) {
       return const ChooseLang();
     }
   }

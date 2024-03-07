@@ -39,6 +39,7 @@ dependencies:
   permission_handler: ^11.3.0
   easy_pie_chart: ^1.0.0
   flutter_rating_null_safe: ^0.0.3
+  uuid: ^4.3.3
 
 dev_dependencies:
   flutter_test:

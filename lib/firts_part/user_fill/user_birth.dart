@@ -14,7 +14,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 class UserBoth extends ConsumerStatefulWidget {
   const UserBoth({super.key});
 
@@ -26,7 +25,7 @@ class _UserBothState extends ConsumerState<UserBoth> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(children: [ BackgroundWidget(), buildBody()]),
+      body: Stack(children: [const BackgroundWidget(), buildBody()]),
     );
   }
 
@@ -72,9 +71,7 @@ class _UserBothState extends ConsumerState<UserBoth> {
               Navigator.of(context).pop();
             },
             icon: Icon(
-
-              Platform.isIOS?Icons.arrow_back_ios:
-              Icons.arrow_back,
+              Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
               color: AppColors.white100,
             ),
           ),
@@ -129,27 +126,26 @@ class _UserBothState extends ConsumerState<UserBoth> {
           PrimaryButton(
               text: "continue".tr(),
               onPressed: () {
-                if(boolSelected){
-                  ref.read(userBirthController.notifier).setUserBirth(
-                      date: DateFormat('yyyy-MM-dd')
-                          .format(selectedDate)
-                          .toString()).then((value) {
+                if (boolSelected) {
+                  ref
+                      .read(userBirthController.notifier)
+                      .setUserBirth(
+                          date: DateFormat('yyyy-MM-dd')
+                              .format(selectedDate)
+                              .toString())
+                      .then((value) {
                     Navigator.push(
                         context,
                         CupertinoPageRoute(
-                          builder: (context) => const AddPhotoRegistration( ),
+                          builder: (context) => const AddPhotoRegistration(),
                         ));
                     return true;
                   });
-
-                }else{
-                  MyWidgets.snackBarMyWidgets(context: context, text: "Tug'ulgan sanani tanlang");
+                } else {
+                  MyWidgets.snackBarMyWidgets(
+                      context: context, text: "Tug'ulgan sanani tanlang");
                 }
-
-
-
               }),
-    
         ],
       ),
     );
@@ -162,38 +158,60 @@ class _UserBothState extends ConsumerState<UserBoth> {
         return Container(
           height: 230,
           color: Colors.white,
-          child: Column(
+          child: Stack(
             children: [
-              GestureDetector(
-                onTap: () {
-                  if(!boolSelected){
-                    boolSelected = true;
-                    selectedDate = DateTime(2006, 1, 1);
-                  }
-                  Navigator.of(context).pop();
-                },
-                child: Container(
-                  padding: const EdgeInsets.only(right: 20, top: 20),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [Icon(Icons.check)],
+              const BackgroundWidget(),
+              Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      if (!boolSelected) {
+                        boolSelected = true;
+                        selectedDate = DateTime(2006, 1, 1);
+                      }
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.only(right: 20, top: 20),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [Icon(Icons.check)],
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 180,
-                child: CupertinoDatePicker(
-                  initialDateTime: DateTime(2006),
-                  onDateTimeChanged: (DateTime newDate) {
-                    selectedDate = newDate;
-                    boolSelected = true;
-                    setState(() {});
-                  },
-                  mode: CupertinoDatePickerMode.date,
-                  minimumDate: DateTime(1960),
-                  maximumDate: DateTime(2006),
-                ),
+                  SizedBox(
+                      height: 180,
+                      child: CupertinoTheme(
+                        data: CupertinoThemeData(
+                            brightness: CupertinoTheme.of(context).brightness,
+
+                            textTheme: CupertinoTextThemeData(
+                              // textStyle: TextStyle(color: AppColors.white100),
+                              // actionTextStyle:
+                              //     TextStyle(color: AppColors.white100),
+                              // navActionTextStyle:  TextStyle(color: AppColors.white100),
+                              // navLargeTitleTextStyle:  TextStyle(color: AppColors.white100),
+                              // navTitleTextStyle:  TextStyle(color: AppColors.white100),
+                              // pickerTextStyle:  TextStyle(color: AppColors.white100),
+                              // primaryColor:   AppColors.white100,
+                              // tabLabelTextStyle:  TextStyle(color: AppColors.white100),
+
+                              dateTimePickerTextStyle:  TextStyle(color: AppColors.white100, fontSize: 20),
+                            )),
+                        child: CupertinoDatePicker(
+                          initialDateTime: DateTime(2006),
+                          onDateTimeChanged: (DateTime newDate) {
+                            selectedDate = newDate;
+                            boolSelected = true;
+                            setState(() {});
+                          },
+                          mode: CupertinoDatePickerMode.date,
+                          minimumDate: DateTime(1960),
+                          maximumDate: DateTime(2006),
+                        ),
+                      )),
+                ],
               ),
             ],
           ),

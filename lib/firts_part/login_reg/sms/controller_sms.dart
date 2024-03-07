@@ -129,7 +129,7 @@ class SmsControllerClass extends StateNotifier<ModelSmsAction> {
           txtError1: e.toString(),
           txtSmsNote: "");
     } catch (ww) {
-
+    log(ww.toString());
     }
   }
 
@@ -160,8 +160,8 @@ class SmsControllerClass extends StateNotifier<ModelSmsAction> {
           txtError1: e.toString(),
           txtSmsNote: "");
     } catch (ww) {
-      print("####");
-      print(ww.toString());
+      log("####");
+      log(ww.toString());
     }
   }
 

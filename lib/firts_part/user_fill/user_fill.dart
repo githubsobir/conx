@@ -3,12 +3,14 @@ import 'dart:io';
 
 import 'package:conx/firts_part/login_reg/login/login_page.dart';
 import 'package:conx/firts_part/user_fill/controller_user.dart';
+import 'package:conx/firts_part/user_fill/user_birth.dart';
 import 'package:conx/firts_part/user_fill/widgets_user_fill/user_1_loading.dart';
 import 'package:conx/firts_part/user_fill/widgets_user_fill/user_2_error.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/primary_button.dart';
 import 'package:conx/widgets/saved_box.dart';
+import 'package:conx/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -159,74 +161,23 @@ class _UserFIOState extends ConsumerState<UserFIO> {
                   builder: (context1, ref, child) => PrimaryButton(
                     text: "continue".tr(),
                     onPressed: () {
-                      log(txtName.text);
-                      log(txtFName.text);
-                      log(txtSName.text);
-                      ref.read(userController.notifier).setUserFIO(
-                          context: context,
-                          name: txtName.text.toString(),
-                          lName: txtFName.text.toString(),
-                          sName: txtSName.text.toString());
+                      if ( txtName.text.toString().length > 2 ||
+                          txtFName.text.length > 2 ||
+                          txtSName.text.toString().length > 2) {
+                        ref.read(userController.notifier).setUserFIO(
+                            context: context,
+                            name: txtName.text.toString(),
+                            lName: txtFName.text.toString(),
+                            sName: txtSName.text.toString());
 
-                      // if (box.userName.toString().length > 4 ||
-                      //     box.userSName.toString().length > 4 ||
-                      //     box.userFName.toString().length > 4) {
-                      //   ref.read(userController.notifier).updateUserFIO(
-                      //       name: txtName.text.toString(),
-                      //       lName: txtFName.text.toString(),
-                      //       sName: txtSName.text.toString(),
-                      //       context: context);
-                      //   Navigator.push(
-                      //       context,
-                      //       CupertinoPageRoute(
-                      //         builder: (context) => const UserBoth(),
-                      //       ));
-                      // } else {
-                      //   ref.read(userController.notifier).setUserFIO(
-                      //     context: context,
-                      //       name: txtName.text.toString(),
-                      //       lName: txtFName.text.toString(),
-                      //       sName: txtSName.text.toString());
-                      //
-                      // }
+                      } else {
+                       MyWidgets.snackBarMyWidgets(context: context, text: "Barcha maydonlarni to'ldiring");
+
+                      }
                     },
                   ),
                 ),
-                const Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "doYouHaveAccount".tr(),
-                      style: TextStyle(
-                          fontFamily: "Inter",
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.white80,
-                          fontSize: 14),
-                    ),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (context) => const LoginPage(),
-                            ));
-                      },
-                      child: Text(
-                        "login".tr(),
-                        style: TextStyle(
-                            fontFamily: "Inter",
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.white100,
-                            fontSize: 14),
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(height: 20)
+
               ],
             ),
           ),

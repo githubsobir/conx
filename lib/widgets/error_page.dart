@@ -1,7 +1,9 @@
+import 'package:conx/firts_part/login_reg/reg/reg.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/primary_button.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
@@ -79,16 +81,26 @@ class _ErrorPageState extends State<ErrorPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Telefon raqamingiz ro'yxatdan o'tmagan ro'yxatdan o'ting",
+                    "Telefon raqam ro'yxatdan o'tmagan",
                     textAlign: TextAlign.center,
                     style: TextStyle(color: AppColors.white100, fontSize: 20),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 40),
                   PrimaryButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
                    text:"tryAgain".tr()
+                  ),
+                   Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text("YOKI", style: TextStyle(color: AppColors.white100),),
+                  ),
+                  PrimaryButton(
+                      onPressed: () {
+                        Navigator.push(context, CupertinoPageRoute(builder: (context) => const Registration(),));
+                      },
+                      text:"Ro'yxatdan o'tish"
                   ),
                 ],
               ),

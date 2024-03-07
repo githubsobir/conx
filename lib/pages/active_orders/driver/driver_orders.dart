@@ -343,6 +343,11 @@ class _DriverOrdersState extends State<DriverOrders>
                                             imageUrl:
                                                 "https://www.agmrc.org/media/cms/onions_1B4338199EE95.jpg",
                                             fit: BoxFit.cover,
+                                            placeholder: (context, url) =>
+                                                const Center(child: CircularProgressIndicator()),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    const Icon(Icons.error),
                                             width: 130,
                                             height: 156,
                                           ),

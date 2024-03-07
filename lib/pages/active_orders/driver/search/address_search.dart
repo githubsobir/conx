@@ -28,7 +28,8 @@ class AddressSearch extends SearchDelegate<Suggestion> {
       tooltip: 'Back',
       icon: const Icon(Icons.arrow_back),
       onPressed: () {
-        close(context, Suggestion("", ""));
+        close(context,
+            Suggestion("ChIJIx_0MSmLrjgRRbhUtgZeCYE", "Amir Temur xiyoboni"));
       },
     );
   }
@@ -60,7 +61,9 @@ class AddressSearch extends SearchDelegate<Suggestion> {
                   ),
                   itemCount: snapshot.data?.length,
                 )
-              : const Text('Loading...'),
+              : const Center(
+                  child: CircularProgressIndicator(),
+                ),
     );
   }
 }

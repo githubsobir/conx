@@ -30,7 +30,7 @@ class Suggestion {
 
 class PlaceApiProvider {
   final dio = Dio();
-  final apiKey = "";
+  final apiKey = "AIzaSyD1SRVQyNfUEziDHrt-dwUt8o-3PGzBqYo";
   String sessionToken = "";
 
   PlaceApiProvider(this.sessionToken);

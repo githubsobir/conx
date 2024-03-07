@@ -5,7 +5,6 @@ import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ConfirmationPage extends ConsumerStatefulWidget {
@@ -166,17 +165,18 @@ class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
                     trailing: Icon(
                       Icons.edit,
                       color: AppColors.white100,
-                    ).animate(
-                        onPlay: (controller) =>
-                            controller.repeat(reverse: true, period: const Duration(seconds: 4)))
-                        .scaleXY(
-                        end: 1,
-                        delay: const Duration(milliseconds: 1000),
-                        curve: Curves.linear)
-                        .shimmer(
-                        color: AppColors.background,
-                        delay: const Duration(milliseconds: 1000))
-                        .elevation(end: 0),
+                    )
+                        // .animate(
+                        // onPlay: (controller) =>
+                        //     controller.repeat(reverse: true, period: const Duration(seconds: 4)))
+                        // .scaleXY(
+                        // end: 1,
+                        // delay: const Duration(milliseconds: 1000),
+                        // curve: Curves.linear)
+                        // .shimmer(
+                        // color: AppColors.background,
+                        // delay: const Duration(milliseconds: 1000))
+                        // .elevation(end: 0),
                   )),
                  const SizedBox(height: 20),
                  PrimaryButton(text: "Принимат", onPressed: () {})

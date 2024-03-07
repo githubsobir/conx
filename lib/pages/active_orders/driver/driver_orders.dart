@@ -4,7 +4,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conx/pages/active_orders/driver/info_window/info_window.dart';
 import 'package:conx/pages/active_orders/driver/search/address_search.dart';
 import 'package:conx/pages/active_orders/driver/search/place_services.dart';
-import 'package:conx/pages/active_orders/driver/search/search.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:custom_info_window/custom_info_window.dart';
@@ -232,17 +231,11 @@ class _DriverOrdersState extends State<DriverOrders>
                               ),
                             ),
                             const SizedBox(width: 10),
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) =>
-                                          const PlacesApiGoogleMapSearch()));
-                                },
-                                child: SvgPicture.asset(
-                                  Assets.imagesLinear,
-                                  width: 24,
-                                  height: 24,
-                                )),
+                            SvgPicture.asset(
+                              Assets.imagesLinear,
+                              width: 24,
+                              height: 24,
+                            ),
                             const SizedBox(width: 12)
                           ],
                         ),

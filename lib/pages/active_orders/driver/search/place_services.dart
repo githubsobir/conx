@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:conx/widgets/main_url.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:dio/dio.dart';
+import 'package:http/http.dart';
 
 class Place {
   double latitude;
@@ -33,7 +34,8 @@ class Suggestion {
 class PlaceApiProvider {
   final _hive = HiveBoxes();
 
-  final dio = Dio();
+  final _dio = Dio();
+  final _client = Client();
   String sessionToken = "";
 
   PlaceApiProvider(this.sessionToken);
@@ -41,14 +43,14 @@ class PlaceApiProvider {
   Future<List<Suggestion>> fetchSuggestions(String input, String lang) async {
     final request =
         'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&language=${_hive.langUser}&key=${MainUrl.googleMapApiKey}';
-    final response = await dio.get(request);
-    print(response);
+    final response = await _dio.get(request);
     if (response.statusCode == 200) {
-      final result = json.decode(response.data);
+      Map<String, dynamic> result = response.data;
       if (result['status'] == 'OK') {
-        return result['predictions']
+        var list = result['predictions']
             .map<Suggestion>((p) => Suggestion(p['place_id'], p['description']))
             .toList();
+        return list;
       }
       if (result['status'] == 'ZERO_RESULTS') {
         return [];
@@ -63,16 +65,18 @@ class PlaceApiProvider {
     final url =
         'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=${MainUrl.googleMapApiKey}';
 
-    final response = await dio.get(url);
+    final response = await _dio.get(url);
 
     if (response.statusCode == 200) {
-      final data = json.decode(response.data);
+      final data = response.data;
       final result = data['result'];
       final geometry = result['geometry'];
       final location = geometry['location'];
       final lat = location['lat'];
       final lng = location['lng'];
 
+      print(lat);
+      print(lng);
       return Place(lat, lng);
     } else {
       throw Exception('Failed to load location');

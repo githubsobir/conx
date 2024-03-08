@@ -40,6 +40,7 @@ dependencies:
   easy_pie_chart: ^1.0.0
   flutter_rating_null_safe: ^0.0.3
   uuid: ^4.3.3
+  http: ^1.2.1
 
 dev_dependencies:
   flutter_test:

@@ -1,23 +1,7 @@
-import 'dart:convert';
 import 'package:conx/widgets/main_url.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:dio/dio.dart';
-import 'package:http/http.dart';
-
-class Place {
-  double latitude;
-  double longitude;
-
-  Place(
-    this.latitude,
-    this.longitude,
-  );
-
-  @override
-  String toString() {
-    return 'Place(latitude: $latitude, longitude: $longitude)';
-  }
-}
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Suggestion {
   final String placeId;
@@ -35,7 +19,6 @@ class PlaceApiProvider {
   final _hive = HiveBoxes();
 
   final _dio = Dio();
-  final _client = Client();
   String sessionToken = "";
 
   PlaceApiProvider(this.sessionToken);
@@ -61,7 +44,7 @@ class PlaceApiProvider {
     }
   }
 
-  Future<Place> getLocationFromPlaceId(String placeId) async {
+  Future<LatLng> getLocationFromPlaceId(String placeId) async {
     final url =
         'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=${MainUrl.googleMapApiKey}';
 
@@ -77,7 +60,7 @@ class PlaceApiProvider {
 
       print(lat);
       print(lng);
-      return Place(lat, lng);
+      return LatLng(lat, lng);
     } else {
       throw Exception('Failed to load location');
     }

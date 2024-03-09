@@ -16,6 +16,7 @@ class Assets {
   static const String fontsSFProDisplaySemiBold = 'assets/fonts/SF-Pro-Display-SemiBold.otf';
   static const String iconsIcBox = 'assets/icons/ic_box.svg';
   static const String iconsIcGlobus = 'assets/icons/ic_globus.svg';
+  static const String iconsIcMarker = 'assets/icons/ic_marker.svg';
   static const String iconsIcOrders = 'assets/icons/ic_orders.png';
   static const String iconsIcProfile = 'assets/icons/ic_profile.svg';
   static const String iconsIcRouting = 'assets/icons/ic_routing.svg';

@@ -39,5 +39,7 @@
   "lastname": "Lastname",
   "more": "More",
   "select": "Select",
-  "enter_address": "Enter your address"
+  "enter_address": "Enter your address",
+  "show_orders": "Show orders",
+  "hide_orders": "Hide orders"
 }

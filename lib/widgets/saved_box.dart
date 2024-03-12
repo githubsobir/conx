@@ -22,7 +22,7 @@ class HiveBoxes {
       return _box.get("langUser");
     } catch (e) {
       log(e.toString());
-      return "-1";
+      return "uz";
     }
   }
 
@@ -41,7 +41,7 @@ class HiveBoxes {
       return _box.get("langUserLang");
     } catch (e) {
       log(e.toString());
-      return "-1";
+      return "uz";
     }
   }
 

@@ -47,10 +47,7 @@ class AddressSearch extends SearchDelegate<Suggestion> {
           : apiClient?.fetchSuggestions(
               query, Localizations.localeOf(context).languageCode),
       builder: (context, snapshot) => query == ''
-          ? Container(
-              padding: const EdgeInsets.all(16.0),
-              child: const Text('Enter your address'),
-            )
+          ? Container()
           : snapshot.hasData
               ? ListView.builder(
                   itemBuilder: (context, index) => ListTile(

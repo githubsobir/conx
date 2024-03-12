@@ -1,4 +1,6 @@
 import 'package:conx/pages/active_orders/driver/search/place_services.dart';
+import 'package:conx/theme/app_colors.dart';
+import 'package:conx/widgets/background_widget.dart';
 import 'package:flutter/material.dart';
 
 class AddressSearch extends SearchDelegate<Suggestion> {
@@ -24,14 +26,16 @@ class AddressSearch extends SearchDelegate<Suggestion> {
 
   @override
   Widget buildLeading(BuildContext context) {
-    return IconButton(
+    return Stack(children: [
+      IconButton(
       tooltip: 'Back',
       icon: const Icon(Icons.arrow_back),
       onPressed: () {
         close(context,
             Suggestion("ChIJIx_0MSmLrjgRRbhUtgZeCYE", "Amir Temur xiyoboni"));
       },
-    );
+    )
+    ],);
   }
 
   @override
@@ -41,26 +45,35 @@ class AddressSearch extends SearchDelegate<Suggestion> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return FutureBuilder(
-      future: query == ""
-          ? null
-          : apiClient?.fetchSuggestions(
-              query, Localizations.localeOf(context).languageCode),
-      builder: (context, snapshot) => query == ''
-          ? Container()
-          : snapshot.hasData
-              ? ListView.builder(
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text((snapshot.data![index]).description),
-                    onTap: () {
-                      close(context, snapshot.data![index]);
-                    },
-                  ),
-                  itemCount: snapshot.data?.length,
-                )
-              : const Center(
-                  child: CircularProgressIndicator(),
-                ),
+
+    return Stack(
+      children: [
+        const BackgroundWidget(),
+        FutureBuilder(
+          future: query == ""
+              ? null
+              : apiClient?.fetchSuggestions(
+                  query, Localizations.localeOf(context).languageCode),
+          builder: (context, snapshot) => query == ''
+              ? Container()
+              : snapshot.hasData
+                  ? ListView.builder(
+                      itemBuilder: (context, index) => ListTile(
+                        title: Text(
+                          (snapshot.data![index]).description,
+                          style: TextStyle(color: AppColors.white100),
+                        ),
+                        onTap: () {
+                          close(context, snapshot.data![index]);
+                        },
+                      ),
+                      itemCount: snapshot.data?.length,
+                    )
+                  : const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+        ),
+      ],
     );
   }
 }

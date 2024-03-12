@@ -132,7 +132,7 @@ class _DriverOrdersState extends State<DriverOrders>
       myMarker.add(Marker(
           markerId: const MarkerId("joylashuvim"),
           position: LatLng(value.latitude, value.longitude),
-          infoWindow: InfoWindow(title: "joylashuvim")));
+          infoWindow:const InfoWindow(title: "joylashuvim")));
       CameraPosition cameraPosition = CameraPosition(
           target: LatLng(value.latitude, value.longitude),
           zoom: 14,

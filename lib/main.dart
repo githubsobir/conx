@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:connection_notifier/connection_notifier.dart';
@@ -69,14 +70,17 @@ class MyApp extends ConsumerWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       debugShowCheckedModeBanner: false,
-      home: const DriverOrders(),
+      home:  mainPage(),
     );
   }
 
   Widget mainPage() {
     try {
+      log("###");
+      log(_box.langUser);
       // _box.langUser == "1" bo'lsa til tanlangan
       if (_box.langUser == "1") {
+        log(_box.langUser);
         return const RootPage();
       } else {
         return const ChooseLang();

@@ -37,7 +37,6 @@ class PlaceApiProvider {
   String sessionToken = "";
 
   PlaceApiProvider(this.sessionToken);
-
   Future<List<Suggestion>> fetchSuggestions(String input, String lang) async {
     final request =
         'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&language=${_hive.langUser}&key=${MainUrl.googleMapApiKey}';

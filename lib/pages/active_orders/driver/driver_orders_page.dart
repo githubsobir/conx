@@ -10,8 +10,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../generated/assets.dart';
@@ -44,12 +44,17 @@ class _DriverOrdersPageState extends ConsumerState<DriverOrdersPage>
   var isAllOrdersShowed = false;
 
   @override
+  void initState() {
+    super.initState();
+    _getUserLocation();
+  }
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
     final response = ref.watch(getDriverOrders(_lastSelectedLocation));
     return Scaffold(
         body: response.when(data: (data) {
-      print(data);
       loadData(data);
       if (response.hasValue) {
         return Stack(
@@ -417,7 +422,6 @@ class _DriverOrdersPageState extends ConsumerState<DriverOrdersPage>
     GoogleMapController controller = await _controller.future;
     LatLngBounds bounds = await controller.getVisibleRegion();
     LatLng center = _calculateCenter(bounds);
-    callToGetOrderList(center.latitude, center.longitude);
 
     var response = ref.watch(getDriverOrders(center));
     loadData(response.hasValue ? response.value! : List.empty());
@@ -430,51 +434,35 @@ class _DriverOrdersPageState extends ConsumerState<DriverOrdersPage>
   }
 
   _getUserLocation() async {
-    Location location = Location();
     bool serviceEnabled;
-    PermissionStatus permissionGranted;
+    LocationPermission permission;
 
-    serviceEnabled = await location.serviceEnabled();
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      serviceEnabled = await location.requestService();
-      if (!serviceEnabled) {
-        return;
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
       }
     }
 
-    permissionGranted = await location.hasPermission();
-    if (permissionGranted == PermissionStatus.denied) {
-      permissionGranted = await location.requestPermission();
-      if (permissionGranted != PermissionStatus.granted) {
-        return;
-      }
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
     }
 
-    LocationData locationData = await location.getLocation();
+    Geolocator.getCurrentPosition().then((value) =>
+        _lastSelectedLocation = LatLng(value.latitude, value.longitude));
 
-    _lastSelectedLocation = LatLng(locationData.latitude ?? 41.3089943,
-        locationData.longitude ?? 69.2742636);
     _moveCamera(
         _lastSelectedLocation.latitude, _lastSelectedLocation.longitude);
 
-    callToGetOrderList(
-        _lastSelectedLocation.latitude, _lastSelectedLocation.longitude);
-  }
-
-  callToGetOrderList(double lat, double lng) {
-    final response = ref.watch(getDriverOrders(_lastSelectedLocation));
-    response.when(data: (data) {
-      // loadData(data);
-      if (response.hasValue) {
-        return Text(data.toString());
-      } else {
-        return const CircularProgressIndicator();
-      }
-    }, error: (error, errorText) {
-      return Container();
-    }, loading: () {
-      return Container();
-    });
+    var response = ref.watch(getDriverOrders(_lastSelectedLocation));
+    loadData(response.value ?? List.empty());
   }
 
   void loadData(List<OrderData> orders) {
@@ -487,7 +475,7 @@ class _DriverOrdersPageState extends ConsumerState<DriverOrdersPage>
             infoWindow: InfoWindow(title: element.name),
             onTap: () {
               _customInfoWindowController.addInfoWindow!(
-                CustomInfoWindows(id: element.id),
+                CustomInfoWindows(id: element.id, orderData: element),
                 LatLng(double.parse(element.latitude),
                     double.parse(element.longitude)),
               );

@@ -117,7 +117,7 @@ class _ChooseLangState extends State<ChooseLang> {
                     Navigator.push(
                         context,
                         CupertinoPageRoute(
-                          builder: (context) =>  UserCategory(windowIdReg: "1",),
+                          builder: (context) =>  const UserCategory(windowIdReg: "1",),
                         ));
                   },
                   color: AppColors.primaryButton,

@@ -173,10 +173,10 @@ class _UserBothState extends ConsumerState<UserBoth> {
                     },
                     child: Container(
                       padding: const EdgeInsets.only(right: 20, top: 20),
-                      child: const Row(
+                      child:  Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [Icon(Icons.check)],
+                        children: [Icon(Icons.check, color: AppColors.white100,)],
                       ),
                     ),
                   ),

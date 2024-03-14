@@ -100,7 +100,7 @@ class _UserCategoryState extends State<UserCategory> {
                             textAlign: TextAlign.justify,
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
-                                fontSize: 16,
+                                fontSize: 15,
                                 color: AppColors.white100,
                                 fontFamily: "Inter")),
                         subtitle: Text(listModelUserCat[index].textCategory,

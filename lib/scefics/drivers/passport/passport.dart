@@ -156,7 +156,10 @@ class _PassportState extends ConsumerState<Passport> {
               autovalidateMode: AutovalidateMode.onUserInteraction,
               child: TextFormField(
                 controller: txtPassport,
+                maxLines: 1,
+                maxLength: 30,
                 decoration: InputDecoration(
+                  counterStyle: TextStyle(color: AppColors.white100),
                     fillColor: Colors.grey.shade100,
                     filled: true,
                     focusedBorder: OutlineInputBorder(
@@ -333,6 +336,9 @@ class _PassportState extends ConsumerState<Passport> {
                               SizedBox(height: 10),
                               Text(
                                 "Фотография лица на фоне документа",
+                                maxLines: 2,
+                                softWrap: true,
+                                overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(fontWeight: FontWeight.w600),
                               )
@@ -573,6 +579,9 @@ class _PassportState extends ConsumerState<Passport> {
                         SizedBox(height: 10),
                         Text(
                           "Фотография лица на фоне документа",
+                          overflow: TextOverflow.clip,
+                          softWrap: true,
+                          maxLines: 2,
                           textAlign: TextAlign.center,
                           style: TextStyle(fontWeight: FontWeight.w600),
                         )

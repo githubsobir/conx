@@ -2,10 +2,8 @@ import 'dart:io';
 
 import 'package:connection_notifier/connection_notifier.dart';
 import 'package:conx/firts_part/login_reg/enter_page/lang_model/choose_lang.dart';
-import 'package:conx/firts_part/login_reg/splash/splash_page.dart';
-import 'package:conx/pages/active_orders/driver/driver_orders_page.dart';
 import 'package:conx/pages/active_orders/exporter/exporter.dart';
-import 'package:conx/pages/user/orders/orders.dart';
+import 'package:conx/pages/user/history_order/history_order.dart';
 import 'package:conx/root_and_unver_page/root_page.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -78,7 +76,7 @@ class MyApp extends ConsumerWidget {
     try {
       // _box.langUser == "1" bo'lsa til tanlangan
       if (_box.langUser == "1") {
-        return const RootPage();
+        return const Exporter();
       } else {
         return const ChooseLang();
       }

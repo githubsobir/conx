@@ -109,9 +109,9 @@ class _SearchDetailsState extends ConsumerState<SearchDetails> {
                     child: MaterialButton(
                         height: 40,
                         color: AppColors.black50,
-
                         shape: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: AppColors.black50)),
+                            borderRadius: BorderRadius.circular(6),
+                            borderSide: BorderSide(color: AppColors.black50)),
                         onPressed: () {},
                         child: Text(
                           "Logist",
@@ -282,8 +282,12 @@ class _SearchDetailsState extends ConsumerState<SearchDetails> {
                       border: Border.all(color: AppColors.white100)),
                   child: ListTile(
                     contentPadding: EdgeInsets.zero,
-                    onTap: (){
-                      setBottomSheetSearch(context: context, id: 2, ref: ref);
+                    leading: Text(ref.watch(controllerSearchDetails.notifier).regionName1,
+                      style: TextStyle(color: AppColors.white100),
+                    ),
+                    onTap: () {
+                      ref.read(controllerSearchDetails.notifier).getRegion();
+                      setBottomSheetSearch(context: context, id: 1, ref: ref);
                     },
                     trailing: Icon(
                       Icons.keyboard_arrow_down,
@@ -306,7 +310,10 @@ class _SearchDetailsState extends ConsumerState<SearchDetails> {
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(color: AppColors.white100)),
                   child: ListTile(
-                    onTap: (){
+                    leading: Text(ref.watch(controllerSearchDetails.notifier).regionName2,
+                    style: TextStyle(color: AppColors.white100),
+                    ),
+                    onTap: () {
                       setBottomSheetSearch(context: context, id: 2, ref: ref);
                     },
                     contentPadding: EdgeInsets.zero,
@@ -315,7 +322,7 @@ class _SearchDetailsState extends ConsumerState<SearchDetails> {
                       color: AppColors.white100,
                     ),
                   )),
-             const SizedBox(height: 15),
+              const SizedBox(height: 15),
               Text("Data", style: TextStyle(color: AppColors.white100)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

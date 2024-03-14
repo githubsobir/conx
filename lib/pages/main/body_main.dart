@@ -197,7 +197,7 @@ class _BodyMainState extends ConsumerState<BodyMain> {
                                     Icons.local_atm,
                                     color: AppColors.newOrangeColorForIcon,
                                   ),
-                                  const SizedBox(width: 8),
+                                  const SizedBox(width: 2),
                                   Text(
                                     ref
                                         .watch(controllerMainPage.notifier)
@@ -217,13 +217,19 @@ class _BodyMainState extends ConsumerState<BodyMain> {
                                     color: AppColors.newOrangeColorForIcon,
                                     fit: BoxFit.cover,
                                   ),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                    "${ref.watch(controllerMainPage.notifier).listMainPage[widget.index].locationFrom.name}-${ref.watch(controllerMainPage.notifier).listMainPage[widget.index].locationTo.name}",
-                                    style: TextStyle(
-                                        color: AppColors.white100,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
+                                  const SizedBox(width: 2),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width*0.5,
+                                    child: Text(
+                                      "${ref.watch(controllerMainPage.notifier).listMainPage[widget.index].locationFrom.name}-${ref.watch(controllerMainPage.notifier).listMainPage[widget.index].locationTo.name}",
+                                      maxLines: 2,
+                                      overflow: TextOverflow.clip,
+                                      softWrap: true,
+                                      style: TextStyle(
+                                          color: AppColors.white100,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
                                 ]),
                                 const SizedBox(height: 10),
@@ -233,14 +239,14 @@ class _BodyMainState extends ConsumerState<BodyMain> {
                                     size: 16,
                                     color: AppColors.newOrangeColorForIcon,
                                   ),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    "Transport ${ref.watch(controllerMainPage.notifier).listMainPage[widget.index].transportType}",
-                                    style: TextStyle(
-                                        color: AppColors.white100,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                  const SizedBox(width: 2),
+                                  // Text(
+                                  //   "Transport ${ref.watch(controllerMainPage.notifier).listMainPage[widget.index].transportType}",
+                                  //   style: TextStyle(
+                                  //       color: AppColors.white100,
+                                  //       fontSize: 15,
+                                  //       fontWeight: FontWeight.bold),
+                                  // ),
                                 ]),
                               ],
                             ),

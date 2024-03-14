@@ -29,20 +29,20 @@ class _GetImagesExporterState extends ConsumerState<GetImagesExporter> {
             margin: const EdgeInsets.all(20),
             child: ref.watch(controllerExporter).boolGetData
                 ? SingleChildScrollView(
-                  child: Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         IconButton(
-                          onPressed: (){
-                            Navigator.of(context).pop();
-                          },
-                          icon: Icon(
-                          Platform.isIOS
-                              ? Icons.arrow_back_ios
-                              : Icons.arrow_back_sharp,
-                          color: AppColors.white100,
-                        )),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            icon: Icon(
+                              Platform.isIOS
+                                  ? Icons.arrow_back_ios
+                                  : Icons.arrow_back_sharp,
+                              color: AppColors.white100,
+                            )),
                         const SizedBox(height: 20),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.7,
@@ -58,50 +58,49 @@ class _GetImagesExporterState extends ConsumerState<GetImagesExporter> {
                               decoration: BoxDecoration(
                                   color: Colors.transparent,
                                   borderRadius: BorderRadius.circular(15),
-                                  border: Border.all(color: AppColors.white100)),
+                                  border:
+                                      Border.all(color: AppColors.white100)),
                               child: getImage(ref, index) == "1"
                                   ? Card(
                                       child: Image.file(
                                           height: 104,
-                                          width:
-                                              MediaQuery.of(context).size.width *
-                                                  0.4,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.4,
                                           fit: BoxFit.cover,
                                           getFile(ref, index)),
                                     )
                                   : Container(
                                       height: 104,
-                                      width:
-                                          MediaQuery.of(context).size.width * 0.4,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.4,
                                       padding: const EdgeInsets.all(4),
                                       decoration: BoxDecoration(
                                           color: Colors.grey.shade300,
                                           borderRadius:
                                               BorderRadius.circular(10)),
-                                      child:const Center(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(Icons
-                                                      .add),
-                                                  SizedBox(height: 10),
-                                                  Text(
-                                                    "File yuklash",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w600),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
+                                      child: const Center(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.add),
+                                            SizedBox(height: 10),
+                                            Text(
+                                              "File yuklash",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600),
+                                            )
+                                          ],
+                                        ),
+                                      ),
                                     ),
                             ),
                           ),
                         ),
-
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -124,9 +123,9 @@ class _GetImagesExporterState extends ConsumerState<GetImagesExporter> {
                             IconButton(
                                 onPressed: () async {
                                   final imagePicker = ImagePicker();
-                  
-                                  final pickedFile = await imagePicker.pickImage(
-                                      source: ImageSource.gallery);
+
+                                  final pickedFile = await imagePicker
+                                      .pickImage(source: ImageSource.gallery);
                                   listFile.add(File(pickedFile!.path));
                                 },
                                 icon: Icon(
@@ -138,7 +137,7 @@ class _GetImagesExporterState extends ConsumerState<GetImagesExporter> {
                         )
                       ],
                     ),
-                )
+                  )
                 : const Center(
                     child: CupertinoActivityIndicator(),
                   ),

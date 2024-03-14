@@ -129,7 +129,7 @@ class _PhotoPassport1State extends ConsumerState<PhotoPassport1> {
                       elevation: 10,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
-                      child: Text(
+                      child: const Text(
                         "Сделать фото",
                       ),
                     ),

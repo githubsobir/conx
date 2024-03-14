@@ -37,13 +37,17 @@ class ControllerPassport extends StateNotifier<ModelPassport> {
     final imagePicker = ImagePicker();
 
     final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);
-    if(index == 0) {
-      file1 = File(pickedFile!.path);
-    }else if(index == 1){
-      file2 = File(pickedFile!.path);
-    }else if(index == 2){
-      file3 = File(pickedFile!.path);
+
+    if(pickedFile != null){
+      if(index == 0) {
+        file1 = File(pickedFile.path);
+      }else if(index == 1){
+        file2 = File(pickedFile.path);
+      }else if(index == 2){
+        file3 = File(pickedFile.path);
+      }
     }
+
 
     state = state.copyWith(
         boolGetData1: true, list: imageList, message1: "", errorMessage1: "");

@@ -142,41 +142,59 @@ class _DriverLicenseState extends State<DriverLicense> {
     DateTime picked = await showCupertinoModalPopup(
       context: context,
       builder: (BuildContext context) {
-        return Container(
-          height: 230,
-          color: Colors.white,
-          child: Column(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: Container(
-                  padding: const EdgeInsets.only(right: 20, top: 20),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [Icon(Icons.check)],
+        return Stack(
+          children: [
+            const BackgroundWidget(),
+            Container(
+              height: 230,
+              color: Colors.transparent,
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.only(right: 20, top: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Icon(
+                            Icons.check,
+                            color: AppColors.white100,
+                          )
+                        ],
+                      ),
+                    ),
                   ),
-                ),
+                  SizedBox(
+                    height: 180,
+                    child: CupertinoTheme(
+                      data: CupertinoThemeData(
+                          brightness: CupertinoTheme.of(context).brightness,
+                          textTheme: CupertinoTextThemeData(
+                            dateTimePickerTextStyle: TextStyle(
+                                color: AppColors.white100, fontSize: 20),
+                          )),
+                      child: CupertinoDatePicker(
+                        initialDateTime: selectedDate,
+                        onDateTimeChanged: (DateTime newDate) {
+                          setState(() {
+                            selectedDate = newDate;
+                            boolSelected = true;
+                          });
+                        },
+                        mode: CupertinoDatePickerMode.date,
+                        minimumDate: DateTime(2024),
+                        maximumDate: DateTime(2030),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 180,
-                child: CupertinoDatePicker(
-                  initialDateTime: selectedDate,
-                  onDateTimeChanged: (DateTime newDate) {
-                    setState(() {
-                      selectedDate = newDate;
-                      boolSelected = true;
-                    });
-                  },
-                  mode: CupertinoDatePickerMode.date,
-                  minimumDate: DateTime(2024),
-                  maximumDate: DateTime(2030),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );

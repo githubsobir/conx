@@ -29,12 +29,9 @@ final controllerGetPositionSelect = StateProvider.autoDispose<bool>((ref) {
 final getCountryList =
     FutureProvider.autoDispose<List<ModelCountryList>>((ref) async {
   List<ModelCountryList> listCountry = [];
-  var _dio = Dio();
-  log("123");
-
+  var dio = Dio();
   Response response =
-      await _dio.get("${MainUrl.urlMain}/api/auth/country-list/");
-  log("3");
+      await dio.get("${MainUrl.urlMain}/api/auth/country-list/");
   listCountry =
       (response.data as List).map((e) => ModelCountryList.fromJson(e)).toList();
   return listCountry;
@@ -268,12 +265,18 @@ class ControllerExporter extends StateNotifier<ModelControllerExporter> {
         "price": price,
         "type_payment": typePayment,
         "description": description,
-        "file_1": await MultipartFile.fromFile(file5.path, filename: "image_user"),
-        "file_2": await MultipartFile.fromFile(file5.path, filename: "image_user"),
-        "file_3": await MultipartFile.fromFile(file5.path, filename: "image_user"),
-        "file_4": await MultipartFile.fromFile(file5.path, filename: "image_user"),
-        "file_5": await MultipartFile.fromFile(file5.path, filename: "image_user"),
-        "file_6": await MultipartFile.fromFile(file5.path, filename: "image_user"),
+        "file_1":
+            await MultipartFile.fromFile(file5.path, filename: "image_user"),
+        "file_2":
+            await MultipartFile.fromFile(file5.path, filename: "image_user"),
+        "file_3":
+            await MultipartFile.fromFile(file5.path, filename: "image_user"),
+        "file_4":
+            await MultipartFile.fromFile(file5.path, filename: "image_user"),
+        "file_5":
+            await MultipartFile.fromFile(file5.path, filename: "image_user"),
+        "file_6":
+            await MultipartFile.fromFile(file5.path, filename: "image_user"),
         // "order_files": [],
         "longitude": longitude,
         "latitude": latitude

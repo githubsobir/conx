@@ -124,7 +124,7 @@ Widget smsTextEnterPage(
                   ],
                 )),
           ),
-          const SizedBox(height: 36),
+          const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

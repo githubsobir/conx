@@ -156,7 +156,10 @@ class _PassportState extends ConsumerState<Passport> {
               autovalidateMode: AutovalidateMode.onUserInteraction,
               child: TextFormField(
                 controller: txtPassport,
+                maxLines: 1,
+                maxLength: 30,
                 decoration: InputDecoration(
+                  counterStyle: TextStyle(color: AppColors.white100),
                     fillColor: Colors.grey.shade100,
                     filled: true,
                     focusedBorder: OutlineInputBorder(
@@ -184,6 +187,7 @@ class _PassportState extends ConsumerState<Passport> {
             const SizedBox(height: 30),
              Text(
               "Фотография документа",
+              textAlign: TextAlign.center,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: AppColors.white100,
@@ -236,6 +240,7 @@ class _PassportState extends ConsumerState<Passport> {
                                       SizedBox(height: 10),
                                       Text(
                                         "Лицевая сторона",
+                                        textAlign: TextAlign.center,
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600),
                                       )
@@ -276,6 +281,7 @@ class _PassportState extends ConsumerState<Passport> {
                                 SizedBox(height: 10),
                                 Text(
                                   "Обратная сторона",
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(fontWeight: FontWeight.w600),
                                 )
                               ],
@@ -333,6 +339,9 @@ class _PassportState extends ConsumerState<Passport> {
                               SizedBox(height: 10),
                               Text(
                                 "Фотография лица на фоне документа",
+                                maxLines: 2,
+                                softWrap: true,
+                                overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(fontWeight: FontWeight.w600),
                               )
@@ -342,32 +351,23 @@ class _PassportState extends ConsumerState<Passport> {
                       ),
               ),
             ),
-            const SizedBox(height: 40),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                MaterialButton(
-                  onPressed: () {
 
-
-                    txtPassport.text.toString().length > 5 ?
-                    ref.read(controllerPassport.notifier).sentServer(context: context,  serNum:txtPassport.text.toString()):{
-
-                      MyWidgets.snackBarMyWidgets(context: context, text: "Pasport ma'lumot kiriting")
-                    };
-                  },
-                  height: 55,
-                  minWidth: double.infinity,
-                  color: AppColors.colorBackground,
-                  shape: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: Colors.grey)),
-                  child: const Text("Davom etish",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white)),
-                ),
-              ],
+            MaterialButton(
+              onPressed: () {
+                txtPassport.text.toString().length > 5 ?
+                ref.read(controllerPassport.notifier).sentServer(context: context,  serNum:txtPassport.text.toString()):{
+                  MyWidgets.snackBarMyWidgets(context: context, text: "Pasport ma'lumot kiriting")
+                };
+              },
+              height: 55,
+              minWidth: double.infinity,
+              color: AppColors.colorBackground,
+              shape: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: Colors.grey)),
+              child: const Text("Davom etish",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white)),
             )
           ],
         ),
@@ -573,6 +573,9 @@ class _PassportState extends ConsumerState<Passport> {
                         SizedBox(height: 10),
                         Text(
                           "Фотография лица на фоне документа",
+                          overflow: TextOverflow.clip,
+                          softWrap: true,
+                          maxLines: 2,
                           textAlign: TextAlign.center,
                           style: TextStyle(fontWeight: FontWeight.w600),
                         )

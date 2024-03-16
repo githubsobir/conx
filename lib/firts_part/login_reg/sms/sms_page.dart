@@ -46,7 +46,7 @@ class _SmsVerificationPageState extends ConsumerState<SmsVerificationPage> {
           :
 
           /// sms kod tasdiqlangandan keyin
-          smsSuccessEntered(context: context);
+          smsSuccessEntered(context: context, windowId: widget.windowId);
     } else if (ref.watch(smsMainController).actionCode == "0") {
       /// sms loading
       return smsLoading();

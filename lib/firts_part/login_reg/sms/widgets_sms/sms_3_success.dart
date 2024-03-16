@@ -1,10 +1,13 @@
+import 'dart:developer';
+
 import 'package:conx/firts_part/user_fill/user_fill.dart';
+import 'package:conx/root_and_unver_page/root_page.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget smsSuccessEntered({required BuildContext context}) {
+Widget smsSuccessEntered({required BuildContext context, required String windowId}) {
   return Center(
     child: Container(
       margin: const EdgeInsets.all(30),
@@ -22,6 +25,16 @@ Widget smsSuccessEntered({required BuildContext context}) {
           const SizedBox(height: 30),
           MaterialButton(
             onPressed: () {
+
+            windowId == "log"?
+
+
+            Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => const RootPage(),
+                ))
+                :
               Navigator.push(
                   context,
                   CupertinoPageRoute(

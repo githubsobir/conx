@@ -40,7 +40,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             const BackgroundWidget(),
             SafeArea(
               child: Container(
-                margin: const EdgeInsets.all(20),
+                margin: const EdgeInsets.only(left: 20, right: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,7 +127,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       ),
                     ),
                     Container(
-                        height: 100,
+                        height: 80,
                         decoration: const BoxDecoration(
                             // color: Colors.grey.shade50,
                             // border: Border.symmetric(
@@ -206,7 +206,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 )),
                           ],
                         )),
-                    const SizedBox(height: 50),
+                  const Spacer(),
                     PrimaryButton(
                       onPressed: () {
                         if (textEditingController.text.toString().length <= 8) {

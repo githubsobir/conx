@@ -1,5 +1,6 @@
 import 'package:conx/pages/search/model_search/model_for_search.dart';
 import 'package:conx/pages/search/search_details/controller_search.dart';
+import 'package:conx/pages/search/sheets/region_sheet.dart';
 import 'package:conx/theme/app_colors.dart';
 import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/primary_button.dart';
@@ -93,21 +94,29 @@ class _SearchDetailsState extends ConsumerState<SearchDetails> {
                 children: [
                   Expanded(
                     child: MaterialButton(
-                        height: 36,
+                        height: 40,
                         color: AppColors.newOrangeColorForIcon,
                         shape: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(6)),
                         onPressed: () {},
-                        child: Text("1")),
+                        child: Text(
+                          "Voditel",
+                          style: TextStyle(color: AppColors.white100),
+                        )),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: MaterialButton(
-                        color: AppColors.newOrangeColorForIcon,
+                        height: 40,
+                        color: AppColors.black50,
                         shape: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10)),
+                            borderRadius: BorderRadius.circular(6),
+                            borderSide: BorderSide(color: AppColors.black50)),
                         onPressed: () {},
-                        child: Text("1")),
+                        child: Text(
+                          "Logist",
+                          style: TextStyle(color: AppColors.white100),
+                        )),
                   )
                 ],
               ),
@@ -273,6 +282,13 @@ class _SearchDetailsState extends ConsumerState<SearchDetails> {
                       border: Border.all(color: AppColors.white100)),
                   child: ListTile(
                     contentPadding: EdgeInsets.zero,
+                    leading: Text(ref.watch(controllerSearchDetails.notifier).regionName1,
+                      style: TextStyle(color: AppColors.white100),
+                    ),
+                    onTap: () {
+                      ref.read(controllerSearchDetails.notifier).getRegion();
+                      setBottomSheetSearch(context: context, id: 1, ref: ref);
+                    },
                     trailing: Icon(
                       Icons.keyboard_arrow_down,
                       color: AppColors.white100,
@@ -294,13 +310,19 @@ class _SearchDetailsState extends ConsumerState<SearchDetails> {
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(color: AppColors.white100)),
                   child: ListTile(
+                    leading: Text(ref.watch(controllerSearchDetails.notifier).regionName2,
+                    style: TextStyle(color: AppColors.white100),
+                    ),
+                    onTap: () {
+                      setBottomSheetSearch(context: context, id: 2, ref: ref);
+                    },
                     contentPadding: EdgeInsets.zero,
                     trailing: Icon(
                       Icons.keyboard_arrow_down,
                       color: AppColors.white100,
                     ),
                   )),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Text("Data", style: TextStyle(color: AppColors.white100)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

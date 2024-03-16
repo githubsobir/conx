@@ -49,7 +49,7 @@ class _DrawerRegistrationState extends ConsumerState<DrawerRegistration> {
               children: [
                 // IconButton(onPressed: (){}, icon:Icon(Platform.isIOS? Icons.arrow_back_ios:Icons.arrow_back)),
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.13,
+                  height: MediaQuery.of(context).size.height * 0.17,
                   padding: const EdgeInsets.all(10),
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
@@ -64,6 +64,7 @@ class _DrawerRegistrationState extends ConsumerState<DrawerRegistration> {
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 30)),
+
                       subtitle: Text("Для регистрации нам нужны эти данные",
                           style: TextStyle(
                               color: Colors.white,

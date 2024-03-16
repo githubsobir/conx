@@ -70,6 +70,7 @@ class ControllerMainPage extends StateNotifier<ModelControllerMainPage> {
         }
         log("3");
       }
+
       log(jsonEncode(listImages).toString());
 
       // serverdan file list qilib kelaydigan qilish kerak.

@@ -55,7 +55,7 @@ class ControllerLoginData extends StateNotifier<ModelStateLogin> {
       Navigator.push(
           context,
           CupertinoPageRoute(
-            builder: (context) => SmsVerificationPage("log"),
+            builder: (context) => const SmsVerificationPage("log"),
           ));
     } on DioException catch (e) {
       if(e.response!.statusCode.toString() == "407" ){

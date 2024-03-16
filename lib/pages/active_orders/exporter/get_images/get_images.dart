@@ -28,114 +28,115 @@ class _GetImagesExporterState extends ConsumerState<GetImagesExporter> {
               child: Container(
             margin: const EdgeInsets.all(20),
             child: ref.watch(controllerExporter).boolGetData
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      IconButton(
-                        onPressed: (){
-                          Navigator.of(context).pop();
-                        },
-                        icon: Icon(
-                        Platform.isIOS
-                            ? Icons.arrow_back_ios
-                            : Icons.arrow_back_sharp,
-                        color: AppColors.white100,
-                      )),
-                      const SizedBox(height: 20),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.7,
-                        child: GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2),
-                          itemCount: 6,
-                          itemBuilder: (context, index) => Container(
-                            margin: const EdgeInsets.all(5),
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                                color: Colors.transparent,
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(color: AppColors.white100)),
-                            child: getImage(ref, index) == "1"
-                                ? Card(
-                                    child: Image.file(
-                                        height: 104,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.4,
-                                        fit: BoxFit.cover,
-                                        getFile(ref, index)),
-                                  )
-                                : Container(
-                                    height: 104,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.4,
-                                    padding: const EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey.shade300,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child:const Center(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(Icons
-                                                    .add),
-                                                SizedBox(height: 10),
-                                                Text(
-                                                  "File yuklash",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                  ),
+                ? SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            icon: Icon(
+                              Platform.isIOS
+                                  ? Icons.arrow_back_ios
+                                  : Icons.arrow_back_sharp,
+                              color: AppColors.white100,
+                            )),
+                        const SizedBox(height: 20),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.7,
+                          child: GridView.builder(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2),
+                            itemCount: 6,
+                            itemBuilder: (context, index) => Container(
+                              margin: const EdgeInsets.all(5),
+                              width: 100,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                  color: Colors.transparent,
+                                  borderRadius: BorderRadius.circular(15),
+                                  border:
+                                      Border.all(color: AppColors.white100)),
+                              child: getImage(ref, index) == "1"
+                                  ? Card(
+                                      child: Image.file(
+                                          height: 104,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.4,
+                                          fit: BoxFit.cover,
+                                          getFile(ref, index)),
+                                    )
+                                  : Container(
+                                      height: 104,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.4,
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey.shade300,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: const Center(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.add),
+                                            SizedBox(height: 10),
+                                            Text(
+                                              "File yuklash",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 30),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                              onPressed: () async {
-                                // ref
-                                //     .read(controllerExporter.notifier)
-                                //     .getImagePhoto(5);
-                                XFile? video = await ImagePicker().pickVideo(
-                                  source: ImageSource.camera,
-                                );
-                              },
-                              icon: Icon(
-                                Icons.photo_camera,
-                                color: AppColors.white100,
-                                size: 55,
-                              )),
-                          const SizedBox(width: 40),
-                          IconButton(
-                              onPressed: () async {
-                                final imagePicker = ImagePicker();
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                                onPressed: () async {
+                                  // ref
+                                  //     .read(controllerExporter.notifier)
+                                  //     .getImagePhoto(5);
+                                  XFile? video = await ImagePicker().pickVideo(
+                                    source: ImageSource.camera,
+                                  );
+                                },
+                                icon: Icon(
+                                  Icons.photo_camera,
+                                  color: AppColors.white100,
+                                  size: 55,
+                                )),
+                            const SizedBox(width: 40),
+                            IconButton(
+                                onPressed: () async {
+                                  final imagePicker = ImagePicker();
 
-                                final pickedFile = await imagePicker.pickImage(
-                                    source: ImageSource.gallery);
-                                listFile.add(File(pickedFile!.path));
-                              },
-                              icon: Icon(
-                                CupertinoIcons.folder_fill_badge_plus,
-                                color: AppColors.white100,
-                                size: 55,
-                              ))
-                        ],
-                      )
-                    ],
+                                  final pickedFile = await imagePicker
+                                      .pickImage(source: ImageSource.gallery);
+                                  listFile.add(File(pickedFile!.path));
+                                },
+                                icon: Icon(
+                                  CupertinoIcons.folder_fill_badge_plus,
+                                  color: AppColors.white100,
+                                  size: 55,
+                                ))
+                          ],
+                        )
+                      ],
+                    ),
                   )
                 : const Center(
                     child: CupertinoActivityIndicator(),

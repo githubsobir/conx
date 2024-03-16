@@ -122,7 +122,9 @@ class _DetailPageState extends State<DetailPage> {
                             // setState(() {});
                           }
                         },
-                        child: CachedNetworkImage(
+                        child:
+                        widget.list.isNotEmpty?
+                        CachedNetworkImage(
                           width: MediaQuery.of(context).size.width,
                           height: 320,
                           fit: BoxFit.cover,
@@ -133,7 +135,7 @@ class _DetailPageState extends State<DetailPage> {
                                   loadingIndicator(),
                           errorWidget: (context, url, error) =>
                               const Icon(Icons.error),
-                        ),
+                        ):SizedBox.shrink(),
                       ),
                     ),
                     Container(

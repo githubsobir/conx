@@ -9,6 +9,7 @@ import 'package:conx/widgets/background_widget.dart';
 import 'package:conx/widgets/primary_button.dart';
 import 'package:conx/widgets/saved_box.dart';
 import 'package:conx/widgets/secondary_button.dart';
+import 'package:conx/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,8 @@ class AddPhotoRegistration extends ConsumerStatefulWidget {
 }
 
 class _AddPhotoRegistrationState extends ConsumerState<AddPhotoRegistration> {
-
   final _box = HiveBoxes();
+
   @override
   Widget build(BuildContext context1) {
     return Scaffold(
@@ -52,23 +53,37 @@ class _AddPhotoRegistrationState extends ConsumerState<AddPhotoRegistration> {
                                   Navigator.of(context1).pop();
                                 },
                                 icon: Icon(
-                                  Platform.isIOS?
-                                  Icons.arrow_back_ios:Icons.arrow_back,
+                                  Platform.isIOS
+                                      ? Icons.arrow_back_ios
+                                      : Icons.arrow_back,
                                   color: AppColors.white100,
                                 )),
                             IconButton(
                                 onPressed: () {
-                                  ref.read(controllerAddPhotoDriver.notifier).setImageServer(context: context1);
+                                  ref
+                                          .watch(
+                                              controllerAddPhotoDriver.notifier)
+                                          .imageList
+                                          .isEmpty
+                                      ? {
+                                          MyWidgets.snackBarMyWidgets(
+                                              context: context,
+                                              text: "Rasm tanlang")
+                                        }
+                                      : {
+                                          ref
+                                              .read(controllerAddPhotoDriver
+                                                  .notifier)
+                                              .setImageServer(context: context1)
+                                        };
                                 },
                                 icon: Icon(
-
                                   Icons.check_box_outlined,
                                   size: 32,
                                   color: AppColors.newOrangeColorForIcon,
                                 )),
                           ],
                         ),
-
                         SizedBox(
                           height: 250,
                           width: MediaQuery.of(context).size.width,
@@ -85,7 +100,8 @@ class _AddPhotoRegistrationState extends ConsumerState<AddPhotoRegistration> {
                                         height: 120,
                                       )
                                     : ClipRRect(
-                                        borderRadius: BorderRadius.circular(100),
+                                        borderRadius:
+                                            BorderRadius.circular(100),
                                         child: Image.file(
                                             height: 180,
                                             width: 180,
@@ -93,7 +109,8 @@ class _AddPhotoRegistrationState extends ConsumerState<AddPhotoRegistration> {
                                             alignment: Alignment.center,
                                             ref
                                                 .watch(
-                                                  controllerAddPhotoDriver.notifier,
+                                                  controllerAddPhotoDriver
+                                                      .notifier,
                                                 )
                                                 .imageList[0])),
                               ),
@@ -101,11 +118,18 @@ class _AddPhotoRegistrationState extends ConsumerState<AddPhotoRegistration> {
                                 padding: const EdgeInsets.only(right: 20),
                                 child: Align(
                                     alignment: Alignment.bottomRight,
-                                    child: IconButton(onPressed: (){
-                                      ref
-                                          .read(controllerAddPhotoDriver.notifier)
-                                          .getImageFromGallery();
-                                    }, icon:  Icon(Icons.change_circle_outlined, color: AppColors.white100,),)),
+                                    child: IconButton(
+                                      onPressed: () {
+                                        ref
+                                            .read(controllerAddPhotoDriver
+                                                .notifier)
+                                            .getImageFromGallery();
+                                      },
+                                      icon: Icon(
+                                        Icons.change_circle_outlined,
+                                        color: AppColors.white100,
+                                      ),
+                                    )),
                               )
                             ],
                           ),
@@ -133,23 +157,20 @@ class _AddPhotoRegistrationState extends ConsumerState<AddPhotoRegistration> {
                         SecondaryButton(
                           text: "skip".tr(),
                           onPressed: () {
-
-                            if(_box.userType.toString() == "2"){
+                            if (_box.userType.toString() == "2") {
                               Navigator.push(
                                   context,
                                   CupertinoDialogRoute(
-                                      builder: (context) =>
-                                      const RootPage(),
+                                      builder: (context) => const RootPage(),
                                       context: context));
-                            }else{
+                            } else {
                               Navigator.push(
                                   context,
                                   CupertinoDialogRoute(
                                       builder: (context) =>
-                                      const DrawerRegistration(),
+                                          const DrawerRegistration(),
                                       context: context));
                             }
-
                           },
                         )
                       ],

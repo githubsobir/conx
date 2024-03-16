@@ -124,7 +124,7 @@ class _RegistrationState extends ConsumerState<Registration> {
             ),
             Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
-                height: 100,
+                height: 80,
                 decoration: BoxDecoration(
                     // color: Colors.grey.shade50,
                     border: Border.symmetric(
@@ -201,7 +201,7 @@ class _RegistrationState extends ConsumerState<Registration> {
                     ),
                   ],
                 )),
-            const SizedBox(height: 50),
+
             const Spacer(),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),

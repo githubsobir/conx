@@ -61,5 +61,12 @@
     </array>
       <key>com.apple.security.files.user-selected.read-only</key>
       <true/>
+
+   <key>NSPhotoLibraryUsageDescription</key>
+       <string>Need to upload image</string>
+       <key>NSCameraUsageDescription</key>
+       <string>Need to upload image</string>
+       <key>NSMicrophoneUsageDescription</key>
+       <string>Need to upload image</string>
 </dict>
 </plist>

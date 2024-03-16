@@ -44,7 +44,10 @@ class ControllerAddPhotoReg extends StateNotifier<ModelAddPhotoReg> {
 
   Future setImageServer({required BuildContext context}) async {
     try {
+
+
       state = state.copyWith("0", "0", "");
+
       FormData formData = FormData.fromMap({
         "image": await MultipartFile.fromFile(imageList[0].path,
             filename: "image_user"),
